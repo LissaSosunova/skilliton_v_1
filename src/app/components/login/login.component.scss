@@ -11,7 +11,6 @@
     overflow-x: hidden;
 }
 .left-side-block {
-    display: flex;
     flex-direction: column;
     padding: 80px;
     justify-content: center;
@@ -48,3 +47,34 @@
 .non-vis {
     display: none;
 }
+
+.vis {
+    display: flex;
+}
+
+.form-width {
+    max-width: 360px;
+    min-width: 280px;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.btn-submit-login{
+    color: map-get($font-color,'primary');
+  }
+
+  .login-btns-conteiner {
+      display: flex;
+      align-content: center;
+      justify-content: center;
+  }
+
+  .checkbox-remember-me {
+      width: 20px;
+      height: 20px;
+      border-radius: 0px;
+      background-color: white;
+      border: 1px solid map-get($bg-color, 'primary');
+  }

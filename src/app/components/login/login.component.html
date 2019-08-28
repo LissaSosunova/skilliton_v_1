@@ -13,21 +13,65 @@
            
         </div>
         <div class="left-side-block
+        align-center
         col-xs-12
         col-sm-12
         col-md-6
         col-lg-6"
         [ngClass]="{'non-vis': isLogin == false, 'vis': isLogin == true}">
-            <form class="">
-                <div>
-                    <app-input-text></app-input-text>
+
+        <!-- Form with login parametres -->
+        <form class="form-width"
+            name="loginForm"
+            #loginForm="ngForm"
+            >
+
+            <div class="login-form">
+            <div class="input-container">
+                <div class="input-name">Nickname or e-mail: </div>
+                <app-input-text
+                name="userInput"
+                [(ngModel)]="nickname"
+                #userInput="ngModel"
+                [required]="true"
+                [requiredFieldError]="'Nickname or e-mail is required'"
+                >
+                </app-input-text>
+            </div>
+            <div class="input-container">
+                <div class="input-name">Password: </div>
+                <app-input-password name="passwordInput"
+                                    [(ngModel)]="password"
+                                    [required]="true"
+                                    #passwordInput="ngModel"
+                                    [requiredFieldError]="'Password is required'"
+                                    >
+                </app-input-password>
+                <input class="checkbox-remember-me"
+                type="checkbox"
+                name="rememberMeInput"
+                #rememberMeInput="ngModel"
+                [(ngModel)]="rememberMe" 
+                checked="false"
+                (change)="rememberMeClick($event)"/> <span>Remember me</span>
                 </div>
-                
-                <div>
-                    <app-input-password></app-input-password>
-                </div>
-                
-            </form>
+
+            <div class="login-btns-conteiner">
+                <input type="submit" 
+                    (click)="setAuthConf(nickname, password)" 
+                    class="btn
+                    primary-btn
+                    btn-width-middle
+                    btn-submit-login"  
+                    value="enter"
+                    [disabled]="loginForm.invalid"
+                    [ngClass]="{'disabled': loginForm.invalid}">
+            </div>
+            </div>
+            <div class="error-login">
+            {{errorMessage}}
+            </div>
+    </form>
 </div>
         <div class="right-side-block
                     col-xs-12
