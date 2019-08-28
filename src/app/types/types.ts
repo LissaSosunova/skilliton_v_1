@@ -1,7 +1,13 @@
 export module types {
 
   export interface Login {
-    username: string;
+    nickname: string;
+    password: string;
+    rememberMe: boolean;
+  }
+
+  export interface LoginAPI {
+    nickname: string;
     password: string;
   }
 
@@ -12,6 +18,12 @@ export module types {
 
     export interface LangSwitcher {
         values: Langs[];
+      }
+
+      export interface LoginResp {
+        success: boolean;
+        access_token: string;
+        token_key: string;
       }
   
   }
