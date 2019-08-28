@@ -1,0 +1,3 @@
+<select (change)="onChange($event)" class="select">
+        <option *ngFor="let v of values" [value]="v.id">{{v.name}}</option>
+</select>

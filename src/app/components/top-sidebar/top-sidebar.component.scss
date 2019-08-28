@@ -1,0 +1,49 @@
+@import '../../../scss/variables';
+
+.navigation-container {
+    width: 80%;
+    padding-block-start: 10px;
+    padding-block-end: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    overflow: hidden;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+header {
+    background: map-get($bg-color, 'white');
+    padding: 1em 0;
+
+    a {
+        color: map-get($font-color, 'primary');
+        text-decoration: none;
+    }
+    a.logo {
+        font-weight: bold;
+        font-size: 30px;
+    }
+
+    nav {
+        float: right;
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            display: flex;
+
+            li a {
+                padding: 1em;
+
+                &:hover {
+                    background: map-get($bg-color, 'gray');
+                }
+            }
+        }
+    }
+}
+
+.logo-img {
+    margin-left: 2%;
+    height: 30px;
+}

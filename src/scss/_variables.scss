@@ -1,0 +1,21 @@
+$bg-color: (
+  'white': white,
+  'gray': rgba(199, 213, 204, 1),
+  'gray-light': rgba(236, 236, 236, 1),
+  'gray-lighter': rgba(242, 242, 242, 1),
+  'black': black,
+  'primary':rgba(79, 79, 79, 1)
+);
+
+$font-color: (
+    'inverse': white,
+    'gray': rgba(199, 213, 204, 1),
+    'gray-light': rgba(236, 236, 236, 1),
+    'gray-lighter': rgba(242, 242, 242, 1),
+    'black': black,
+    'primary':rgba(36, 66, 36, 1),
+    'warning': rgba(251, 1, 36, 1)
+);
+
+$header-height: 89.2px;
+$footer-height: 40px;

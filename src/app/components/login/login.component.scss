@@ -1,0 +1,50 @@
+@import '../../../scss/variables';
+
+.main-block {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    align-content: center;
+    height: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    overflow-x: hidden;
+}
+.left-side-block {
+    display: flex;
+    flex-direction: column;
+    padding: 80px;
+    justify-content: center;
+    background-color: map-get($bg-color, 'primary');
+    color: white;
+    font-size: 16px;
+    height: 100%;
+}
+
+.right-side-block {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.btn-margin-bottom {
+    margin-bottom: 5%;
+}
+
+.as-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: map-get($font-color,'primary');
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.non-vis {
+    display: none;
+}

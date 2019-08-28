@@ -1,0 +1,55 @@
+<div class="main-block includer col-xs-12">
+        <div class="left-side-block
+                    col-xs-12
+                    col-sm-12
+                    col-md-6
+                    col-lg-6"
+                    [ngClass]="{'vis': isLogin == false, 'non-vis': isLogin == true}">
+                    <h2>WHAT IS IT?</h2>
+                    <p>This is a social online space in which users
+                            exchange knowledge and practical experience
+                            in the most convenient format for learning
+                            and improve skills thanks to each other.</p>
+           
+        </div>
+        <div class="left-side-block
+        col-xs-12
+        col-sm-12
+        col-md-6
+        col-lg-6"
+        [ngClass]="{'non-vis': isLogin == false, 'vis': isLogin == true}">
+            <form class="">
+                <div>
+                    <app-input-text></app-input-text>
+                </div>
+                
+                <div>
+                    <app-input-password></app-input-password>
+                </div>
+                
+            </form>
+</div>
+        <div class="right-side-block
+                    col-xs-12
+                    col-sm-12
+                    col-md-6
+                    col-lg-6">
+                    <div class="btn
+                    primary-btn
+                    btn-width-middle
+                    btn-height-middle
+                    btn-margin-bottom
+                    as-btn"
+                    routerLink="../registration">
+                    <span>Sign Up</span>
+                    </div>
+                    <div class="btn
+                    primary-btn
+                    btn-width-middle
+                    btn-height-middle
+                    as-btn"
+                    (click)="openLogin()">
+                    <span>Log in</span>
+                </div> 
+        </div>
+    </div>
