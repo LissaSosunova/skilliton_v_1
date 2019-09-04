@@ -49,7 +49,7 @@
                 </app-input-password>
                 <input class="checkbox-remember-me"
                 type="checkbox"
-                name="rememberMeInput"
+                name="rememberMe"
                 #rememberMeInput="ngModel"
                 [(ngModel)]="rememberMe" 
                 checked="false"
@@ -58,7 +58,7 @@
 
             <div class="login-btns-conteiner">
                 <input type="submit" 
-                    (click)="setAuthConf(nickname, password)" 
+                    (click)="setAuthConf(nickname, password, rememberMe)" 
                     class="btn
                     primary-btn
                     btn-width-middle
@@ -68,8 +68,8 @@
                     [ngClass]="{'disabled': loginForm.invalid}">
             </div>
             </div>
-            <div class="error-login">
-            {{errorMessage}}
+            <div *ngIf="showError" class="error-login">
+                {{showErrorText}}
             </div>
     </form>
 </div>

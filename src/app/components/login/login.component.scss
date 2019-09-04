@@ -5,10 +5,10 @@
     flex-direction: row;
     padding: 0px;
     align-content: center;
-    height: 100%;
-    margin-left: 0px;
-    margin-right: 0px;
+    height: calc(100vh - #{$header-height + $footer-height});
+    margin: 0px;
     overflow-x: hidden;
+    flex-wrap: wrap;
 }
 .left-side-block {
     flex-direction: column;
@@ -77,4 +77,8 @@
       border-radius: 0px;
       background-color: white;
       border: 1px solid map-get($bg-color, 'primary');
+  }
+
+  .error-login {
+    color: map-get($font-color,'warning');
   }

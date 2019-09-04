@@ -1,0 +1,6 @@
+<section>
+    <label class="select-placeholder">{{placeholder}}</label>
+    <select [formControl]="control" class="select-width">
+        <option *ngFor="let item of options" [value]="item.value">{{item.label}}</option>
+    </select>
+</section>
