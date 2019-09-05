@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "skilliton1"
+    }
+  },
+  "defaultProject": "skilliton1",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

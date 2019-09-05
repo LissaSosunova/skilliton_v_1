@@ -19,24 +19,12 @@ export class HttpService {
     })
   }
 
-  loginOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
-    })
-  }
-
   constructor(private http: HttpClient,
     private sessionStorage: SessionstorageService,
     private router: Router) { }
 
   public setAuth(params: types.Login): Observable<any> {
-    // Body especial for Login
-    let body = new URLSearchParams();
-    body.set('username', params.username);
-    body.set('password', params.password);
-    body.set('rememberMe', params.rememberMe.toString());
-    console.log();
-    return this.http.post(URL_BACK + '/login', body.toString(), this.loginOptions);
+    return this.http.post(URL_BACK + '/login', params, this.registrOptions);
   }
 
   public registration(params: types.RegistrationAPI): Observable<any> {
@@ -44,12 +32,17 @@ export class HttpService {
     return this.http.post(URL_BACK + '/register', params, this.registrOptions);
   }
 
-  // Headers for http requests, tocken gets from SessonStorage
-  private getHeaders(endPoint): HttpHeaders {
+  public getUser(): Observable<any> {
+    return this.http.get(URL_BACK + '/user/me', {headers: this.getHeaders()});
+  }
 
-    const token = this.sessionStorage.getValue('_token');
-    const tokenKey = this.sessionStorage.getValue('token_key');
-    const headers = new HttpHeaders({'authorization': token, 'token_key': tokenKey});
+
+  // Headers for http requests, tocken gets from SessonStorage
+  private getHeaders(): HttpHeaders {
+    const tokenStr = this.sessionStorage.getValue('_token');
+    const tokenType = this.sessionStorage.getValue('tokenType');
+    const token = tokenType +" "+tokenStr;
+    const headers = new HttpHeaders({'Authorization': token});
     return headers;
   }
   // Function for geting status codes

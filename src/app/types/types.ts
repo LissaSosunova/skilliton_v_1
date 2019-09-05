@@ -1,5 +1,21 @@
 export module types {
 
+  export interface User {
+    active: boolean;
+    birthAddress: any;
+    birthDate: string;
+    currentAddress: any;
+    email: string;
+    id: number;
+    lastName: string;
+    name: string;
+    nickname: string;
+    rate: number;
+    sex: null
+    socialAccount: string;
+    socialAccountId: any | null;
+    summary: any | null;
+  }
   export interface Login {
     username: string;
     password: string;
