@@ -1,12 +1,16 @@
 
 @import './scss/variables';
+@import '~@angular/cdk/overlay-prebuilt.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 // For children need scroll (overflow-y: scroll;)
 
 body {
-    background: #ffffff;
+    background: #F8FAFE;
     font-family: 'Montserrat', sans-serif;
-    height: calc(100vh - #{$header-height});
+    // height: calc(100vh + #{$footer-height});
+    height: 100vh;
+    margin: 0px;
   }
 
 // MAIN FONT
@@ -40,6 +44,7 @@ input, button {
   .mat-radio-button.mat-accent .mat-radio-inner-circle,
   .mat-form-field.mat-focused .mat-form-field-ripple {
     background-color: map-get($bg-color, 'primary') !important;
+    font-family: $font-primary;
   }
   
   .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
@@ -48,6 +53,7 @@ input, button {
   
   .mat-form-field.mat-focused .mat-form-field-label {
     color: map-get($bg-color, 'primary') !important;
+    font-family: $font-primary;
   }
   
   .mat-progress-spinner circle {

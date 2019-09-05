@@ -9,8 +9,8 @@
         </a>
         <nav>
         <ul>
-            <li><a href="#" routerLink="/">Sign Up</a></li>
-            <li><a href="#" routerLink="/list">Log in</a></li>
+            <li  *ngIf="currParentUrl === 'registration'"><a href="#" routerLink="/login">Log in</a></li>
+            <li  *ngIf="currParentUrl === 'login'"><a href="#" routerLink="/registration">Sign Up</a></li>
             <li>
                 <app-lang-switcher></app-lang-switcher>
             </li>
