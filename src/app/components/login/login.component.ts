@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SessionstorageService } from '../../services/sessionstorage.service';
 import { types } from '../../types/types';
 import * as _ from 'lodash';
+import { TransferService } from 'src/app/services/transfer.service';
 
 @Component({
   selector: 'app-login',
@@ -27,13 +28,17 @@ export class LoginComponent implements OnInit {
   private ERROR_APP: any = errorTypes.app.login;
   public showError: boolean = false;
   public showErrorText: string;
+  public user: types.User = {} as types.User;
   @ViewChild('loginForm', { read: true, static: false }) public loginForm: NgForm;
 
   constructor(
     private data: HttpService,
     private sessionStorageService: SessionstorageService,
     private localstorageService: LocalstorageService,
-    private router: Router) { }
+    private router: Router,
+    private transferService: TransferService
+    // private store: Store<any>
+    ) { }
 
   ngOnInit() {
     this.isLogin = false;
@@ -45,7 +50,7 @@ export class LoginComponent implements OnInit {
 
   public setAuthConf(username: string, password: string, rememberMe: boolean): void {
     if(rememberMe){
-      this.localstorageService.setValue('user', username);
+      this.localstorageService.setValue(username, 'user');
     }
     this.params = {
       username,
@@ -68,17 +73,22 @@ export class LoginComponent implements OnInit {
    return data;
 
  }
- 
+//  Check on error, show details of error
 getErrorCodeApi(data: number, message: string): void {
-  console.log(data);
   let result = _.find(this.ERROR_API, function(o) { return o.code == data; });
   this.showError = true;
-  // this.showErrorText = result.title + message;
-  this.showErrorText =  message;
+  (typeof(message)  === 'string') ?
+  this.showErrorText =  result.title + " Details: "+ message:
+  this.showErrorText =  result.title;
 }
+// Check status of response, set tocken and navigate to HOME page
 checkStatusData(data: any): void{
-  console.log(data);
-  
-  this.router.navigate(['/home']);
+  if(data.accessToken){
+    const tokenType = data.tokenType;
+    this.token = data.accessToken;
+    this.sessionStorageService.setValue(this.token, '_token');
+    this.sessionStorageService.setValue(tokenType, 'tokenType');
+    this.router.navigate(['/home']);
+  }
 }
 }

@@ -9,6 +9,10 @@
         </a>
         <nav>
         <ul>
+            <li  *ngIf="currParentUrl !== 'login' || 'registration'"><a href="#" routerLink="/home">Home</a></li>
+            <li  *ngIf="currParentUrl !== 'login' || 'registration'"><a href="#" routerLink="/home">Library</a></li>
+            <li  *ngIf="currParentUrl !== 'login' || 'registration'"><a href="#" routerLink="/home">My classroom</a></li>
+            <li  *ngIf="currParentUrl !== 'login' || 'registration'"><a href="#" routerLink="/home">Chat</a></li>
             <li  *ngIf="currParentUrl === 'registration'"><a href="#" routerLink="/login">Log in</a></li>
             <li  *ngIf="currParentUrl === 'login'"><a href="#" routerLink="/registration">Sign Up</a></li>
             <li>

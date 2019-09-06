@@ -27,6 +27,9 @@ import { InputEmailComponent } from './shared/form-controls/input-email/input-em
 import { InputDatepickerComponent } from './shared/form-controls/input-datepicker/input-datepicker.component';
 import { MatSelectComponent } from './shared/form-controls/mat-select/mat-select.component';
 import { SelectComponent } from './shared/form-controls/select/select.component';
+import { OverlayModule } from "@angular/cdk/overlay";
+import { StoreModule }  from '@ngrx/store';
+import { userReducer} from './state/reducers/user';
 
 
 @NgModule({
@@ -60,7 +63,9 @@ import { SelectComponent } from './shared/form-controls/select/select.component'
     MatRadioModule,
     NgbModule,
     ReactiveFormsModule,
-    HttpClientModule    
+    HttpClientModule,
+    OverlayModule,
+    StoreModule.forRoot({user: userReducer})
   ],
   providers: [],
   bootstrap: [AppComponent]
