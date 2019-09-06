@@ -7,7 +7,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SessionstorageService } from '../../services/sessionstorage.service';
 import { types } from '../../types/types';
 import * as _ from 'lodash';
-import { TransferService } from 'src/app/services/transfer.service';
 
 @Component({
   selector: 'app-login',
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
     private sessionStorageService: SessionstorageService,
     private localstorageService: LocalstorageService,
     private router: Router,
-    private transferService: TransferService
     // private store: Store<any>
     ) { }
 
@@ -69,8 +67,9 @@ export class LoginComponent implements OnInit {
 
  getDataFromLocalStorage (key: string) {
    const data = this.localstorageService.getValue(key);
-   console.log(key, 'is exist: ', data);
-   return data;
+   if(data !== "" && data !== null){
+    this.router.navigate(['/home']);
+   } 
 
  }
 //  Check on error, show details of error

@@ -25,12 +25,13 @@ header {
 
     nav {
         float: right;
+        section {
 
         ul {
             list-style-type: none;
             margin: 0;
             display: flex;
-
+            
             li a {
                 padding: 1em;
 
@@ -38,6 +39,9 @@ header {
                     background: map-get($bg-color, 'gray');
                 }
             }
+
+            }
+            
         }
     }
 }
