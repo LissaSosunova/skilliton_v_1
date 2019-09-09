@@ -39,8 +39,13 @@ export class HttpService {
 
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {
+
     const tokenStr = this.sessionStorage.getValue('_token');
     const tokenType = this.sessionStorage.getValue('tokenType');
+    if(tokenStr === "" || tokenStr === null || tokenType === "" || tokenType === null){
+      console.log("User doesn't autorizated");
+      this.router.navigate(["/login"]);
+    }
     const token = tokenType +" "+tokenStr;
     const headers = new HttpHeaders({'Authorization': token});
     return headers;

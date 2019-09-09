@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, Output, Input } from '@angular/core';
 import { errorTypes } from '../../shared/constants/errors';
 import { HttpService } from '../../services/http.service';
 import { LocalstorageService } from '../../services/localstorage.service';
@@ -7,7 +7,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SessionstorageService } from '../../services/sessionstorage.service';
 import { types } from '../../types/types';
 import * as _ from 'lodash';
-import { TransferService } from 'src/app/services/transfer.service';
+import { PopupComponent } from "../modals/popup/popup.component";
+import { PopupControls, PopupControlsService } from '../../services/popup-controls.service';
+import { ErrorModalComponent } from "../modals/error-modal/error-modal.component";
+import { AlertModalComponent } from "../modals/alert-modal/alert-modal.component";
 
 @Component({
   selector: 'app-login',
@@ -30,19 +33,25 @@ export class LoginComponent implements OnInit {
   public showErrorText: string;
   public user: types.User = {} as types.User;
   @ViewChild('loginForm', { read: true, static: false }) public loginForm: NgForm;
+  @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
+
+  @Input() public actionName: string;
 
   constructor(
     private data: HttpService,
     private sessionStorageService: SessionstorageService,
     private localstorageService: LocalstorageService,
     private router: Router,
-    private transferService: TransferService
+    public errorModal: ErrorModalComponent,
+    public alertModal: AlertModalComponent,
     // private store: Store<any>
     ) { }
 
   ngOnInit() {
     this.isLogin = false;
     this.getDataFromLocalStorage('user');
+    // this.infoPopup.onClose();
+    
   }
   public openLogin (): void {
       this.isLogin == false ? this.isLogin = true : this.isLogin = false;
@@ -69,8 +78,9 @@ export class LoginComponent implements OnInit {
 
  getDataFromLocalStorage (key: string) {
    const data = this.localstorageService.getValue(key);
-   console.log(key, 'is exist: ', data);
-   return data;
+   if(data !== "" && data !== null){
+    this.router.navigate(['/home']);
+   } 
 
  }
 //  Check on error, show details of error
@@ -79,7 +89,13 @@ getErrorCodeApi(data: number, message: string): void {
   this.showError = true;
   (typeof(message)  === 'string') ?
   this.showErrorText =  result.title + " Details: "+ message:
-  this.showErrorText =  result.title;
+  // this.showErrorText =  result.title;
+  this.actionName = result.title;
+  // this.popupConteiner.innerHtml = this.showErrorText;
+  console.log(this.actionName);
+  this.infoPopup.actionName = this.actionName;
+  this.infoPopup.open();
+
 }
 // Check status of response, set tocken and navigate to HOME page
 checkStatusData(data: any): void{
@@ -90,5 +106,8 @@ checkStatusData(data: any): void{
     this.sessionStorageService.setValue(tokenType, 'tokenType');
     this.router.navigate(['/home']);
   }
+}
+public onPopupOpen(): void {
+  this.infoPopup.open();
 }
 }

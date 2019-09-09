@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { RouterService } from '../../services/router.service';
+import { LocalstorageService } from '../../services/localstorage.service';
+import { SessionstorageService } from '../../services/sessionstorage.service';
 
 @Component({
   selector: 'app-top-sidebar',
@@ -16,7 +18,9 @@ export class TopSidebarComponent implements OnInit {
 
   constructor(public router: Router,
     private activateRouter: ActivatedRoute,
-    private routerService: RouterService,) { }
+    private routerService: RouterService,
+    private sessionStorageService: SessionstorageService,
+    private localstorageService: LocalstorageService,) { }
 
   ngOnInit() {
     this.getCurrentRoute();
@@ -37,5 +41,12 @@ export class TopSidebarComponent implements OnInit {
         this.currChildUrl = '';
       }
     });
+   }
+
+   private exitApp() {
+    this.localstorageService.removeValue('user');
+    this.sessionStorageService.removeValue('_token');
+    this.sessionStorageService.removeValue('tokenType');
+    this.router.navigate(['/login']);
    }
 }

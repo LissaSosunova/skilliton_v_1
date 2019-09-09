@@ -28,8 +28,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.user = this.transferService.dataGet('user');
-    // console.log(this.user);
+    this.getDataFromLocalStorage('user');
 
     this.getUserData();
   }
@@ -45,14 +44,20 @@ export class HomeComponent implements OnInit {
   }
 
   getErrorCodeApi(data: number, message: string): void {
-    console.log(data, message);
-    // let result = _.find(this.ERROR_API, function(o) { return o.code == data; });
-    // this.showError = true;
-    // // this.showErrorText = result.title + message;
-    // this.showErrorText =  result.title + message;
+    if(data === 401){
+      this.router.navigate(['/login']);
+    }
   }
   checkStatusData(data: any): void{
-    console.log(data);
-    
+    this.user = data;
+    this.transferService.dataSet({name:'user', data: this.user});
+  }
+
+  getDataFromLocalStorage (key: string) {
+    const dataStorage = this.sessionStorageService.getValue("_token");
+    const dataLocal = this.localstorageService.getValue(key);
+    if((dataLocal === "" || dataLocal === null || !dataLocal) && (dataStorage === null || dataStorage === "")){
+    this.router.navigate(['/login']);
+    } 
   }
 }

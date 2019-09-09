@@ -20,17 +20,22 @@ import { MatFormFieldModule,
           MatDatepickerModule,
           MatRadioModule,
           MatInputModule } from '@angular/material';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RegistrationComponent } from './components/registration/registration.component';
-import { TopSidebarComponent } from './components/top-sidebar/top-sidebar.component';
-import { InputEmailComponent } from './shared/form-controls/input-email/input-email.component';
 import { InputDatepickerComponent } from './shared/form-controls/input-datepicker/input-datepicker.component';
+import { InputEmailComponent } from './shared/form-controls/input-email/input-email.component';
 import { MatSelectComponent } from './shared/form-controls/mat-select/mat-select.component';
-import { SelectComponent } from './shared/form-controls/select/select.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OverlayModule } from "@angular/cdk/overlay";
+import { RegistrationComponent } from './components/registration/registration.component';
+import { RouterModule } from '@angular/router';
+import { SelectComponent } from './shared/form-controls/select/select.component';
 import { StoreModule }  from '@ngrx/store';
+import { TopSidebarComponent } from './components/top-sidebar/top-sidebar.component';
 import { userReducer} from './state/reducers/user';
-
+import { AlertModalComponent } from './components/modals/alert-modal/alert-modal.component';
+import { LeavePopupComponent } from './components/registration/leave-popup/leave-popup.component';
+import { PopupComponent } from './components/modals/popup/popup.component';
+import { ErrorModalComponent } from './components/modals/error-modal/error-modal.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +51,12 @@ import { userReducer} from './state/reducers/user';
     InputEmailComponent,
     InputDatepickerComponent,
     MatSelectComponent,
-    SelectComponent
+    SelectComponent,
+    AlertModalComponent,
+    LeavePopupComponent,
+    PopupComponent,
+    ErrorModalComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +77,12 @@ import { userReducer} from './state/reducers/user';
     OverlayModule,
     StoreModule.forRoot({user: userReducer})
   ],
-  providers: [],
+  providers: [
+    AlertModalComponent,
+    LeavePopupComponent,
+    PopupComponent,
+    ErrorModalComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -72,5 +72,27 @@ export module types {
       error: boolean;
       errorMessage: string;
     }
+
+    export interface FormPopupConfig {
+      position?: 'top-center'|'center-center';
+      cssClass?: string;
+      header?: string;
+      isHeaderCloseBtn?: boolean;
+      formId?: string;
+      isFooter?: boolean;
+      isHeader?: boolean;
+      footer?: {
+          isCloseBtn?: boolean;
+          closeBtnText?: string;
+          isSubmitBtn?: boolean;
+          submitBtnText?: string;
+          isSubmitLoading?: boolean;
+          isSubmitDisabled?: boolean;
+          isRemoveBtn?: boolean;
+          removeBtnText?: string;
+          isRemoveLoading?: boolean;
+          btnOrder?: string[];
+      };
+  }
   }
   

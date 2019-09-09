@@ -1,4 +1,4 @@
-<form class=""
+<form class="registrationForm"
     name="registrationForm"
     #registrationForm="ngForm">
 <div class="row content-block">
@@ -114,6 +114,7 @@
                     <input class="checkbox-agree"
                     type="checkbox"
                     name="rememberMeInput"
+                    [required]="true"
                     #agreeInput="ngModel"
                     [(ngModel)]="checkbox-agree" 
                     checked="!!agreeConfirmCheckBox"
@@ -145,3 +146,5 @@
         </div>       
     </div>
 </form>
+
+<app-leave-popup #leaveRegistration></app-leave-popup>

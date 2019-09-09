@@ -1,0 +1,10 @@
+<app-popup 
+    *ngIf="popup.isOpened"
+    [config]="popupConfig"
+    (onClose)="onClose()"
+    >
+  <div id="popupConteiner">
+
+    Check your data and try again.
+  </div>
+</app-popup> 

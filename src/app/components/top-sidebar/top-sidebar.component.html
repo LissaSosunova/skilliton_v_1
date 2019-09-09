@@ -8,17 +8,37 @@
             <img src="assets/images/skilliton_logo.png" class="logo-img">
         </a>
         <nav>
-        <ul>
-            <li  *ngIf="currParentUrl !== 'login' || 'registration'"><a href="#" routerLink="/home">Home</a></li>
-            <li  *ngIf="currParentUrl !== 'login' || 'registration'"><a href="#" routerLink="/home">Library</a></li>
-            <li  *ngIf="currParentUrl !== 'login' || 'registration'"><a href="#" routerLink="/home">My classroom</a></li>
-            <li  *ngIf="currParentUrl !== 'login' || 'registration'"><a href="#" routerLink="/home">Chat</a></li>
-            <li  *ngIf="currParentUrl === 'registration'"><a href="#" routerLink="/login">Log in</a></li>
-            <li  *ngIf="currParentUrl === 'login'"><a href="#" routerLink="/registration">Sign Up</a></li>
+       
+          <section *ngIf="currParentUrl !== 'login' && currParentUrl !== 'registration'">
+                <ul>
+            <li><a href="#" routerLink="/home"><span>Home</span></a></li>
+            <li><a href="#" routerLink="/home"><span>Library</span></a></li>
+            <li ><a href="#" routerLink="/home"><span>My classroom</span></a></li>
+            <li><a href="#" routerLink="/home"><span>Chat</span></a></li>
             <li>
-                <app-lang-switcher></app-lang-switcher>
-            </li>
-        </ul>
+                    <app-lang-switcher></app-lang-switcher>
+                </li>
+                <li><a href="#" routerLink="/profile"><i class="material-icons exit-btn">face</i></a></li>
+                <li><i class="material-icons exit-btn" (click)="exitApp()">exit_to_app</i></li>
+                </ul>
+          </section>
+          <section *ngIf="currParentUrl === 'registration'">
+                <ul>
+                <li ><a href="#" routerLink="/login"><span>Log in</span></a></li>
+                <li>
+                    <app-lang-switcher></app-lang-switcher>
+                </li>
+                </ul>
+          </section>
+        <section *ngIf="currParentUrl === 'login'">
+            <ul>
+                    <li ><a href="#" routerLink="/registration"><span>Sign Up</span></a></li>
+                    <li>
+                        <app-lang-switcher></app-lang-switcher>
+                    </li>
+            </ul>
+            
+          </section>
         </nav>
     </div>
 </header>

@@ -1,0 +1,10 @@
+<app-popup 
+    *ngIf="popup.isOpened"
+    [config]="popupConfig"
+    (onClose)="onClose()"
+    (onSubmit)="onSubmit()"
+    >
+  <div>
+    Are you sure you want to leave registration?
+  </div>
+</app-popup> 

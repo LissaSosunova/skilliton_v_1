@@ -6,6 +6,9 @@ import { NgForm } from '@angular/forms';
 import { types } from '../../types/types';
 import * as _ from 'lodash';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LeavePopupComponent} from './leave-popup/leave-popup.component';
+import { takeUntil, take } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-registration',
@@ -15,6 +18,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
   @ViewChild('registrationForm', { read: true, static: false }) public registrationForm: NgForm;
+  @ViewChild('leaveRegistration', { static: false }) public leaveRegistration: LeavePopupComponent;
+  private unsubscribe$: Subject<void> = new Subject();
   public params: types.RegistrationAPI;
   private registrationResp: types.RegistrationResponse;
   private agreeConfirmCheckBox: boolean = false;
@@ -27,6 +32,15 @@ export class RegistrationComponent implements OnInit {
   public errorMes: string;
   public minLength: 5;
   private resp: any;
+  public openConfirmPopup: boolean = false;
+
+    firstNameOfUser: string;
+    lastNameOfUser: string;
+    nickNameOfUser: string;
+    birthdayDate: string;
+    email: string;
+    password: string;
+    passConf: string;
 
   constructor(
     private data: HttpService,
@@ -35,6 +49,13 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // this.initRegModel();
+    console.log(this.registrationForm);
+    // this.registrationForm.valueChanges
+    // .pipe(takeUntil(this.unsubscribe$))
+    // .subscribe(form => {
+    //   this.openConfirmPopup = Object.keys(form).some(key => !!form[key]);
+    // });
     this.getDataForDateOptions ();
   }
 
@@ -97,5 +118,15 @@ export class RegistrationComponent implements OnInit {
 
   public clear(event: MouseEvent): void {
     this.registrationForm.reset();
+  }
+
+  private initRegModel(): void {
+    this.firstNameOfUser = 'string',
+    this.lastNameOfUser = 'string',
+    this.nickNameOfUser = 'string',
+    this.birthdayDate = 'string',
+    this.email = 'string',
+    this.password = 'string',
+    this.passConf = 'string'
   }
 }
