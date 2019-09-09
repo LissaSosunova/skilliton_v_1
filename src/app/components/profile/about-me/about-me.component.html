@@ -1,0 +1,52 @@
+
+    
+    <section id="content" class="direction-row">
+        <!-- Menu -->
+      <div id="menu-switcher"
+            class="tabs-nav
+                col-lg-2
+                direction-column">
+            <div class="row row-nav">
+                <div class="col-xs-12
+                            tab-expert-class
+                            border-right"
+                [ngClass]="{'not-active-tab': currTab !== 'contacts',  'active': currTab === 'contacts'}"
+                            (click)="switcher('contacts')">
+                            <span>
+                              Contact list
+                            </span>
+                          </div>
+                <div class="col-xs-12
+                            tab-expert-class
+                            border-right"
+                      [ngClass]="{'not-active-tab': currTab !== 'avaiting',  'active': currTab === 'avaiting'}"
+                            (click)="switcher('avaiting')">
+                            <span>
+                                Awaiting for confirmation
+                            </span>
+              </div>
+                <div class="col-xs-12
+                            tab-expert-class
+                            border-right"
+                      [ngClass]="{'not-active-tab': currTab !== 'requested',  'active': currTab === 'requested'}"
+                            (click)="switcher('requested')">
+                            <span>
+                                Requested
+                            </span>
+              </div>
+                <div class="col-xs-12
+                            tab-expert-class"
+                      [ngClass]="{'not-active-tab': currTab !== 'add',  'active': currTab === 'add'}"
+                            (click)="switcher('add')">
+                            <span>
+                                Add new contact
+                            </span>
+              </div>
+            </div>
+        </div>
+        <div class="col-lg-10">Show content
+    
+    
+            
+        </div>
+    </section>
