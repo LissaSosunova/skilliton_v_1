@@ -20,6 +20,7 @@ export class PopupComponent implements OnInit, DoCheck {
       @Input() public header: string;
       @Input() public formId: string;
       @Input() public formName: string;
+      @Input() public actionName: string;
       @Output() public onClose = new EventEmitter<void>();
       @Output() public onRemove = new EventEmitter<void>();
       @Output() public onSubmit = new EventEmitter<void>();

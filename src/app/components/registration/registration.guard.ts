@@ -35,7 +35,7 @@ export class RegistrationGuard implements CanActivate, CanActivateChild, CanLoad
 
   canDeactivate(component: RegistrationComponent): Observable<boolean> | boolean {
     if (component.openConfirmPopup) {
-      return component.leaveRegistrationPopup.onOpen();
+      return component.leaveRegistration.onOpen();
     } else {
     return true;
   }

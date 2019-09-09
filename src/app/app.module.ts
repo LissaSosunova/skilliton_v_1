@@ -34,7 +34,8 @@ import { userReducer} from './state/reducers/user';
 import { AlertModalComponent } from './components/modals/alert-modal/alert-modal.component';
 import { LeavePopupComponent } from './components/registration/leave-popup/leave-popup.component';
 import { PopupComponent } from './components/modals/popup/popup.component';
-
+import { ErrorModalComponent } from './components/modals/error-modal/error-modal.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,9 @@ import { PopupComponent } from './components/modals/popup/popup.component';
     SelectComponent,
     AlertModalComponent,
     LeavePopupComponent,
-    PopupComponent
+    PopupComponent,
+    ErrorModalComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,12 @@ import { PopupComponent } from './components/modals/popup/popup.component';
     OverlayModule,
     StoreModule.forRoot({user: userReducer})
   ],
-  providers: [],
+  providers: [
+    AlertModalComponent,
+    LeavePopupComponent,
+    PopupComponent,
+    ErrorModalComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

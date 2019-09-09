@@ -4,7 +4,7 @@
             <!-- Header -->
             <div class="g-form-popup__header" *ngIf="conf.isHeader">
               <div class="g-form-popup__close-btn-wrap" (click)="closePopup()">
-                <button class="close-btn m-btn"
+                <button class="close-btn m-radio-btn"
                      *ngIf="conf.isHeaderCloseBtn"
                      [disabled]="conf.footer.isSubmitLoading || conf.footer.isRemoveLoading"
                         >
@@ -16,7 +16,9 @@
             <!--/ Header -->
       
             <!-- Body -->
-            <ng-content (click)="$event.stopPropagation()"></ng-content>
+            <ng-content (click)="$event.stopPropagation()">
+            </ng-content>
+            
             <!--/ Body -->
       
             <!-- Footer -->

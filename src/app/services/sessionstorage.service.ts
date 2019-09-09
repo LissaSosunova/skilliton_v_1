@@ -14,4 +14,8 @@ export class SessionstorageService {
   public setValue(value: string, key: string): void {
     sessionStorage.setItem(key, value);
   }
+
+  public removeValue(key: string): void {
+    sessionStorage.removeItem(key);
+  }
 }

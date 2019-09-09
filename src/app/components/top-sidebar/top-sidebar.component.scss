@@ -32,7 +32,7 @@ header {
             margin: 0;
             display: flex;
             
-            li a {
+            li a span {
                 padding: 1em;
 
                 &:hover {
@@ -49,4 +49,15 @@ header {
 .logo-img {
     margin-left: 2%;
     height: 30px;
+}
+
+.exit-btn {
+    font-size: 30px;
+    padding-left: 20px;
+
+    &:hover {
+        cursor: pointer;
+        color: red;
+        background: none;
+    }
 }

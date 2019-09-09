@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
   checkStatusData(data: any): void{
     this.user = data;
     this.transferService.dataSet({name:'user', data: this.user});
-    console.log('checkStatusData: ', data);
   }
 
   getDataFromLocalStorage (key: string) {
