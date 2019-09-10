@@ -18,7 +18,7 @@
                 col-md-10
                 col-lg-10
                 header-text-block">
-            <span>{{user.name + " " + user.lastName}} {{user.lastname}}</span>
+            <span>{{user.name}} </span><span>{{user.lastName}}</span> 
             <br/>
             <div  class="summary">
                     <span>{{user.summary || "No summary"}}</span>
@@ -33,11 +33,11 @@
 
 <div class="col-lg-12">Width</div>
 
-<section>
+<section class="col-lg-12 btns-box">
         <button>About me</button>
         <button>My posts</button>
         <button>Saved posts</button>
-        <button>My requests</button>
+        <button>Contacts (My requests)</button>
     </section>
 
     <app-about-me></app-about-me>

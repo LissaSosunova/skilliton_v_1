@@ -37,6 +37,8 @@ import { PopupComponent } from './components/modals/popup/popup.component';
 import { ErrorModalComponent } from './components/modals/error-modal/error-modal.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AboutMeComponent } from './components/profile/about-me/about-me.component';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './state/effects/user.effects';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,8 @@ import { AboutMeComponent } from './components/profile/about-me/about-me.compone
     ReactiveFormsModule,
     HttpClientModule,
     OverlayModule,
-    StoreModule.forRoot({user: userReducer})
+    StoreModule.forRoot({user: userReducer}),
+    EffectsModule.forRoot([UserEffects])
   ],
   providers: [
     AlertModalComponent,
