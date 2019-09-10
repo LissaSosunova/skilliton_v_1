@@ -5,7 +5,9 @@ export const errorTypes = {
     app: {
         registration: [
             {code: 100, title: 'Passwords must be equal'},
-            {code: 101, title: 'Code 100'}
+            {code: 101, title: 'Code 100'},
+            {code: 102, title: 'Check your data and try again'},
+            {code: 103, title: "Data is not correct: you must to set coreect birthday (in the past) and You must be over 14 years old."}
         ],
         login: [
             {code: 100, title: 'Passwords must be equal'},

@@ -75,3 +75,8 @@
     font-size: 12px;
     margin-top: -15px;
 }
+
+.error-message {
+    color:map-get($font-color, 'error');
+    font-size: 12px;
+}

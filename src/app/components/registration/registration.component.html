@@ -66,11 +66,13 @@
                             [floatLabel]="'auto'"
                             [disabled]="false"
                             [format]="'dd MM yyyy'"
-                            [min]="8601"
+                            [max]="2012"
                             [(ngModel)]="birthdayDate"
                             [required]="true"
                             [errorText]="'Date of birth is required'"
-                            name="birthday">
+                            name="birthday"
+                            (dateChange)="checkDatePicker('change', $event, birthdayDate)"
+                            [errorTextDate]="errorTextDate">
 
         </app-input-datepicker>
         </div>
@@ -118,12 +120,13 @@
                     #agreeInput="ngModel"
                     [(ngModel)]="checkbox-agree" 
                     checked="!!agreeConfirmCheckBox"
-                    (change)="agreeConfirm($event)"/> 
+                    (change)="agreeConfirm($event, birthdayDate)"/> 
             
             <span>I accept Skilliton's Terms of Use and Privacy Policy</span>
             
                     <!-- Button confirm -->
-        <div class="error-passwords">{{errorMes}}</div>
+        <div class="error-message">{{errorAPI}}</div>
+        <div class="error-message">{{errorAPP}}</div>
         <div class="login-btns-conteiner">
           <input type="submit" 
                 (click)="setRegConf(

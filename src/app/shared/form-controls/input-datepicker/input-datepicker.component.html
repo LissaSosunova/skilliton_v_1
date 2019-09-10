@@ -27,5 +27,7 @@
         <mat-error *ngIf="control?.hasError('required') && control?.touched && !datepicker.opened" class="m-datepicker__error">
           {{errorText}}
         </mat-error>
+        <br/>
+        <span class="errorTextDate">{{errorTextDate}}</span>
       </section>
       
