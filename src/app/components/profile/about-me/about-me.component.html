@@ -57,23 +57,28 @@
                         <div>My name is : <span>{{user.name}}</span>, Last name <span>{{user.lastName}}</span></div>
                         <div>Birthday: {{user.birthDate}}</div>
                         <div>Sex: {{user.sex || "I haven't choosed yet"}}</div>
-                        <div>Native language: {{user.language || "I haven't choosed languages yet"}}</div>
-                        
-                                                
+                        <div>Native language: {{user.language || "I haven't choosed languages yet"}}</div>                          
                     </section>
             </div>
             
                 <!-- placedYourVeLived -->
                 <div class="tab" id="placedYourVeLived" *ngIf="currTab === 'placedYourVeLived'">
                         <section>
-                            Placed your’ve lived
+                                <div>I am from: Country: <span *ngIf="!!user.birthAddress">{{user.birthAddress.country || "I haven't choosed languages yet"}}</span>
+                                    City <span *ngIf="!!user.birthAddress">{{user.birthAddress.city || "I haven't choosed languages yet"}}</span></div>
+                                <div>I live in: <span *ngIf="!!user.currentAddress">{{user.currentAddress.country || "I haven't choosed languages yet"}}</span>,
+                                     City: <span *ngIf="!!user.currentAddress">{{user.currentAddress.city || "I haven't choosed languages yet"}}</span></div>                    
                         </section>
                 </div>
         
                 <!-- workAndEducation -->
                 <div class="tab" id="workAndEducation" *ngIf="currTab === 'workAndEducation'">
                         <section>
-                            Work and Education
+                                <div>Workplace: <span>{{user.name}}</span></div>
+                                <div>Должность: <span>{{user.name}}</span></div>
+                                <div>Education: <span>{{user.name}}</span></div>
+                                <div>Specialisation: <span>{{user.name}}</span></div> 
+                                <div>Degree: <span>{{user.name}}</span></div>                       
                         </section>
                 </div>
         

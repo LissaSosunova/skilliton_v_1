@@ -10,7 +10,6 @@ import { SessionstorageService } from '../../services/sessionstorage.service';
 import { Store} from '@ngrx/store';
 import { LoadUserData } from '../../state/actions/user.actions';
 import {Observable, Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged, filter, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
