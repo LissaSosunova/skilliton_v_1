@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { errorTypes } from '../../shared/constants/errors';
 import { HttpService } from '../../services/http.service';
 import { NgForm } from '@angular/forms';
 import { types } from '../../types/types';
 import * as _ from 'lodash';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { LeavePopupComponent} from './leave-popup/leave-popup.component';
-import { takeUntil, take } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-registration',
@@ -19,28 +17,23 @@ import { Observable, Subject } from 'rxjs';
 export class RegistrationComponent implements OnInit {
   @ViewChild('registrationForm', { read: true, static: false }) public registrationForm: NgForm;
   @ViewChild('leaveRegistration', { static: false }) public leaveRegistration: LeavePopupComponent;
-  private unsubscribe$: Subject<void> = new Subject();
+
   public params: types.RegistrationAPI;
-  private registrationResp: types.RegistrationResponse;
   private agreeConfirmCheckBox: boolean = false;
   private registrationFormCorrect: boolean = true;
-  private registrationFormData: types.RegistrationFormData;
   private ERROR_API: any = errorTypes.api.registration;
   private ERROR_APP: any = errorTypes.app.registration;
   public showEqualError: boolean = false;
   public showEqualErrorText: string;
-  public errorMes: string;
+  public showAPIError: boolean = false;
+  public errorAPP: string;
+  public errorAPI: string;
   public minLength: 5;
   private resp: any;
   public openConfirmPopup: boolean = false;
-
-    firstNameOfUser: string;
-    lastNameOfUser: string;
-    nickNameOfUser: string;
-    birthdayDate: string;
-    email: string;
-    password: string;
-    passConf: string;
+  private minimalYear: number;
+  public chechDate: number;
+  @Input() errorTextDate: string;
 
   constructor(
     private data: HttpService,
@@ -49,13 +42,7 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.initRegModel();
-    console.log(this.registrationForm);
-    // this.registrationForm.valueChanges
-    // .pipe(takeUntil(this.unsubscribe$))
-    // .subscribe(form => {
-    //   this.openConfirmPopup = Object.keys(form).some(key => !!form[key]);
-    // });
+
     this.getDataForDateOptions ();
   }
 
@@ -66,8 +53,9 @@ export class RegistrationComponent implements OnInit {
     email: string,
     password: string,
     passConf: string): void {
-
+      
     if(password === passConf){
+      this.checkDateFn();
       let data = {
         birthDate: this.datePipe.transform(birthdayDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"),
         email: email,
@@ -79,54 +67,80 @@ export class RegistrationComponent implements OnInit {
       } 
       this.showEqualError = false;
       this.params = data;
-      this.data.registration(this.params).subscribe(
-        (data: types.ApiResponse) => {this.checkStatusData(data);},
-        error => this.getErrorCodeApi(error.status, error.error))
+      if(this.registrationFormCorrect === false){
+        let result = _.find(this.ERROR_APP, function(o) { return o.code == 102; });
+        this.errorAPP = result.title;
+      } else {
+        this.registrationFormCorrect === true;
+        this.errorTextDate= '';
+        this.showEqualError = false;
+        this.data.registration(this.params).subscribe(
+          (data: types.ApiResponse) => {this.checkStatusData(data);},
+          error => this.getErrorCodeApi(error.status, error.error))
+      }
     }else if (password !== passConf){
       let result = _.find(this.ERROR_APP, function(o) { return o.code == 100; });
         this.showEqualErrorText = result.title;
         this.showEqualError = true;
     }
   }
-
+// Function checks inputs and makes send button visible
   agreeConfirm($event) {
     if($event.target.checked == true) {
+      this.checkDateFn();
       return this.registrationFormCorrect = false;
     } else {
       return this.registrationFormCorrect = true;
     }
-
   }
 
   checkStatusData(data: any): void{
-    
     setTimeout(() => { this.router.navigate(['/login']) }, 2000);
-
   }
-
+// Function gets current date
   getDataForDateOptions (): void {
     let today = new Date();
-    let todayTransformed = this.datePipe.transform(today, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-
-    
+    this.minimalYear = +(this.datePipe.transform(today, "yyyy"))-13;
   }
-  getErrorCodeApi(data: number, message: string): void {
+  // Get text of error on API
+  getErrorCodeApi(data: number, message: string): void  {
+    this.errorAPP = '';
     let result = _.find(this.ERROR_API, function(o) { return o.code == data; });
+
+    this.errorAPI = result.title + message;
+  }
+// Get text of error on APP
+  getErrorCodeApp(data: number): void  {
+    this.errorAPP = '';
+    let result = _.find(this.ERROR_APP, function(o) { return o.code == data; });
     this.showEqualError = true;
-    this.errorMes = result.title + message;
+    this.errorAPP = result.title;
   }
-
-  public clear(event: MouseEvent): void {
-    this.registrationForm.reset();
+// Function checks correct date in input datepicker
+  public checkDatePicker(event, birthdayDate: string): void {
+    this.chechDate = +(this.datePipe.transform(birthdayDate, "yyyy"));
+    if(this.chechDate >= this.minimalYear){
+      this.registrationFormCorrect = false;
+      let result = _.find(this.ERROR_APP, function(o) { return o.code == 103; });
+      this.getErrorCodeApp(103);
+      this.errorAPP = result.title;
+      this.errorTextDate = this.errorAPP;
+    } else {
+      this.errorTextDate= '';
+      this.showEqualError = false;
+      this.errorAPP = '';
+    }
   }
-
-  private initRegModel(): void {
-    this.firstNameOfUser = 'string',
-    this.lastNameOfUser = 'string',
-    this.nickNameOfUser = 'string',
-    this.birthdayDate = 'string',
-    this.email = 'string',
-    this.password = 'string',
-    this.passConf = 'string'
+// Function checks correct date before send request
+  public checkDateFn(minimalYear = this.minimalYear, chechDate = this.chechDate) {
+    if(chechDate >= minimalYear && this.registrationForm){
+      this.registrationForm.invalid;
+      this.registrationFormCorrect = false;
+      this.showEqualError = true;
+      this.getErrorCodeApp(103);
+      this.errorTextDate = this.errorAPP;
+    } else {
+      this.registrationFormCorrect = true;
+    }
   }
 }

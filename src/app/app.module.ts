@@ -36,6 +36,10 @@ import { LeavePopupComponent } from './components/registration/leave-popup/leave
 import { PopupComponent } from './components/modals/popup/popup.component';
 import { ErrorModalComponent } from './components/modals/error-modal/error-modal.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AboutMeComponent } from './components/profile/about-me/about-me.component';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffects } from './state/effects/user.effects';
+import { PostsComponent } from './components/home/posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     LeavePopupComponent,
     PopupComponent,
     ErrorModalComponent,
-    ProfileComponent
+    ProfileComponent,
+    AboutMeComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +81,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     ReactiveFormsModule,
     HttpClientModule,
     OverlayModule,
-    StoreModule.forRoot({user: userReducer})
+    StoreModule.forRoot({user: userReducer}),
+    EffectsModule.forRoot([UserEffects])
   ],
   providers: [
     AlertModalComponent,

@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SessionstorageService } from '../../services/sessionstorage.service';
 import { Store} from '@ngrx/store';
 import { LoadUserData } from '../../state/actions/user.actions';
+import {Observable, Subject} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,8 @@ import { LoadUserData } from '../../state/actions/user.actions';
 })
 export class HomeComponent implements OnInit {
   public user: types.User = {} as types.User;
+  public user$: Observable<types.User>;
+  private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
     private data: HttpService,
@@ -38,19 +41,10 @@ export class HomeComponent implements OnInit {
   }
 
   private getUserData() {
-    this.data.getUser().subscribe(
-      (data: types.User) => {this.checkStatusData(data);},
-      error => this.getErrorCodeApi(error.status, error.error))
-  }
-
-  getErrorCodeApi(data: number, message: string): void {
-    if(data === 401){
-      this.router.navigate(['/login']);
-    }
-  }
-  checkStatusData(data: any): void{
-    this.user = data;
-    this.transferService.dataSet({name:'user', data: this.user});
+    this.store.dispatch(new LoadUserData());
+    const storeSub$ = this.store.select('user').subscribe((state: any) => {
+      this.user = state;
+    });
   }
 
   getDataFromLocalStorage (key: string) {

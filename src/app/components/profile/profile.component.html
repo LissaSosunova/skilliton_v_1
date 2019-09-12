@@ -1,1 +1,43 @@
-<p>profile works!</p>
+<!-- Header section -->
+<section class="row content-block">
+    <div class="header
+                col-xs-12
+                col-sm-12
+                col-md-12
+                col-lg-12
+                direction-row">   
+        <div class="
+                col-xs-6
+                col-sm-6
+                col-md-2
+                col-lg-2">
+            <i class="material-icons avatar">face</i>
+        </div>
+        <div class="col-xs-6
+                col-sm-6
+                col-md-10
+                col-lg-10
+                header-text-block">
+            <span>{{user.name}} </span><span>{{user.lastName}}</span> 
+            <br/>
+            <div  class="summary">
+                    <span>{{user.summary || "No summary"}}</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- Bar of %%  -->
+
+<div class="col-lg-12">Width</div>
+
+<section class="col-lg-12 btns-box">
+        <button>About me</button>
+        <button>My posts</button>
+        <button>Saved posts</button>
+        <button>Contacts (My requests)</button>
+    </section>
+
+    <app-about-me></app-about-me>

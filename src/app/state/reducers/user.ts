@@ -15,7 +15,7 @@ export const stateFeatureKey = 'state';
 
 
 export interface State {
-  active: boolean;
+    active: boolean;
     birthAddress: any;
     birthDate: string;
     currentAddress: any;
@@ -48,8 +48,38 @@ const userInitState: types.User = {
 };
 
 export function userReducer(state: any, action: any)  {
+  const updateState: types.User = {...state};
+  switch (action.type) {
+    
+    case userAction.UserActionTypes.LOAD_USER_SUCCESS: {
+      const user: types.User = action.payload;
+      state = user;
+      return user;
+    }
+    default:
+      return state;
+    }
 
-};
+  };
 
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+
+
+
+// export function userReducer(state = userInitState, action: any) {
+//   const actions = {
+//     [userAction.UserActionTypes.LOAD_USER]: (): State => ({
+//       ...state,
+//     }),
+//     [userAction.UserActionTypes.LOAD_USER_SUCCESS]: (): State => {
+//       return ({
+//         ...state,
+//         userInitState: action.payload
+//       });
+//     }
+//     }
+  
+
+//   return actions[action.type] ? actions[action.type]() : state;
+// }

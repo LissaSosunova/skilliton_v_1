@@ -21,6 +21,7 @@ export class InputDatepickerComponent implements ControlValueAccessor, OnInit, O
    */
   @Input() public floatLabel?: 'never' | 'always' | 'auto' = 'never';
   @Input() public errorText?: string = 'Date is required';
+  @Input() public errorTextDate?: string;
   // date pipe format
   @Input() public format?: string = 'dd MM yyyy';
   // for form validation when FormControl is not passed

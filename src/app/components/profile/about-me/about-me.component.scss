@@ -1,0 +1,63 @@
+@import '../../../../scss/variables';
+
+.tab {
+    display: flex;
+  }
+  .tabs-nav {
+    display: flex;
+    width: 100%;
+    div{
+      flex-direction: row;
+      width: 100%;
+      margin: 0px;
+  
+    }
+  }
+
+  .tab-expert-class {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    min-height: 30px;
+    border-bottom: 1px solid map-get($bg-color, 'dark');
+    &:hover {
+      cursor: pointer;
+    }
+    span {
+        width: 100%;
+        list-style: none;
+        text-align: center;
+        margin: 0;
+        font-size: 13px;
+        font-weight: 600;
+        &:hover {
+          cursor: pointer;
+        }
+    }
+  }
+  
+  .active {
+    color: map-get($font-color, 'primary');
+    background-color: map-get($bg-color, 'light-olive');
+    &:hover {
+      background-color: map-get($font-color, 'dark-gray');
+      color: map-get($font-color, 'light-olive');
+    }
+  }
+  
+  .not-active-tab {
+    color: map-get($font-color, 'primary');
+    &:hover {
+      background-color: map-get($font-color, 'gray');
+      color: map-get($font-color, 'light-olive');
+    }
+  }
+
+  .show-content {
+      padding: 40px;
+      margin-top: 20px;
+  }
+
+  .main {
+      padding: 20px;
+  }
