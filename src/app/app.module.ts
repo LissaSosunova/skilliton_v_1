@@ -39,6 +39,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AboutMeComponent } from './components/profile/about-me/about-me.component';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './state/effects/user.effects';
+import { PostsComponent } from './components/home/posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { UserEffects } from './state/effects/user.effects';
     PopupComponent,
     ErrorModalComponent,
     ProfileComponent,
-    AboutMeComponent
+    AboutMeComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,

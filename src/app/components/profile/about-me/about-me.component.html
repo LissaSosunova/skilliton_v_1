@@ -48,6 +48,14 @@
                                 Skills to obtain
                             </span>
               </div>
+              <div class="col-xs-12
+              tab-expert-class"
+        [ngClass]="{'not-active-tab': currTab !== 'skillsToObtain',  'active': currTab === 'skillsToObtain'}"
+              (click)="switcher('skillsToObtain')">
+              <span>
+                    Skills to share
+              </span>
+            </div>
             </div>
             <div class="col-lg-8 show-content">Show content
     
@@ -82,7 +90,14 @@
                         </section>
                 </div>
         
-                <!-- workAndEducation -->
+                <!-- skillsToObtain -->
+                <div class="tab" id="skillsToObtain" *ngIf="currTab === 'skillsToObtain'">
+                        <section>
+                            Skills to obtain
+                        </section>
+                </div>
+
+                <!-- skillsToObtain -->
                 <div class="tab" id="skillsToObtain" *ngIf="currTab === 'skillsToObtain'">
                         <section>
                             Skills to obtain

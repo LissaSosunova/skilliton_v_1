@@ -1,0 +1,82 @@
+@import '../../../../scss/variables';
+
+.one-post {
+    border-top: 1px solid map-get($bg-color, 'primary');
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-top: 20px;
+}
+
+.markers {
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.header-box {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    width: 80%;
+}
+
+.mark {
+    font-size: 40px;
+}
+.date-of-post {
+    font-size: 12px;
+}
+
+.face {
+    font-size: 100px;
+}
+.ava2 {
+    font-size: 60px;
+}
+.ava3 {
+    font-size: 30px;
+}
+
+.head {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+}
+
+.name {
+    font-size: 30px;
+}
+.name2 {
+    font-size: 24px;
+    margin-left: 10px;
+}
+.sm-descr {
+    font-size: 16px;
+    color: map-get($font-color, 'gray');
+}
+.left-side {
+    width: 16%;
+}
+
+.post-img {
+    width: 100%;
+}
+
+.tex-bg {
+    border-bottom: 3px solid map-get($bg-color, 'gray-light');
+    padding-bottom: 10px;
+}
+
+.link {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.comment-box {
+    padding: 20px 5px 10px 5px;
+    margin: 10px 0px 10px 0px;
+    border: 1px solid map-get($bg-color, 'gray');
+}
