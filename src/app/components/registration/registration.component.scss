@@ -1,23 +1,9 @@
 @import '../../../scss/variables';
 
-.middle-block {
-    display: flex;
-    color: map-get($font-color,'primary');
-    font-size: 16px;
-    width: 80%;
-    flex-direction: row;
-    padding: 30px;
-    flex-wrap: wrap;
-    border: 1px solid map-get($bg-color, 'primary');
-    justify-content: center;
-}
-
 .content-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 420px;
+    padding-top: 15px;
     height: calc(100vh + #{$footer-height + $header-height});
+    padding-bottom: $footer-height;
 }
 
 .direction-column {
@@ -37,15 +23,9 @@
 }
 
 .spec-width {
-    width: 100%;
+    width: 92%;
 }
 
-.birthday {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
 
 .div-bd-select {
     display: flex;
@@ -54,8 +34,8 @@
 
 
 .checkbox-agree {
-    width: 20px;
-    height: 20px;
+    width: 45px;
+    height: 45px;
     border-radius: 0px;
     background-color: white;
     border: 1px solid map-get($bg-color, 'primary');
@@ -73,10 +53,42 @@
   .error {
     color:map-get($font-color, 'error');
     font-size: 12px;
-    margin-top: -15px;
+    margin-top: -10px;
 }
 
 .error-message {
     color:map-get($font-color, 'error');
     font-size: 12px;
+}
+
+.social-btn {
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    border: 1px solid map-get($bg-color, 'gray-light');
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 47px;
+    background-color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.spec-padd {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.login-btns-conteiner {
+    padding-top: 20px;
+    margin-bottom: calc(4vh + #{$footer-height});
+}
+
+.relative-pos-text {
+    position: relative;
+    bottom: 15px;
+    padding-left: 10px;
 }

@@ -1,6 +1,6 @@
 <section class="app-datepicker__container">
-        <mat-form-field [floatLabel]="floatLabel">
-          <input matInput [placeholder]="placeholder"
+        <mat-form-field [floatLabel]="floatLabel" class="input-field form-field-edit" id="input-field">
+          <input id="matInput" matInput [placeholder]="placeholder"
                 [matDatepicker]="datepicker"
                 [formControl]="control"
                 [min]="min"
@@ -20,11 +20,11 @@
                 [formControl]="control"
                 >      
           <mat-datepicker-toggle matSuffix [for]="datepicker">
-            <div matDatepickerToggleIcon class="material-icons" [ngClass]="{'disabled_icon': disabled}">date_range</div>
+            <div matDatepickerToggleIcon id="icon-calendar" class="material-icons" [ngClass]="{'disabled_icon': disabled}">date_range</div>
           </mat-datepicker-toggle>
           <mat-datepicker #datepicker></mat-datepicker>
         </mat-form-field>
-        <mat-error *ngIf="control?.hasError('required') && control?.touched && !datepicker.opened" class="m-datepicker__error">
+        <mat-error *ngIf="control?.hasError('required') && control?.touched && !datepicker.opened" class="errorTextDate">
           {{errorText}}
         </mat-error>
         <br/>

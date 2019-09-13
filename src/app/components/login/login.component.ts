@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   public user: types.User = {} as types.User;
   @ViewChild('loginForm', { read: true, static: false }) public loginForm: NgForm;
   @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
+  @Output() rememberMeText: string = 'Remember me';
 
   @Input() public actionName: string;
 
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.isLogin = false;
     this.getDataFromLocalStorage('user');
+
     // this.infoPopup.onClose();
     
   }
@@ -77,10 +79,10 @@ export class LoginComponent implements OnInit {
  }
 
  getDataFromLocalStorage (key: string) {
-   const data = this.localstorageService.getValue(key);
-   if(data !== "" && data !== null){
-    this.router.navigate(['/home']);
-   } 
+  //  const data = this.localstorageService.getValue(key);
+  //  if(data !== "" && data !== null){
+  //   // this.router.navigate(['/home']);
+  //  } 
 
  }
 //  Check on error, show details of error

@@ -1,4 +1,13 @@
+@import '../../../../scss/variables';
 .errorTextDate {
+    color:map-get($font-color, 'error');
     font-size: 12px;
-    color: red;
+}
+
+.input-field {
+    height: 47px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 97%;
+    margin-bottom: 5px;
 }

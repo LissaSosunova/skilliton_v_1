@@ -39,7 +39,6 @@ const userInitState: types.User = {
   id: 0,
   lastName: "",
   name: "",
-  nickname: "",
   rate: 0,
   sex: null,
   socialAccount: "",

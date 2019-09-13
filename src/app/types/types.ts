@@ -9,7 +9,6 @@ export module types {
     id: number;
     lastName: string;
     name: string;
-    nickname: string;
     rate: number;
     sex: null
     socialAccount: string;
@@ -33,7 +32,6 @@ export module types {
     email: string;
     lastName: string;
     name: string;
-    nickname: string;
     password: string;
     isMobile: boolean;
   }
@@ -41,7 +39,6 @@ export module types {
   export interface RegistrationFormData {
     firstNameOfUser: string;
     lastNameOfUser: string;
-    nickNameOfUser: string;
     birthdayDate: string;
     email: string;
     password: string;

@@ -40,6 +40,8 @@ import { AboutMeComponent } from './components/profile/about-me/about-me.compone
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './state/effects/user.effects';
 import { PostsComponent } from './components/home/posts/posts.component';
+import { InputCustomDatepickerComponent } from './shared/form-controls/input-custom-datepicker/input-custom-datepicker.component';
+import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { PostsComponent } from './components/home/posts/posts.component';
     ErrorModalComponent,
     ProfileComponent,
     AboutMeComponent,
-    PostsComponent
+    PostsComponent,
+    InputCustomDatepickerComponent
   ],
   imports: [
     BrowserModule,
@@ -79,8 +82,10 @@ import { PostsComponent } from './components/home/posts/posts.component';
     MatRadioModule,
     NgbModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     OverlayModule,
+    AngularMyDatePickerModule,
     StoreModule.forRoot({user: userReducer}),
     EffectsModule.forRoot([UserEffects])
   ],

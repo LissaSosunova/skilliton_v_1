@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { errorTypes } from '../../shared/constants/errors';
 import { HttpService } from '../../services/http.service';
-import { NgForm } from '@angular/forms';
+import {  NgForm, NgModelGroup, NgModel } from '@angular/forms';
 import { types } from '../../types/types';
 import * as _ from 'lodash';
 import { Router } from '@angular/router';
@@ -48,7 +48,6 @@ export class RegistrationComponent implements OnInit {
 
   public setRegConf(firstNameOfUser: string,
     lastNameOfUser: string,
-    nickNameOfUser: string,
     birthdayDate: string,
     email: string,
     password: string,
@@ -61,7 +60,6 @@ export class RegistrationComponent implements OnInit {
         email: email,
         lastName: lastNameOfUser,
         name: firstNameOfUser,
-        nickname: nickNameOfUser,
         password: password,
         isMobile: false
       } 
