@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: row;
     padding: 0px;
-    align-content: center;
     height: calc(100vh - #{$header-height + $footer-height});
     margin: 0px;
     overflow-x: hidden;
@@ -13,10 +12,8 @@
 .left-side-block {
     flex-direction: column;
     padding: 80px;
-    justify-content: center;
     background-color: map-get($bg-color, 'primary');
     color: white;
-    font-size: 16px;
     height: 100%;
 }
 
@@ -28,20 +25,17 @@
     align-items: center;
     height: 100%;
 }
-
+.btn-conteiner {
+    display: flex;
+    flex-direction: column;
+}
 .btn-margin-bottom {
     margin-bottom: 5%;
 }
 
-.as-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: map-get($font-color,'primary');
-
-    &:hover {
-        cursor: pointer;
-    }
+.btn-margin-top {
+    margin-top: 40px;
+    margin-bottom: $footer-height;
 }
 
 .non-vis {
@@ -55,6 +49,7 @@
 .form-width {
     max-width: 360px;
     min-width: 280px;
+    background-color: map-get($bg-color, 'gray-lighter');
 }
 
 .align-center {
@@ -80,5 +75,66 @@
   }
 
   .error-login {
-    color: map-get($font-color,'warning');
+    color: map-get($font-color,'error');
+    font-size: 15px;
+    font-weight: 500;
   }
+
+  h2 {
+      font-size: 30px;
+      font-weight: 700;
+  }
+
+  .p-login {
+    font-size: 20px;
+  }
+
+  .label-rem-me {
+      padding-left: 30px;
+      margin-top: -8px;
+  }
+//   .input-name {
+//       position: relative;
+//   }
+  .forgot-pass {
+      margin-bottom: 20px;
+  }
+  .rem-me-block {
+      position: relative;
+      padding-top: 20px;
+  }
+
+  .social-btn {
+    padding: 5px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    border: 1px solid map-get($bg-color, 'gray-light');
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 47px;
+    background-color: white;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.spec-padd {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.relative-pos-text {
+    position: relative;
+    bottom: 15px;
+    padding-left: 10px;
+}
+
+.checkbox-agree {
+    width: 45px;
+    height: 45px;
+    border-radius: 0px;
+    background-color: white;
+    border: 1px solid map-get($bg-color, 'primary');
+}

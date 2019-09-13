@@ -4,10 +4,12 @@
     padding: 10px;
     margin-bottom: 15px;
     margin-top: 10px;
-    border: 1px solid #14200B;
+    border: 1px solid map-get($bg-color, 'gray-light');
+    border-radius: 8px;
     width: 100%;
     box-sizing: border-box;
     display: inline-block;
+    height: 47px;
 }
 
 .input {
@@ -20,7 +22,7 @@
 .error {
     color:map-get($font-color, 'error');
     font-size: 12px;
-    margin-top: -15px;
+    margin-top: -10px;
 }
 
 .error-input {

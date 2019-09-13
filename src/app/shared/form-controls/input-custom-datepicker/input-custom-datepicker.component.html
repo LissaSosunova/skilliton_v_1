@@ -1,0 +1,8 @@
+<div class="input-box-container">
+        <input class="input-box" placeholder="Click to select a date" 
+          angular-mydatepicker [name]="mydate" (click)="dp.toggleCalendar()" 
+          [(ngModel)]="model" [options]="myDpOptions" 
+          #dp="angular-mydatepicker" (dateChanged)="onDateChanged($event)"/>
+          <i class="material-icons">date_range</i>
+          
+</div>

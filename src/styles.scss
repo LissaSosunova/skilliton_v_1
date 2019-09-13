@@ -6,11 +6,14 @@
 // For children need scroll (overflow-y: scroll;)
 
 body {
-    background: #F8FAFE;
+    background: map-get($bg-color , 'gray-lighter' );
     font-family: 'Montserrat', sans-serif;
-    // height: calc(100vh + #{$footer-height});
     height: 100vh;
     margin: 0px;
+    color: map-get($font-color, 'primary');
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
 // MAIN FONT
@@ -98,32 +101,60 @@ input, button {
 
   .primary-btn {
     border: 1px solid map-get($bg-color, 'primary');
-    background-color: map-get($bg-color, 'white');
+    background-color: map-get($bg-color, 'primary');
+    color: map-get($font-color, 'inverse');
+    border-radius: 8px;
     &:hover {
-      background: map-get($bg-color, 'gray');
+      background: map-get($bg-color, 'gray-lighter');
+      color: map-get($font-color, 'primary');
     }
-  }
-  .btn-width-middle {
-    width: 120px;
 }
 
-.btn-height-middle {
-  min-height: 60px;
+.btn-width-big {
+  width: 280px;
 }
-.btn-height-small {
-  min-height: 40px;
+.btn-width-middle {
+    width: 200px;
+}
+.btn-width-small {
+  width: 60px;
 }
 .btn-height-big {
-  min-height: 96px;
+  min-height: 84px;
+  font-size: 24px;
+  font-weight: 400;
+  span {
+    font-size: 24px;
+  font-weight: 400;
+  }
 }
+.btn-height-middle {
+  min-height: 60px;
+  font-size: 20px;
+  font-weight: 500;
+  span {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+.btn-height-small {
+  min-height: 18px;
+  font-size: 12px;
+  font-weight: 200;
+  span {
+    font-size: 12px;
+  font-weight: 200;
+  }
+}
+
 
 footer {
   position: fixed;
   bottom: 0px;
   left: 0px;
   text-align: center;
-  font-size: 1em;
-  background-color: map-get($bg-color, 'gray');
+  font-size: 12px;
+  background-color: map-get($bg-color, 'gray-light');
   width: 100%;
   padding-top: 15px;
   height: $footer-height;
@@ -132,6 +163,15 @@ footer {
 }
 
 p {
-  font-size: 14px;
-  line-height: 1.6em;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 1.8em;
+}
+
+a {
+  color: map-get($font-color, 'link');
+  text-decoration: double;
+  &:hover {
+    cursor: pointer;
+  }
 }
