@@ -4,7 +4,7 @@ import { types } from '../../../types/types';
 import * as _ from 'lodash';
 import { HttpService } from '../../../services/http.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {Observable, Subject} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import {Store} from '@ngrx/store';
 
 @Component({
@@ -14,15 +14,15 @@ import {Store} from '@ngrx/store';
 })
 export class AboutMeComponent implements OnInit {
 
-  public user: types.User = {} as types.User;
+  @Input() user: types.NewUser;
   public currTab: string;
-  
+  @Input() userUploaded: boolean = false;
 
   constructor(
     private data: HttpService,
     private router: Router,
     private transferService: TransferService,
-    private store: Store<types.User>,
+    private store: Store<types.NewUser>,
   ) { }
 
   ngOnInit() {
@@ -31,15 +31,10 @@ export class AboutMeComponent implements OnInit {
 
 
   private init(): void {
+    
     if(this.currTab === undefined){
       this.currTab = 'general';
     }
-    const user$ = this.store.select('user').subscribe((state: any) => {
-      if(state !== undefined){
-        this.user = state;
-        console.log(this.user)
-      }
-    });
   }
 
   public switcher(currId: string): void {

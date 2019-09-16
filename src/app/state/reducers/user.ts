@@ -15,52 +15,65 @@ export const stateFeatureKey = 'state';
 
 
 export interface State {
-    active: boolean;
-    birthAddress: any;
-    birthDate: string;
-    currentAddress: any;
-    email: string;
-    id: number;
-    lastName: string;
-    name: string;
-    nickname: string;
-    rate: number;
-    sex: null
-    socialAccount: any;
-    socialAccountId: any;
-    summary: any;
+  profile: types.ProfileUser;
+  keyData: types.KeyData;
+  contacts: Array<any> | [];
+  posts: types.Posts;
+  notifications: types.Notifications;
 }
-const userInitState: types.User = {
-  active: true,
-  birthAddress: "",
-  birthDate: "",
-  currentAddress: "",
-  email: "",
-  id: 0,
-  lastName: "",
-  name: "",
-  rate: 0,
-  sex: null,
-  socialAccount: "",
-  socialAccountId: null,
-  summary: null
+const userInitState: types.NewUser = {
+  profile: {
+    id: 0,
+    email: '',
+    avatar:'',
+    socialNetworksProfiles: [],
+    name: '',
+    lastName:  '',
+    birthDate:  '',
+    placeOfBirth:  '',
+    placeOfResidence:  '',
+    rate: 0,
+    profileSummary: null,
+    langs: null,
+    sex: '',
+  },
+  contacts: [],
+  keyData: {
+    skills: [],
+    interests: [],
+    education: [],
+    goals: [],
+    myServices: [],
+    workExperience: []
+  },
+  posts: {
+    public: [],
+    saved: [],
+    drafts: [],
+    favorite: []
+  },
+  notifications: {
+    ignored: [],
+    deferred: [],
+    system: [],
+    chats: [],
+    active: []
+  }
 };
 
 export function userReducer(state: any, action: any)  {
-  const updateState: types.User = {...state};
+  const updateState: types.NewUser = {...state};
   switch (action.type) {
     
     case userAction.UserActionTypes.LOAD_USER_SUCCESS: {
-      const user: types.User = action.payload;
+      const user = action.payload;
       state = user;
-      return user;
+      return state;
     }
     default:
       return state;
     }
-
   };
-
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
 

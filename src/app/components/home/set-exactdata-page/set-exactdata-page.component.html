@@ -1,0 +1,112 @@
+<div class="row main">
+    <div class="col-xs-12 center-xs" *ngIf="activePage === 'skills'">
+        <div class="col-xs-12
+                    col-sm-12
+                    col-md-10
+                    col-lg-8
+                    col-xs-offset-0
+                    col-sm-offset-0
+                    col-md-offset-1
+                    col-lg-offset-2">
+            <div>Hi!</div>
+            <div>Before we start, please answer some questions:</div>
+            <p>What are your excellent skills you are ready to share as an expert?</p>
+            <form
+            name="skillsDataForm"
+            #skillsDataForm="ngForm">
+            <div class="col-xs-12">
+                    <app-input-search
+                    [control]="searchControl"
+                    name="skillName"
+                    [(ngModel)]="skillName"
+                    #lastName="ngModel"
+                    [required]="true"
+                    [placeholder]="'Start to type name of skill'"
+                    [requiredFieldError]="'You can not to continue without any skills'"
+                    (searchAction)="setSearchAction">
+                  </app-input-search>
+                <button class="search-btn"      
+                  (click)="setValue(skillName)"
+                  >
+                    <i class="material-icons search-icon">
+                      done
+                    </i>
+                </button>
+            </div>
+                  <div>
+                      <span>{{skills}}</span>
+                    <div *ngIf="goToNextPage === true">
+                        <button
+                        (click)="goNext('goals')" 
+                        class="btn
+                        primary-btn
+                        btn-width-middle
+                        btn-height-middle"  
+                        value="Next"
+                       >Next</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+    </div>
+    <!-- Goals -->
+    <div class="col-xs-12 center-xs" *ngIf="activePage === 'goals'">
+            <div class="col-xs-12
+                        col-sm-12
+                        col-md-10
+                        col-lg-8
+                        col-xs-offset-0
+                        col-sm-offset-0
+                        col-md-offset-1
+                        col-lg-offset-2">
+               
+                <p>What would you like to learn?</p>
+                <form
+                name="skillsDataForm"
+                #skillsDataForm="ngForm">
+                <div class="col-xs-12">
+                        <app-input-search
+                        [control]="searchControl"
+                        name="skillName"
+                        [(ngModel)]="skillName"
+                        #lastName="ngModel"
+                        [required]="true"
+                        [placeholder]="'Start to type name of skill'"
+                        [requiredFieldError]="'You can not to continue without any skills'"
+                        (searchAction)="setSearchAction">
+                      </app-input-search>
+                    <button class="search-btn"      
+                      (click)="setValue(skillName)"
+                      >
+                        <i class="material-icons search-icon">
+                          done
+                        </i>
+                    </button>
+                    <section *ngIf="isTags == true">
+                           
+                                    <ul *ngFor="let item of arrTags">
+                                        <li>
+                                            {{item.tagName}}
+                                        </li>
+                                    </ul>
+                               
+                    </section>
+                    
+                </div>
+                      <div>
+                          <span>{{skills}}</span>
+                        <div *ngIf="goToNextPage === true">
+                            <button
+                            (click)="setAuthConf()" 
+                            class="btn
+                            primary-btn
+                            btn-width-middle
+                            btn-height-middle"  
+                            value="Next"
+                           >Next</button>
+                        </div>
+                      </div>
+                </form>
+            </div>
+        </div>
+</div>

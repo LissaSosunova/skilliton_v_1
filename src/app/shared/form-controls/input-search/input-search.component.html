@@ -1,0 +1,12 @@
+<div class="input-search align">
+
+    <input class="input-field"
+      #searchInput
+      type="text"
+      matInput
+      [placeholder]="placeholder" 
+      [formControl]="control"
+      (change)="$event.stopPropagation()" 
+      (input)="onChangeInput($event.target.value)"    
+      >
+</div>

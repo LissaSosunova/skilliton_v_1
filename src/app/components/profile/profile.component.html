@@ -18,10 +18,10 @@
                 col-md-10
                 col-lg-10
                 header-text-block">
-            <span>{{user.name}} </span><span>{{user.lastName}}</span> 
+            <span>{{name}} </span><span>{{lastName}}</span> 
             <br/>
             <div  class="summary">
-                    <span>{{user.summary || "No summary"}}</span>
+                    <span>{{summary || "No summary"}}</span>
             </div>
         </div>
     </div>
@@ -40,4 +40,7 @@
         <button>Contacts (My requests)</button>
     </section>
 
-    <app-about-me></app-about-me>
+    <app-about-me 
+        [user]="user"
+        [userUploaded]="userUploaded">
+    </app-about-me>

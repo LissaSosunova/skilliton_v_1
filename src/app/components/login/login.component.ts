@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   private ERROR_APP: any = errorTypes.app.login;
   public showError: boolean = false;
   public showErrorText: string;
-  public user: types.User = {} as types.User;
+  public user: types.NewUser = {} as types.NewUser;
   @ViewChild('loginForm', { read: true, static: false }) public loginForm: NgForm;
   @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
   @Output() rememberMeText: string = 'Remember me';

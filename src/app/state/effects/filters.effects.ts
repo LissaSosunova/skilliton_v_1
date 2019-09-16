@@ -4,23 +4,23 @@ import { of } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { HttpService } from '../../services/http.service';
 import {Action, Store} from '@ngrx/store';
-import { UserActionTypes } from '../actions/user.actions';
+import { FiltersActionTypes } from '../actions/filters.actions';
+
 
 
 @Injectable()
-export class UserEffects {
-    loadUserData$ = createEffect(() =>
+export class FiltersEffects {
+  loadTags$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(UserActionTypes.LOAD_USER),
-      mergeMap(() => this.api.getUser()
+      ofType(FiltersActionTypes.LOAD_TAGS),
+      mergeMap(() => this.api.getTags()
         .pipe(
-          map(resp => ({ type: UserActionTypes.LOAD_USER_SUCCESS, payload: resp })),
-          catchError(() => of({ type: UserActionTypes.LOAD_USER_ERROR }))
+          map(resp => ({ type: FiltersActionTypes.LOAD_TAGS_SUCCESS, payload: resp })),
+          catchError(() => of({ type: FiltersActionTypes.LOAD_TAGS_ERROR }))
         )
       )
     )
   );
-
 
 
   constructor(
