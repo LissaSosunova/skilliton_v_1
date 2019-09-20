@@ -26,7 +26,7 @@
           [requiredFieldError]="'You can not to continue without any skill'">
                   </app-input-search>
                   <button (click)="setValue(skillName)"
-                  [ngClass]="{'search-btn': openAuto == false,  'non-vis': openAuto == true}" >
+                  [ngClass]="{'search-btn': showBtn == true,  'non-vis': showBtn == false}" >
                     <i class="material-icons search-icon">
                         done
                       </i>
@@ -37,7 +37,11 @@
                 <section *ngIf="openAuto === true" 
       [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
           <div *ngFor="let option of options">
-              <div (click)="setValueFromDropDown(option, 'skills')">{{option.name}}</div>
+              <div (click)="setValueFromDropDown(option, 'skills')">
+                  <i class="material-icons plus-icon">
+                      add_circle_outline
+                    </i>
+                    <span>{{option.name}} </span><div class="category-name">{{option.categoryName}}</div></div>
             </div>
       </section>
           <app-mat-default-chips
@@ -89,7 +93,7 @@
                                   >
                                 </app-input-search>
                                 <button (click)="setValue(goalName)"
-                                [ngClass]="{'search-btn': openAuto == false,  'non-vis': openAuto == true}" >
+                                [ngClass]="{'search-btn': showBtn == true,  'non-vis': showBtn == false}">
                                   <i class="material-icons search-icon">
                                       done
                                     </i>
@@ -99,7 +103,11 @@
                     <section *ngIf="openAuto === true" 
                     [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
                         <div *ngFor="let option of options">
-                            <div (click)="setValueFromDropDown(option, 'goals')">{{option.name}}</div>
+                            <div (click)="setValueFromDropDown(option, 'goals')">
+                              <i class="material-icons plus-icon">
+                                add_circle_outline
+                              </i>
+                              <span>{{option.name}} </span><div class="category-name">{{option.categoryName}}</div></div>
                           </div>
                     </section>
                         <app-mat-default-chips
@@ -154,7 +162,7 @@
                               >
                             </app-input-search>
                             <button (click)="setValue(interestName)"
-                            [ngClass]="{'search-btn': openAuto == false,  'non-vis': openAuto == true}"
+                            [ngClass]="{'search-btn': showBtn == true,  'non-vis': showBtn == false}"
                           >
                               <i class="material-icons search-icon">
                                   done
@@ -165,7 +173,10 @@
                 <section *ngIf="openAuto === true" 
                 [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
                     <div *ngFor="let option of options">
-                        <div (click)="setValueFromDropDown(option, 'interests')">{{option.name}}</div>
+                        <div (click)="setValueFromDropDown(option, 'interests')">
+                            <i class="material-icons plus-icon">
+                                add_circle_outline
+                              </i>{{option.name}}</div>
                       </div>
                 </section>
                     <app-mat-default-chips

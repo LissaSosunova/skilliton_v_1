@@ -33,7 +33,7 @@ ngOnInit() {
   console.log(this.autocompleteData);
   if(this.autocompleteData){
     this.filteredOptions = [{name: '', value: null}];
-  }else{
+  } else {
     // this.filteredOptions = this.autocompleteData;
     this.showContent = true;
     console.log(this.autocompleteData);

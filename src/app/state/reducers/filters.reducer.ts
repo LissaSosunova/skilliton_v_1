@@ -17,6 +17,7 @@ export const filtersFeatureKey = 'filters';
 export interface State {
   tagsArr: any;
   tagsSkills: any;
+  tagsInterests: any;
 }
 export interface TagsChips {
   value: any;
@@ -29,7 +30,8 @@ export const initialState: State = {
     categoryId: null,
     categoryName: null
   }],
-  tagsSkills: []
+  tagsSkills: [],
+  tagsInterests: []
 };
 
 export function filtersReducer(state = initialState, action: any): State {
@@ -39,7 +41,13 @@ export function filtersReducer(state = initialState, action: any): State {
         const tags: Array<any> = action.payload;
         state.tagsArr = tags;
         state.tagsArr.forEach(el => {
-          state.tagsSkills.push({value: el.tagId, name: el.tagName})
+          if(el.categoryId === null){
+            state.tagsSkills.push({value: el.tagId, name: el.tagName, categoryName: ""});
+            state.tagsInterests.push({value: el.tagId, name: el.tagName});
+          } else {
+            state.tagsSkills.push({value: el.tagId, name: el.tagName, categoryName: el.categoryName})
+          }
+
         });
         return state;
       }

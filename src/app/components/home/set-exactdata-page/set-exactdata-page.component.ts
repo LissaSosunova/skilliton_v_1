@@ -38,12 +38,14 @@ export class SetExactdataPageComponent implements OnInit {
   
   private skills: any;
   private openAuto: boolean = false;
+  private showBtn: boolean = false;
   @Output() tagsSkills = [] as  any;
-  @Output() tagsInterest = [] as  any;
+  @Output() tagsInterests = [] as  any;
   @Output() chipsSkills = [] as  any;
   @Output() chipsGoals = [] as  any;
   @Output() chipsInterest = [] as  any;
   @Output() selectedTagsId = [] as  any;
+  @Output() dataNotSet: boolean = true;
   
   @Input() activePage: string;
   @Input() valueSearch: any;
@@ -63,6 +65,8 @@ export class SetExactdataPageComponent implements OnInit {
       if(state !== undefined || state){
         this.TAGS = state.tagsArr;
         this.tagsSkills = state.tagsSkills;
+        this.tagsInterests = state.tagsInterests;
+        console.log(state);
       }
     });
   }
@@ -70,11 +74,14 @@ export class SetExactdataPageComponent implements OnInit {
   public setValue(val){
     if(val !== null){
       setTimeout(() => {
-        this.chipsSkills.push({name: val});
-        this.goToNextPage = true;
-        this.openAuto = false;
-        if(this.chipsSkills.length === 5){
-          this.isTagsSkills = false;
+        if (this.activePage !== 'interests') {
+          this.chipsSkills.push({name: val});
+          this.goToNextPage = true;
+          this.openAuto = false;
+          this.showBtn = true;
+          if(this.chipsSkills.length === 2){
+            this.isTagsSkills = false;
+          }
         }
       });
     }
@@ -85,23 +92,21 @@ export class SetExactdataPageComponent implements OnInit {
       this.chipsSkills.push({name: option.name});
       this.selectedTagsId.push(option.value)
       this.goToNextPage = true;
-      if(this.chipsSkills.length === 5){
+      if(this.chipsSkills.length === 2){
       this.isTagsSkills = false;
     }
     } else if(param === 'goals'){
       this.chipsGoals.push({name: option.name});
       this.selectedTagsId.push(option.value)
       this.goToNextPage = true;
-      console.log(this.chipsInterest);
-      if(this.chipsGoals.length === 5){
+      if(this.chipsGoals.length === 2){
         this.isTagsGoals = false;
       }
     } else if(param === 'interests'){
       this.chipsInterest.push({name: option.name});
       this.selectedTagsId.push(option.value)
       this.goToNextPage = true;
-      console.log(this.chipsInterest);
-      if(this.chipsInterest.length === 5){
+      if(this.chipsInterest.length === 2){
       this.isTagsInterests = false;
     }
   }
@@ -120,20 +125,43 @@ export class SetExactdataPageComponent implements OnInit {
     } else if (page === "done"){
       this.selectedTagsId = [];
       console.log('send data of interests and get new user');
+      return this.dataNotSet = false;
     }
   }
 
 
   public setSearch(query: string): void {
+    console.log(this.activePage);
     this.query = {
       query: query
     };
-    this.options = this.tagsSkills;
-    const result = _.filter(this.tagsSkills, o => _.includes(o.name, query))
-    this.openAuto = true;
-    this.options = result;
-    if(result.length === 0){
-      this.openAuto = false;
+    if(this.activePage === 'skills'){
+      this.options = this.tagsSkills;
+      const result = _.filter(this.tagsSkills, o => _.includes(o.name, query));
+      this.openAuto = true;
+      this.options = result;
+      if(result.length === 0){
+        this.openAuto = false;
+        this.showBtn = true;
+      }
+    } else if (this.activePage === 'goals'){
+      this.options = this.tagsSkills;
+      const result = _.filter(this.tagsSkills, o => _.includes(o.name, query));
+      this.openAuto = true;
+      this.options = result;
+      if(result.length === 0){
+        this.openAuto = false;
+        this.showBtn = true;
+      }
+    } else if (this.activePage === 'interests'){
+      this.options = this.tagsInterests;
+      const result = _.filter(this.tagsInterests, o => _.includes(o.name, query));
+      this.openAuto = true;
+      this.options = result;
+      if(result.length === 0){
+        this.openAuto = false;
+        this.showBtn = true;
+      }
     }
   }
 
