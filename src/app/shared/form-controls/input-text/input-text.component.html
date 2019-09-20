@@ -12,6 +12,13 @@
           && control.touched
           }"
           > 
+
+          <div class="autocomplete" *ngIf="showContent == true">
+            nen
+            <!-- <p *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option.name}}
+            </p> -->
+          </div>
     <div class="error"*ngIf="control.invalid && !control.errors?.maxlength?.requiredLength && !control.errors?.minlength?.requiredLength && control.touched">
       {{requiredFieldError}}
     </div>

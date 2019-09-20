@@ -16,15 +16,20 @@ export const filtersFeatureKey = 'filters';
 
 export interface State {
   tagsArr: any;
+  tagsSkills: any;
 }
-
+export interface TagsChips {
+  value: any;
+  name: string;
+}
 export const initialState: State = {
   tagsArr: [{
     tagId: null,
     tagName: "",
     categoryId: null,
     categoryName: null
-  }]
+  }],
+  tagsSkills: []
 };
 
 export function filtersReducer(state = initialState, action: any): State {
@@ -33,11 +38,14 @@ export function filtersReducer(state = initialState, action: any): State {
       if(action.payload){
         const tags: Array<any> = action.payload;
         state.tagsArr = tags;
+        state.tagsArr.forEach(el => {
+          state.tagsSkills.push({value: el.tagId, name: el.tagName})
+        });
         return state;
       }
     }
-    default:
-      return state;
-    }
+  default:
+    return state;
+  }
 }
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];

@@ -64,12 +64,12 @@
 
   .search-btn {
     position: relative;
-    right: -40%;
+    right: -50%;
     min-height: 47px;
     width: 60px;
     padding-top: 10px;
     padding-left: 10px;
-    top: -62px;
+    top: -52px;
     border: 1px solid map-get($bg-color, 'gray-light');
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -78,4 +78,29 @@
         cursor: pointer;
         background-color: map-get($bg-color, 'gray-light');
     }
+}
+
+.block-droop {
+  position: relative;
+  top: -6px;
+  width: 93%;
+  padding: 20px;
+  background-color: map-get($bg-color, 'gray-lighter');
+  border: 1px solid map-get($bg-color, 'gray-light');
+  // border-left: 1px solid map-get($bg-color, 'gray-light');
+  // border-right: 1px solid map-get($bg-color, 'gray-light');
+  border-radius: 8px;
+  div {
+      padding: 5px;
+      color: red;
+      &:hover {
+          background-color: white;
+          cursor: pointer;
+          border-radius: 8px;
+      }
+  }
+}
+
+.non-vis {
+  display: none;
 }

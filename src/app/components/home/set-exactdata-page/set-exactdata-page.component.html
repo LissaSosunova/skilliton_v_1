@@ -8,33 +8,45 @@
                     col-sm-offset-0
                     col-md-offset-1
                     col-lg-offset-2">
-            <div>Hi!</div>
-            <div>Before we start, please answer some questions:</div>
+            <h2>Hi!<br>
+            Before we start, please answer some questions:</h2>
             <p>What are your excellent skills you are ready to share as an expert?</p>
             <form
             name="skillsDataForm"
             #skillsDataForm="ngForm">
             <div class="col-xs-12">
-                    <app-input-search
-                    [control]="searchControl"
-                    name="skillName"
-                    [(ngModel)]="skillName"
-                    #lastName="ngModel"
-                    [required]="true"
-                    [placeholder]="'Start to type name of skill'"
-                    [requiredFieldError]="'You can not to continue without any skills'"
-                    (searchAction)="setSearchAction">
+      <section *ngIf="isTagsSkills">
+          <app-input-search
+          [control]="searchControl"
+          name="skillName"
+          [(ngModel)]="skillName"
+          #lastName="ngModel"
+          [required]="true"
+          [placeholder]="'Start to type name of skill'"
+          [requiredFieldError]="'You can not to continue without any skill'">
                   </app-input-search>
-                <button class="search-btn"      
-                  (click)="setValue(skillName)"
-                  >
+                  <button (click)="setValue(skillName)"
+                  [ngClass]="{'search-btn': openAuto == false,  'non-vis': openAuto == true}" >
                     <i class="material-icons search-icon">
-                      done
-                    </i>
+                        done
+                      </i>
                 </button>
+      </section>
+          
+
+                <section *ngIf="openAuto === true" 
+      [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
+          <div *ngFor="let option of options">
+              <div (click)="setValueFromDropDown(option, 'skills')">{{option.name}}</div>
+            </div>
+      </section>
+          <app-mat-default-chips
+              [items]="chipsSkills"
+              [floatLabel]="auto"
+              >
+              </app-mat-default-chips>   
             </div>
                   <div>
-                      <span>{{skills}}</span>
                     <div *ngIf="goToNextPage === true">
                         <button
                         (click)="goNext('goals')" 
@@ -62,51 +74,120 @@
                
                 <p>What would you like to learn?</p>
                 <form
-                name="skillsDataForm"
-                #skillsDataForm="ngForm">
+                name="goalsDataForm"
+                #goalsDataForm="ngForm">
                 <div class="col-xs-12">
+                    <section *ngIf="isTagsGoals">
                         <app-input-search
                         [control]="searchControl"
-                        name="skillName"
-                        [(ngModel)]="skillName"
+                        name="goalName"
+                        [(ngModel)]="goalName"
                         #lastName="ngModel"
                         [required]="true"
-                        [placeholder]="'Start to type name of skill'"
-                        [requiredFieldError]="'You can not to continue without any skills'"
-                        (searchAction)="setSearchAction">
-                      </app-input-search>
-                    <button class="search-btn"      
-                      (click)="setValue(skillName)"
-                      >
-                        <i class="material-icons search-icon">
-                          done
-                        </i>
-                    </button>
-                    <section *ngIf="isTags == true">
-                           
-                                    <ul *ngFor="let item of arrTags">
-                                        <li>
-                                            {{item.tagName}}
-                                        </li>
-                                    </ul>
-                               
+                        [placeholder]="'Start to type name of goal'"
+                        [requiredFieldError]="'You can not to continue without any goal'"
+                                  >
+                                </app-input-search>
+                                <button (click)="setValue(goalName)"
+                                [ngClass]="{'search-btn': openAuto == false,  'non-vis': openAuto == true}" >
+                                  <i class="material-icons search-icon">
+                                      done
+                                    </i>
+                              </button>
                     </section>
+
+                    <section *ngIf="openAuto === true" 
+                    [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
+                        <div *ngFor="let option of options">
+                            <div (click)="setValueFromDropDown(option, 'goals')">{{option.name}}</div>
+                          </div>
+                    </section>
+                        <app-mat-default-chips
+                            [items]="chipsGoals"
+                            [floatLabel]="auto"
+                            >
+                            </app-mat-default-chips>
                     
                 </div>
-                      <div>
-                          <span>{{skills}}</span>
-                        <div *ngIf="goToNextPage === true">
-                            <button
-                            (click)="setAuthConf()" 
-                            class="btn
-                            primary-btn
-                            btn-width-middle
-                            btn-height-middle"  
-                            value="Next"
-                           >Next</button>
-                        </div>
-                      </div>
+                <div>
+                    <div *ngIf="goToNextPage === true">
+                        <button
+                        (click)="goNext('interests')" 
+                        class="btn
+                        primary-btn
+                        btn-width-middle
+                        btn-height-middle"  
+                        value="Next"
+                       >Next</button>
+                    </div>
+                  </div>
                 </form>
             </div>
         </div>
+
+
+        <!-- Interests -->
+    <div class="col-xs-12 center-xs" *ngIf="activePage === 'interests'">
+        <div class="col-xs-12
+                    col-sm-12
+                    col-md-10
+                    col-lg-8
+                    col-xs-offset-0
+                    col-sm-offset-0
+                    col-md-offset-1
+                    col-lg-offset-2">
+           
+            <p>What Are Your Interests?</p>
+            <form
+            name="interestsDataForm"
+            #goalsDataForm="ngForm">
+            <div class="col-xs-12">
+                <section *ngIf="isTagsInterests">
+                    <app-input-search
+                    [control]="searchControl"
+                    name="interestName"
+                    [(ngModel)]="interestName"
+                    #lastName="ngModel"
+                    [required]="true"
+                    [placeholder]="'Start to type name of interest'"
+                    [requiredFieldError]="'You can not to continue without any interest'"
+                              >
+                            </app-input-search>
+                            <button (click)="setValue(interestName)"
+                            [ngClass]="{'search-btn': openAuto == false,  'non-vis': openAuto == true}"
+                          >
+                              <i class="material-icons search-icon">
+                                  done
+                                </i>
+                          </button>
+                </section>
+
+                <section *ngIf="openAuto === true" 
+                [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
+                    <div *ngFor="let option of options">
+                        <div (click)="setValueFromDropDown(option, 'interests')">{{option.name}}</div>
+                      </div>
+                </section>
+                    <app-mat-default-chips
+                        [items]="chipsInterest"
+                        [floatLabel]="auto"
+                        >
+                        </app-mat-default-chips>
+                
+            </div>
+            <div>
+                <div *ngIf="goToNextPage === true">
+                    <button
+                    (click)="goNext('done')" 
+                    class="btn
+                    primary-btn
+                    btn-width-middle
+                    btn-height-middle"  
+                    value="Done"
+                   >Done</button>
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
 </div>

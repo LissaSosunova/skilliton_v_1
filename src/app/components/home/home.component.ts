@@ -19,12 +19,12 @@ import {Observable, Subject} from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   @Output() user: types.NewUser = {} as types.NewUser;
-  @Output() arrTags: types.TagsArr = {} as types.TagsArr;
   public user$: Observable<types.NewUser>;
   private unsubscribe$: Subject<void> = new Subject<void>();
   @Input() dataNotSet: boolean = true;
   @Output() userUploaded: boolean = false;
   @Output() activePage: string;
+
 
   constructor(
     private data: HttpService,
@@ -39,18 +39,11 @@ export class HomeComponent implements OnInit {
     this.getDataFromLocalStorage('user');
     this.getUserData();
   }
-  private getTocken() {
-    const paramsForReq = {token: this.sessionStorageService.getValue('_token'),
-    tokenType: this.sessionStorageService.getValue('tokenType')};
-  }
-
-  private getUserData() {
+    private getUserData() {
     this.store.dispatch(new LoadUserData());
-    this.store.dispatch(new LoadTags());
     const user$ = this.store.select('user').subscribe((state: any) => {
       if(state !== undefined || state){
         this.user = state;
-        console.log(this.user);
         this.userUploaded = true;
         if(this.user.keyData.skills.length == 0 || this.user.keyData.skills == null){
           this.dataNotSet = true;
@@ -65,13 +58,6 @@ export class HomeComponent implements OnInit {
         
       }
     });
-
-    const tags$ = this.store.select('filters').subscribe((state: any) => {
-      if(state !== undefined || state){
-        this.arrTags = state;
-        console.log('this.arrTags', this.arrTags);
-      }
-    });
   }
 
   getDataFromLocalStorage (key: string) {
@@ -80,5 +66,6 @@ export class HomeComponent implements OnInit {
     if((dataLocal === "" || dataLocal === null || !dataLocal) && (dataStorage === null || dataStorage === "")){
     this.router.navigate(['/login']);
     } 
+  
   }
 }

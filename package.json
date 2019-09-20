@@ -28,6 +28,7 @@
     "@types/lodash": "^4.14.138",
     "angular-mydatepicker": "^0.1.9",
     "lodash": "^4.17.15",
+    "ngx-chips": "^2.0.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
@@ -38,6 +39,7 @@
     "@angular/compiler-cli": "~8.2.3",
     "@angular/forms": "^8.2.5",
     "@angular/language-service": "~8.2.3",
+    "@material/chips": "^3.2.0",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",

@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { InputAbstract, MakeProvider } from '../model/input-abstract';
-import { Subscription } from 'rxjs';
+import { Subscription,
+  Observable } from 'rxjs';
+import { types } from '../../../types/types';
 
 @Component({
   selector: 'app-input-text',
@@ -16,15 +18,26 @@ export class InputTextComponent extends InputAbstract implements OnInit {
 @Input() public maxLength?: number = 524288; // default value
 // min text length
 @Input() public minLength?: number;
-
+@Input() public autocomplete?: boolean = false;
+@Input() public autocompleteData?: Observable<types.AutoCompleteModel[]>;
+public filteredOptions: Array<types.AutoCompleteModel> = [];
 public showMaxInputMessageError: boolean = false;
 public maxLengthLimit: number;
+public showContent: boolean = false;
 
 constructor() {
   super();
 }
 
 ngOnInit() {
+  console.log(this.autocompleteData);
+  if(this.autocompleteData){
+    this.filteredOptions = [{name: '', value: null}];
+  }else{
+    // this.filteredOptions = this.autocompleteData;
+    this.showContent = true;
+    console.log(this.autocompleteData);
+  }
   if (this.maxLength) {
     this.validatorsConfig.push(Validators.maxLength(this.maxLength));
   }

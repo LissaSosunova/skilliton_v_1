@@ -3,6 +3,7 @@
 @import '~@angular/cdk/overlay-prebuilt.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+
 // For children need scroll (overflow-y: scroll;)
 
 body {
@@ -87,6 +88,13 @@ input, button {
     -moz-osx-font-smoothing: grayscale;
   }
 
+  // Chips
+  .mat-basic-chip {
+    font-family: 'Material Chips';
+    font-weight: normal;
+    font-style: normal;
+  }
+
   // Buttons
   .btn {
       min-width: 120px;
@@ -164,7 +172,7 @@ footer {
 
 p {
   font-size: 18px;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1.8em;
 }
 

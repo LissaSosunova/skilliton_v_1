@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 import { InputPasswordComponent } from './shared/form-controls/input-password/input-password.component';
 import { InputTextComponent } from './shared/form-controls/input-text/input-text.component';
 import { LangSwitcherComponent } from './components/lang-switcher/lang-switcher.component';
@@ -14,21 +14,50 @@ import { ListComponent } from './components/list/list.component';
 import { LoginComponent } from './components/login/login.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule,
           MatSelectModule,
           MatNativeDateModule,
           MatDatepickerModule,
           MatRadioModule,
-          MatInputModule } from '@angular/material';
+          MatInputModule,
+          MatCommonModule,
+          MatIconModule,
+          MatBadgeModule,
+          MatBottomSheetModule,
+          MatButtonToggleModule,
+          MatCardModule,
+          MatDialogModule,
+          MatDividerModule,
+          MatExpansionModule,
+          MatGridListModule,
+          MatListModule,
+          MatMenuModule,
+          MatPaginatorModule,
+          MatProgressBarModule,
+          MatProgressSpinnerModule,
+          MatRippleModule,
+          MatSidenavModule,
+          MatSliderModule,
+          MatSlideToggleModule,
+          MatSnackBarModule,
+          MatSortModule,
+          MatStepperModule,
+          MatTableModule,
+          MatTabsModule,
+          MatToolbarModule,
+          MatTooltipModule,
+          MatTreeModule, } from '@angular/material';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { InputDatepickerComponent } from './shared/form-controls/input-datepicker/input-datepicker.component';
 import { InputEmailComponent } from './shared/form-controls/input-email/input-email.component';
 import { MatSelectComponent } from './shared/form-controls/mat-select/mat-select.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { OverlayModule } from "@angular/cdk/overlay";
+import { OverlayModule } from '@angular/cdk/overlay';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RouterModule } from '@angular/router';
 import { SelectComponent } from './shared/form-controls/select/select.component';
-import { StoreModule }  from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { TopSidebarComponent } from './components/top-sidebar/top-sidebar.component';
 import { userReducer} from './state/reducers/user';
 import { filtersReducer} from './state/reducers/filters.reducer';
@@ -46,6 +75,15 @@ import { InputCustomDatepickerComponent } from './shared/form-controls/input-cus
 import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 import { SetExactdataPageComponent } from './components/home/set-exactdata-page/set-exactdata-page.component';
 import { InputSearchComponent } from './shared/form-controls/input-search/input-search.component';
+import { TagInputModule } from 'ngx-chips';
+import { TagsChipsInputComponent } from './shared/form-controls/tags-chips-input/tags-chips-input.component';
+import { MatDefaultChipsComponent } from './shared/form-controls/mat-default-chips/mat-default-chips.component';
+import {DemoMaterialModule} from './material-module';
+import { HintComponent } from './shared/components/hint/hint.component';
+import { InputTrimDirective } from './shared/directives/input-trim.directive';
+import { DropdownItemsComponent } from './shared/components/dropdown-items/dropdown-items.component';
+
+
 
 @NgModule({
   declarations: [
@@ -71,24 +109,62 @@ import { InputSearchComponent } from './shared/form-controls/input-search/input-
     PostsComponent,
     InputCustomDatepickerComponent,
     SetExactdataPageComponent,
-    InputSearchComponent
+    InputSearchComponent,
+    TagsChipsInputComponent,
+    MatDefaultChipsComponent,
+    HintComponent,
+    InputTrimDirective,
+    DropdownItemsComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
     MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
     MatCheckboxModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
+    MatChipsModule,
+    MatCommonModule,
     MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatGridListModule,
+    MatIconModule,
     MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule,
+    DemoMaterialModule,
+    NoopAnimationsModule,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+    TagInputModule,
     HttpClientModule,
     OverlayModule,
     AngularMyDatePickerModule,
@@ -99,7 +175,7 @@ import { InputSearchComponent } from './shared/form-controls/input-search/input-
     AlertModalComponent,
     LeavePopupComponent,
     PopupComponent,
-    ErrorModalComponent
+    ErrorModalComponent,
   ],
   bootstrap: [AppComponent]
 })

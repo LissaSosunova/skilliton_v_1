@@ -1,4 +1,4 @@
-<div class="input-search align">
+<!-- <div class="input-search align">
 
     <input class="input-field"
       #searchInput
@@ -7,6 +7,42 @@
       [placeholder]="placeholder" 
       [formControl]="control"
       (change)="$event.stopPropagation()" 
-      (input)="onChangeInput($event.target.value)"    
+      (input)="onChangeInput($event.target.value)"  
       >
+      <section *ngIf="openAuto === true" 
+      [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
+          <div *ngFor="let option of options">
+              <div (click)="setValueFromDropDown(option)">{{option.name}}</div>
+            </div>
+      </section>
 </div>
+
+<app-dropdown-items
+[options]="options">
+</app-dropdown-items> -->
+<!-- <div action="onFilterChange()" class="block-search">
+
+  
+    <div class="hint" *ngIf="hint">
+      <app-hint>
+        <p [innerHTML]="hint"></p>
+      </app-hint>
+    </div>
+    <button type="submit" #search class="search-btn" value="" (click)="onChange()">  <i class="material-icons search-icon">
+        done
+      </i>
+      </button>
+  </div> -->
+
+  <div class="input-search">
+
+      <input class="input-field"
+        #searchInput type="text"
+        matInput
+        [placeholder]="placeholder" 
+        [formControl]="control"
+        (change)="$event.stopPropagation()" 
+        (input)="onChangeInput($event.target.value)"    
+        >
+  </div>
+  

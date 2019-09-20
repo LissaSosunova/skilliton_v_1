@@ -1,0 +1,22 @@
+@import '../../../../scss/variables';
+.block-droop {
+    
+    position: relative;
+    top: -6px;
+    width: 100%;
+    padding: 20px;
+    background-color: map-get($bg-color, 'gray-lighter');
+    border-bottom: 1px solid map-get($bg-color, 'gray-light');
+    border-left: 1px solid map-get($bg-color, 'gray-light');
+    border-right: 1px solid map-get($bg-color, 'gray-light');
+    border-radius: 8px;
+    div {
+        padding: 5px;
+        color: red;
+        &:hover {
+            background-color: white;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    }
+}

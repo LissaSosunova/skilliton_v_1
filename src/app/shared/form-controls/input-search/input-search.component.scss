@@ -1,12 +1,15 @@
 @import '../../../../scss/variables';
 
 .input-field {
+    position: relative;
+    top: 10px;
     padding: 10px;
     margin-bottom: 15px;
     margin-top: 10px;
+    background-color: white;
     border: 1px solid map-get($bg-color, 'gray-light');
     border-radius: 8px;
-    width: 80%;
+    width: 100%;
     box-sizing: border-box;
     display: inline-block;
     height: 47px;
@@ -31,19 +34,46 @@
     border: 1px red solid;
 }
 
-.visibility-toggle-container {
-    position: absolute;
-    right: 5px;
-    top: 23px;
-    cursor: pointer;
-    i {
-        color: gray;
+// .visibility-toggle-container {
+//     position: absolute;
+//     right: 5px;
+//     top: 23px;
+//     cursor: pointer;
+//     i {
+//         color: gray;
+//         &:hover {
+//             color: gray;
+//         }
+//     }
+// }
+.input-search {
+    border-top-color:black;
+}
+.align {
+    text-align: center;
+}
+
+.block-droop {
+    position: relative;
+    top: -6px;
+    width: 100%;
+    padding: 20px;
+    background-color: map-get($bg-color, 'gray-lighter');
+    border-bottom: 1px solid map-get($bg-color, 'gray-light');
+    border-left: 1px solid map-get($bg-color, 'gray-light');
+    border-right: 1px solid map-get($bg-color, 'gray-light');
+    border-radius: 8px;
+    div {
+        padding: 5px;
+        color: red;
         &:hover {
-            color: gray;
+            background-color: white;
+            cursor: pointer;
+            border-radius: 8px;
         }
     }
 }
 
-.align {
-    text-align: center;
+.non-vis {
+    display: none;
 }
