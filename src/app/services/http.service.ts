@@ -36,6 +36,13 @@ export class HttpService {
     return this.http.get(URL_BACK + '/user/me', {headers: this.getHeaders()});
   }
 
+  public getTags(): Observable<any> {
+    return this.http.get(URL_BACK + '/tags', {headers: this.getHeaders()});
+  }
+
+  public postTags(params: types.PostTag): Observable<any> {
+    return this.http.post(URL_BACK + '/tags', params, {headers: this.getHeaders()});
+  }
 
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {

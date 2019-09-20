@@ -12,6 +12,9 @@
           && control.touched
           }"
           > 
+
+          <div class="autocomplete" *ngIf="showContent == true">
+          </div>
     <div class="error"*ngIf="control.invalid && !control.errors?.maxlength?.requiredLength && !control.errors?.minlength?.requiredLength && control.touched">
       {{requiredFieldError}}
     </div>

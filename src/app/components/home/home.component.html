@@ -1,5 +1,16 @@
-<div class="main-content"
+<div *ngIf="userUploaded == true"
+class="main-content"
         id="main-content">
+        <section *ngIf="dataNotSet == true">
+            <app-set-exactdata-page
+            [user]="user"
+            [activePage]="activePage"
+            >
+        </app-set-exactdata-page>
+        </section>
+        <section *ngIf="dataNotSet == false">
+            <app-posts></app-posts>
     <app-posts></app-posts>
-    <app-posts></app-posts>
+        </section>
+    
 </div>>

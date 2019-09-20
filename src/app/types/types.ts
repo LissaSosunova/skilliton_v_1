@@ -1,20 +1,5 @@
 export module types {
 
-  export interface User {
-    active: boolean;
-    birthAddress: any;
-    birthDate: string;
-    currentAddress: any;
-    email: string;
-    id: number;
-    lastName: string;
-    name: string;
-    rate: number;
-    sex: null
-    socialAccount: string;
-    socialAccountId: any | null;
-    summary: any | null;
-  }
   export interface Login {
     username: string;
     password: string;
@@ -50,46 +35,146 @@ export module types {
     statusCodeValue: string;
   }
 
-    export interface Langs {
-      id: number;
-      name: string;
-    }
-
-    export interface LangSwitcher {
-        values: Langs[];
-      }
-
-    export interface LoginResp {
-      success: boolean;
-      access_token: string;
-      token_key: string;
-    }
-    export interface ApiResponse {
-      data: any;
-      error: boolean;
-      errorMessage: string;
-    }
-
-    export interface FormPopupConfig {
-      position?: 'top-center'|'center-center';
-      cssClass?: string;
-      header?: string;
-      isHeaderCloseBtn?: boolean;
-      formId?: string;
-      isFooter?: boolean;
-      isHeader?: boolean;
-      footer?: {
-          isCloseBtn?: boolean;
-          closeBtnText?: string;
-          isSubmitBtn?: boolean;
-          submitBtnText?: string;
-          isSubmitLoading?: boolean;
-          isSubmitDisabled?: boolean;
-          isRemoveBtn?: boolean;
-          removeBtnText?: string;
-          isRemoveLoading?: boolean;
-          btnOrder?: string[];
-      };
+  export interface User {
+    active: boolean;
+    birthAddress: any;
+    birthDate: string;
+    currentAddress: any;
+    email: string;
+    id: number;
+    lastName: string;
+    name: string;
+    rate: number;
+    sex: null
+    socialAccount: string;
+    socialAccountId: any | null;
+    summary: any | null;
   }
+
+  export interface Lang {
+    id: number;
+    name: string;
   }
+
+  export interface LangSwitcher {
+      values: Lang[];
+    }
+
+  export interface LoginResp {
+    success: boolean;
+    access_token: string;
+    token_key: string;
+  }
+  export interface ApiResponse {
+    data: any;
+    error: boolean;
+    errorMessage: string;
+  }
+
+  export interface NewUser {
+    profile: ProfileUser;
+    keyData: KeyData;
+    contacts: Array<any> | [];
+    posts: Posts;
+    notifications: Notifications;
+  }
+
+  export interface ProfileUser {
+    id: number;
+    email: string;
+    avatar: any;
+    socialNetworksProfiles: Array<any>;
+    name: string;
+    lastName:  string;
+    birthDate:  string;
+    placeOfBirth:  any;
+    placeOfResidence:  any;
+    rate: number;
+    profileSummary: null | string;
+    langs: Langs | null;
+    sex: any;
+  }
+
+  export interface Langs {
+    other: Array<Lang> | [];
+    native: null | Lang;
+  }
+
+  export interface KeyData {
+    skills: Array<any> | [];
+    interests: Array<any> | [];
+    education: Array<any> | [];
+    goals: Array<any> | [];
+    myServices: Array<any> | [];
+    workExperience: Array<any> | [];
+  }
+
+  export interface Posts {
+    public: Array<any> | [];
+    saved: Array<any> | [];
+    drafts: Array<any> | [];
+    favorite: Array<any> | [];
+  }
+
+  export interface Notifications {
+    ignored: Array<Notification> | [];
+    deferred: Array<Notification> | [];
+    system: Array<Notification> | [];
+    chats: Array<Notification> | [];
+    active: Array<Notification> | [];
+  }
+
+  export interface Notification {
+    id: number;
+    status: string;
+    text: string;
+  }
+
+  export interface FormPopupConfig {
+    position?: 'top-center'|'center-center';
+    cssClass?: string;
+    header?: string;
+    isHeaderCloseBtn?: boolean;
+    formId?: string;
+    isFooter?: boolean;
+    isHeader?: boolean;
+    footer?: {
+        isCloseBtn?: boolean;
+        closeBtnText?: string;
+        isSubmitBtn?: boolean;
+        submitBtnText?: string;
+        isSubmitLoading?: boolean;
+        isSubmitDisabled?: boolean;
+        isRemoveBtn?: boolean;
+        removeBtnText?: string;
+        isRemoveLoading?: boolean;
+        btnOrder?: string[];
+    };
+  }
+  export interface Filters {
+    tagsArr: Array<TagsArr>;
+  }
+
+  export interface TagsArr {
+    tagId: number | null;
+    tagName: string;
+    categoryId: number | null;
+    categoryName: any;
+  }
+
+  export interface FindTag {
+    query: string;
+  }
+
+  export interface PostTag {
+    category: boolean;
+    categoryId: number;
+    name: string;
+    status: string;
+  }
+  export interface AutoCompleteModel {
+    value: any;
+    name: string;
+  }
+}
   

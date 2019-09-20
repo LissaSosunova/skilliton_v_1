@@ -1,14 +1,14 @@
 import { TransferService } from 'src/app/services/transfer.service';
 import { types } from '../../types/types';
 import * as _ from 'lodash';
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, Input, Output } from '@angular/core';
-import { errorTypes } from '../../shared/constants/errors';
-import { HttpService } from '../../services/http.service';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { LocalstorageService } from '../../services/localstorage.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { SessionstorageService } from '../../services/sessionstorage.service';
 import { Store} from '@ngrx/store';
 import { LoadUserData } from '../../state/actions/user.actions';
+import { Observable, Subject, Subscription } from 'rxjs';
+import {UserSubService} from '../../services/user-sub.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,17 +16,22 @@ import { LoadUserData } from '../../state/actions/user.actions';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  @Output() user$: types.User = {} as types.User;
-  public user: types.User = {} as types.User;
+  @Output() user: types.NewUser = {} as types.NewUser;
+  @Output() userUploaded: boolean = false;
+  @Output() dataNotSet: boolean = true;
   public transferData: any;
   public transferChildUrl: any;
+  subscription: Subscription;
+  name: string;
+  lastName: string;
+  summary: string;
   constructor(
-    private data: HttpService,
     private sessionStorageService: SessionstorageService,
     private localstorageService: LocalstorageService,
     private router: Router,
     private transferService: TransferService,
-    private store: Store<any>
+    private store: Store<any>,
+    private userSubService: UserSubService
   ) { }
   ngOnInit() {
     this.getTranferUserData();
@@ -42,7 +47,6 @@ export class ProfileComponent implements OnInit {
     }
 
     if(!this.transferChildUrl || this.transferChildUrl == null){
-      this.user$ = this.user;
       this.router.navigate(['profile/about-me']);
     }
 
@@ -50,13 +54,27 @@ export class ProfileComponent implements OnInit {
 
   private getUserData() {
     this.store.dispatch(new LoadUserData());
-    const storeSub$ = this.store.select('user').subscribe((state: any) => {
-      if(state !== undefined){
+    const user$ = this.store.select('user').subscribe((state: any) => {
+      if(state !== undefined || state){
         this.user = state;
+        this.setUser(this.user);
+        this.name = this.user.profile.name;
+        this.lastName = this.user.profile.lastName;
+        this.summary = this.user.profile.profileSummary;
+        this.userUploaded = true;
       }
-      
     });
   }
+
+  setUser(user: any) {
+    this.subscription = this.userSubService.getUser().subscribe(user => {
+      if (user) {
+        this.user = user;
+      }
+    });
+    }
+
+
 
   getErrorCodeApi(data: number, message: string): void {
     if(data === 401){
@@ -67,5 +85,10 @@ export class ProfileComponent implements OnInit {
     this.user = data;
     this.transferService.dataSet({name:'user', data: this.user});
   }
+
+  ngOnDestroy() {
+    // unsubscribe to ensure no memory leaks
+    this.subscription.unsubscribe();
+}
 
 }

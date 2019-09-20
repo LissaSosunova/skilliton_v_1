@@ -8,7 +8,7 @@ import { types } from '../../types/types';
 })
 export class LangSwitcherComponent implements OnInit {
 
-  public values: Array<types.Langs> = [];
+  public values: Array<types.Lang> = [];
 
   constructor() { }
 

@@ -61,32 +61,32 @@
     
                     <!-- General -->
             <div class="tab" id="general" *ngIf="currTab === 'general'">
-                    <section>
-                        <div>My name is : <span>{{user.name}}</span>, Last name <span>{{user.lastName}}</span></div>
-                        <div>Birthday: {{user.birthDate}}</div>
-                        <div>Sex: {{user.sex || "I haven't choosed yet"}}</div>
-                        <div>Native language: {{user.language || "I haven't choosed languages yet"}}</div>                          
+                    <section *ngIf="userUploaded == true">
+                        <div>My name is : <span>{{user.profile.name}}</span>, Last name <span>{{user.profile.lastName}}</span></div>
+                        <div>Birthday: {{user.profile.birthDate}}</div>
+                        <div>Sex: {{user.profile.sex || "I haven't choosed yet"}}</div>
+                        <div>Native language: {{user.profile.language || "I haven't choosed languages yet"}}</div>                          
                     </section>
             </div>
             
                 <!-- placedYourVeLived -->
                 <div class="tab" id="placedYourVeLived" *ngIf="currTab === 'placedYourVeLived'">
                         <section>
-                                <div>I am from: Country: <span *ngIf="!!user.birthAddress">{{user.birthAddress.country || "I haven't choosed languages yet"}}</span>
-                                    City <span *ngIf="!!user.birthAddress">{{user.birthAddress.city || "I haven't choosed languages yet"}}</span></div>
-                                <div>I live in: <span *ngIf="!!user.currentAddress">{{user.currentAddress.country || "I haven't choosed languages yet"}}</span>,
-                                     City: <span *ngIf="!!user.currentAddress">{{user.currentAddress.city || "I haven't choosed languages yet"}}</span></div>                    
+                                <div>I am from: Country: <span *ngIf="!!user.birthAddress">{{user.profile.birthAddress.country || "I haven't choosed languages yet"}}</span>
+                                    City <span *ngIf="!!user.birthAddress">{{user.profile.birthAddress.city || "I haven't choosed languages yet"}}</span></div>
+                                <div>I live in: <span *ngIf="!!user.currentAddress">{{user.profile.currentAddress.country || "I haven't choosed languages yet"}}</span>,
+                                     City: <span *ngIf="!!user.currentAddress">{{user.profile.currentAddress.city || "I haven't choosed languages yet"}}</span></div>                    
                         </section>
                 </div>
         
                 <!-- workAndEducation -->
                 <div class="tab" id="workAndEducation" *ngIf="currTab === 'workAndEducation'">
                         <section>
-                                <div>Workplace: <span>{{user.name}}</span></div>
-                                <div>Должность: <span>{{user.name}}</span></div>
-                                <div>Education: <span>{{user.name}}</span></div>
-                                <div>Specialisation: <span>{{user.name}}</span></div> 
-                                <div>Degree: <span>{{user.name}}</span></div>                       
+                                <div>Workplace: <span>{{user.profile.name}}</span></div>
+                                <div>Должность: <span>{{user.profile.name}}</span></div>
+                                <div>Education: <span>{{user.profile.name}}</span></div>
+                                <div>Specialisation: <span>{{user.profile.name}}</span></div> 
+                                <div>Degree: <span>{{user.profile.name}}</span></div>                       
                         </section>
                 </div>
         

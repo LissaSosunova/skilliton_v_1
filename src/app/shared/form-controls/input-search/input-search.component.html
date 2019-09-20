@@ -1,0 +1,24 @@
+  <div class="input-search">
+
+      <input class="input-field"
+        #searchInput type="text"
+        matInput
+        [placeholder]="placeholder" 
+        [formControl]="control"
+        (change)="$event.stopPropagation()" 
+        (input)="onChangeInput($event.target.value)"
+        [required]="required"
+          [ngClass]="{'error-input': (control.invalid
+          || control.hasError('required')
+          || control.hasError('email'))
+          && control.touched
+          }" 
+        >
+        <div class="error" *ngIf="control.hasError('required') && control.touched">
+            {{requiredFieldError}}
+          </div>
+          <div class="error" *ngIf="control.hasError('email')  && control.touched">
+            {{invalidEmailError}}
+          </div>
+  </div>
+  
