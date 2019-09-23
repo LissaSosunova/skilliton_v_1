@@ -1,13 +1,6 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer
-} from '@ngrx/store';
-
+import { MetaReducer } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
-
+import * as _ from 'lodash';
 import { types } from '../../types/types';
 import * as filtersAction from '../actions/filters.actions';
 
@@ -23,6 +16,7 @@ export interface TagsChips {
   value: any;
   name: string;
 }
+// TagsSkills and tagsInterests contains "srchStr" key: string with lower case letters
 export const initialState: State = {
   tagsArr: [{
     tagId: null,
@@ -42,18 +36,28 @@ export function filtersReducer(state = initialState, action: any): State {
         state.tagsArr = tags;
         state.tagsArr.forEach(el => {
           if(el.categoryId === null){
-            state.tagsSkills.push({value: el.tagId, name: el.tagName, categoryName: ""});
-            state.tagsInterests.push({value: el.tagId, name: el.tagName});
+            state.tagsSkills.push(
+              {value: el.tagId,
+                name: el.tagName,
+                categoryName: "",
+                srchStr: _.lowerCase(el.tagName)});
+            state.tagsInterests.push(
+              {value: el.tagId,
+                name: el.tagName,
+                srchStr: _.lowerCase(el.tagName)});
           } else {
-            state.tagsSkills.push({value: el.tagId, name: el.tagName, categoryName: el.categoryName})
+            state.tagsSkills.push(
+              {value: el.tagId,
+              name: el.tagName,
+              categoryName: el.categoryName,
+              srchStr: _.lowerCase(el.tagName)});
           }
-
         });
         return state;
       }
     }
-  default:
-    return state;
+    default:
+      return state;
   }
 }
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];

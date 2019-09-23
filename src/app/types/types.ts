@@ -172,9 +172,5 @@ export module types {
     name: string;
     status: string;
   }
-  export interface AutoCompleteModel {
-    value: any;
-    name: string;
-  }
 }
   

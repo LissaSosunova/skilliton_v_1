@@ -19,8 +19,6 @@ export class InputTextComponent extends InputAbstract implements OnInit {
 // min text length
 @Input() public minLength?: number;
 @Input() public autocomplete?: boolean = false;
-@Input() public autocompleteData?: Observable<types.AutoCompleteModel[]>;
-public filteredOptions: Array<types.AutoCompleteModel> = [];
 public showMaxInputMessageError: boolean = false;
 public maxLengthLimit: number;
 public showContent: boolean = false;
@@ -30,14 +28,6 @@ constructor() {
 }
 
 ngOnInit() {
-  console.log(this.autocompleteData);
-  if(this.autocompleteData){
-    this.filteredOptions = [{name: '', value: null}];
-  } else {
-    // this.filteredOptions = this.autocompleteData;
-    this.showContent = true;
-    console.log(this.autocompleteData);
-  }
   if (this.maxLength) {
     this.validatorsConfig.push(Validators.maxLength(this.maxLength));
   }

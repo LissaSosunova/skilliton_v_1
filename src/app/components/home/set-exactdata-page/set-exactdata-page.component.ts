@@ -10,6 +10,7 @@ import {Observable, Subject} from 'rxjs';
 import * as _ from 'lodash';
 import { LoadTags } from '../../../state/actions/filters.actions';
 import { Store} from '@ngrx/store';
+import { onInitEffects } from '@ngrx/effects/src/lifecycle_hooks';
 
 
 @Component({
@@ -25,7 +26,6 @@ export class SetExactdataPageComponent implements OnInit {
   public options: any;
   public TAGS: any;
 
-  public query: types.FindTag;
   public searchControl: FormControl;
   private unsubscribe$: Subject<void> = new Subject();
   private createNewTagParams: types.PostTag;
@@ -35,7 +35,6 @@ export class SetExactdataPageComponent implements OnInit {
   private isTagsSkills:  boolean = true;
   private isTagsGoals:  boolean = true;
   private isTagsInterests:  boolean = true;
-  
   private skills: any;
   private openAuto: boolean = false;
   private showBtn: boolean = false;
@@ -46,7 +45,6 @@ export class SetExactdataPageComponent implements OnInit {
   @Output() chipsInterest = [] as  any;
   @Output() selectedTagsId = [] as  any;
   @Output() dataNotSet: boolean = true;
-  
   @Input() activePage: string;
   @Input() valueSearch: any;
   constructor(
@@ -59,27 +57,26 @@ export class SetExactdataPageComponent implements OnInit {
     this.init();
   }
 
-  init(){
+  init() {
     this.store.dispatch(new LoadTags());
     const tags$ = this.store.select('filters').subscribe((state: any) => {
-      if(state !== undefined || state){
+      if (state !== undefined || state) {
         this.TAGS = state.tagsArr;
         this.tagsSkills = state.tagsSkills;
         this.tagsInterests = state.tagsInterests;
-        console.log(state);
       }
     });
   }
 
-  public setValue(val){
-    if(val !== null){
+  public setValue(val) {
+    if (val !== null) {
       setTimeout(() => {
         if (this.activePage !== 'interests') {
           this.chipsSkills.push({name: val});
           this.goToNextPage = true;
           this.openAuto = false;
           this.showBtn = true;
-          if(this.chipsSkills.length === 2){
+          if (this.chipsSkills.length === 2) {
             this.isTagsSkills = false;
           }
         }
@@ -88,25 +85,25 @@ export class SetExactdataPageComponent implements OnInit {
   }
     public setValueFromDropDown(option, param: string) {
     this.openAuto = false;
-    if(param === 'skills'){
+    if (param === 'skills') {
       this.chipsSkills.push({name: option.name});
-      this.selectedTagsId.push(option.value)
+      this.selectedTagsId.push({value: option.value});
       this.goToNextPage = true;
-      if(this.chipsSkills.length === 2){
+      if (this.chipsSkills.length === 2) {
       this.isTagsSkills = false;
     }
-    } else if(param === 'goals'){
+    } else if (param === 'goals') {
       this.chipsGoals.push({name: option.name});
-      this.selectedTagsId.push(option.value)
+      this.selectedTagsId.push({value: option.value});
       this.goToNextPage = true;
-      if(this.chipsGoals.length === 2){
+      if (this.chipsGoals.length === 2) {
         this.isTagsGoals = false;
       }
-    } else if(param === 'interests'){
+    } else if (param === 'interests'){
       this.chipsInterest.push({name: option.name});
-      this.selectedTagsId.push(option.value)
+      this.selectedTagsId.push({value: option.value});
       this.goToNextPage = true;
-      if(this.chipsInterest.length === 2){
+      if (this.chipsInterest.length === 2) {
       this.isTagsInterests = false;
     }
   }
@@ -116,13 +113,13 @@ export class SetExactdataPageComponent implements OnInit {
     this.goToNextPage = false;
     this.activePage = page;
     this.chipsSkills = [];
-    if(page === "goals"){
+    if (page === 'goals') {
       this.selectedTagsId = [];
       console.log('send data of skills');
-    } else if (page === "interests"){
+    } else if (page === 'interests') {
       this.selectedTagsId = [];
       console.log('send data of goals');
-    } else if (page === "done"){
+    } else if (page === 'done') {
       this.selectedTagsId = [];
       console.log('send data of interests and get new user');
       return this.dataNotSet = false;
@@ -131,34 +128,27 @@ export class SetExactdataPageComponent implements OnInit {
 
 
   public setSearch(query: string): void {
-    console.log(this.activePage);
-    this.query = {
-      query: query
-    };
-    if(this.activePage === 'skills'){
+    if (this.activePage === 'skills' || this.activePage === 'goals') {
       this.options = this.tagsSkills;
-      const result = _.filter(this.tagsSkills, o => _.includes(o.name, query));
+      const search = _.filter(this.tagsSkills, o => _.includes(o.srchStr, query));
       this.openAuto = true;
-      this.options = result;
-      if(result.length === 0){
+      if (this.selectedTagsId.length !== 0) {
+        const deleteId = this.selectedTagsId;
+        const result = _.differenceBy(search, this.selectedTagsId, 'value');
+        this.options = result;
+      } else {
+        this.options = search;
+      }
+      if (this.options.length === 0) {
         this.openAuto = false;
         this.showBtn = true;
       }
-    } else if (this.activePage === 'goals'){
-      this.options = this.tagsSkills;
-      const result = _.filter(this.tagsSkills, o => _.includes(o.name, query));
-      this.openAuto = true;
-      this.options = result;
-      if(result.length === 0){
-        this.openAuto = false;
-        this.showBtn = true;
-      }
-    } else if (this.activePage === 'interests'){
+    } else if (this.activePage === 'interests') {
       this.options = this.tagsInterests;
-      const result = _.filter(this.tagsInterests, o => _.includes(o.name, query));
+      const result = _.filter(this.tagsInterests, o => _.includes(o.srchStr, query));
       this.openAuto = true;
       this.options = result;
-      if(result.length === 0){
+      if (result.length === 0) {
         this.openAuto = false;
         this.showBtn = true;
       }
@@ -179,14 +169,12 @@ export class SetExactdataPageComponent implements OnInit {
   }
   //  Check on error, show details of error
 getErrorCodeApi(data: number, message: string): void {
-  let result = _.find(this.ERROR_API, function(o) { return o.code == data; });
-  console.log(data, message);
-  if(data===500){
-   
+  const result = _.find(this.ERROR_API, function(o) { return o.code === data; });
+  if (data === 500 ) {
   }
 }
-checkStatusData(data: any): void{
-  if(data){
+checkStatusData(data: any): void {
+  if (data) {
   console.log(data);
   }
 }
