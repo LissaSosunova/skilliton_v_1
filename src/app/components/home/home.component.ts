@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   @Output() user: types.NewUser = {} as types.NewUser;
   public user$: Observable<types.NewUser>;
   private unsubscribe$: Subject<void> = new Subject<void>();
-  @Input() dataNotSet: boolean = true;
+  private dataNotSet: boolean;
   @Output() userUploaded: boolean = false;
   @Output() activePage: string;
 
@@ -54,6 +54,8 @@ export class HomeComponent implements OnInit {
         } else if(this.user.keyData.interests.length == 0 || this.user.keyData.interests == null){
           this.dataNotSet = true;
           this.activePage = "interests";
+        } else {
+          this.dataNotSet = false;
         }
         
       }

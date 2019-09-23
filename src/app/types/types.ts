@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-namespace
 export module types {
 
   export interface Login {
@@ -45,7 +46,7 @@ export module types {
     lastName: string;
     name: string;
     rate: number;
-    sex: null
+    sex: null;
     socialAccount: string;
     socialAccountId: any | null;
     summary: any | null;
@@ -85,10 +86,10 @@ export module types {
     avatar: any;
     socialNetworksProfiles: Array<any>;
     name: string;
-    lastName:  string;
-    birthDate:  string;
-    placeOfBirth:  any;
-    placeOfResidence:  any;
+    lastName: string;
+    birthDate: string;
+    placeOfBirth: any;
+    placeOfResidence: any;
     rate: number;
     profileSummary: null | string;
     langs: Langs | null;
@@ -172,5 +173,16 @@ export module types {
     name: string;
     status: string;
   }
+  export interface AutoCompleteModel {
+    value: any;
+    name: string;
+  }
+  export interface CategoryElement {
+    categoryId?: number | null;
+    tagName: string;
+  }
+  export interface PostInitInfo {
+    selectedTagsId: Array<number> | null;
+    newTags?: Array<CategoryElement>;
 }
-  
+}
