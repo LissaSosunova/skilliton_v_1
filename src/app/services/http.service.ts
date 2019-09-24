@@ -28,7 +28,6 @@ export class HttpService {
   }
 
   public registration(params: types.RegistrationAPI): Observable<any> {
-    console.log(params)
     return this.http.post(URL_BACK + '/register', params, this.registrOptions);
   }
 
@@ -39,6 +38,13 @@ export class HttpService {
   public getTags(): Observable<any> {
     return this.http.get(URL_BACK + '/tags', {headers: this.getHeaders()});
   }
+
+  // Post data scills/goals/interests from exact info
+  public postInitInfo(params: types.PostInitInfo, infoType: string): Observable<any> {
+    console.log(params, infoType);
+    return this.http.post(URL_BACK + '/user/init-info/' + infoType, params, {headers: this.getHeaders()});
+  }
+
 
   public postTags(params: types.PostTag): Observable<any> {
     return this.http.post(URL_BACK + '/tags', params, {headers: this.getHeaders()});
