@@ -6,6 +6,7 @@ import { HttpService } from '../../../services/http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import {Store} from '@ngrx/store';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 
 @Component({
   selector: 'app-about-me',
@@ -15,8 +16,10 @@ import {Store} from '@ngrx/store';
 export class AboutMeComponent implements OnInit {
 
   @Input() user: types.NewUser;
+  @Input() myGoals = [] as any;
   public currTab: string;
   @Input() userUploaded: boolean = false;
+  @ViewChild('placesRef', {static: true}) placesRef: GooglePlaceDirective;
 
   constructor(
     private data: HttpService,
@@ -31,7 +34,6 @@ export class AboutMeComponent implements OnInit {
 
 
   private init(): void {
-    
     if(this.currTab === undefined){
       this.currTab = 'general';
     }

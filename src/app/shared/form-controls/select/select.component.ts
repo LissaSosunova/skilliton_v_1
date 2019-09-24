@@ -1,128 +1,40 @@
-import { Component, OnInit, Input, HostListener,
-  ElementRef,
-  Output,
-  EventEmitter,
-  forwardRef } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { InputAbstract, MakeProvider } from '../model/input-abstract';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectComponent),
-      multi: true
-    }
-  ],
+  providers: [MakeProvider(SelectComponent)]
 })
 
-export class SelectComponent implements ControlValueAccessor, OnInit {
-  _value: any;
-  currentOption: any;
-  isOpened = false;
+export class SelectComponent extends InputAbstract implements OnInit {
+  submitted = false;
+  @Input() options: any;
 
-  @Input() options;
-  @Input() init;
-  @Input() placeholder: string;
-  @Input() hint: string;
-  @Input() showAdd: boolean;
-  @Input() showRemove: boolean;
-  @Input() disableSorting: boolean;
-
-  @Output() change = new EventEmitter();
-  @Output() add = new EventEmitter();
-  @Output() remove = new EventEmitter();
-  @Output() selectedValue = new EventEmitter();
-
-
-  constructor(private element: ElementRef) { }
-
-  get value() {
-    return this._value && this._value.value;
-  }
-
-  set value(val) {
-    if (val === '') {
-      this._value = val;
-      this.propagateChange(val);
-      this.change.next(val);
-      return;
-    }
-    if ((!val && val !== 0) || !this.options) { return; }
-    const value = this.options.find(o => o.value === val);
-    if (!value) { return; }
-    this._value = value;
-    this.propagateChange(this._value.value);
-    this.change.next(this._value.value);
-    this.close();
-  }
+  constructor( ) {
+    super();
+   }
 
   ngOnInit() {
-    if (!this.init) { return; }
-    setTimeout(() => {
-      this._value = this.init;
-      this.propagateChange(this.init.value);
+    super.init();
+    super.subscribeFormControl();
+  }
+
+  changeSuit(e) {
+    // this.oppoSuitsForm.get('name').setValue(e.target.value, {
+    //   onlySelf: true
+    // })
+  }
+  private subscribeForShowingErrorMessages(): void {
+    const subscription: Subscription = this.control.valueChanges.subscribe(value => {
+      value = value || '';
     });
+    this.subscriptions.push(subscription);
   }
-
-
-  writeValue(value: any) {
-    this.value = value;
+  onSubmit() {
+    this.submitted = true;
   }
-
-  propagateChange = (_: any) => { };
-
-  registerOnChange(fn) {
-    this.propagateChange = fn;
-  }
-
-  registerOnTouched() { }
-
-  toggleSelect(): void {
-    this.isOpened = !this.isOpened;
-  }
-
-  close(): void {
-    this.isOpened = false;
-  }
-
-  sortOptions() {
-    if (!this.disableSorting) {
-      // some array could be immutable
-      return [...this.options].sort((a, b) => {
-        let valA = a.value || a;
-        let valB = b.value || b;
-        if (valA == 'all') return -1;
-        if (valB == 'all') return 1;
-        if (valA > valB) return 1;
-        if (valA < valB) return -1;
-        return 0;
-      });
-    } else {
-      return this.options;
-    }
-  }
-
-  pickValueHandler(option) {
-    this.value = option.value;
-    this.selectedValue.emit(this.value);
-  }
-
-  resetToNull() {
-    this._value = null;
-    this.propagateChange(this._value);
-  }
-
-  @HostListener('document:click', ['$event', '$event.target'])
-  onClick(event: MouseEvent, targetElement: HTMLElement): void {
-    if (!targetElement) { return; }
-
-    const clickedInside = this.element.nativeElement.contains(targetElement);
-
-    if (!clickedInside) { this.close(); }
-  }
-
 }

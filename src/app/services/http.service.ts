@@ -50,6 +50,10 @@ export class HttpService {
     return this.http.post(URL_BACK + '/tags', params, {headers: this.getHeaders()});
   }
 
+  public postNewGoal(params: types.AddGoalAPI): Observable<any> {
+    return this.http.post(URL_BACK + '/user/add-goal', params, {headers: this.getHeaders()});
+  }
+
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {
 

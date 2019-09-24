@@ -9,6 +9,7 @@
 body {
     background: map-get($bg-color , 'gray-lighter' );
     font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
     height: 100vh;
     margin: 0px;
     color: map-get($font-color, 'primary');
@@ -171,7 +172,7 @@ footer {
 }
 
 p {
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 300;
   line-height: 1.8em;
 }
@@ -182,4 +183,76 @@ a {
   &:hover {
     cursor: pointer;
   }
+}
+
+
+
+/* Customize the label (the container) */
+.container-ch {
+  text-align: center;
+  display: block;
+  position: relative;
+  padding-left: 55px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container-ch input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 36px;
+  width: 36px;
+  border: 1px solid  map-get($bg-color, 'primary');
+  border-radius: 8px;
+  background-color: white;
+}
+
+/* On mouse-over, add a grey background color */
+.container-ch:hover input ~ .checkmark {
+  background-color:white;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-ch input:checked ~ .checkmark {
+  background-color: map-get($bg-color, 'primary');
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container-ch input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-ch .checkmark:after {
+  left: 8px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }

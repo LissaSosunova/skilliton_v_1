@@ -1,40 +1,18 @@
-<div class="select" (click)="toggleSelect()"
-     [ngClass]="{ 'placeholder': !(init || _value)}" >
-  <span
-    
-    [innerHTML]="gg"
-  ></span>
-  <span
-    [innerHTML]="(_value ? _value.token : placeholder)"
-  ></span>
-</div>
-<div class="controls" (click)="toggleSelect()">
-  <app-hint *ngIf="hint">
-    <p [innerHTML]="hint"></p>
-  </app-hint>
-  <span *ngIf="showRemove" (click)="remove.next()" class="remove">
-    <svg fill="#bdbdbd" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-        <path d="M0 0h24v24H0z" fill="none"/>
-    </svg>
-  </span>
-  <span *ngIf="showAdd" (click)="add.next()" class="add">
-    <svg fill="#bdbdbd" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-        <path d="M0 0h24v24H0z" fill="none"/>
-    </svg>
-  </span>
-</div>
-
-<div class="options" *ngIf="isOpened">
-  <div>
-    <div *ngFor="let option of sortOptions()" [innerHTML]="option.name" class="option" (click)="pickValueHandler(option)">
-
+<div class="input">
+    <select
+    [formControl]="control"
+    (change)="changeSuit($event)"
+    class="input-field"
+    [ngClass]="{'error-input': (control.invalid
+              || control.hasError('required'))
+              && control.touched
+              }"
+              >
+      <option class="options" value="" disabled selected>{{ label }}</option>
+      <option *ngFor="let option of options"  value="{{option.value}}">{{option.name}}</option>
+    </select>
+  
+    <div class="error"*ngIf="control.invalid && !control.errors?.requiredLength && control.touched">
+        {{requiredFieldError}}
+      </div>
     </div>
-  </div>
-  <div>
-    <div *ngFor="let option of sortOptions()" [innerHTML]="option.name" class="option" (click)="pickValueHandler(option)">
-
-    </div>
-  </div>
-</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, OnChanges, Input } from '@angular/core';
 import { InputAbstract, MakeProvider } from '../model/input-abstract';
 
 @Component({
@@ -11,8 +11,12 @@ import { InputAbstract, MakeProvider } from '../model/input-abstract';
 export class InputSearchComponent extends InputAbstract implements OnInit, OnChanges {
 
   @Output() public reset: EventEmitter<void> = new EventEmitter<void>();
-
+  @Input() newValue?: string;
   public isValue: boolean = false;
+  @Input() public maxLength?: number = 300; // default value
+  public showMaxInputMessageError: boolean = false;
+  public maxLengthLimit: number;
+  public showContent: boolean = false;
 
   @ViewChild('searchInput',  { static: false }) private input: ElementRef;
 
@@ -50,5 +54,14 @@ export class InputSearchComponent extends InputAbstract implements OnInit, OnCha
       this.reset.emit();
     }
   }
-
+  private showErrorMessages(inputValueLength: number, maxLength: number | undefined): void {
+    if (maxLength && inputValueLength === maxLength) {
+      this.showMaxInputMessageError = true;
+      this.maxLengthLimit = maxLength;
+    } else if (this.control.errors && this.control.errors.maxlength) {
+      this.maxLengthLimit = this.control.errors.maxlength.requiredLength;
+    } else {
+      this.showMaxInputMessageError = false;
+    }
+  }
 }

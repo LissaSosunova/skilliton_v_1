@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SessionstorageService } from '../../services/sessionstorage.service';
 import { Store} from '@ngrx/store';
 import { LoadUserData } from '../../state/actions/user.actions';
-import { LoadTags } from '../../state/actions/filters.actions'
+import { LoadTags } from '../../state/actions/filters.actions';
 import {Observable, Subject} from 'rxjs';
 
 @Component({
@@ -42,16 +42,16 @@ export class HomeComponent implements OnInit {
     private getUserData() {
     this.store.dispatch(new LoadUserData());
     const user$ = this.store.select('user').subscribe((state: any) => {
-      if(state !== undefined || state){
+      if (state !== undefined || state) {
         this.user = state;
         this.userUploaded = true;
-        if(this.user.keyData.skills.length == 0 || this.user.keyData.skills == null){
+        if(this.user.keyData.skills.length === 0 || this.user.keyData.skills == null) {
           this.dataNotSet = true;
           this.activePage = "skills";
-        } else if (this.user.keyData.goals.length == 0 || this.user.keyData.goals == null){
+        } else if (this.user.keyData.goals.length === 0 || this.user.keyData.goals == null) {
           this.dataNotSet = true;
           this.activePage = "goals";
-        } else if(this.user.keyData.interests.length == 0 || this.user.keyData.interests == null){
+        } else if(this.user.keyData.interests.length === 0 || this.user.keyData.interests == null) {
           this.dataNotSet = true;
           this.activePage = "interests";
         } else {

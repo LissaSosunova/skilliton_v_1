@@ -1,148 +1,37 @@
-.select-placeholder{
-    font-family: 'Montserrat';
-}
+@import '../../../../scss/variables';
 
-.select-width {
-    min-width: 80px;
-    min-height: 35px;
-    border: 1px solid black;
-}
-
-:host {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    cursor: pointer;
-    border-radius: 5px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  app-hint {
-    position: absolute;
-    top: 3px;
-    right: 25px;
-  }
-  
-  .select {
-    overflow: hidden;
-    flex-basis: 100%;
-    flex-shrink: 1;
-    display: flex;
-    align-items: center;
-    padding: 8px 15px;
-    font-size: 10px;
-    user-select: none;
-    position: relative;
-    &.placeholder {
-      color: lightslategray;
-    }
-  
-    span {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: inline-block;
-    }
-  }
-  
-  .options {
-    position: absolute;
-    font-size: 12px;
-    top: 100%;
-    right: 0;
-    left: 0;
-    z-index: 100;
-    background-color: white;
-    box-shadow: none;
-    max-height: 150px;
-    overflow-y: auto;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    user-select: none;
-    .select {
-      padding: 10px;
-    }
-    &::-webkit-scrollbar {
-      width: 5px;
-    }
-    &::-webkit-scrollbar-thumb{
-      border-radius:5px;
-    }
-  }
-  
-  .option {
-    overflow: hidden;
-    text-overflow: ellipsis;
+.input-field {
     padding: 10px;
-    background-color: white;
-    transition: color .2s;
-    &:hover {
-      color: black;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    border: 1px solid map-get($bg-color, 'gray-light');
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 47px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.input {
+    &__max-length-warning {
+        font-size: 12px;
+        color: grey;
     }
-    &:not(:first-child) {
-      padding-top: 5px;
-    }
-  }
-  
-  .controls {
-    flex-shrink: 0;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    position: relative;
-    user-select: none;
-    &:before {
-      content: '';
-      margin: 8px 8px 0 0;
-      border: 5px solid transparent;
-      border-top-color: #808080;
-    }
-  }
-  
-  .add {
-    height: 100%;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 24px;
-    transition: .3s;
-    svg {
-      cursor: pointer;
-      transform: rotate(45deg);
-      transition: .3s;
-    }
-    &:hover {
-      background-color: #bdbdbd;
-      svg {
-        fill: #fff;
-      }
-    }
-  }
-  
-  .remove {
-    height: 100%;
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 24px;
-    transition: .3s;
-    svg {
-      cursor: pointer;
-      transition: .3s;
-    }
-    &:hover {
-      background-color: #bdbdbd;
-      svg {
-        fill: #fff;
-      }
-    }
-  }
-  
+}
+
+.error {
+    color:map-get($font-color, 'error');
+    font-size: 12px;
+    margin-top: -10px;
+}
+
+.error-input {
+    border: 1px map-get($font-color, 'error') solid;
+}
+
+.options {
+  padding: 5px;
+}
+

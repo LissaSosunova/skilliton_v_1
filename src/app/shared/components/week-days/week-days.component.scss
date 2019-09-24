@@ -1,0 +1,28 @@
+@import '../../../../scss/variables';
+
+.btn-week {
+    background-color: white;
+    border: 1px solid map-get($bg-color, 'primary');
+    border-radius: 8px;
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+    font-weight: 500;
+    font-size: 0.5rem;
+    padding: 8px;
+    font-family: Montserrat;
+    &:hover {
+        background-color: map-get($bg-color, 'primary');
+        color: map-get($font-color, 'inverse');
+      cursor: pointer;
+    }
+}
+
+.selected {
+    background-color: map-get($bg-color, 'primary');
+    color: map-get($font-color, 'inverse');
+}
+.deselected {
+    background-color: white;
+    color: map-get($font-color, 'primary');
+}

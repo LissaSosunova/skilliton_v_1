@@ -33,19 +33,15 @@ export function filtersReducer(state = initialState, action: any): State {
     case filtersAction.FiltersActionTypes.LOAD_TAGS_SUCCESS: {
       if(action.payload){
         const tags: Array<any> = action.payload;
-        state.tagsArr = tags;
+        const sortByFilter = _.orderBy(tags, ['tagName', 'tagId'], ['asc', 'desc']);
+        state.tagsArr = sortByFilter;
         state.tagsArr.forEach(el => {
           if(el.categoryId === null){
-            state.tagsSkills.push(
-              {value: el.tagId,
-                name: el.tagName,
-                categoryName: "",
-                srchStr: _.lowerCase(el.tagName)});
             state.tagsInterests.push(
               {value: el.tagId,
                 name: el.tagName,
                 srchStr: _.lowerCase(el.tagName)});
-          } else {
+          } else if (el.categoryId !== null) {
             state.tagsSkills.push(
               {value: el.tagId,
               name: el.tagName,
