@@ -1,0 +1,16 @@
+@import '../../../../scss/variables';
+.bar {
+    background-color: map-get($bg-color, "happy" );
+    text-align: center;
+    vertical-align: center;
+    border-radius: 8px;
+    span {
+        color: white;
+        font-weight: 400;
+        font-size: 12px;
+    }
+}
+
+:host {
+    display: block;
+  }

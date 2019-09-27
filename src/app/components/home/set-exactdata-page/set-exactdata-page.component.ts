@@ -10,7 +10,6 @@ import * as _ from 'lodash';
 import { LoadTags } from '../../../state/actions/filters.actions';
 import { LoadUserData } from '../../../state/actions/user.actions';
 import { Store} from '@ngrx/store';
-import { onInitEffects } from '@ngrx/effects/src/lifecycle_hooks';
 
 
 @Component({

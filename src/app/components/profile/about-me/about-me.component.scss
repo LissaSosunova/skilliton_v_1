@@ -17,19 +17,18 @@
   .tab-expert-class {
     display: flex;
     align-items: center;
-    align-content: center;
+    align-content: flex-start;
     min-height: 30px;
-    border-bottom: 1px solid map-get($bg-color, 'dark');
     &:hover {
       cursor: pointer;
     }
     span {
         width: 100%;
         list-style: none;
-        text-align: center;
         margin: 0;
         font-size: 13px;
         font-weight: 600;
+        padding: 15px;
         &:hover {
           cursor: pointer;
         }
@@ -46,18 +45,22 @@
   }
   
   .not-active-tab {
-    color: map-get($font-color, 'primary');
+    color: map-get($font-color, 'gray');
+    border-radius: 8px;
     &:hover {
-      background-color: map-get($font-color, 'gray');
-      color: map-get($font-color, 'light-olive');
+      background-color: map-get($bg-color, 'primary');
+      color: white;
     }
   }
 
   .show-content {
-      padding: 40px;
+      padding: 10px;
       margin-top: 20px;
+      line-height: 1.6rem;
   }
 
   .main {
-      padding: 20px;
+      padding: 20px 10px 60px 10px ;
+      display: flex;
+      justify-content: center;
   }

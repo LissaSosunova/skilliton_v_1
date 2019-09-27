@@ -8,7 +8,7 @@ import { InputAbstract, MakeProvider } from '../model/input-abstract';
   providers: [MakeProvider(MatSelectComponent)]
 })
 export class MatSelectComponent extends InputAbstract implements OnInit  {
-  @Input() options: {label: string, value: string | number}[];
+  @Input() options: {name: string, value: string | number}[];
 
   constructor() {
     super();

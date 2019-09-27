@@ -78,6 +78,7 @@ export module types {
     contacts: Array<any> | [];
     posts: Posts;
     notifications: Notifications;
+    userType?: number;
   }
 
   export interface ProfileUser {
@@ -184,5 +185,13 @@ export module types {
   export interface PostInitInfo {
     selectedTagsId: Array<number> | null;
     newTags?: Array<CategoryElement>;
-}
+  }
+  export interface AddGoalAPI {
+      currentLevel: string;
+      expectedLevel: string;
+      name?: string;
+      tagId?: number;
+      decription?: string;
+
+  }
 }

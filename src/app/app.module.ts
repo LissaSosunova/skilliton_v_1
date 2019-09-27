@@ -79,10 +79,13 @@ import { TagInputModule } from 'ngx-chips';
 import { TagsChipsInputComponent } from './shared/form-controls/tags-chips-input/tags-chips-input.component';
 import { MatDefaultChipsComponent } from './shared/form-controls/mat-default-chips/mat-default-chips.component';
 import {DemoMaterialModule} from './material-module';
-import { HintComponent } from './shared/components/hint/hint.component';
 import { InputTrimDirective } from './shared/directives/input-trim.directive';
 import { DropdownItemsComponent } from './shared/components/dropdown-items/dropdown-items.component';
-
+import { ProgressBarComponent } from './shared/components/progress-bar/progress-bar.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { SkillsToOtainComponent } from './components/profile/skills-to-otain/skills-to-otain.component';
+import { WeekDaysComponent } from './shared/components/week-days/week-days.component';
+import { InputTextareaComponent } from './shared/form-controls/input-textarea/input-textarea.component';
 
 
 @NgModule({
@@ -112,14 +115,18 @@ import { DropdownItemsComponent } from './shared/components/dropdown-items/dropd
     InputSearchComponent,
     TagsChipsInputComponent,
     MatDefaultChipsComponent,
-    HintComponent,
     InputTrimDirective,
     DropdownItemsComponent,
+    ProgressBarComponent,
+    SkillsToOtainComponent,
+    WeekDaysComponent,
+    InputTextareaComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    GooglePlaceModule,
     FormsModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,

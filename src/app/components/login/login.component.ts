@@ -86,30 +86,30 @@ export class LoginComponent implements OnInit {
 
  }
 //  Check on error, show details of error
-getErrorCodeApi(data: number, message: string): void {
-  let result = _.find(this.ERROR_API, function(o) { return o.code == data; });
-  this.showError = true;
-  (typeof(message)  === 'string') ?
-  this.showErrorText =  result.title + " Details: "+ message:
-  // this.showErrorText =  result.title;
-  this.actionName = result.title;
-  // this.popupConteiner.innerHtml = this.showErrorText;
-  console.log(this.actionName);
-  this.infoPopup.actionName = this.actionName;
-  this.infoPopup.open();
+  getErrorCodeApi(data: number, message: string): void {
+    let result = _.find(this.ERROR_API, function(o) { return o.code == data; });
+    this.showError = true;
+    (typeof(message)  === 'string') ?
+    this.showErrorText =  result.title + " Details: "+ message:
+    // this.showErrorText =  result.title;
+    this.actionName = result.title;
+    // this.popupConteiner.innerHtml = this.showErrorText;
+    console.log(this.actionName);
+    this.infoPopup.actionName = this.actionName;
+    this.infoPopup.open();
 
-}
-// Check status of response, set tocken and navigate to HOME page
-checkStatusData(data: any): void{
-  if(data.accessToken){
-    const tokenType = data.tokenType;
-    this.token = data.accessToken;
-    this.sessionStorageService.setValue(this.token, '_token');
-    this.sessionStorageService.setValue(tokenType, 'tokenType');
-    this.router.navigate(['/home']);
   }
-}
-public onPopupOpen(): void {
-  this.infoPopup.open();
-}
+  // Check status of response, set tocken and navigate to HOME page
+  checkStatusData(data: any): void{
+    if(data.accessToken){
+      const tokenType = data.tokenType;
+      this.token = data.accessToken;
+      this.sessionStorageService.setValue(this.token, '_token');
+      this.sessionStorageService.setValue(tokenType, 'tokenType');
+      this.router.navigate(['/home']);
+    }
+  }
+  public onPopupOpen(): void {
+    this.infoPopup.open();
+  }
 }

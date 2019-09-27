@@ -1,0 +1,6 @@
+<div>
+    <button *ngFor="let option of options"
+        class="btn-week deselected"
+        [ngClass]="{'selected': value === 'true', 'deselected': value === 'false'}"
+        (click)="setValue(option.value)">{{option.name}}</button>
+</div>
