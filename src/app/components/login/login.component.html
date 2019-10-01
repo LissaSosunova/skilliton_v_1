@@ -62,29 +62,6 @@
                     #loginForm="ngForm">
 
             <div class="login-form">
-                    <div class="row">
-        
-                            <!-- Block with GOOGLE and FB -->
-                              <div class="col-xs-12
-                                col-sm-12
-                                col-md-6
-                                col-lg-6
-                                start-xs">
-                                  <!-- GOOGLE -->
-                                      <div class="social-btn">G</div>
-                                     
-                                    </div>
-                                    <div class="col-xs-12
-                                      col-sm-12
-                                      col-md-6
-                                      col-lg-6
-                                      start-xs">
-                                      <!-- FB -->
-                                        <div class="social-btn">f</div>
-                                       
-                                    </div>
-            
-                </div>
                 <div class="spec-padd">
                         
                     <div class="input-name">E-mail: </div>
@@ -109,16 +86,19 @@
                             </app-input-password>
                             <a><span class="forgot-pass">Forgot your password?</span></a><br/>
                             <div class="rem-me-block">
-                                <input class="checkbox-agree"
-                                        type="checkbox"
-                                        name="rememberMe"
-                                        checked="false"
-                                        name="rememberMeInput"
-                                        [required]="false"
-                                        #rememberMeInput="ngModel"
-                                        [(ngModel)]="rememberMe" 
-                                        (change)="rememberMeClick($event)"/> 
-                                        <span class="relative-pos-text">Remember me</span>
+                                    <label class="container-ch">
+                                            Remember me
+                                            <input
+                                            type="checkbox"
+                                            name="rememberMe"
+                                            checked="false"
+                                            name="rememberMeInput"
+                                            [required]="false"
+                                            #rememberMeInput="ngModel"
+                                            [(ngModel)]="rememberMe" 
+                                            (change)="rememberMeClick($event)"/> 
+                                            <span class="checkmark"></span>
+                                        </label>
                             </div>
                     </div>
 
@@ -139,7 +119,12 @@
                     <div *ngIf="showError" class="error-login">
                     {{showErrorText}}
                     </div>
-                    <app-alert-modal #infoPopup></app-alert-modal>
+                    <app-alert-modal
+                    [header]="headerError"
+                    [actionName]="showErrorText"
+                    [details]="details"
+                    [recomend]="recomend"
+                     #infoPopup></app-alert-modal>
                     </form>
                     </div>
         </div>

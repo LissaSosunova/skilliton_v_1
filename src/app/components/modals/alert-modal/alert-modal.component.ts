@@ -10,7 +10,10 @@ import { PopupControls, PopupControlsService } from '../../../services/popup-con
 export class AlertModalComponent implements OnInit {
   public popup: PopupControls;
   public popupConfig: types.FormPopupConfig;
-  @Input() public actionName: string;
+  @Input() public actionName?: string;
+  @Input() public header?: string = "Info";
+  @Input() public details?: string;
+  @Input() public recomend?: string;
 
   constructor(
     private popupControlsService: PopupControlsService
@@ -18,16 +21,16 @@ export class AlertModalComponent implements OnInit {
 
   ngOnInit() {
     this.popup = this.popupControlsService.create(true);
-      this.popupConfig = {
-        header: "Info",
-        isHeaderCloseBtn: true,
-        isFooter: false,
-        isHeader: true,
-        footer: {
-          isCloseBtn: false,
-          submitBtnText: 'OK'
-        }
-    }
+    this.popupConfig = {
+      header: this.header,
+      isHeaderCloseBtn: true,
+      isFooter: false,
+      isHeader: true,
+      footer: {
+        isCloseBtn: false,
+        submitBtnText: 'OK'
+      }
+  }
   }
 
   public open(): void {

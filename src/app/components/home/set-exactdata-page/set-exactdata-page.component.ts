@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 import { LoadTags } from '../../../state/actions/filters.actions';
 import { LoadUserData } from '../../../state/actions/user.actions';
 import { Store} from '@ngrx/store';
+import { AlertModalComponent } from '../../modals/alert-modal/alert-modal.component';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class SetExactdataPageComponent implements OnInit {
   private createNewElem: types.CategoryElement;
 
   private ERROR_API: any = errorTypes.api.login;
-  private ERROR_APP: any = errorTypes.app.login;
+  private ERROR_APP: any = errorTypes.app.setExactData;
 
   public options: any;
 
@@ -46,16 +47,22 @@ export class SetExactdataPageComponent implements OnInit {
   @Output() chipsSkills = [] as  any;
   @Output() chipsGoals = [] as  any;
   @Output() chipsInterest = [] as  any;
-  @Output() selected = [] as  any;
+  @Output() actionName: string;
+  @Output() headerError: any;
+  @Output() details: string;
+  @Output() recomend: string;
+  public showErrorText: string;
   private selectedTagsId = [] as  any;
   private newTags = [] as  any;
   @Input() activePage: string;
   @Input() valueSearch: any;
+  @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
 
   constructor(
     private data: HttpService,
     private store: Store<any>,
     private router: Router,
+    public alertModal: AlertModalComponent,
   ) { }
 
   ngOnInit() {
@@ -77,74 +84,95 @@ export class SetExactdataPageComponent implements OnInit {
     if (val !== null) {
       setTimeout(() => {
         if (this.activePage !== 'interests') {
-          this.chipsSkills.push({name: val});
-          this.goToNextPage = true;
-          this.openAuto = false;
-          this.showBtn = true;
-          if (this.chipsSkills.length === 2) {
-            this.isTagsSkills = false;
-          }
+          this.openAlertAboutNewSkill(100);
+        } else {
+          this.openAlertAboutNewSkill(101);
         }
       });
     }
   }
+  // Alert functions
+  public onPopupOpen(): void {
+    this.infoPopup.open();
+  }
+  public openAlertAboutNewSkill(code: number) {
+    const result = _.find(this.ERROR_APP, function(o) { return o.code === code; });
+    this.showErrorText =  result.title;
+    this.actionName = this.showErrorText;
+    this.headerError = 'Error of creating new name';
+    this.recomend = result.recomend;
+    this.infoPopup.open();
+  }
+
+
+  public skipField(page: string, name: string) {
+    this.activePage = page;
+    this.chipsSkills = [];
+    const params = {newTags: ['skiped']};
+    this.goToNextPage = false;
+  }
+  
     public setValueFromDropDown(option, param: string) {
     this.openAuto = false;
     if (param === 'skills') {
-      this.chipsSkills.push({name: option.name});
-      this.selected.push({value: option.value});
+      this.chipsSkills.push({name: option.name, value: option.value});
       this.selectedTagsId.push(option.value);
       this.goToNextPage = true;
-      if (this.chipsSkills.length === 2) {
+      console.log(this.chipsSkills)
+      if (this.chipsSkills.length === 20) {
       this.isTagsSkills = false;
     }
     } else if (param === 'goals') {
       this.chipsGoals.push({name: option.name});
-      this.selected.push({value: option.value});
       this.selectedTagsId.push(option.value);
       this.goToNextPage = true;
-      if (this.chipsGoals.length === 2) {
+      if (this.chipsGoals.length === 20) {
         this.isTagsGoals = false;
       }
-    } else if (param === 'interests'){
+    } else if (param === 'interests') {
       this.chipsInterest.push({name: option.name});
-      this.selected.push({value: option.value});
       this.selectedTagsId.push(option.value);
       this.goToNextPage = true;
-      if (this.chipsInterest.length === 2) {
+      if (this.chipsInterest.length === 20) {
       this.isTagsInterests = false;
     }
   }
 }
 
   public goNext(page: string){
-    let params = {};
-    this.goToNextPage = false;
-    this.activePage = page;
-    this.chipsSkills = [];
-    if (page === 'goals' ) {
-      this.newTags.length !== 0 ? params = {selectedTagsId: this.selectedTagsId, newTags: this.newTags}
-      : params = {selectedTagsId: this.selectedTagsId};
-      this.postNewData(params, 'skill');
-      console.log('params', params);
-      this.newTags = [];
-      this.selectedTagsId = [];
-      this.selected = [];
-    } else if (page === 'interests') {
-      this.newTags.length !== 0 ? params = {selectedTagsId: this.selectedTagsId, newTags: this.newTags}
-      : params = {selectedTagsId: this.selectedTagsId};
-      this.postNewData(params, 'goal');
-      this.newTags = [];
-      this.selectedTagsId = [];
-      this.selected = [];
-    } else if (page === 'done') {
-      this.newTags.length !== 0 ? params = {selectedTagsId: this.selectedTagsId, newTags: this.newTags}
-      : params = {selectedTagsId: this.selectedTagsId};
-      this.postNewData(params, 'interest');
-      this.newTags = [];
-      this.selectedTagsId = [];
-      this.selected = [];
-      this.router.navigate(['/home']);
+    if (this.chipsSkills.length === 0 ) {
+      this.goToNextPage = false;
+    } else {
+      this.chipsSkills.forEach(el => {
+        if (el.value !== 0) {
+          this.selectedTagsId.push(el.value);
+        }
+      });
+      let params = {};
+      this.goToNextPage = false;
+      this.activePage = page;
+      this.chipsSkills = [];
+      if (page === 'goals' ) {
+        this.newTags.length !== 0 ? params = {selectedTagsId: this.selectedTagsId, newTags: this.newTags}
+        : params = {selectedTagsId: this.selectedTagsId};
+        this.postNewData(params, 'skill');
+        console.log('params', params);
+        this.newTags = [];
+        this.selectedTagsId = [];
+      } else if (page === 'interests') {
+        this.newTags.length !== 0 ? params = {selectedTagsId: this.selectedTagsId, newTags: this.newTags}
+        : params = {selectedTagsId: this.selectedTagsId};
+        this.postNewData(params, 'goal');
+        this.newTags = [];
+        this.selectedTagsId = [];
+      } else if (page === 'done') {
+        this.newTags.length !== 0 ? params = {selectedTagsId: this.selectedTagsId, newTags: this.newTags}
+        : params = {selectedTagsId: this.selectedTagsId};
+        this.postNewData(params, 'interest');
+        this.newTags = [];
+        this.selectedTagsId = [];
+        this.router.navigate(['/home']);
+      }
     }
   }
 
@@ -154,29 +182,29 @@ export class SetExactdataPageComponent implements OnInit {
       this.options = this.tagsSkills;
       const search = _.filter(this.tagsSkills, o => _.includes(o.srchStr, query));
       this.openAuto = true;
-      if (this.selected.length !== 0) {
-        const result = _.differenceBy(search, this.selected, 'value');
+      if (this.chipsSkills.length !== 0) {
+        const result = _.differenceBy(search, this.chipsSkills, 'value');
         this.options = result;
       } else {
         this.options = search;
       }
       if (this.options.length === 0) {
         this.openAuto = false;
-        this.showBtn = true;
+        this.openAlertAboutNewSkill(100);
       }
     } else if (this.activePage === 'interests') {
       this.options = this.tagsInterests;
       const search = _.filter(this.tagsInterests, o => _.includes(o.srchStr, query));
       this.openAuto = true;
-      if (this.selected.length !== 0) {
-        const result = _.differenceBy(search, this.selected, 'value');
+      if (this.chipsSkills.length !== 0) {
+        const result = _.differenceBy(search, this.chipsSkills, 'value');
         this.options = result;
       } else {
         this.options = search;
       }
       if (this.options.length === 0) {
         this.openAuto = false;
-        this.showBtn = true;
+        this.openAlertAboutNewSkill(101);
       }
     }
   }
@@ -214,6 +242,6 @@ checkStatusData(data: any): void {
   }
 }
 public onReset(event): void {
-
 }
+
 }

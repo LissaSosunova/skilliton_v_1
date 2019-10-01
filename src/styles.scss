@@ -189,7 +189,7 @@ a {
 
 /* Customize the label (the container) */
 .container-ch {
-  text-align: center;
+  padding-top: 10px;
   display: block;
   position: relative;
   padding-left: 55px;
@@ -247,9 +247,9 @@ a {
 /* Style the checkmark/indicator */
 .container-ch .checkmark:after {
   left: 8px;
-  top: 2px;
-  width: 16px;
-  height: 16px;
+  top: 3px;
+  width: 14px;
+  height: 14px;
   border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);

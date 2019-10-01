@@ -2,37 +2,7 @@
     name="registrationForm"
     #registrationForm="ngForm">
 <div class="row content-block">
-          
-    <div class="col-xs-11
-                col-sm-11
-                col-md-6
-                col-lg-6
-                start-xs
-                col-xs-offset-1
-                col-md-offset-2
-                col-lg-offset-3 row">
-
-                <!-- Block with GOOGLE and FB -->
-                  <div class="col-xs-12
-                    col-sm-12
-                    col-md-6
-                    col-lg-6
-                    start-xs">
-                      <!-- GOOGLE -->
-                          <div class="social-btn">G</div>
-                         
-                        </div>
-                        <div class="col-xs-12
-                          col-sm-12
-                          col-md-6
-                          col-lg-6
-                          start-xs">
-                          <!-- FB -->
-                            <div class="social-btn">f</div>
-                           
-                        </div>
-
-    </div>
+   
     <div class="col-xs-11
       col-sm-11
       col-md-6
@@ -147,17 +117,19 @@
                 middle-xs
                 spec-padd
                 ">
+                <label class="container-ch">
+                    I accept Skilliton's <a>Terms of Use and Privacy Policy</a>
+                    <input class=""
+                    type="checkbox" checked="checked"
+                    name="rememberMeInput"
+                    [required]="true"
+                    #agreeInput="ngModel"
+                    [(ngModel)]="checkbox-agree" 
+                    checked="!!agreeConfirmCheckBox"
+                    (change)="agreeConfirm($event, birthdayDate)"/> 
+                    <span class="checkmark"></span>
+                </label>
                 
-                <input class="checkbox-agree"
-                type="checkbox"
-                name="rememberMeInput"
-                [required]="true"
-                #agreeInput="ngModel"
-                [(ngModel)]="checkbox-agree" 
-                checked="!!agreeConfirmCheckBox"
-                (change)="agreeConfirm($event, birthdayDate)"/> 
-        
-        <span class="relative-pos-text">I accept Skilliton's <a>Terms of Use and Privacy Policy</a></span>
         
                 <!-- Button confirm -->
     <div class="error-message">{{errorAPI}}</div>

@@ -16,48 +16,50 @@
             #skillsDataForm="ngForm">
             <div class="col-xs-12">
       <section *ngIf="isTagsSkills">
-          <app-input-search
-          [control]="searchControl"
-          name="skillName"
-          [(ngModel)]="skillName"
-          #lastName="ngModel"
-          [required]="true"
-          [placeholder]="'Start to type name of skill'"
-          [requiredFieldError]="'You can not to continue without any skill'">
-                  </app-input-search>
-                  <button (click)="setValue(skillName)"
-                  [ngClass]="{'search-btn': showBtn == true,  'non-vis': showBtn == false}" >
-                    <i class="material-icons search-icon">
-                        done
-                      </i>
-                </button>
+        <app-input-search
+            [control]="searchControl"
+            name="skillName"
+            [(ngModel)]="skillName"
+            #lastName="ngModel"
+            [required]="true"
+            [placeholder]="'Start to type name of skill'"
+            [requiredFieldError]="'You can to skip this step.'">
+        </app-input-search>
       </section>
           
-
-                <section *ngIf="openAuto === true" 
-      [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
-          <div *ngFor="let option of options">
+        <section *ngIf="openAuto === true" 
+                    [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
+        <div *ngFor="let option of options">
               <div (click)="setValueFromDropDown(option, 'skills')">
                   <i class="material-icons plus-icon">
                       add_circle_outline
                     </i>
-                    <span>{{option.name}} </span><div class="category-name">{{option.categoryName}}</div></div>
+                    <span>{{option.name}} </span></div>
             </div>
       </section>
           <app-mat-default-chips
-              [items]="chipsSkills"
-              [floatLabel]="auto"
-              >
-              </app-mat-default-chips>   
+            [items]="chipsSkills"
+            [floatLabel]="auto"
+            (click)="clickFn()"
+            >
+            </app-mat-default-chips>   
             </div>
-                  <div>
-                    <div *ngIf="goToNextPage === true">
+                  <div class="row">
+                    <div class="col-xs-6 no-padd">
+                            <button
+                            (click)="skipField('goals', 'skill')" 
+                            class="btn
+                            primary-btn
+                            btn-width-middle">
+                           Skip</button>
+                    </div>
+                    <div *ngIf="goToNextPage === true"
+                    class="col-xs-6 no-padd">
                         <button
                         (click)="goNext('goals')" 
                         class="btn
                         primary-btn
-                        btn-width-middle
-                        btn-height-middle"  
+                        btn-width-middle"  
                         value="Next"
                        >Next</button>
                     </div>
@@ -89,15 +91,9 @@
                         #lastName="ngModel"
                         [required]="true"
                         [placeholder]="'Start to type name of goal'"
-                        [requiredFieldError]="'You can not to continue without any goal'"
-                                  >
-                                </app-input-search>
-                                <button (click)="setValue(goalName)"
-                                [ngClass]="{'search-btn': showBtn == true,  'non-vis': showBtn == false}">
-                                  <i class="material-icons search-icon">
-                                      done
-                                    </i>
-                              </button>
+                        [requiredFieldError]="'You can to skip this step.'"
+                        >
+                    </app-input-search>
                     </section>
 
                     <section *ngIf="openAuto === true" 
@@ -107,7 +103,8 @@
                               <i class="material-icons plus-icon">
                                 add_circle_outline
                               </i>
-                              <span>{{option.name}} </span><div class="category-name">{{option.categoryName}}</div></div>
+                              <span>{{option.name}} </span>
+                            </div>
                           </div>
                     </section>
                         <app-mat-default-chips
@@ -118,16 +115,28 @@
                     
                 </div>
                 <div>
-                    <div *ngIf="goToNextPage === true">
-                        <button
-                        (click)="goNext('interests')" 
-                        class="btn
-                        primary-btn
-                        btn-width-middle
-                        btn-height-middle"  
-                        value="Next"
-                       >Next</button>
+                    <div class="row">
+                            <div class="col-xs-6 no-padd">
+                                    <button
+                                    (click)="skipField('interests', 'goal')" 
+                                    class="btn
+                                    primary-btn
+                                    btn-width-middle">
+                                   Skip</button>
+                            </div>
+                            <div class="col-xs-6 no-padd">
+                            <div *ngIf="goToNextPage === true">
+                                    <button
+                                    (click)="goNext('interests')" 
+                                    class="btn
+                                    primary-btn
+                                    btn-width-middle"  
+                                    value="Next"
+                                   >Next</button>
+                                </div>
+                            </div>
                     </div>
+                    
                   </div>
                 </form>
             </div>
@@ -159,15 +168,8 @@
                     [required]="true"
                     [placeholder]="'Start to type name of interest'"
                     [requiredFieldError]="'You can not to continue without any interest'"
-                              >
-                            </app-input-search>
-                            <button (click)="setValue(interestName)"
-                            [ngClass]="{'search-btn': showBtn == true,  'non-vis': showBtn == false}"
-                          >
-                              <i class="material-icons search-icon">
-                                  done
-                                </i>
-                          </button>
+                    >
+                </app-input-search>
                 </section>
 
                 <section *ngIf="openAuto === true" 
@@ -192,8 +194,7 @@
                     (click)="goNext('done')" 
                     class="btn
                     primary-btn
-                    btn-width-middle
-                    btn-height-middle"  
+                    btn-width-middle"  
                     value="Done"
                    >Done</button>
                 </div>
@@ -202,3 +203,10 @@
         </div>
     </div>
 </div>
+<app-alert-modal
+    [header]="headerError"
+    [actionName]="showErrorText"
+    [details]="details"
+    [recomend]="recomend"
+    #infoPopup>
+</app-alert-modal>

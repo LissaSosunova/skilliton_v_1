@@ -14,6 +14,7 @@ import {map, startWith} from 'rxjs/operators';
 import { InputAbstract, MakeProvider } from '../model/input-abstract';
 export interface Item {
   name: string;
+  value?: number;
 }
 
 @Component({
@@ -60,11 +61,12 @@ export class MatDefaultChipsComponent extends InputAbstract implements  OnInit {
     }
   }
 
-  remove(fruit: Item): void {
-    const index = this.items.indexOf(fruit);
-
+  remove(oneItem: Item): void {
+    const index = this.items.indexOf(oneItem);
+    
     if (index >= 0) {
       this.items.splice(index, 1);
+      console.log(oneItem, this.items);
     }
   }
 }
