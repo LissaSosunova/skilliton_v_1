@@ -62,7 +62,6 @@ export class SkillsToOtainComponent implements OnInit {
       if (state !== undefined || state) {
         this.tagsSkills = state.tagsSkills;
         const result = _.differenceBy(this.tagsSkills, this.myGoals, 'name');
-        console.log(result);
         this.tagsInterests = state.tagsInterests;
       }
     });

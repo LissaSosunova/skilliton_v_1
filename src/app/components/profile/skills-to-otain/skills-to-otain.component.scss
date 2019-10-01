@@ -47,7 +47,7 @@
       &:hover {
           background-color: map-get($bg-color, 'primary');
           cursor: pointer;
-          color: map-get($font-color, 'inverce');
+          color: map-get($font-color, 'inverse');
       }
   }
 }
@@ -72,10 +72,6 @@
     margin-top: 10px;
     border: 1px solid map-get($bg-color, 'gray-light');
 }
-.padd-top {
-    padding-top: 10px;
-}
-
 .no-padd {
     padding-left: 0px;
     padding-right: 0px;

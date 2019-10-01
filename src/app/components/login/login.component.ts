@@ -35,8 +35,10 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginForm', { read: true, static: false }) public loginForm: NgForm;
   @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
   @Output() rememberMeText: string = 'Remember me';
-
-  @Input() public actionName: string;
+  @Output() actionName: string;
+  @Output() headerError: any;
+  @Output() details: string;
+  @Output() recomend: string;
 
   constructor(
     private data: HttpService,
@@ -70,12 +72,12 @@ export class LoginComponent implements OnInit {
     };
     this.data.setAuth(this.params).subscribe(
       (data: types.ApiResponse) => {this.checkStatusData(data);},
-      error => this.getErrorCodeApi(error.status, error.error))
+      error => this.getErrorCodeApi(error.status));
   }
 
   public rememberMeClick(e) {
     // Read and write data to localStorage
-    this.rememberMe= e.target.checked;
+    this.rememberMe = e.target.checked;
  }
 
  getDataFromLocalStorage (key: string) {
@@ -86,17 +88,14 @@ export class LoginComponent implements OnInit {
 
  }
 //  Check on error, show details of error
-  getErrorCodeApi(data: number, message: string): void {
-    let result = _.find(this.ERROR_API, function(o) { return o.code == data; });
-    this.showError = true;
-    (typeof(message)  === 'string') ?
-    this.showErrorText =  result.title + " Details: "+ message:
-    // this.showErrorText =  result.title;
-    this.actionName = result.title;
-    // this.popupConteiner.innerHtml = this.showErrorText;
-    console.log(this.actionName);
-    this.infoPopup.actionName = this.actionName;
-    this.infoPopup.open();
+  getErrorCodeApi(data: number): void {
+   const result = _.find(this.ERROR_API, function(o) { return o.code === data; });
+   this.showError = true;
+   this.showErrorText =  result.title;
+   this.actionName = this.showErrorText;
+   this.headerError = 'Error';
+   this.recomend = 'Check your data and try again.';
+   this.infoPopup.open();
 
   }
   // Check status of response, set tocken and navigate to HOME page

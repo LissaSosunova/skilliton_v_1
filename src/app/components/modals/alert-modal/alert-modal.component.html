@@ -2,9 +2,13 @@
     *ngIf="popup.isOpened"
     [config]="popupConfig"
     (onClose)="onClose()"
+    [actionName]="actionName"
+    [header]="header"
     >
-  <div id="popupConteiner">
-
-    Check your data and try again.
+  <div id="popupConteiner"
+  class="body-text">
+    <label>{{actionName}}</label><br>
+    <label class="details">{{details}}</label><br>
+    <label>{{recomend}}</label>
   </div>
 </app-popup> 
