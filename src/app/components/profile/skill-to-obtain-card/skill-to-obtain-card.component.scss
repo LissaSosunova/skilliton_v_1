@@ -1,0 +1,85 @@
+@import '../../../../scss/variables';
+
+.table {
+  width: 100%;
+  font-size: 0.8em;
+  background-color: #F1F6FA;
+  border-collapse: collapse;
+  tr:nth-child(even) {
+    background-color: white;
+  }
+  tr {
+    td {
+      vertical-align: top;
+      width: 50%;
+      padding: 20px 10px 20px 10px;
+    }
+  }
+}
+.included-table {
+  width: 100%;
+  background-color: #F1F6FA;
+  tr:nth-child(even) {
+    background-color:  #F1F6FA;
+  }
+  tr {
+    td:nth-child(even) {
+      font-size: 0.75em;
+    }
+    td {
+      width: 50%;
+      padding: 5px 0px 5px 0px;
+    }
+  }
+}
+
+.header-block {
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  min-width: 240px;
+  padding: 10px;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: map-get($font-color, 'inverse');
+}
+
+.enable {
+  background-color: map-get($bg-color, 'primary');
+}
+.disable {
+  background-color: map-get($bg-color, 'gray-light');
+}
+.table-block {
+  min-width: 240px;
+  padding: 0px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border: 1px solid white;
+}
+.description-block {
+  min-width: 240px;
+  background-color: white;
+  padding: 16px 16px 16px 16px;
+}
+.edit-round-btn {
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 50%;
+  background-color: map-get($bg-color, 'white');
+  border: 1px solid  map-get($bg-color, 'gray');
+  .edit-icon {
+      font-size: 0.8em;
+      color: map-get($font-color, 'gray');
+  }
+  &:hover {
+      background-color: map-get($bg-color, 'primary');
+      cursor: pointer;
+      .edit-icon {
+          color: map-get($font-color, 'gray-lighter');
+      }
+  }
+}
+.title-header-block {
+  padding-left: 10px;
+}

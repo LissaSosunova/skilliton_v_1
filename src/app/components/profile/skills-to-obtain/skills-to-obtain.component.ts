@@ -13,13 +13,13 @@ import { selectHours } from '../../../shared/constants/select-hours';
 import { skillLevel } from '../../../shared/constants/skill-levels';
 
 @Component({
-  selector: 'app-skills-to-otain',
-  templateUrl: './skills-to-otain.component.html',
-  styleUrls: ['./skills-to-otain.component.scss']
+  selector: 'app-skills-to-obtain',
+  templateUrl: './skills-to-obtain.component.html',
+  styleUrls: ['./skills-to-obtain.component.scss']
 })
-export class SkillsToOtainComponent implements OnInit {
+export class SkillsToObtainComponent implements OnInit {
   @ViewChild('skillsDataForm', { read: true, static: false  }) public skillsDataForm: NgForm;
-  @Input() user: types.NewUser;
+  public user: Observable<types.NewUser>;
   @Output() selected = [] as  any;
   @Output() skillPlaceholder: string;
   @Output() newValue: string;
@@ -40,6 +40,7 @@ export class SkillsToOtainComponent implements OnInit {
   private choosedSkill: any;
   private choosedSkillname: any;
   public options: any;
+  public userUploaded: boolean;
 
   public searchControl: FormControl;
   private unsubscribe$: Subject<void> = new Subject();
@@ -51,12 +52,19 @@ export class SkillsToOtainComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.initSearchForm();
     this.init();
   }
 
   init() {
+    this.store.dispatch(new LoadUserData());
+    const user$ = this.store.select('user').subscribe((state: any) => {
+      if(state !== undefined || state) {
+        this.user = state;
+        this.userUploaded = true;
+        this.myGoals = state.keyData.goals;
+      }
+    });
     this.store.dispatch(new LoadTags());
     const tags$ = this.store.select('filters').subscribe((state: any) => {
       if (state !== undefined || state) {
@@ -124,6 +132,7 @@ export class SkillsToOtainComponent implements OnInit {
   }
 
   public saveBtn (currLvlValue: string, expLvlValuE: string, goalValue?: number, decr?: string) {
+    console.log(expLvlValuE);
     if (typeof this.choosedSkill === 'string') {
       this.createdSkillToObtaine = {
         currentLevel: currLvlValue,
@@ -138,10 +147,10 @@ export class SkillsToOtainComponent implements OnInit {
         tagId: this.choosedSkill
       };
     }
-    this.data.postNewGoal(this.createdSkillToObtaine).subscribe((data) => {
-      if (data.status === 200) {
-      this.router.navigate(['profile/about-me']);
-      }
-    });
+    // this.data.postNewGoal(this.createdSkillToObtaine).subscribe((data) => {
+    //   if (data.status === 200) {
+    //   this.router.navigate(['profile/about-me']);
+    //   }
+    // });
   }
 }

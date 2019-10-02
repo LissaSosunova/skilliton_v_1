@@ -131,3 +131,12 @@
     background-color: white;
     border: 1px solid map-get($bg-color, 'primary');
 }
+
+.disabled {
+    color: rgba(204, 204, 204, 0.8);
+    border: 1px solid  rgba(204, 204, 204, 0.8);
+    &:hover {
+      background-color: map-get($bg-color, 'primary');
+      border: 1px solid map-get($bg-color, 'error');
+    }
+  }
