@@ -41,7 +41,6 @@ export class HttpService {
 
   // Post data scills/goals/interests from exact info
   public postInitInfo(params: types.PostInitInfo, infoType: string): Observable<any> {
-    console.log(params, infoType);
     return this.http.post(URL_BACK + '/user/init-info/' + infoType, params, {headers: this.getHeaders()});
   }
 
@@ -60,7 +59,6 @@ export class HttpService {
     const tokenStr = this.sessionStorage.getValue('_token');
     const tokenType = this.sessionStorage.getValue('tokenType');
     if(tokenStr === "" || tokenStr === null || tokenType === "" || tokenType === null){
-      console.log("User doesn't autorizated");
       this.router.navigate(["/login"]);
     }
     const token = tokenType +" "+tokenStr;
@@ -91,7 +89,6 @@ export class HttpService {
     try {
       res = r.json();
     } catch (err) {
-      console.log(err);
     }
     if (r.status == 404) {
       this.router.navigate(['/login']);

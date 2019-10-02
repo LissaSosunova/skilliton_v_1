@@ -118,7 +118,6 @@ export class SetExactdataPageComponent implements OnInit {
       this.chipsSkills.push({name: option.name, value: option.value});
       this.selectedTagsId.push(option.value);
       this.goToNextPage = true;
-      console.log(this.chipsSkills)
       if (this.chipsSkills.length === 20) {
       this.isTagsSkills = false;
     }
@@ -156,7 +155,6 @@ export class SetExactdataPageComponent implements OnInit {
         this.newTags.length !== 0 ? params = {selectedTagsId: this.selectedTagsId, newTags: this.newTags}
         : params = {selectedTagsId: this.selectedTagsId};
         this.postNewData(params, 'skill');
-        console.log('params', params);
         this.newTags = [];
         this.selectedTagsId = [];
       } else if (page === 'interests') {
@@ -223,8 +221,7 @@ export class SetExactdataPageComponent implements OnInit {
   }
 
   // HTTP req
-  private postNewData (params: any, infoType: string) {
-    console.log(params, infoType);
+  private postNewData(params: any, infoType: string) {
     this.data.postInitInfo(params, infoType).subscribe(
       (data: types.ApiResponse) => {this.checkStatusData(data); } ,
       error => this.getErrorCodeApi(error.status, error.error));
@@ -238,7 +235,6 @@ getErrorCodeApi(data: number, message: string): void {
 }
 checkStatusData(data: any): void {
   if (data) {
-  console.log(data);
   }
 }
 public onReset(event): void {

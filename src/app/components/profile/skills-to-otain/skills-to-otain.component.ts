@@ -101,7 +101,6 @@ export class SkillsToOtainComponent implements OnInit {
   }
 
   public setSearch(query: string): void {
-    console.log(query)
     this.options = this.tagsSkills;
     const search = _.filter(this.tagsSkills, o => _.includes(o.srchStr, query));
     this.openAuto = true;
@@ -140,7 +139,6 @@ export class SkillsToOtainComponent implements OnInit {
       };
     }
     this.data.postNewGoal(this.createdSkillToObtaine).subscribe((data) => {
-      console.log(data);
       if (data.status === 200) {
       this.router.navigate(['profile/about-me']);
       }
