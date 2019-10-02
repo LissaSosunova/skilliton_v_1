@@ -49,9 +49,8 @@ export class MatDefaultChipsComponent extends InputAbstract implements  OnInit {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
+    // Add our item
     if ((value || '').trim()) {
-      console.log(value);
       this.itemsNew.push({name: value.trim(), value: value.trim() });
     }
 
@@ -66,7 +65,6 @@ export class MatDefaultChipsComponent extends InputAbstract implements  OnInit {
     
     if (index >= 0) {
       this.items.splice(index, 1);
-      console.log(oneItem, this.items);
     }
   }
 }

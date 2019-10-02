@@ -36,22 +36,6 @@ export module types {
     statusCodeValue: string;
   }
 
-  export interface User {
-    active: boolean;
-    birthAddress: any;
-    birthDate: string;
-    currentAddress: any;
-    email: string;
-    id: number;
-    lastName: string;
-    name: string;
-    rate: number;
-    sex: null;
-    socialAccount: string;
-    socialAccountId: any | null;
-    summary: any | null;
-  }
-
   export interface Lang {
     id: number;
     name: string;

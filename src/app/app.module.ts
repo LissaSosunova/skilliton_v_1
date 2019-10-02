@@ -76,7 +76,6 @@ import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 import { SetExactdataPageComponent } from './components/home/set-exactdata-page/set-exactdata-page.component';
 import { InputSearchComponent } from './shared/form-controls/input-search/input-search.component';
 import { TagInputModule } from 'ngx-chips';
-import { TagsChipsInputComponent } from './shared/form-controls/tags-chips-input/tags-chips-input.component';
 import { MatDefaultChipsComponent } from './shared/form-controls/mat-default-chips/mat-default-chips.component';
 import {DemoMaterialModule} from './material-module';
 import { InputTrimDirective } from './shared/directives/input-trim.directive';
@@ -113,7 +112,6 @@ import { InputTextareaComponent } from './shared/form-controls/input-textarea/in
     InputCustomDatepickerComponent,
     SetExactdataPageComponent,
     InputSearchComponent,
-    TagsChipsInputComponent,
     MatDefaultChipsComponent,
     InputTrimDirective,
     DropdownItemsComponent,
