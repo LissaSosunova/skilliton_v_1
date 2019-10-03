@@ -81,6 +81,18 @@ export module types {
     sex: any;
   }
 
+  export interface Avatar {
+    url?: string;
+    owner: string;
+    avatar?: AvatarObject;
+  }
+
+  export interface AvatarObject {
+    contentType: string;
+    image: string;
+    formData: any;
+  }
+
   export interface Langs {
     other: Array<Lang> | [];
     native: null | Lang;

@@ -19,7 +19,6 @@ import {Observable, Subject} from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   @Output() user: types.NewUser = {} as types.NewUser;
-  public user$: Observable<types.NewUser>;
   private unsubscribe$: Subject<void> = new Subject<void>();
   private dataNotSet: boolean;
   @Output() userUploaded: boolean = false;
@@ -44,6 +43,7 @@ export class HomeComponent implements OnInit {
     const user$ = this.store.select('user').subscribe((state: any) => {
       if (state !== undefined || state) {
         this.user = state;
+        console.log(this.user);
         this.userUploaded = true;
         if(this.user.keyData.skills.length === 0 || this.user.keyData.skills == null) {
           this.dataNotSet = true;
@@ -57,7 +57,6 @@ export class HomeComponent implements OnInit {
         } else {
           this.dataNotSet = false;
         }
-        
       }
     });
   }
@@ -67,7 +66,6 @@ export class HomeComponent implements OnInit {
     const dataLocal = this.localstorageService.getValue(key);
     if((dataLocal === "" || dataLocal === null || !dataLocal) && (dataStorage === null || dataStorage === "")){
     this.router.navigate(['/login']);
-    } 
-  
+    }
   }
 }

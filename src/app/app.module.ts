@@ -82,9 +82,13 @@ import { InputTrimDirective } from './shared/directives/input-trim.directive';
 import { DropdownItemsComponent } from './shared/components/dropdown-items/dropdown-items.component';
 import { ProgressBarComponent } from './shared/components/progress-bar/progress-bar.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
-import { SkillsToOtainComponent } from './components/profile/skills-to-otain/skills-to-otain.component';
+import { SkillsToObtainComponent } from './components/profile/skills-to-obtain/skills-to-obtain.component';
 import { WeekDaysComponent } from './shared/components/week-days/week-days.component';
 import { InputTextareaComponent } from './shared/form-controls/input-textarea/input-textarea.component';
+import { SkillToShareComponent } from './components/profile/skill-to-share/skill-to-share.component';
+import { SkillToShareCardComponent } from './components/profile/skill-to-share-card/skill-to-share-card.component';
+import { SkillToObtainCardComponent } from './components/profile/skill-to-obtain-card/skill-to-obtain-card.component';
+import { LeftBarComponent } from './components/profile/left-bar/left-bar.component';
 
 
 @NgModule({
@@ -116,9 +120,13 @@ import { InputTextareaComponent } from './shared/form-controls/input-textarea/in
     InputTrimDirective,
     DropdownItemsComponent,
     ProgressBarComponent,
-    SkillsToOtainComponent,
+    SkillsToObtainComponent,
     WeekDaysComponent,
     InputTextareaComponent,
+    SkillToShareComponent,
+    SkillToShareCardComponent,
+    SkillToObtainCardComponent,
+    LeftBarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SkillsToOtainComponent } from './skills-to-otain.component';
+import { SkillToShareCardComponent } from './skill-to-share-card.component';
 
-describe('SkillsToOtainComponent', () => {
-  let component: SkillsToOtainComponent;
-  let fixture: ComponentFixture<SkillsToOtainComponent>;
+describe('SkillToShareCardComponent', () => {
+  let component: SkillToShareCardComponent;
+  let fixture: ComponentFixture<SkillToShareCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SkillsToOtainComponent ]
+      declarations: [ SkillToShareCardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SkillsToOtainComponent);
+    fixture = TestBed.createComponent(SkillToShareCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,12 @@
 <!-- Header section -->
 <section class="row content-block">
+    <div class="col-xs-10
+    col-sm-10
+    col-md-8
+    col-lg-8
+    row
+    middle-xs">
+</div>
     <div class="header
                 col-xs-10
                 col-sm-10
@@ -12,7 +19,24 @@
                 col-sm-2
                 col-md-2
                 col-lg-2">
-           <img src="assets/images/einstain.png">
+           <!-- <img src="assets/images/einstain.png"> -->
+           <label for="avatar-input">
+                <img src="assets/images/einstain.png"
+                 class="avatar">
+                <input id="avatar-input" 
+                      type="file" 
+                      name="image" 
+                      (change)="uploadAvatar($event)"
+                      accept=".png, .jpg, .jpeg"
+                      enctype="multipart/form-data" #uploadFile>
+        
+            </label>
+                    <!-- <span class="edit-icon-ava-position">
+                        <button (click)="uploadAvatar($event)" class="edit-round-btn">
+                            <i class="material-icons edit-icon">
+                                edit
+                            </i>
+                        </button></span> -->
         </div>
         <div class="col-xs-10
                 col-sm-10
@@ -38,22 +62,300 @@
 <!-- Bar of %%  -->
 <div class="row center-xs content-bar-btn">
     
-    <div class="col-lg-8 top-bar center-xs row">
-        <div class="col-lg-3
-                    btn-top-bar"
-                    [ngClass]="{'active-btn': activeTopBtn === 'aboutMe' , 'def': activeTopBtn !== 'aboutMe' }"
-                    >About me</div>
-        <div class="col-lg-3
+    <div class="col-xs-10
+                col-sm-10
+                col-md-8
+                col-lg-8
+                top-bar
+                center-xs row">
+        <div class="col-xs-12 row top-bar">
+                <div class="col-xs-3
+                            col-sm-3
+                            col-md-3
+                            col-lg-3
+                            btn-top-bar"
+                [ngClass]="{'active-btn': activeTopBtn === 'aboutMe' , 'def': activeTopBtn !== 'aboutMe' }"
+                >About me</div>
+        <div class="col-xs-3
+                    col-sm-3
+                    col-md-3
+                    col-lg-3
                     btn-top-bar">My posts</div>
-        <div class="col-lg-3
-                    btn-top-bar">Saved posts</div>
-        <div class="col-lg-3
+        <div class="col-xs-3
+                    col-sm-3
+                    col-md-3
+                    col-lg-3
+                            btn-top-bar">Saved posts</div>
+        <div class="col-xs-3
+                    col-sm-3
+                    col-md-3
+                    col-lg-3
                     btn-top-bar">My requests</div>
+        </div>
     </div>
 </div>
 
+<!-- Section about User -->
+<div class="row center-xs user-block">
+    <div *ngIf="userUploaded == true && router.url === '/profile'"
+        class="col-xs-12
+        col-sm-12
+        col-md-8
+        col-lg-8
+        center-xs
+        row
+        block-about-user">
+        <div class="section-of-block row start-xs">
+            <div class="col-xs-12 title-section-block">
+                From
+                <button (click)="goToSubUrl('/profile/about-me')"
+                        class="edit-btn">edit</button>
+                </div>
+            <div class="colxs-12 content-section-block">
+                    <span>{{user.profile.placeOfBirth || "No information"}}</span>
+            </div>
+        </div>
+        <div class="section-of-block row start-xs">
+                <div class="col-xs-12 title-section-block">
+                    Live in 
+                    <button (click)="goToSubUrl('/profile/about-me')"
+                        class="edit-btn">edit</button>
+                    </div>
+                <div class="colxs-12 content-section-block">
+                        <span>{{user.profile.placeOfBirth || "No information"}}</span>
+                </div>
+        </div>
+        <div class="section-of-block row start-xs">
+                <div class="col-xs-12 title-section-block">
+                    Studied at 
+                    <button (click)="goToSubUrl('/profile/about-me')"
+                        class="edit-btn">edit</button>
+                    </div>
+                <div class="colxs-12 content-section-block">
+                        <span>{{user.profile.placeOfBirth || "No information"}}</span>
+                </div>
+        </div>
+        <div class="section-of-block row start-xs">
+                <div class="col-xs-12 title-section-block">
+                    Languages 
+                    <button (click)="goToSubUrl('/profile/about-me')"
+                        class="edit-btn">edit</button>
+                    </div>
+                <div class="colxs-12 content-section-block">
+                        <span>{{user.profile.placeOfBirth || "No information"}}</span>
+                </div>
+        </div>
+        <div class="section-of-block row start-xs">
+                <div class="col-xs-12 title-section-block">
+                    Workplace 
+                    <button (click)="goToSubUrl('/profile/about-me')"
+                        class="edit-btn">edit</button>
+                    </div>
+                <div class="colxs-12 content-section-block">
+                        <span>{{user.profile.placeOfBirth || "No information"}}</span>
+                </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content os Shared skills -->
+
+<div class="row center-xs">
+    <div *ngIf="userUploaded == true && router.url === '/profile'"
+    class="col-xs-12
+            col-sm-12
+            col-md-8
+            col-lg-8
+            center-xs
+            row
+            spec-pad">
+            <div class="col-xs-12
+                        col-sm-12
+                        col-md-12
+                        col-lg-12
+                        title-section-block-skills">
+                    Skills to share
+                    <button (click)="goToSubUrl('/profile/skills-to-share')"
+                            class="edit-round-btn">
+                        <i class="material-icons edit-icon">
+                            edit
+                        </i>
+                    </button>
+                    </div>
+        <div class="section-of-block row start-xs">
+            
+            <div class="colxs-12">
+                <app-skill-to-share-card></app-skill-to-share-card>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- Content os Skills to obtain -->
+
+<div class="row center-xs">
+    <div *ngIf="userUploaded == true && router.url === '/profile'"
+    class="col-xs-12
+            col-sm-12
+            col-md-8
+            col-lg-8
+            center-xs
+            row
+            spec-pad">
+            <div class="col-xs-12
+                        col-sm-12
+                        col-md-12
+                        col-lg-12
+                        title-section-block-skills">
+                        Skills to obtain
+                    <button (click)="goToSubUrl('/profile/skills-to-obtaine')"
+                            class="edit-round-btn">
+                        <i class="material-icons edit-icon">
+                            edit
+                        </i>
+                    </button>
+                    </div>
+        <div class="section-of-block row start-xs">
+            
+            <div class="colxs-12">
+                <app-skill-to-obtain-card></app-skill-to-obtain-card>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- Content os Services -->
+
+<div class="row center-xs">
+    <div
+    *ngIf="userUploaded == true && router.url === '/profile'"
+    class="spec-pad
+            col-xs-12
+            col-sm-12
+            col-md-8
+            col-lg-8
+            center-xs
+            row">
+            <div class="col-xs-12
+                        col-sm-12
+                        col-md-12
+                        col-lg-12
+                        title-section-block-skills">
+                        Services
+                    <button (click)="goToSubUrl('/profile/about-me')"
+                            class="edit-round-btn">
+                        <i class="material-icons edit-icon">
+                            edit
+                        </i>
+                    </button>
+                    </div>
+                <div class="col-xs-12">
+                        <div class="section-of-block
+                        col-xs-12
+                        col-sm-12
+                        col-md-12
+                        col-lg-12
+                        row
+                        start-xs
+                        services">
+                <!-- List of Servises -->
+                <span class="btn-interest">
+                        Wash cars
+                </span>
+                <span class="btn-interest">
+                        Homework
+                </span>
+                <span class="btn-interest">
+                        Feed the fish
+                </span>
+                <span class="btn-interest">
+                        Dog walk
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<!-- Content os Services -->
+
+<div class="row center-xs">
+        <div
+        *ngIf="userUploaded == true && router.url === '/profile'"
+        class="spec-pad
+                col-xs-12
+                col-sm-12
+                col-md-8
+                col-lg-8
+                center-xs
+                row">
+                <div class="col-xs-12
+                            col-sm-12
+                            col-md-12
+                            col-lg-12
+                            title-section-block-skills">
+                            Interests
+                        <button (click)="goToSubUrl('/profile/about-me')"
+                                class="edit-round-btn">
+                            <i class="material-icons edit-icon">
+                                edit
+                            </i>
+                        </button>
+                        </div>
+                    <div class="col-xs-12">
+                            <div class="section-of-block
+                            col-xs-12
+                            col-sm-12
+                            col-md-12
+                            col-lg-12
+                            row
+                            start-xs
+                            services">
+                    <!-- List of Servises -->
+                    <span class="btn-interest">
+                            Machines <span class="followers-count">450K people</span>
+                    </span>
+                    <span class="btn-interest">
+                            Machines <span class="followers-count">450K people</span>
+                    </span>
+                    <span class="btn-interest">
+                            Machines <span class="followers-count">450K people</span>
+                    </span>
+                    <span class="btn-interest">
+                            Machines <span class="followers-count">450K people</span>
+                    </span>
+                    <span class="btn-interest">
+                            Machines <span class="followers-count">450K people</span>
+                    </span>
+                    <span class="btn-interest">
+                            Machines <span class="followers-count">450K people</span>
+                    </span>
+                    <span class="btn-interest">
+                            Machines <span class="followers-count">450K people</span>
+                    </span>
+                    <span class="btn-interest">
+                            Machines <span class="followers-count">450K people</span>
+                    </span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+<section *ngIf="activeUrl === '/profile/about-me'">
     <app-about-me 
-        [user]="user"
-        [userUploaded]="userUploaded"
-        [myGoals]="myGoals">
-    </app-about-me>
+    [user]="user"
+    [userUploaded]="userUploaded"
+    [myGoals]="myGoals"
+    [currChildUrl]="'about-me'">
+</app-about-me>
+</section>
+
+<div class="bottom-spacer"></div>
+<div class="bottom-spacer"></div>
+<div class="router-outlet">
+        <router-outlet></router-outlet>
+     </div>

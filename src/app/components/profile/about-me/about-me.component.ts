@@ -17,6 +17,7 @@ export class AboutMeComponent implements OnInit {
 
   @Input() user: types.NewUser;
   @Input() myGoals = [] as any;
+  @Input() currChildUrl: string;
   public currTab: string;
   @Input() userUploaded: boolean = false;
   @ViewChild('placesRef', {static: true}) placesRef: GooglePlaceDirective;
@@ -26,6 +27,7 @@ export class AboutMeComponent implements OnInit {
     private router: Router,
     private transferService: TransferService,
     private store: Store<types.NewUser>,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {

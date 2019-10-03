@@ -1,0 +1,69 @@
+<!-- Menu -->
+<div id="menu-switcher"
+class="tabs-nav
+        row
+        direction-column">
+<div class="row-nav
+            
+            start-xs">
+    <div class="col-xs-12
+                tab-expert-class
+                border-right start-xs"
+    [ngClass]="{'not-active-tab': currChildUrl !== 'about-me',  'active': currChildUrl === 'about-me'}"
+                (click)="switcher('general')">
+                <span>
+                    General
+                </span>
+                </div>
+    <div class="col-xs-12
+                tab-expert-class
+                border-right start-xs"
+            [ngClass]="{'not-active-tab': currTab !== 'placedYourVeLived',  'active': currTab === 'placedYourVeLived'}"
+                (click)="switcher('placedYourVeLived')">
+                <span>
+                    Placed your’ve lived
+                </span>
+    </div>
+    <div class="col-xs-12
+                tab-expert-class
+                border-right start-xs"
+            [ngClass]="{'not-active-tab': currTab !== 'workAndEducation',  'active': currTab === 'workAndEducation'}"
+                (click)="switcher('workAndEducation')">
+                <span>
+                    Work and Education 
+                </span>
+    </div>
+    <div class="col-xs-12
+                tab-expert-class"
+            [ngClass]="{'not-active-tab': currChildUrl !== 'skills-to-obtaine',  'active': currChildUrl === 'skills-to-obtaine'}"
+                (click)="switcher('skills-to-obtaine')">
+                <span>
+                    Skills to obtain
+                </span>
+    </div>
+    <div class="col-xs-12
+        tab-expert-class"
+        [ngClass]="{'not-active-tab': currTab !== 'skillsToShare',  'active': currTab === 'skillsToShare'}"
+        (click)="switcher('skillsToShare')">
+        <span>
+            Skills to share
+        </span>
+    </div>
+<div class="col-xs-12
+        tab-expert-class"
+        [ngClass]="{'not-active-tab': currTab !== 'myIntrests',  'active': currTab === 'myIntrests'}"
+        (click)="switcher('myIntrests')">
+        <span>
+            My interests
+        </span>
+</div>
+<div class="col-xs-12
+    tab-expert-class"
+    [ngClass]="{'not-active-tab': currTab !== 'myServices',  'active': currTab === 'myServices'}"
+    (click)="switcher('myServices')">
+    <span>
+        My services
+    </span>
+</div>
+</div>
+</div>

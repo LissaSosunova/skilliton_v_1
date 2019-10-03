@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class SelectComponent extends InputAbstract implements OnInit {
   submitted = false;
   @Input() options: any;
+  @Input() label?: any;
 
   constructor( ) {
     super();
