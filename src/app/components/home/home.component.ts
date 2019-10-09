@@ -17,15 +17,17 @@ import {Observable, Subject} from 'rxjs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   @Output() user: types.NewUser = {} as types.NewUser;
   private unsubscribe$: Subject<void> = new Subject<void>();
   private dataNotSet: boolean;
   @Output() userUploaded: boolean = false;
   @Output() activePage: string;
+  @Output() tags: any;
 
 
   constructor(
+    private actRoute: ActivatedRoute,
     private data: HttpService,
     private sessionStorageService: SessionstorageService,
     private localstorageService: LocalstorageService,
@@ -36,27 +38,41 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getDataFromLocalStorage('user');
+    this.getFilters();
     this.getUserData();
   }
     private getUserData() {
-    this.store.dispatch(new LoadUserData());
-    const user$ = this.store.select('user').subscribe((state: any) => {
-      if (state !== undefined || state) {
-        this.user = state;
-        console.log(this.user);
+
+      // Here is example of resolver for this.user
+      this.actRoute.data.subscribe(data => {
+        this.user = data.user$.data;
         this.userUploaded = true;
-        if(this.user.keyData.skills.length === 0 || this.user.keyData.skills == null) {
+        if((this.user.keyData.skills.length === 0 ||
+          this.user.keyData.skills == null) &&
+          this.user.keyData.skillsSkipped === false) {
           this.dataNotSet = true;
-          this.activePage = "skills";
-        } else if (this.user.keyData.goals.length === 0 || this.user.keyData.goals == null) {
+          this.router.navigate(['/set-exactdata']);
+        } else if ((this.user.keyData.goals.length === 0 ||
+          this.user.keyData.goals == null)
+          && this.user.keyData.goalsSkipped === false) {
           this.dataNotSet = true;
-          this.activePage = "goals";
-        } else if(this.user.keyData.interests.length === 0 || this.user.keyData.interests == null) {
+          this.router.navigate(['/set-exactdata']);
+        } else if(this.user.keyData.interests.length === 0 ||
+          this.user.keyData.interests == null) {
           this.dataNotSet = true;
-          this.activePage = "interests";
+          this.router.navigate(['/set-exactdata']);
         } else {
           this.dataNotSet = false;
         }
+      });
+      // this.store.dispatch(new LoadUserData());
+  }
+
+  private getFilters() {
+    this.store.dispatch(new LoadTags());
+    const tags$ = this.store.select('filters').subscribe((state: any) => {
+      if (state !== undefined || state) {
+        this.tags = state;
       }
     });
   }
@@ -68,4 +84,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']);
     }
   }
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete(); }
 }

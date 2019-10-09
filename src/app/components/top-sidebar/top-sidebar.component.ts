@@ -17,10 +17,11 @@ export class TopSidebarComponent implements OnInit {
   public currChildUrl: string;
 
   constructor(public router: Router,
-    private activateRouter: ActivatedRoute,
-    private routerService: RouterService,
-    private sessionStorageService: SessionstorageService,
-    private localstorageService: LocalstorageService,) { }
+              private activateRouter: ActivatedRoute,
+              private routerService: RouterService,
+              private sessionStorageService: SessionstorageService,
+              private localstorageService: LocalstorageService,
+              ) { }
 
   ngOnInit() {
     this.getCurrentRoute();

@@ -44,6 +44,9 @@ export class HttpService {
     return this.http.post(URL_BACK + '/user/init-info/' + infoType, params, {headers: this.getHeaders()});
   }
 
+  public postSkipedInitInfo(params: string): Observable<any> {
+    return this.http.get(URL_BACK + '/user/skip-skill/' + params, {headers: this.getHeaders()});
+  }
 
   public postTags(params: types.PostTag): Observable<any> {
     return this.http.post(URL_BACK + '/tags', params, {headers: this.getHeaders()});
@@ -62,20 +65,21 @@ export class HttpService {
 
     const tokenStr = this.sessionStorage.getValue('_token');
     const tokenType = this.sessionStorage.getValue('tokenType');
-    if(tokenStr === "" || tokenStr === null || tokenType === "" || tokenType === null){
+    if(tokenStr === "" || tokenStr === null || tokenType === '' || tokenType === null){
       this.router.navigate(["/login"]);
     }
-    const token = tokenType +" "+tokenStr;
+    const token = tokenType + ' ' + tokenStr;
     const headers = new HttpHeaders({'Authorization': token});
     return headers;
   }
   // Function for geting status codes
   getStatusCode = r => {
-    if (r.status !== 200)
+    if (r.status !== 200) {
       return {
         data: {},
         status: r.status
       };
+    }
 
     const res = r.json();
     this.router.navigateByUrl('/login');
