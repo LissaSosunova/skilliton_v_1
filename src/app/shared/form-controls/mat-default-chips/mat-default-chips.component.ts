@@ -1,20 +1,11 @@
 import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
-import {Component, ElementRef, ViewChild, Input, Output, EventEmitter, HostListener, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete,
-  MatChipEvent,
-  MatChipSelectionChange,
-  MatChipAvatar,
-  MatChipRemove,
-  MatChipTrailingIcon,
-  MatChipsDefaultOptions,
-  MatChipList} from '@angular/material';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { MatChipInputEvent, } from '@angular/material';
 import { InputAbstract, MakeProvider } from '../model/input-abstract';
 export interface Item {
   name: string;
-  value?: number;
+  id?: number;
 }
 
 @Component({
@@ -28,7 +19,7 @@ export class MatDefaultChipsComponent extends InputAbstract implements  OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
-  itemsNew= [];
+  itemsNew = [];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   @Input() items?: Item[] = [];
   @Input() placeholder?: string;

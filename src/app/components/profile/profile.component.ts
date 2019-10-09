@@ -13,6 +13,7 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { RouterService } from 'src/app/services/router.service';
 import { HttpService } from '../../services/http.service';
 import { AvatarService } from 'src/app/services/avatar.service';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-profile',
@@ -51,32 +52,22 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.getUserData();
     this.activeTopBtn = 'aboutMe';
-    this.getCurrentRoute();
-    if (this.currChildUrl === 'about-me') {
-      this.activeUrl = '/profile/about-me';
-    } else if ((this.currChildUrl === 'skills-to-obtaine')) {
-      this.activeUrl = '/profile/skills-to-obtaine';
-
-    } else if (this.currChildUrl === '') {
-      this.activeUrl = 'parentUrl';
-    }
-
+    // this.getCurrentRoute();
+    // if (this.currChildUrl === 'about-me') {
+    //   this.activeUrl = '/profile/about-me';
+    // } else if ((this.currChildUrl === 'skills-to-obtaine')) {
+    //   this.activeUrl = '/profile/skills-to-obtaine';
+    // } else if (this.currChildUrl === '') {
+    //   this.activeUrl = '/profile';
+    // }
   }
 
   private getCurrentRoute(): void {
     this.routerService.getCurrentRoute$().subscribe(url => {
       const urlSegments = url.split('/');
       this.currParentUrl = urlSegments[1];
-      if (this.currParentUrl === '/' || !this.currParentUrl) {
-        this.currParentUrl = 'login';
-        const token = this.sessionStorageService.getValue('_token');
-        if (token) {
-          this.currParentUrl = 'main';
-        }
-      }
       if (urlSegments.length > 2) {
         this.currChildUrl = urlSegments[2];
-        console.log(this.currChildUrl);
         const childSegments = this.currChildUrl.split('?');
         this.currChildUrl = childSegments[0];
       } else {
@@ -118,8 +109,7 @@ export class ProfileComponent implements OnInit {
     const files = this.uploadFile.nativeElement.files;
     const formData: FormData = new FormData();
     formData.append('image', files[0]);
-    const params = {formData: formData}
-    console.log(params);
+    const params = {formData: formData};
     // this.data.uploadAvatar(params).subscribe((res) => {
     //   const avatar: types.Avatar = this.avatarService.parseAvatar(res);
     //   console.log(avatar);

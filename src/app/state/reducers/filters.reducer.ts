@@ -8,47 +8,42 @@ import * as filtersAction from '../actions/filters.actions';
 export const filtersFeatureKey = 'filters';
 
 export interface State {
-  tagsArr: any;
-  tagsSkills: any;
-  tagsInterests: any;
+  interests: any;
+  skills: any;
 }
 export interface TagsChips {
-  value: any;
+  id: any;
   name: string;
 }
 // TagsSkills and tagsInterests contains "srchStr" key: string with lower case letters
 export const initialState: State = {
-  tagsArr: [{
-    tagId: null,
-    tagName: "",
-    categoryId: null,
-    categoryName: null
+  interests: [{
+    id: null,
+    name: '',
+    srchStr: ''
   }],
-  tagsSkills: [],
-  tagsInterests: []
+  skills: [{
+    id: null,
+    name: '',
+    srchStr: ''
+  }]
 };
 
 export function filtersReducer(state = initialState, action: any): State {
   switch (action.type) {
     case filtersAction.FiltersActionTypes.LOAD_TAGS_SUCCESS: {
       if(action.payload){
-        const tags: Array<any> = action.payload;
-        const sortByFilter = _.orderBy(tags, ['tagName', 'tagId'], ['asc', 'desc']);
-        state.tagsArr = sortByFilter;
-        state.tagsArr.forEach(el => {
-          if(el.categoryId === null){
-            state.tagsInterests.push(
-              {value: el.tagId,
-                name: el.tagName,
-                srchStr: _.lowerCase(el.tagName)});
-          } else if (el.categoryId !== null) {
-            state.tagsSkills.push(
-              {value: el.tagId,
-              name: el.tagName,
-              categoryName: el.categoryName,
-              srchStr: _.lowerCase(el.tagName)});
-          }
-        });
+        const tags = action.payload.data;
+        const sortSkillsByFilter = _.orderBy(tags.skills, ['name', 'id'], ['asc', 'desc']);
+        const sortInterestsByFilter = _.orderBy(tags.interests, ['name', 'id'], ['asc', 'desc']);
+        state.skills = sortSkillsByFilter;
+        state.interests = sortInterestsByFilter;
+        state.skills.forEach(el => {
+          el.srchStr = _.lowerCase(el.name);
+          });
+        state.interests.forEach(el => {
+            el.srchStr = _.lowerCase(el.name);
+            });
         return state;
       }
     }

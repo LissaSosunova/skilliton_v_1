@@ -4,13 +4,12 @@ class="tabs-nav
         row
         direction-column">
 <div class="row-nav
-            
             start-xs">
     <div class="col-xs-12
                 tab-expert-class
                 border-right start-xs"
     [ngClass]="{'not-active-tab': currChildUrl !== 'about-me',  'active': currChildUrl === 'about-me'}"
-                (click)="switcher('general')">
+                (click)="switcher('/profile/about-me', 'general')">
                 <span>
                     General
                 </span>
@@ -19,7 +18,7 @@ class="tabs-nav
                 tab-expert-class
                 border-right start-xs"
             [ngClass]="{'not-active-tab': currTab !== 'placedYourVeLived',  'active': currTab === 'placedYourVeLived'}"
-                (click)="switcher('placedYourVeLived')">
+                (click)="switcher('/profile/about-me', 'placedYourVeLived')">
                 <span>
                     Placed your’ve lived
                 </span>
@@ -28,7 +27,7 @@ class="tabs-nav
                 tab-expert-class
                 border-right start-xs"
             [ngClass]="{'not-active-tab': currTab !== 'workAndEducation',  'active': currTab === 'workAndEducation'}"
-                (click)="switcher('workAndEducation')">
+                (click)="switcher('/profile/about-me', 'workAndEducation')">
                 <span>
                     Work and Education 
                 </span>
@@ -36,15 +35,15 @@ class="tabs-nav
     <div class="col-xs-12
                 tab-expert-class"
             [ngClass]="{'not-active-tab': currChildUrl !== 'skills-to-obtaine',  'active': currChildUrl === 'skills-to-obtaine'}"
-                (click)="switcher('skills-to-obtaine')">
+                (click)="switcher('/profile/skills-to-obtaine', 'skills-to-obtaine')">
                 <span>
                     Skills to obtain
                 </span>
     </div>
     <div class="col-xs-12
         tab-expert-class"
-        [ngClass]="{'not-active-tab': currTab !== 'skillsToShare',  'active': currTab === 'skillsToShare'}"
-        (click)="switcher('skillsToShare')">
+        [ngClass]="{'not-active-tab': currChildUrl !== 'skills-to-share',  'active': currChildUrl === 'skills-to-share'}"
+        (click)="switcher('/profile/skills-to-share', 'skillsToShare')">
         <span>
             Skills to share
         </span>
@@ -67,3 +66,4 @@ class="tabs-nav
 </div>
 </div>
 </div>
+<router-outlet></router-outlet>

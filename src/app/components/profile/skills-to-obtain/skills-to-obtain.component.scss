@@ -3,6 +3,7 @@
   .show-content {
       padding: 10px;
       margin-top: 20px;
+      margin-bottom: calc(#{$footer-height} + 10px);
   }
 
   .search-btn {

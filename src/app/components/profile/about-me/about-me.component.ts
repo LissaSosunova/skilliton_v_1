@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import {Store} from '@ngrx/store';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
+import { LoadUserData } from '../../../state/actions/user.actions';
 
 @Component({
   selector: 'app-about-me',
@@ -15,10 +16,10 @@ import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 })
 export class AboutMeComponent implements OnInit {
 
-  @Input() user: types.NewUser;
+  public user: Observable<types.NewUser>;
   @Input() myGoals = [] as any;
-  @Input() currChildUrl: string;
-  public currTab: string;
+  public activeUrl: string = '/profile/about-me';
+  @Input() currTab: string;
   @Input() userUploaded: boolean = false;
   @ViewChild('placesRef', {static: true}) placesRef: GooglePlaceDirective;
 
@@ -32,22 +33,18 @@ export class AboutMeComponent implements OnInit {
 
   ngOnInit() {
     this.init();
+    console.log(this.currTab)
   }
 
 
   private init(): void {
-    if(this.currTab === undefined){
-      this.currTab = 'general';
-    }
-  }
-
-  public switcher(currId: string): void {
-    this.router.navigate([], {
-      queryParams: {
-        currTab: currId
+    this.store.dispatch(new LoadUserData());
+    const user$ = this.store.select('user').subscribe((state: any) => {
+      if(state !== undefined || state) {
+        this.user = state;
+        this.userUploaded = true;
       }
     });
-    this.currTab = currId;
   }
 
 }

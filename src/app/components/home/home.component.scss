@@ -3,4 +3,5 @@
     padding-left: 10%;
     padding-right: 10%;
     padding-bottom: $footer-height;
+    margin-top: calc(#{$header-height} - 3px);
 }

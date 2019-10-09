@@ -6,6 +6,7 @@
     padding: 0px;
     height: calc(100vh - #{$header-height + $footer-height});
     margin: 0px;
+    margin-top: calc(#{$header-height} - 3px);
     overflow-x: hidden;
     flex-wrap: wrap;
 }
@@ -23,7 +24,8 @@
     padding: 20px;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 90%;
+    margin-top: calc(#{$header-height} - 3px);
 }
 .btn-conteiner {
     display: flex;

@@ -13,7 +13,8 @@ export class LeftBarComponent implements OnInit {
   @Input() user: types.NewUser;
   @Input() myGoals = [] as any;
   @Input() currChildUrl: string;
-  public currTab: string;
+  public activeUrl: any;
+  @ViewChild('currTab', {static: false}) public currTab: string;
   constructor(
     private router: Router,
     private transferService: TransferService,
@@ -28,6 +29,12 @@ export class LeftBarComponent implements OnInit {
     if (this.currTab === undefined) {
       this.currTab = 'general';
     }
+  }
+
+  public switcher(url: string, tab: string): void {
+    this.currTab = tab;
+    this.activeUrl = url;
+    this.router.navigate([url]);
   }
 
 }

@@ -73,7 +73,7 @@ import { FiltersEffects } from './state/effects/filters.effects';
 import { PostsComponent } from './components/home/posts/posts.component';
 import { InputCustomDatepickerComponent } from './shared/form-controls/input-custom-datepicker/input-custom-datepicker.component';
 import { AngularMyDatePickerModule } from 'angular-mydatepicker';
-import { SetExactdataPageComponent } from './components/home/set-exactdata-page/set-exactdata-page.component';
+import { SetExactdataPageComponent } from './components/set-exactdata-page/set-exactdata-page.component';
 import { InputSearchComponent } from './shared/form-controls/input-search/input-search.component';
 import { TagInputModule } from 'ngx-chips';
 import { MatDefaultChipsComponent } from './shared/form-controls/mat-default-chips/mat-default-chips.component';

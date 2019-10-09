@@ -105,6 +105,8 @@ export module types {
     goals: Array<any> | [];
     myServices: Array<any> | [];
     workExperience: Array<any> | [];
+    goalsSkipped: boolean;
+    skillsSkipped: boolean;
   }
 
   export interface Posts {
@@ -150,14 +152,20 @@ export module types {
     };
   }
   export interface Filters {
-    tagsArr: Array<TagsArr>;
+    interests: Array<InterestTag>;
+    skills: Array<SkillTag>;
   }
 
-  export interface TagsArr {
-    tagId: number | null;
-    tagName: string;
-    categoryId: number | null;
-    categoryName: any;
+  export interface InterestTag {
+    id: number | null;
+    name: string;
+    srchStr: string;
+  }
+
+  export interface SkillTag {
+    id: number | null;
+    name: string;
+    srchStr: string;
   }
 
   export interface FindTag {
@@ -183,11 +191,17 @@ export module types {
     newTags?: Array<CategoryElement>;
   }
   export interface AddGoalAPI {
-      currentLevel: string;
-      expectedLevel: string;
-      name?: string;
-      tagId?: number;
-      decription?: string;
-
+    currentLevel: number;
+    expectedLevel: number;
+    moneyOffered: boolean;
+    servicesOffered: boolean;
+    skillsOffered: boolean;
+    withTrial: boolean;
+    hidden: boolean;
+    description?: string;
+    id?: number;
+    name?: string;
+    services?: Array<number>;
+    skills?: Array<number>;
   }
 }

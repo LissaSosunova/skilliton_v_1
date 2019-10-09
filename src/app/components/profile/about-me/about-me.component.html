@@ -5,29 +5,23 @@
         col-lg-8
         row
         ">
-<div class="col-xs-3">
-        <app-left-bar
-        [currChildUrl]="'about-me'"></app-left-bar>
-</div>
+        <div class="col-xs-3">
+                <app-left-bar
+                [currChildUrl]="'about-me'"></app-left-bar>
+        </div>
 
-
-<div class="col-xs-9">
- <!-- General -->
- <div class="tab" id="general" *ngIf="currTab === 'general'">
-        <section *ngIf="userUploaded == true">
-            <div class="row col-xs-12">
-                <div class="col-xs-4">Full name: </div>
-                <div class="col-xs-8"><span>{{user.profile.name}}, {{user.profile.lastName}}</span> </div>
-                <div class="col-xs-4">Birthday: </div>
-                <div class="col-xs-8"><span>{{user.profile.birthDate}}</span> </div>
-                <div class="col-xs-4">Sex: </div>
-                <div class="col-xs-8"><span>{{user.profile.sex || "I haven't choosed yet"}}</span> </div>
-                <div class="col-xs-4">Native language: </div>
-                <div class="col-xs-8"><span> {{user.profile.language || "I haven't choosed languages yet"}}</span> </div>
-            </div>                    
-        </section>
-</div>
-</div>
-
-</div>
+        <div class="col-xs-9">
+        <!-- General -->
+                <div class="row col-xs-12" *ngIf="userUploaded == true">
+                                <div class="col-xs-4">Full name: </div>
+                                <div class="col-xs-8"><span>{{user.profile.name}}, {{user.profile.lastName}}</span> </div>
+                                <div class="col-xs-4">Birthday: </div>
+                                <div class="col-xs-8"><span>{{user.profile.birthDate}}</span> </div>
+                                <div class="col-xs-4">Sex: </div>
+                                <div class="col-xs-8"><span>{{user.profile.sex || "I haven't choosed yet"}}</span> </div>
+                                <div class="col-xs-4">Native language: </div>
+                                <div class="col-xs-8"><span> {{user.profile.language || "I haven't choosed languages yet"}}</span> </div>
+                </div>    
+                </div>
+        </div>
 </div>

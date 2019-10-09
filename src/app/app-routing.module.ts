@@ -8,7 +8,7 @@ import { AboutMeComponent } from './components/profile/about-me/about-me.compone
 import { SkillsToObtainComponent } from './components/profile/skills-to-obtain/skills-to-obtain.component';
 import { SkillToShareComponent } from './components/profile/skill-to-share/skill-to-share.component';
 import { GetDataUserResolverService } from './resolvers/get-data-user-resolver.service';
-
+import { SetExactdataPageComponent } from './components/set-exactdata-page/set-exactdata-page.component';
 
 const routes: Routes = [
   {
@@ -25,8 +25,8 @@ const routes: Routes = [
     component: RegistrationComponent
   },
   {
-    path: 'home',
-    component: HomeComponent
+    path: 'set-exactdata',
+    component: SetExactdataPageComponent
   },
   {
     path: 'profile',
@@ -34,32 +34,31 @@ const routes: Routes = [
     children: [
       {
         path: 'about-me',
-        component: AboutMeComponent,
-        resolve: {
-          userData: GetDataUserResolverService
-        },
+        component: AboutMeComponent
       },
       {
         path: 'skills-to-obtaine',
-        component: SkillsToObtainComponent,
-        resolve: {
-          userData: GetDataUserResolverService
-        },
+        component: SkillsToObtainComponent
       },
       {
         path: 'skills-to-share',
-        component: SkillToShareComponent,
-        resolve: {
-          userData: GetDataUserResolverService
-        },
+        component: SkillToShareComponent
       }
     ]
-  }
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+    // Resolver
+    resolve: {
+      user$: GetDataUserResolverService
+    }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true }),  RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [GetDataUserResolverService]
 })
 export class AppRoutingModule { }

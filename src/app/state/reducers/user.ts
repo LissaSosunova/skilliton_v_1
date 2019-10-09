@@ -44,7 +44,9 @@ const userInitState: types.NewUser = {
     education: [],
     goals: [],
     myServices: [],
-    workExperience: []
+    workExperience: [],
+    skillsSkipped: false,
+    goalsSkipped: false
   },
   posts: {
     public: [],
@@ -64,9 +66,8 @@ const userInitState: types.NewUser = {
 export function userReducer(state: any, action: any)  {
   const updateState: types.NewUser = {...state};
   switch (action.type) {
-    
     case userAction.UserActionTypes.LOAD_USER_SUCCESS: {
-      const user = action.payload;
+      const user = action.payload.data;
       state = user;
       return state;
     }

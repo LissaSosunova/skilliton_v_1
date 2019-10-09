@@ -11,6 +11,8 @@
     margin-left: 0px;
     margin-right: 0px;
     z-index: 500;
+    display: flex;
+    align-items: center;
 }
 
 header {
@@ -31,24 +33,21 @@ header {
 
     nav {
         float: right;
-        section {
-
         ul {
             list-style-type: none;
             margin: 0;
             display: flex;
-            
             li a span {
-                padding: 1em;
-
+                color: map-get($font-color, 'primary');
+                font-size: 1em;
+                padding: 1.2em;
                 &:hover {
-                    background: map-get($bg-color, 'gray');
+                    color: map-get($font-color, 'inverse');
+                    background: map-get($bg-color, 'primary');
                 }
             }
 
             }
-            
-        }
     }
 }
 
