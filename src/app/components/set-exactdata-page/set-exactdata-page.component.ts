@@ -9,7 +9,7 @@ import { Observable, Subject} from 'rxjs';
 import * as _ from 'lodash';
 import { AlertModalComponent } from '../modals/alert-modal/alert-modal.component';
 import { Store} from '@ngrx/store';
-import { LoadUserData } from '../../state/actions/user.actions';
+import { ResetUserData } from '../../state/actions/user.actions';
 import { LoadTags } from '../../state/actions/filters.actions';
 
 @Component({
@@ -59,6 +59,7 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
   @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
 
   constructor(
+    private actRoute: ActivatedRoute,
     private data: HttpService,
     private router: Router,
     public alertModal: AlertModalComponent,
@@ -83,10 +84,8 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
     });
   }
   private getUserData(): void {
-  this.store.dispatch(new LoadUserData());
-  const user$ = this.store.select('user').subscribe((state: any) => {
-    if (state !== undefined || state) {
-      this.user = state;
+    this.actRoute.data.subscribe(data => {
+      this.user = data.user$.data;
       this.userUploaded = true;
       if((this.user.keyData.skills.length === 0 ||
         this.user.keyData.skills == null) &&
@@ -102,10 +101,9 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
         this.activePage = "interests";
       } else if (this.user.keyData.interests.length !== 0 && 
         (this.activePage !== "skills" && this.activePage !== "goals") ){
-        this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/home');
       }
-    }
-  });
+    });
 }
 
   public setValue(val) {
@@ -265,7 +263,7 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
         this.chipsSkills = [];
         this.goToNextPage = false;
       } else if (typeof data === 'object' && !page) {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.navigateByUrl('/home');
       }
     }
   }

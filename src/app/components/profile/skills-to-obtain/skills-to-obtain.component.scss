@@ -2,7 +2,6 @@
 
   .show-content {
       padding: 10px;
-      margin-top: 20px;
       margin-bottom: calc(#{$footer-height} + 10px);
   }
 
@@ -76,6 +75,10 @@
     font-size: 0.7rem;
     line-height: 1rem;
 }
+
+.margin-text {
+  margin-top: 2em;
+}
 .disabled {
   color: rgba(204, 204, 204, 0.8);
   border: 1px solid  rgba(204, 204, 204, 0.8);
@@ -124,4 +127,15 @@
 .main {
   display: flex;
   justify-content: center;
+}
+
+.disabled-select {
+  border: 1px solid map-get($bg-color, 'gray');
+}
+.enable-select {
+  
+}
+
+.align-left {
+  text-align: left;
 }

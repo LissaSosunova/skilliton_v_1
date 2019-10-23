@@ -5,6 +5,18 @@ class="tabs-nav
         direction-column">
 <div class="row-nav
             start-xs">
+            <div class="col-xs-12
+            tab-back-arr
+                start-xs "
+                (click)="switcher('/profile', 'general')">
+                <i class="material-icons back-icon">
+                        keyboard_arrow_left
+                </i>
+                <span>
+                    
+                    Back to profile
+                </span>
+                </div>
     <div class="col-xs-12
                 tab-expert-class
                 border-right start-xs"
@@ -34,23 +46,23 @@ class="tabs-nav
     </div>
     <div class="col-xs-12
                 tab-expert-class"
-            [ngClass]="{'not-active-tab': currChildUrl !== 'skills-to-obtaine',  'active': currChildUrl === 'skills-to-obtaine'}"
-                (click)="switcher('/profile/skills-to-obtaine', 'skills-to-obtaine')">
+            [ngClass]="{'not-active-tab': currChildUrl !== 'skills-to-obtain',  'active': currChildUrl === 'skills-to-obtain'}"
+                (click)="switcher('/profile/sto-view', 'skills-to-obtain')">
                 <span>
-                    Skills to obtain
+                      Skills to obtain
                 </span>
     </div>
     <div class="col-xs-12
         tab-expert-class"
         [ngClass]="{'not-active-tab': currChildUrl !== 'skills-to-share',  'active': currChildUrl === 'skills-to-share'}"
-        (click)="switcher('/profile/skills-to-share', 'skillsToShare')">
+        (click)="switcher('/profile/sts-view', 'skills-to-share')">
         <span>
             Skills to share
         </span>
     </div>
 <div class="col-xs-12
         tab-expert-class"
-        [ngClass]="{'not-active-tab': currTab !== 'myIntrests',  'active': currTab === 'myIntrests'}"
+        [ngClass]="{'not-active-tab':  currChildUrl !== 'myIntrests',  'active':  currChildUrl === 'myIntrests'}"
         (click)="switcher('myIntrests')">
         <span>
             My interests
@@ -58,8 +70,8 @@ class="tabs-nav
 </div>
 <div class="col-xs-12
     tab-expert-class"
-    [ngClass]="{'not-active-tab': currTab !== 'myServices',  'active': currTab === 'myServices'}"
-    (click)="switcher('myServices')">
+    [ngClass]="{'not-active-tab':  currChildUrl !== 'services',  'active':  currChildUrl === 'services'}"
+    (click)="switcher('/profile/services', 'myServices')">
     <span>
         My services
     </span>

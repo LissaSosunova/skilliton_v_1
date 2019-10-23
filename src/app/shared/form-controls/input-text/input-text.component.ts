@@ -22,6 +22,7 @@ export class InputTextComponent extends InputAbstract implements OnInit {
 public showMaxInputMessageError: boolean = false;
 public maxLengthLimit: number;
 public showContent: boolean = false;
+public placeholder?: string;
 
 constructor() {
   super();

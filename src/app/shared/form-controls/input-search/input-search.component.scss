@@ -1,11 +1,7 @@
 @import '../../../../scss/variables';
 
 .input-field {
-    position: relative;
-    top: 10px;
     padding: 10px;
-    margin-bottom: 15px;
-    margin-top: 10px;
     background-color: white;
     border: 1px solid map-get($bg-color, 'gray-light');
     font-family: 'Montserrat', sans-serif;
@@ -65,4 +61,8 @@
 
 .non-vis {
     display: none;
+}
+.label-optional {
+    font-size: 0.7em;
+    color: map-get($font-color, 'gray');
 }

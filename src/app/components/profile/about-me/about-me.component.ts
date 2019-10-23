@@ -33,7 +33,6 @@ export class AboutMeComponent implements OnInit {
 
   ngOnInit() {
     this.init();
-    console.log(this.currTab)
   }
 
 

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild, Input, Output, ElementRef } fr
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { HttpService } from '../../../services/http.service';
 import { LoadTags } from '../../../state/actions/filters.actions';
-import { LoadUserData } from '../../../state/actions/user.actions';
+import { LoadUserData, UpdateUsersGoals } from 'src/app/state/actions/user.actions';
 import { NgForm, FormControl } from '@angular/forms';
 import { Observable, Subject} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -19,8 +19,7 @@ import { skillLevel } from '../../../shared/constants/skill-levels';
 })
 export class SkillsToObtainComponent implements OnInit {
   @ViewChild('skillsDataForm', { read: true, static: false  }) public skillsDataForm: NgForm;
-  public user: Observable<types.NewUser>;
-  @Output() selected = [] as  any;
+  @Output() user: Observable<types.NewUser>;
   @Output() skillPlaceholder: string;
   @Output() newValue: string;
   @Output() time: any = selectHours;
@@ -45,8 +44,12 @@ export class SkillsToObtainComponent implements OnInit {
   private moneyOffered: boolean = true;
   private servicesOffered: boolean = false;
   private skillsOffered: boolean = false;
+  private hidden: boolean = false;
+  private withTrial: boolean = false;
   public searchControl: FormControl;
   private unsubscribe$: Subject<void> = new Subject();
+  private noSkillsForSelect: boolean = false;
+  private noServicesForSelect: boolean = false;
 
   constructor(
     private data: HttpService,
@@ -67,6 +70,12 @@ export class SkillsToObtainComponent implements OnInit {
         this.user = state;
         this.userUploaded = true;
         this.myGoals = state.keyData.goals;
+        if(this.user && state.keyData.skills.length === 0 ){
+          this.noSkillsForSelect = true;
+        }
+        if(this.user && state.keyData.myServices.length === 0 ){
+          this.noServicesForSelect = true;
+        }
       }
     });
     const tags$ = this.store.select('filters').subscribe((state: any) => {
@@ -84,7 +93,6 @@ export class SkillsToObtainComponent implements OnInit {
   }
 // Create new tag of skill
   public setValue(val) {
-    console.log(val);
     if (val !== null) {
       setTimeout(() => {
         this.showChoosedSkill = true;
@@ -114,12 +122,12 @@ export class SkillsToObtainComponent implements OnInit {
   public setSearch(query: string): void {
     const querySearch = _.lowerCase(query);
     this.tagsSkills = this.tags.skills;
-    const result1 = _.differenceBy(this.tagsSkills, this.myGoals, 'name');
+    const result1 = _.differenceBy(this.tagsSkills, this.myGoals, 'id');
     this.options = result1;
     const search = _.filter(this.tagsSkills, o => _.includes(o.srchStr, querySearch));
     this.openAuto = true;
-    if (this.selected.length !== 0) {
-      const result = _.differenceBy(search, this.selected, 'value');
+    if (this.user) {
+      const result = _.differenceBy(search, this.myGoals, 'id');
       this.options = result;
     } else {
       this.options = search;
@@ -132,20 +140,26 @@ export class SkillsToObtainComponent implements OnInit {
 
   public changeSkill () {
     this.showChoosedSkill = false;
-    this.choosedSkill = "";
+    this.choosedSkill = null;
     this.showBtn = false;
     this.newSkill = false;
   }
 
   // FUntion og chanching selects
-  agreeMoney(e) {
+  agreeMoneyHandler(e) {
     this.moneyOffered = e.target.checked;
   }
-  agreeService(e) {
+  agreeServiceHandler(e) {
     this.servicesOffered = e.target.checked;
   }
-  agreeSkills(e) {
+  agreeSkillsHandler(e) {
     this.skillsOffered = e.target.checked;
+  }
+  hiddenHandler(e) {
+    this.hidden = e.target.checked;
+  }
+  trialHandler(e) {
+    this.withTrial = e.target.checked;
   }
 
   public saveBtn(
@@ -155,52 +169,37 @@ export class SkillsToObtainComponent implements OnInit {
     hide: boolean,
     nameOfNewSkill?: string,
     descr?: string) {
-
-      this.createdSkillToObtaine = {
-      currentLevel: currLevel,
-      expectedLevel: expLevel,
-      moneyOffered: this.moneyOffered,
-      servicesOffered: this.servicesOffered,
-      skillsOffered: this.skillsOffered,
-      withTrial: trial,
-      hidden: hide,
-      name: nameOfNewSkill,
-      description: descr
-      };
-console.log(this.createdSkillToObtaine);
-    // if (typeof this.choosedSkill === 'string') {
-    //   // this.createdSkillToObtaine = {
-    //   //   currentLevel: currentLevel,
-    //   //   expectedLevel: expectedLevel,
-    //   //   name: this.choosedSkillname,
-    //   //   description: description,
-    //   //   withTrial: withTrial,
-    //   //   moneyOffered: moneyOffered,
-    //   //   services: [],
-    //   //   servicesOffered: servicesOffered,
-    //   //   skills: [],
-    //   //   skillsOffered: false,
-    //   //   hidden: hidden
-    //   // };
-    // } else {
-    //   // this.createdSkillToObtaine = {
-    //   //   currentLevel: currLvlValue,
-    //   //   expectedLevel: expLvlValuE,
-    //   //   id: this.choosedSkill,
-    //   //   withTrial: trialLesson,
-    //   //   moneyOffered: true,
-    //   //   services: [null],
-    //   //   servicesOffered: false,
-    //   //   skills: [null],
-    //   //   skillsOffered: false,
-    //   //   hidden: false
-    //   // };
-    // }
-    // this.data.postNewGoal(this.createdSkillToObtaine).subscribe((data) => {
-    //   console.log(data);
-    //   if (data.status === 200) {
-    //   // this.router.navigate(['profile/about-me']);
-    //   }
-    // });
+      if (typeof this.choosedSkill !== 'number') {
+        this.createdSkillToObtaine = {
+          currentLevel: currLevel,
+          expectedLevel: expLevel,
+          moneyOffered: this.moneyOffered,
+          servicesOffered: this.servicesOffered,
+          skillsOffered: this.skillsOffered,
+          withTrial: this.withTrial,
+          hidden: this.hidden,
+          name: nameOfNewSkill,
+          description: descr
+          };
+      } else if (this.choosedSkill) {
+        this.createdSkillToObtaine = {
+          currentLevel: currLevel,
+          expectedLevel: expLevel,
+          moneyOffered: this.moneyOffered,
+          servicesOffered: this.servicesOffered,
+          skillsOffered: this.skillsOffered,
+          withTrial: this.withTrial,
+          hidden: this.hidden,
+          id: this.choosedSkill
+          };
+      }
+      this.data.postNewGoal(this.createdSkillToObtaine).subscribe((data) => {
+        if (data.error === false || data.status === 200) {
+          this.data.getUser().subscribe((res) => {
+            this.store.dispatch(new UpdateUsersGoals(res.data.keyData.goals));
+            this.router.navigate(['/profile']);
+          });
+        }
+      });
   }
 }

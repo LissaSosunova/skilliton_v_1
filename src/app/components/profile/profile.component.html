@@ -90,7 +90,7 @@
                     col-sm-3
                     col-md-3
                     col-lg-3
-                    btn-top-bar">My requests</div>
+                    btn-top-bar">My matches</div>
         </div>
     </div>
 </div>
@@ -112,7 +112,7 @@
                         class="edit-btn">edit</button>
                 </div>
             <div class="colxs-12 content-section-block">
-                    <span>{{user.profile.placeOfBirth || "No information"}}</span>
+                    <span>{{placeOfBirth || "No information"}}</span>
             </div>
         </div>
         <div class="section-of-block row start-xs">
@@ -122,7 +122,7 @@
                         class="edit-btn">edit</button>
                     </div>
                 <div class="colxs-12 content-section-block">
-                        <span>{{user.profile.placeOfBirth || "No information"}}</span>
+                        <span>{{placeOfResidence || "No information"}}</span>
                 </div>
         </div>
         <div class="section-of-block row start-xs">
@@ -132,7 +132,7 @@
                         class="edit-btn">edit</button>
                     </div>
                 <div class="colxs-12 content-section-block">
-                        <span>{{user.profile.placeOfBirth || "No information"}}</span>
+                        <!-- <span>{{user.profile.placeOfBirth || "No information"}}</span> -->
                 </div>
         </div>
         <div class="section-of-block row start-xs">
@@ -142,8 +142,13 @@
                         class="edit-btn">edit</button>
                     </div>
                 <div class="colxs-12 content-section-block">
-                        <span>{{user.profile.placeOfBirth || "No information"}}</span>
+                        {{ langNative }}
                 </div>
+                <section *ngIf="langs.lenght !==0">
+                        <div  *ngFor="let lang of langs"> 
+                                <span>{{ lang.name}}</span>
+                            </div>
+                </section>
         </div>
         <div class="section-of-block row start-xs">
                 <div class="col-xs-12 title-section-block">
@@ -152,7 +157,7 @@
                         class="edit-btn">edit</button>
                     </div>
                 <div class="colxs-12 content-section-block">
-                        <span>{{user.profile.placeOfBirth || "No information"}}</span>
+                        <!-- <span>{{user.profile.placeOfBirth || "No information"}}</span> -->
                 </div>
         </div>
     </div>
@@ -160,7 +165,7 @@
 
 <!-- Content os Shared skills -->
 
-<div class="row center-xs">
+<div class="row center-xs margin-bottom">
     <div *ngIf="userUploaded == true && router.url === '/profile'"
     class="col-xs-12
             col-sm-12
@@ -175,21 +180,19 @@
                         col-lg-12
                         title-section-block-skills">
                     Skills to share
-                    <button (click)="goToSubUrl('/profile/skills-to-share')"
+                    <button (click)="goToSubUrl('/profile/sts-view')"
                             class="edit-round-btn">
                         <i class="material-icons edit-icon">
                             edit
                         </i>
                     </button>
                     </div>
-        <div class="section-of-block row start-xs">
-            
-            <div class="colxs-12">
-                <app-skill-to-share-card></app-skill-to-share-card>
+        <div class="section-of-skill-list col-xs-12 start-xs">
+                <section>
+                        <app-skill-to-share-card></app-skill-to-share-card>
+                </section>
+                </div>
             </div>
-        </div>
-        
-    </div>
 </div>
 
 <!-- Content os Skills to obtain -->
@@ -209,143 +212,89 @@
                         col-lg-12
                         title-section-block-skills">
                         Skills to obtain
-                    <button (click)="goToSubUrl('/profile/skills-to-obtaine')"
+                    <button (click)="goToSubUrl('/profile/sto-view')"
                             class="edit-round-btn">
                         <i class="material-icons edit-icon">
                             edit
                         </i>
                     </button>
                     </div>
-        <div class="section-of-block row start-xs">
-            
-            <div class="colxs-12">
-                <app-skill-to-obtain-card></app-skill-to-obtain-card>
-            </div>
-        </div>
-        
+                    
+        <div class="section-of-skill-list col-xs-12 start-xs">
+                <section>
+                        <app-skill-to-obtain-card></app-skill-to-obtain-card>
+                </section>
+        </div>        
     </div>
 </div>
 
 <!-- Content os Services -->
 
 <div class="row center-xs">
-    <div
-    *ngIf="userUploaded == true && router.url === '/profile'"
-    class="spec-pad
-            col-xs-12
-            col-sm-12
-            col-md-8
-            col-lg-8
-            center-xs
-            row">
-            <div class="col-xs-12
-                        col-sm-12
-                        col-md-12
-                        col-lg-12
-                        title-section-block-skills">
-                        Services
-                    <button (click)="goToSubUrl('/profile/about-me')"
-                            class="edit-round-btn">
-                        <i class="material-icons edit-icon">
-                            edit
-                        </i>
-                    </button>
-                    </div>
-                <div class="col-xs-12">
-                        <div class="section-of-block
-                        col-xs-12
-                        col-sm-12
-                        col-md-12
-                        col-lg-12
-                        row
-                        start-xs
-                        services">
-                <!-- List of Servises -->
-                <span class="btn-interest">
-                        Wash cars
-                </span>
-                <span class="btn-interest">
-                        Homework
-                </span>
-                <span class="btn-interest">
-                        Feed the fish
-                </span>
-                <span class="btn-interest">
-                        Dog walk
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</div>
-
-<!-- Content os Services -->
-
-<div class="row center-xs">
-        <div
-        *ngIf="userUploaded == true && router.url === '/profile'"
-        class="spec-pad
-                col-xs-12
+        <div *ngIf="userUploaded == true && router.url === '/profile'"
+        class="col-xs-12
                 col-sm-12
                 col-md-8
                 col-lg-8
                 center-xs
-                row">
+                row
+                spec-pad">
+                <div class="col-xs-12
+                            col-sm-12
+                            col-md-12
+                            col-lg-12
+                            title-section-block-skills">
+                            Services
+                            <button (click)="goToSubUrl('/profile/services')"
+                            class="edit-round-btn">
+                        <i class="material-icons edit-icon">
+                            edit
+                        </i>
+                    </button>
+                        </div>
+                        
+            <div class="section-of-skill-list col-xs-12 start-xs">
+                    <section>
+                            <app-service-card></app-service-card>
+                    </section>
+            </div>        
+        </div>
+    </div>
+   
+
+<!-- Content os Interests -->
+<div class="row center-xs">
+        <div *ngIf="userUploaded == true && router.url === '/profile'"
+        class="col-xs-12
+                col-sm-12
+                col-md-8
+                col-lg-8
+                center-xs
+                row
+                spec-pad">
                 <div class="col-xs-12
                             col-sm-12
                             col-md-12
                             col-lg-12
                             title-section-block-skills">
                             Interests
-                        <button (click)="goToSubUrl('/profile/about-me')"
-                                class="edit-round-btn">
-                            <i class="material-icons edit-icon">
-                                edit
-                            </i>
-                        </button>
+                            <button (click)="goToSubUrl('/profile/about-me')"
+                                    class="edit-round-btn">
+                                <i class="material-icons edit-icon">
+                                    edit
+                                </i>
+                            </button>
                         </div>
-                    <div class="col-xs-12">
-                            <div class="section-of-block
-                            col-xs-12
-                            col-sm-12
-                            col-md-12
-                            col-lg-12
-                            row
-                            start-xs
-                            services">
-                    <!-- List of Servises -->
-                    <span class="btn-interest">
-                            Machines <span class="followers-count">450K people</span>
-                    </span>
-                    <span class="btn-interest">
-                            Machines <span class="followers-count">450K people</span>
-                    </span>
-                    <span class="btn-interest">
-                            Machines <span class="followers-count">450K people</span>
-                    </span>
-                    <span class="btn-interest">
-                            Machines <span class="followers-count">450K people</span>
-                    </span>
-                    <span class="btn-interest">
-                            Machines <span class="followers-count">450K people</span>
-                    </span>
-                    <span class="btn-interest">
-                            Machines <span class="followers-count">450K people</span>
-                    </span>
-                    <span class="btn-interest">
-                            Machines <span class="followers-count">450K people</span>
-                    </span>
-                    <span class="btn-interest">
-                            Machines <span class="followers-count">450K people</span>
-                    </span>
-                </div>
-            </div>
-            
+                        
+            <div class="section-of-skill-list col-xs-12 start-xs">
+                    <section>
+                            <app-interests-card></app-interests-card>
+                    </section>
+            </div>        
         </div>
     </div>
 
-<div class="bottom-spacer"></div>
-<div class="bottom-spacer"></div>
-<div class="router-outlet">
-        <router-outlet></router-outlet>
-     </div>
+<div *ngIf="router.url === '/profile'" class="bottom-spacer"></div>
+<div class="router-outlet col-xs-12">
+    <router-outlet></router-outlet>
+</div>

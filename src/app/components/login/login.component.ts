@@ -47,7 +47,6 @@ export class LoginComponent implements OnInit {
     private router: Router,
     public errorModal: ErrorModalComponent,
     public alertModal: AlertModalComponent,
-    // private store: Store<any>
     ) { }
 
   ngOnInit() {

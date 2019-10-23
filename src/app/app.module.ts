@@ -61,6 +61,7 @@ import { StoreModule } from '@ngrx/store';
 import { TopSidebarComponent } from './components/top-sidebar/top-sidebar.component';
 import { userReducer} from './state/reducers/user';
 import { filtersReducer} from './state/reducers/filters.reducer';
+import { langsReducer} from './state/reducers/langs.reducer';
 import { AlertModalComponent } from './components/modals/alert-modal/alert-modal.component';
 import { LeavePopupComponent } from './components/registration/leave-popup/leave-popup.component';
 import { PopupComponent } from './components/modals/popup/popup.component';
@@ -89,6 +90,15 @@ import { SkillToShareComponent } from './components/profile/skill-to-share/skill
 import { SkillToShareCardComponent } from './components/profile/skill-to-share-card/skill-to-share-card.component';
 import { SkillToObtainCardComponent } from './components/profile/skill-to-obtain-card/skill-to-obtain-card.component';
 import { LeftBarComponent } from './components/profile/left-bar/left-bar.component';
+import { ServicesComponent } from './components/profile/services/services.component';
+import { StoViewComponent } from './components/profile/sto-view/sto-view.component';
+import { ServiceCardComponent } from './components/profile/service-card/service-card.component';
+import { InterestsCardComponent } from './components/profile/interests-card/interests-card.component';
+import { StsViewComponent } from './components/profile/sts-view/sts-view.component';
+import { LangsEffects } from './state/effects/langs.effects';
+import { PricesTypesPipe } from './shared/pipes/prices-types.pipe';
+import { SkillLevelsPipe } from './shared/pipes/skill-levels.pipe';
+import { LangsPipe } from './shared/pipes/langs.pipe';
 
 
 @NgModule({
@@ -127,6 +137,14 @@ import { LeftBarComponent } from './components/profile/left-bar/left-bar.compone
     SkillToShareCardComponent,
     SkillToObtainCardComponent,
     LeftBarComponent,
+    ServicesComponent,
+    StoViewComponent,
+    ServiceCardComponent,
+    InterestsCardComponent,
+    StsViewComponent,
+    PricesTypesPipe,
+    SkillLevelsPipe,
+    LangsPipe,
   ],
   imports: [
     BrowserModule,
@@ -181,8 +199,8 @@ import { LeftBarComponent } from './components/profile/left-bar/left-bar.compone
     HttpClientModule,
     OverlayModule,
     AngularMyDatePickerModule,
-    StoreModule.forRoot({user: userReducer, filters: filtersReducer}),
-    EffectsModule.forRoot([UserEffects, FiltersEffects])
+    StoreModule.forRoot({user: userReducer, filters: filtersReducer, langs: langsReducer}),
+    EffectsModule.forRoot([UserEffects, FiltersEffects, LangsEffects])
   ],
   providers: [
     AlertModalComponent,

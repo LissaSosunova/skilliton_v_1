@@ -1,6 +1,6 @@
 @import '../../../scss/variables';
 .bottom-spacer {
-    height: $footer-height;
+    height: calc(#{$footer-height} + #{$footer-height});
 }
 
 .content-block {
@@ -168,6 +168,10 @@ padding-left: 0px;
     }
 }
 
+.section-of-skill-list {
+    padding-left: 0px;
+    padding-right: 0px;;
+}
 .edit-btn {
     height: 20px;
     border: 0px;
@@ -238,6 +242,7 @@ padding-left: 0px;
     background-color: map-get($bg-color, 'white');
     border-radius: 16px;
     padding: 20px;
+    min-height: 70px;
 }
 .spec-pad {
     padding: 16px 0px 16px 0px;
@@ -245,3 +250,7 @@ padding-left: 0px;
 .followers-count {
     font-size: 0.6em;
 }
+.margin-bottom {
+    margin-bottom: 40px;
+}
+

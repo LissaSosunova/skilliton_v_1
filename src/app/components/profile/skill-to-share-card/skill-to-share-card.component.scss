@@ -34,7 +34,6 @@
 }
 
 .header-block {
-  background-color: map-get($bg-color, 'primary');
   border-top-right-radius: 16px;
   border-top-left-radius: 16px;
   min-width: 240px;
@@ -42,6 +41,13 @@
   font-size: 1.2em;
   font-weight: 500;
   color: map-get($font-color, 'inverse');
+}
+
+.enable {
+  background-color: map-get($bg-color, 'primary');
+}
+.disable {
+  background-color: map-get($bg-color, 'gray-light');
 }
 .table-block {
   min-width: 240px;
@@ -76,4 +82,24 @@
 }
 .title-header-block {
   padding-left: 10px;
+}
+
+.margin-bottom {
+  margin-bottom: 20px;
+}
+
+.services {
+  background-color: map-get($bg-color, 'white');
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 70px;
+}
+
+.no-padding {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.td-with-incl-table {
+  padding: 0px;
 }

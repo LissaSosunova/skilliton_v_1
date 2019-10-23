@@ -83,3 +83,19 @@
 .title-header-block {
   padding-left: 10px;
 }
+
+.margin-bottom {
+  margin-bottom: 20px;
+}
+
+.services {
+  background-color: map-get($bg-color, 'white');
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 70px;
+}
+
+.no-padding {
+  padding-left: 0px;
+  padding-right: 0px;
+}

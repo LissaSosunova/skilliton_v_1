@@ -4,7 +4,11 @@ import { Action } from '@ngrx/store';
 export enum UserActionTypes {
   LOAD_USER = '[User] Load User',
   LOAD_USER_SUCCESS = '[User] Load User Success',
-  LOAD_USER_ERROR = '[User] Load User Error' 
+  LOAD_USER_ERROR = '[User] Load User Error',
+  RESET_USER = '[User] Reset User Data',
+  UPDATE_USERS_GOALS = '[User] Update User KeyData Goals',
+  UPDATE_USERS_SERVICES = '[User] Update User KeyData Services',
+  UPDATE_USERS_SKILLS = '[User] Update User KeyData Skills',
 }
 
 export class LoadUserData implements Action {
@@ -21,6 +25,24 @@ export class LoadUserDataError implements Action {
   constructor(public payload) { }
 }
 
+export class ResetUserData implements Action {
+  readonly type = UserActionTypes.RESET_USER;
+}
+
+export class UpdateUsersGoals implements Action {
+  type = UserActionTypes.UPDATE_USERS_GOALS;
+  constructor(public payload) { }
+}
+
+export class UpdateUsersServices implements Action {
+  type = UserActionTypes.UPDATE_USERS_SERVICES;
+  constructor(public payload) { }
+}
+
+export class UpdateUsersSkills implements Action {
+  type = UserActionTypes.UPDATE_USERS_SKILLS;
+  constructor(public payload) { }
+}
 
 
 export type UserActions = LoadUserData;

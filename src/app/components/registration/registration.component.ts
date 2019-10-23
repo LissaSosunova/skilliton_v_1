@@ -32,7 +32,7 @@ export class RegistrationComponent implements OnInit {
   private resp: any;
   public openConfirmPopup: boolean = false;
   private minimalYear: number;
-  public chechDate: number;
+  public checkDate: number;
   @Input() errorTextDate: string;
 
   constructor(
@@ -76,7 +76,7 @@ export class RegistrationComponent implements OnInit {
           (data: types.ApiResponse) => {this.checkStatusData(data);},
           error => this.getErrorCodeApi(error.status, error.error))
       }
-    }else if (password !== passConf){
+    } else if (password !== passConf){
       let result = _.find(this.ERROR_APP, function(o) { return o.code == 100; });
         this.showEqualErrorText = result.title;
         this.showEqualError = true;
@@ -116,8 +116,8 @@ export class RegistrationComponent implements OnInit {
   }
 // Function checks correct date in input datepicker
   public checkDatePicker(event, birthdayDate: string): void {
-    this.chechDate = +(this.datePipe.transform(birthdayDate, "yyyy"));
-    if(this.chechDate >= this.minimalYear){
+    this.checkDate = +(this.datePipe.transform(birthdayDate, "yyyy"));
+    if(this.checkDate >= this.minimalYear){
       this.registrationFormCorrect = false;
       let result = _.find(this.ERROR_APP, function(o) { return o.code == 103; });
       this.getErrorCodeApp(103);
@@ -130,8 +130,8 @@ export class RegistrationComponent implements OnInit {
     }
   }
 // Function checks correct date before send request
-  public checkDateFn(minimalYear = this.minimalYear, chechDate = this.chechDate) {
-    if(chechDate >= minimalYear && this.registrationForm){
+  public checkDateFn(minimalYear = this.minimalYear, checkDate = this.checkDate) {
+    if(checkDate >= minimalYear && this.registrationForm){
       this.registrationForm.invalid;
       this.registrationFormCorrect = false;
       this.showEqualError = true;

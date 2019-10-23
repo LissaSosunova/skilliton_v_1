@@ -1,120 +1,79 @@
 <div class="row">
+    <div class="col-xs-12">
+        <div class="section-of-block
+        col-xs-12
+        col-sm-12
+        col-md-12
+        col-lg-12
+        row
+        center-xs
+        services"
+        *ngIf="!showSkills"
+        >
+        Add information about skills
+</div>
+<div class="col-xs-12 row no-padding">
     <div class="col-xs-12
-                col-sm-6
-                col-md-6
-                col-lg-4
-                row">
-        <div class="col-xs-12
-                    header-block
-                    row"
-                    [ngClass]="{'enable': enableSkill === true,  'disable': enableSkill === false}">
-          <div class="col-xs-10
-                      title-header-block
-                      start-xs"
-                      >
-              Back End Web Development
-          </div> 
-          <div class="col-xs-2 end-xs">
-              <button (click)="goToSubUrl('/profile/about-me')"
-              class="edit-round-btn">
-          <i class="material-icons edit-icon">
-              edit
-          </i>
-      </button>
-          </div>
+    col-sm-6
+    col-md-6
+    col-lg-4
+    row
+    margin-bottom"
+    *ngFor="let skill of skills">
+  <div class="col-xs-12
+          header-block
+          row"
+          [ngClass]="{'enable': enableSkill === true,  'disable': enableSkill === false}">
+      <div class="col-xs-10
+                title-header-block
+                start-xs"
+                >
+        {{skill.name}}
+      </div> 
+        <div class="col-xs-2 end-xs">
+          <button (click)="goToSubUrl('/profile/about-me')"
+          class="edit-round-btn">
+        <i class="material-icons edit-icon">
+          edit
+        </i>
+        </button>
         </div>
-        <div class="col-xs-12 description-block start-xs">Data science is a multi-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and
-            insights from structured and unstructured data.</div>
+        </div>
+        <div class="col-xs-12 description-block start-xs"> {{skill.name}}</div>
         <div class="col-xs-12 table-block">
-            <table class="table">
-                <tr>
-                  <td>In exchange:</td>
-                  <td><table class="included-table">
-                      <tr>
-                        <td>Skill</td>
-                        <td>Graphic Design</td>
-                      </tr>
-                      <tr>
-                        <td>Group</td>
-                        <td>$150 / h</td>
-                        </tr>
-                    </table></td>
-                </tr>
-                <tr>
-                  <td>Schedule</td>
-                  <td>Courses</td>
-                </tr>
-                <tr>
-                  <td>Time</td>
-                  <td>5 years for Microsoft</td>
-                </tr>
-                <tr>
-                  <td>Trial lesson</td>
-                  <td>Yes, I would like</td>
-                </tr>
-              </table>
+        <table class="table">
+            <tr *ngIf="skill.services.length !==0">
+              <td>In exchange:</td>
+              <td><table class="included-table">
+                  <tr>
+                    <td>Skill</td>
+                    <td>Graphic Design</td>
+                  </tr>
+                  <tr>
+                    <td>Group</td>
+                    <td>$150 / h</td>
+                    </tr>
+                </table></td>
+            </tr>
+            <tr>
+              <td>Schedule</td>
+              <td>Courses</td>
+            </tr>
+            <tr>
+              <td>Time</td>
+              <td>10:00 - 22:00</td>
+            </tr>
+            <tr>
+              <td>Trial lesson</td>
+              <td *ngIf="skill.withTrial === true">Yes, I would like</td>
+              <td *ngIf="skill.withTrial === false">No</td>
+            </tr>
+          </table>
         </div>
-    </div>
-  
-  
-    <!-- Double -->
-    <div class="col-xs-12
-                col-sm-6
-                col-md-6
-                col-lg-4
-                row">
-        <div class="col-xs-12
-                    header-block
-                    disable
-                    row">
-          <div class="col-xs-10
-                      title-header-block
-                      start-xs">
-              Back End Web Development
-          </div> 
-          <div class="col-xs-2 end-xs">
-              <button (click)="goToSubUrl('/profile/about-me')"
-              class="edit-round-btn">
-          <i class="material-icons edit-icon">
-              edit
-          </i>
-      </button>
-          </div>
-        </div>
-        <div class="col-xs-12 description-block start-xs">Data science is a multi-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and
-            insights from structured and unstructured data.</div>
-        <div class="col-xs-12 table-block">
-            <table class="table">
-                <tr>
-                  <td>In exchange:</td>
-                  <td><table class="included-table">
-                      <tr>
-                        <td>Skill</td>
-                        <td>Graphic Design</td>
-                      </tr>
-                      <tr>
-                        <td>Group</td>
-                        <td>$150 / h</td>
-                        </tr>
-                    </table></td>
-                </tr>
-                <tr>
-                  <td>Schedule</td>
-                  <td>Courses</td>
-                </tr>
-                <tr>
-                  <td>Time</td>
-                  <td>5 years for Microsoft</td>
-                </tr>
-                <tr>
-                  <td>Trial lesson</td>
-                  <td>Yes, I would like</td>
-                </tr>
-              </table>
-        </div>
-    </div>
-  
+  </div>
+</div>
     
+
   <!-- End of includer -->
   </div>
   

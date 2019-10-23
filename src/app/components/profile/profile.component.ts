@@ -7,27 +7,32 @@ import { Router, ActivatedRoute, UrlSegment  } from '@angular/router';
 import { SessionstorageService } from 'src/app/services/sessionstorage.service';
 import { UserSubService } from 'src/app/services/user-sub.service';
 import { Store} from '@ngrx/store';
-import { LoadUserData } from 'src/app/state/actions/user.actions';
-import { LoadTags } from 'src/app/state/actions/filters.actions';
+import { LoadUserData, UpdateUsersGoals } from 'src/app/state/actions/user.actions';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { RouterService } from 'src/app/services/router.service';
 import { HttpService } from '../../services/http.service';
 import { AvatarService } from 'src/app/services/avatar.service';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
-  @Output() user: types.NewUser = {} as types.NewUser;
+export class ProfileComponent implements OnInit,  OnDestroy {
+  // @ViewChild('user', {static: false}) public user: types.NewUser = {} as types.NewUser;
+  @Input() user: types.NewUser = {} as types.NewUser;
   @Output() userUploaded: boolean = false;
   @Output() dataNotSet: boolean = true;
-  @Output() myGoals = [] as any;
+  @Input() myGoals = [] as any;
+  @Output() goals: Observable<any>;
+  @Output() mySkills = [] as any;
+  @Output() langs = [] as any;
+  public myInterests: Array<any>;
   public activeTopBtn: string;
   public transferData: any;
   public activeUrl: any;
+  public langNative: any;
+  public myServices: Array<any>;
   public currParentUrl: string;
   @ViewChild('currChildUrl', {static: false}) public currChildUrl: string;
   @ViewChild('uploadFile', {static: true}) public uploadFile: ElementRef;
@@ -35,9 +40,11 @@ export class ProfileComponent implements OnInit {
   public name: string;
   public lastName: string;
   public summary: string;
+  public placeOfBirth: any;
+  private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
-    private activeRoute: ActivatedRoute,
+    private actRoute: ActivatedRoute,
     private avatarService: AvatarService,
     private localstorageService: LocalstorageService,
     private router: Router,
@@ -51,15 +58,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getUserData();
+    this.getGoals();
     this.activeTopBtn = 'aboutMe';
-    // this.getCurrentRoute();
-    // if (this.currChildUrl === 'about-me') {
-    //   this.activeUrl = '/profile/about-me';
-    // } else if ((this.currChildUrl === 'skills-to-obtaine')) {
-    //   this.activeUrl = '/profile/skills-to-obtaine';
-    // } else if (this.currChildUrl === '') {
-    //   this.activeUrl = '/profile';
-    // }
   }
 
   private getCurrentRoute(): void {
@@ -77,16 +77,23 @@ export class ProfileComponent implements OnInit {
    }
 
   private getUserData() {
-    this.store.dispatch(new LoadUserData());
-    const user$ = this.store.select('user').subscribe((state: any) => {
-      if(state !== undefined || state) {
-        this.user = state;
-        this.name = this.user.profile.name;
-        this.lastName = this.user.profile.lastName;
-        this.summary = this.user.profile.profileSummary;
-        this.userUploaded = true;
-        this.myGoals = this.user.keyData.goals;
+    this.actRoute.data.subscribe(data => {
+      this.user = data.user$.data;
+      this.name = data.user$.data.profile.name;
+      this.lastName = data.user$.data.profile.lastName;
+      this.summary = this.user.profile.profileSummary;
+      this.myGoals = this.user.keyData.goals;
+      this.myServices = this.user.keyData.myServices;
+      this.placeOfBirth = this.user.profile.placeOfBirth;
+      if (this.user.profile.langs.native !== null) {
+        this.langNative = this.user.profile.langs.native + ' (native)';
+      } else {
+        this.langNative = "No information";
       }
+      this.langs = this.user.profile.langs.other;
+      this.mySkills = this.user.keyData.skills;
+      this.myInterests = this.user.keyData.interests;
+      this.userUploaded = true;
     });
   }
 
@@ -94,6 +101,15 @@ export class ProfileComponent implements OnInit {
     this.activeUrl = url;
     this.router.navigate([url]);
     this.getCurrentRoute();
+  }
+
+  public getGoals() {
+    this.store.dispatch(new LoadUserData());
+    const goals$ = this.store.select('user').subscribe((state: any) => {
+      if  (state !== undefined || state && state.skills.length > 1)  {
+        this.goals = state.keyData.goals;
+      }
+    });
   }
 
   getErrorCodeApi(data: number, message: string): void {
@@ -118,5 +134,10 @@ export class ProfileComponent implements OnInit {
     // //   console.log(err);
     // //   // this.toastService.openToastFail('Error in uploading avatar');
     // });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
