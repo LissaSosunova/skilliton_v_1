@@ -10,6 +10,7 @@ export const filtersFeatureKey = 'filters';
 export interface State {
   interests: any;
   skills: any;
+  services: any;
 }
 export interface TagsChips {
   id: any;
@@ -26,6 +27,11 @@ export const initialState: State = {
     id: null,
     name: '',
     srchStr: ''
+  }],
+  services: [{
+    id: null,
+    name: '',
+    srchStr: ''
   }]
 };
 
@@ -36,14 +42,19 @@ export function filtersReducer(state = initialState, action: any): State {
         const tags = action.payload.data;
         const sortSkillsByFilter = _.orderBy(tags.skills, ['name', 'id'], ['asc', 'desc']);
         const sortInterestsByFilter = _.orderBy(tags.interests, ['name', 'id'], ['asc', 'desc']);
+        const sortServicesByFilter = _.orderBy(tags.services, ['name', 'id'], ['asc', 'desc']);
         state.skills = sortSkillsByFilter;
         state.interests = sortInterestsByFilter;
+        state.services = sortServicesByFilter;
         state.skills.forEach(el => {
           el.srchStr = _.lowerCase(el.name);
           });
         state.interests.forEach(el => {
             el.srchStr = _.lowerCase(el.name);
             });
+        state.services.forEach(el => {
+          el.srchStr = _.lowerCase(el.name);
+          });
         return state;
       }
     }

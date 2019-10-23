@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-xs-12">
+      <div class="section-of-block
+      col-xs-12
+      col-sm-12
+      col-md-12
+      col-lg-12
+      row
+      center-xs
+      services"
+      *ngIf="!showServices"
+      >
+        Add information about services
+    </div>
+      <div class="section-of-block
+      col-xs-12
+      col-sm-12
+      col-md-12
+      col-lg-12
+      row
+      middle-xs
+      start-xs
+      services"
+      *ngIf="showServices"
+      >
+        <!-- List of Servises -->
+        <span *ngFor="let service of services" class="btn-service">
+            {{service.name}}
+        </span>
+        </div>
+
+  </div>
+</div>

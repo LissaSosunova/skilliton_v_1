@@ -62,7 +62,6 @@ export module types {
     contacts: Array<any> | [];
     posts: Posts;
     notifications: Notifications;
-    userType?: number;
   }
 
   export interface ProfileUser {
@@ -79,6 +78,7 @@ export module types {
     profileSummary: null | string;
     langs: Langs | null;
     sex: any;
+    userType?: number;
   }
 
   export interface Avatar {
@@ -154,9 +154,15 @@ export module types {
   export interface Filters {
     interests: Array<InterestTag>;
     skills: Array<SkillTag>;
+    services: Array<ServicsTag>;
   }
 
   export interface InterestTag {
+    id: number | null;
+    name: string;
+    srchStr: string;
+  }
+  export interface ServicsTag {
     id: number | null;
     name: string;
     srchStr: string;
@@ -203,5 +209,37 @@ export module types {
     name?: string;
     services?: Array<number>;
     skills?: Array<number>;
+  }
+
+  export interface AddSkillAPI {
+    certificates?: Array<number> | [null];
+    degree: string;
+    description: string;
+    educationLanguage: Array<any>;
+    experience: string;
+    expertise: string;
+    isShared: boolean | true;
+    level: number;
+    moneyExpected: boolean;
+    name?: string;
+    prices: Array<Price>;
+    recommendations?: Array<any> | [null];
+    serviceExpected: boolean;
+    skillId?: number;
+    skills: Array<any> | [null];
+    skillsExpected: boolean;
+    withTrial: boolean;
+  }
+
+  export interface Price {
+    type: number;
+    currency: string;
+    value: number;
+  }
+
+  export interface AddServiceAPI {
+    id?: number;
+    name?: string;
+    recommendationsMedia?: [null];
   }
 }

@@ -1,16 +1,563 @@
 <div class="row middle-xs show-content main">
-    <div class="col-xs-10
-    col-sm-10
-    col-md-8
-    col-lg-8
-    row
-    ">
-    <div class="col-xs-3">
-            <app-left-bar
-            [currChildUrl]="'about-me'"></app-left-bar>
+  <div class="col-xs-12
+  col-sm-12
+  col-md-10
+  col-lg-10
+  row
+  ">
+  <!-- Menu -->
+    <div class="col-xs-3" *ngIf="activeUrl === 'skills-to-share'">
+      <app-left-bar
+      [currChildUrl]="'skills-to-share'"></app-left-bar>
+    </div>
+<!-- Content -->
+    <div class="col-xs-9">
+      <form name="skillsDataForm"
+      #skillsDataForm="ngForm"
+      class="col-xs-12
+      no-padd
+      skillsDataForm"
+      >
+      <div class="col-xs-12">
+        Add the skills you would like to share and indicate the current level of ownership
+      </div>
+
+    <div class="col-xs-12 elem row">
+        <div class="col-xs-3 row-text margin-text">
+          Add skill <span class="required-star">*</span>
+        </div>
+        <section *ngIf="showChoosedSkill" class="col-xs-9 no-padd" >
+            <div class="choosed-skill-field">
+                    {{choosedSkillname}}
+                    <button (click)="changeSkill()"
+                    class="btn-remome"
+                    >
+                            <i class="material-icons remove-icon">
+                                            clear
+                            </i>
+                    </button>
+            </div>
+          </section>
+
+          <!-- Search -->
+        <section class="col-xs-9 no-padd" *ngIf="!showChoosedSkill">
+          <app-input-search
+          class="no-margin search"
+                  [maxLength]="100"
+                  [control]="searchControl"
+                  name="skilName"
+                  [(ngModel)]="skillName"
+                  #skilName="ngModel"
+                  [required]="true"
+                  [placeholder]="skillPlaceholder"
+                  [requiredFieldError]="'You can not to continue without any skill'"
+          >
+          </app-input-search>
+
+          <section *ngIf="openAuto === true" 
+          [ngClass]="{'block-drop': openAuto == true,  'non-vis': openAuto == false}">
+          <div *ngFor="let option of options">
+                  <div (click)="setValueFromDropDown(option)">
+                  <i class="material-icons plus-icon">
+                  add_circle_outline
+                  </i>
+                  <span>{{option.name}} </span>
+                  </div>
+                  </div>
+          </section>   
+
+
+          <span *ngIf="showBtn"
+          [ngClass]="{'non-vis': showBtn == false}">Add new skill?   </span>
+          <input
+          type="submit"
+          (click)="setValue(skillName)"
+          [ngClass]="{'btn primary-btn btn-height-small btn-width-small': showBtn == true,  'non-vis': showBtn == false}"  
+          value="Add"
+          >
+          </section>
+</div>
+<div class="col-xs-12 elem row">
+  <div class="col-xs-3 row-text margin-text">
+    Level:  <span class="required-star">*</span>
+  </div>
+  <div class="col-xs-9 no-padd">
+          <app-select
+          name="goalCurrLevel"
+          #goalCurrLevel="ngModel"
+          [(ngModel)]="currentLevel"
+          [options]="levelSkill"
+          [required]="true"
+          [requiredFieldError]="'You can not to continue without any level'"></app-select>
+  </div>
+  
+</div>
+
+<!-- Degree -->
+<div class="col-xs-12 elem row">
+    <div class="col-xs-3 row-text">
+      Degree  <span class="required-star">*</span>
+    </div>
+    <div class="col-xs-9 no-padd">
+            <label class="container-ch align-left">University
+                    <input type="checkbox"
+                    name="university"
+                    #university="ngModel"
+                    [(ngModel)]="arrDegree[0].val"
+                    (change)="degreeHandler($event)">
+                    <span class="checkmark"></span>
+                    </label>
+            <label class="container-ch  align-left">College
+                    <input type="checkbox"
+                    name="college"
+                    #college="ngModel"
+                    [(ngModel)]="arrDegree[1].val"
+                    (change)="degreeHandler($event)">
+                    <span class="checkmark"></span>
+                    </label>
+            <label class="container-ch  align-left">Courses
+                    <input type="checkbox"
+                    name="courses"
+                    #courses="ngModel"
+                    [(ngModel)]="arrDegree[2].val"
+                    (change)="degreeHandler($event)">
+                    <span class="checkmark">
+                    </span>
+                    </label>
+                <label class="container-ch  align-left">Self Education
+                    <input type="checkbox"
+                    name="selfEducation"
+                    #selfEducation="ngModel"
+                    [(ngModel)]="arrDegree[3].val"
+                    (change)="degreeHandler($event)">
+                    <span class="checkmark">
+                    </span>
+                    </label>
+                <label class="container-ch  align-left">Other
+                    <input type="checkbox"
+                    name="other"
+                    #other="ngModel"
+                    [(ngModel)]="arrDegree[4].val"
+                    (change)="degreeHandler($event, true)">
+                    <span class="checkmark">
+                    </span>
+                    </label>
+                    <section *ngIf="otherRequired === true">
+                      <app-input-text
+                      name="otherInput"
+                      [(ngModel)]="otherinputText"
+                      #otherInput="ngModel"
+                      [required]="otherRequired"
+                      [placeholder]="'other degree'"
+                      [requiredFieldError]="otherRequiredErr"
+                      > 
+                      </app-input-text>
+                    </section>
+    </div>
+    
+  </div>
+
+  <!-- Expected result -->
+
+  <div class="col-xs-12 elem row">
+      <div class="col-xs-3 row-text margin-text">
+        Description <span class="required-star">*</span>
+      </div>
+      <div class="col-xs-9 no-padd">
+          <app-input-textarea
+          name="sharedDescr"
+          #sharedDescr="ngModel"
+          [(ngModel)]="description"
+          [placeholder]="'add description (max 300 characters)'"
+          [maxLength]="300"
+          [required]="true"
+          [requiredFieldError]="'You must to fill this area'"
+          >
+      </app-input-textarea>
+      </div>
+</div>
+
+<!-- Language -->
+
+<div class="col-xs-12 elem row">
+    <div class="col-xs-3 row-text margin-text">
+      Education language  <span class="required-star">*</span><br>
+    </div>
+    <div class="col-xs-9 no-padd">
+        <section *ngIf="showChoosedLangs" class="col-xs-9 no-padd" >
+            <div class="choosed-lang-field" *ngFor="let option of choosedLangname">
+              <span>{{option.name}} </span>
+                    <button (click)="changeLang(option)"
+                    class="btn-remome"
+                    >
+                            <i class="material-icons remove-icon">
+                                            clear
+                            </i>
+                    </button>
+            </div>
+          </section>
+          <section class="col-xs-12 no-padd">
+              <app-input-search
+                      class="no-margin search"
+                      [maxLength]="100"
+                      [control]="searchLangsControl"
+                      name="langNames"
+                      [(ngModel)]="langName"
+                      #langNames="ngModel"
+                      [required]="langRequired"
+                      [placeholder]="langsPlaceholder"
+                      [requiredFieldError]="'You can not to continue without any lang'"
+              >
+              </app-input-search>
+    
+              <section *ngIf="openAutoLangs === true" 
+              [ngClass]="{'block-drop': openAutoLangs == true,  'non-vis': openAutoLangs == false}">
+              <div *ngFor="let option of optionsLangs">
+                      <div (click)="setValueLangsFromDropDown(option)">
+                      <i class="material-icons plus-icon">
+                      add_circle_outline
+                      </i>
+                      <span>{{option.native}} </span> 
+                      <span class="lang-native">({{option.name}})</span></div>
+                      </div>
+              </section>
+            </section>    
+    </div>
+  </div>
+
+<!-- Expirience -->
+
+<div class="col-xs-12 elem row">
+    <div class="col-xs-3 row-text margin-text">
+      Relevant experience <span class="required-star">*</span></div>
+    <div class="col-xs-9 no-padd">
+        <app-input-textarea
+        name="relevantExp"
+        #relevantExp="ngModel"
+        [(ngModel)]="relevantExpirience"
+        [maxLength]="800"
+        [required]="false"
+        >
+    </app-input-textarea>
+    </div>
+</div>
+
+<!-- Training expertise -->
+
+<div class="col-xs-12 elem row">
+    <div class="col-xs-3 row-text margin-text">
+      Training expertise <span class="required-star">*</span></div>
+    <div class="col-xs-9 no-padd">
+        <app-input-textarea
+        name="traningExp"
+        #traningExp="ngModel"
+        [(ngModel)]="traningExpertise"
+        [maxLength]="800"
+        [required]="false"
+        >
+    </app-input-textarea>
+    </div>
+</div>
+
+
+<!-- Payment -->
+<div class="col-xs-12 elem row">
+  <div class="col-xs-3 row-text">
+    What do want in exchange?  <span class="required-star">*</span>
+  </div>
+  <div class="col-xs-9 no-padd">
+      <label class="container-ch  align-left">Skills 
+          <input type="checkbox"
+          name="skillsExp"
+          #skillsExp="ngModel"
+          [(ngModel)]="skillsExpected"
+          (change)="agreeSkillsHandler($event)"
+          [disabled]="!!noSkillsForSelect">
+          <span class="checkmark"
+          [ngClass]="{'disabled-select': noSkillsForSelect == true,  'enable-select': noSkillsForSelect == false}">
+          </span>
+          <section *ngIf="skillsExpList.length !== 0">
+              <div *ngFor="let option of skillsExpList" class="choosed-goals-field">
+                  <span>{{option.name}} </span>
+                  <button (click)="changeGoalsList(option)"
+                  class="btn-remome">
+                          <i class="material-icons remove-icon">
+                                          clear
+                          </i>
+                  </button>
+              </div>
+            </section>
+ </label>
+
+<!-- Search goals -->
+<div class="col-xs-12 no-padd">
+    <section *ngIf="skillsExpected === true">
+      <app-input-search
+        [label]="'Select skills from your skills to obtain'"
+        class="search"
+        [maxLength]="100"
+        [control]="searchGoalsControl"
+        name="goalNames"
+        [(ngModel)]="goalsName"
+        #goalNames="ngModel"
+        [required]="!!noSkillsForSelect"
+        [placeholder]="goalsPlaceholder"
+        [requiredFieldError]="'Check skill from your list'">
+      </app-input-search>
+  
+        <section *ngIf="openAutoGoals === true"
+          [ngClass]="{'block-drop': openAutoGoals == true,  'non-vis': openAutoGoals == false}">
+          <div *ngFor="let option of optionsGoals">
+                  <div (click)="setValueGoalsFromDropDown(option)">
+                  <i class="material-icons plus-icon">
+                  add_circle_outline
+                  </i>
+                  <span>{{option.name}}</span></div>
+                  </div>
+          </section>
+        </section>
     </div>
 
-    <div class="col-xs-9"> Skills to share </div>
+      <label class="container-ch align-left">Money
+              <input type="checkbox"
+              name="money"
+              #money="ngModel"
+              [(ngModel)]="moneyExpected"
+              (change)="agreeMoneyHandler($event)">
+              <span class="checkmark"></span>
+              </label>
+
+<!-- Checkboxes of money -->
+
+<section *ngIf="moneyExpected == true" class="choosed-money-field">
+<!-- Individual -->
+    <div class="col-xs-12">
+        <label class="container-ch-sm  align-left"> Individual lesson 
+          <span class="additional-text">(per hour)</span>
+            <input type="checkbox"
+              name="individual"
+              #individual="ngModel"
+              [(ngModel)]="money.individual"
+              (change)="pricingSet($event, 'individual')">
+            <span class="checkmark-sm"></span>
+            </label>
+      </div>
+      
+      <div class="col-xs-12 row">
+          <div class="col-xs-9 no-padd">
+            <input
+            min="0.1" max="999999" step="0.1"
+            name="individVal"
+            #individVal="ngModel"
+            [(ngModel)]="money.individVal"
+            class="input-field"
+            type="number"
+            (change)="valPayment($event, 0)"
+            [disabled]="disIndividVal">
+          </div>
+          <div class="col-xs-3 no-padd center-xs">
+              USD
+          </div>
+        </div>
+
+        <!-- Group -->
+      <div class="col-xs-12">
+        <label class="container-ch-sm  align-left"> Group lesson 
+            <span class="additional-text">(per hour)</span>
+            <input type="checkbox"
+              name="group"
+              #group="ngModel"
+              [(ngModel)]="money.group"
+              (change)="pricingSet($event, 'group')">
+              <span class="checkmark-sm"></span>
+              </label>
+      </div>
+        
+      <div class="col-xs-12 row">
+          <div class="col-xs-9 no-padd">
+            <input
+            min="0.1" max="999999" step="0.1"
+            name="groupVal"
+            #groupVal="ngModel"
+            [(ngModel)]="money.groupVal"
+            class="input-field"
+            type="number"
+            (change)="valPayment($event, 1)"
+            [disabled]="disGroupVal">
+          </div>
+          <div class="col-xs-3 no-padd center-xs">
+              USD
+          </div>
+        </div>
+
+          <!--  Consultation  -->
+        <div class="col-xs-12">
+            <label class="container-ch-sm  align-left"> Consultation 
+                <span class="additional-text">(per hour)</span>
+                <input type="checkbox"
+                  name="consultation"
+                  #consultation="ngModel"
+                  [(ngModel)]="money.consultation"
+                (change)="pricingSet($event, 'consultation')">
+                <span class="checkmark-sm"></span>
+                </label>
+          </div>
+          
+          <div class="col-xs-12 row">
+              <div class="col-xs-9 no-padd">
+                <input
+                min="0.1" max="999999" step="0.1"
+                name="consultationVal"
+                #consultationVal="ngModel"
+                [(ngModel)]="money.consultationVal"
+                class="input-field"
+                type="number"
+                (change)="valPayment($event, 2)"
+                [disabled]="disConsultationVal">
+              </div>
+              <div class="col-xs-3 no-padd center-xs">
+                  USD
+              </div>
+            </div>
+
+             <!--  Expert opinion  -->
+        <div class="col-xs-12">
+            <label class="container-ch-sm  align-left"> Expert opinion
+                <input type="checkbox"
+                  name="expertOp"
+                  #expertOp="ngModel"
+                  [(ngModel)]="money.expertOp"
+                  (change)="pricingSet($event, 'expertOp')">
+                <span class="checkmark-sm"></span>
+                </label>
+          </div>
+          
+          <div class="col-xs-12 row">
+              <div class="col-xs-9 no-padd">
+                <input
+                min="0.1" max="999999" step="0.1"
+                name="expertOpVal"
+                #expertOpVal="ngModel"
+                [(ngModel)]="money.expertOpVal"
+                class="input-field"
+                type="number"
+                (change)="valPayment($event, 3)"
+                [disabled]="disExpertOpVal">
+              </div>
+              <div class="col-xs-3 no-padd center-xs">
+                  USD
+              </div>
+            </div>
+</section>
+
+      <label class="container-ch  align-left">Service
+              <input type="checkbox"
+              name="service"
+              #service="ngModel"
+              [(ngModel)]="servicesExpected"
+              (change)="agreeServiceHandler($event)"
+              >
+              <span class="checkmark"></span>
+              </label>
+  </div>
+  
+</div>
+
+<div class="col-xs-12 elem row">
+  <div class="col-xs-3 row-text">
+    Set schedule  <span class="required-star">*</span>
+  </div>
+  <div class="col-xs-9 no-padd">
+          <app-week-days></app-week-days>
   </div>
 </div>
 
+<div class="col-xs-12 row elem">
+  <div class="col-xs-3 row-text">Edit time</div>
+  <div class="col-xs-9 row no-padd">
+          <div class="col-xs-6 row middle-xs no-padd">
+                  <div class="col-xs-3">
+                          <span class="row-text">From: </span>
+                  </div>
+                  
+                          <div class="col-xs-9">
+                                  <app-select
+                                  [options]="time"
+                                  [label]="'Set time'"></app-select>
+                          </div>
+          </div>
+          <div class="col-xs-6 no-padd row middle-xs">
+                  <div class="col-xs-3">
+                          <span class="row-text">To: </span>
+                  </div>
+                  
+                  <div class="col-xs-9">
+                          <app-select
+                          [options]="time"
+                          [label]="'Set time'"></app-select>
+                  </div>
+          </div>
+  </div>
+  </div>
+
+  <!-- Trial -->
+
+  <div class="col-xs-12 elem row">
+      <div class="col-xs-3 row-text">
+          Trial lesson <span class="required-star">*</span>
+      </div>
+      <div  class="col-xs-9 row no-padd trial-select">
+          <label class="container-ch">
+              <input type="checkbox"
+              name="trial"
+              #trial="ngModel"
+              [(ngModel)]="withTrial"
+              (change)="trialHandler($event)">
+              <span class="checkmark"></span>
+          </label>
+      </div>
+    </div>
+
+    <!-- Is shared -->
+
+    <div class="col-xs-12 elem row">
+        <div class="col-xs-3 row-text">
+          Is this skill searchable?<span class="required-star">*</span>
+        </div>
+        <div  class="col-xs-9 row no-padd trial-select">
+            <label class="container-ch">
+                <input type="checkbox"
+                name="shared"
+                #shared="ngModel"
+                [(ngModel)]="isShared"
+                (change)="isShatedHandler($event)">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+      </div>
+
+    <!-- Save -->
+
+    <div class="col-xs-12 row elem">
+      <div>
+        <input
+        type="submit"
+        (click)="saveBtn(skillName, currentLevel, description, traningExpertise, arrDegree[4].val, otherinputText, relevantExpirience)" 
+        class="btn
+        primary-btn
+        btn-width-middle"    
+        value="Add"
+        [disabled]="skillsDataForm.invalid"
+        [ngClass]="{'disabled': skillsDataForm.invalid}">
+        </div>
+        </div>
+        <app-alert-modal
+                    [header]="headerError"
+                    [actionName]="showErrorText"
+                    [details]="details"
+                    [recomend]="recomend"
+                     #infoPopup></app-alert-modal>
+        </form> 
+    </div>
+  </div>  
+</div>

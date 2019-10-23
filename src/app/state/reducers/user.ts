@@ -36,6 +36,7 @@ const userInitState: types.NewUser = {
     profileSummary: null,
     langs: null,
     sex: '',
+    userType: null
   },
   contacts: [],
   keyData: {
@@ -71,28 +72,29 @@ export function userReducer(state: any, action: any)  {
       state = user;
       return state;
     }
+    case userAction.UserActionTypes.RESET_USER: {
+      state = undefined;
+      return state;
+    }
+    case userAction.UserActionTypes.UPDATE_USERS_GOALS: {
+      const data = action.payload;
+      state.keyData.goals = data;
+      return state;
+    }
+    case userAction.UserActionTypes.UPDATE_USERS_SERVICES: {
+      const data = action.payload;
+      state.keyData.myServices = data;
+      return state;
+    }
+    case userAction.UserActionTypes.UPDATE_USERS_SKILLS: {
+      const data = action.payload;
+      state.keyData.skills = data;
+      console.log(state);
+      return state;
+    }
     default:
       return state;
     }
   };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
-
-
-
-// export function userReducer(state = userInitState, action: any) {
-//   const actions = {
-//     [userAction.UserActionTypes.LOAD_USER]: (): State => ({
-//       ...state,
-//     }),
-//     [userAction.UserActionTypes.LOAD_USER_SUCCESS]: (): State => {
-//       return ({
-//         ...state,
-//         userInitState: action.payload
-//       });
-//     }
-//     }
-  
-
-//   return actions[action.type] ? actions[action.type]() : state;
-// }

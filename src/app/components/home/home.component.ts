@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.dataNotSet = false;
         }
       });
-      // this.store.dispatch(new LoadUserData());
+      this.store.dispatch(new LoadUserData());
   }
 
   private getFilters() {

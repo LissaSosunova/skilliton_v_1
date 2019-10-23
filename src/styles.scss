@@ -148,7 +148,7 @@ input, button {
 .btn-height-small {
   min-height: 18px;
   font-size: 12px;
-  font-weight: 200;
+  font-weight: 400;
   span {
     font-size: 12px;
   font-weight: 200;
@@ -185,10 +185,9 @@ a {
 }
 
 
-
-/* Customize the label (the container) */
+/* Customize the label (the container) BIG*/
 .container-ch {
-  padding-top: 10px;
+  padding-top: 5px;
   display: block;
   position: relative;
   padding-left: 55px;
@@ -214,8 +213,8 @@ a {
   position: absolute;
   top: 0;
   left: 0;
-  height: 36px;
-  width: 36px;
+  height: 30px;
+  width: 30px;
   border: 1px solid  map-get($bg-color, 'primary');
   border-radius: 8px;
   background-color: white;
@@ -246,12 +245,97 @@ a {
 /* Style the checkmark/indicator */
 .container-ch .checkmark:after {
   left: 8px;
-  top: 3px;
-  width: 14px;
-  height: 14px;
+  top: 2px;
+  width: 12px;
+  height: 12px;
   border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+
+/* Customize the label (the container) SMALL */
+.container-ch-sm {
+  padding-top: 2px;
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container-ch-sm input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark-sm {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  border: 1px solid  map-get($bg-color, 'primary');
+  border-radius: 4px;
+  background-color: white;
+}
+
+/* On mouse-over, add a grey background color */
+.container-ch-sm:hover input ~ .checkmark-sm {
+  background-color:white;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-ch-sm input:checked ~ .checkmark-sm {
+  background-color: map-get($bg-color, 'primary');
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark-sm:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container-ch-sm input:checked ~ .checkmark-sm:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-ch-sm .checkmark-sm:after {
+  left: 4px;
+  top: 1px;
+  width: 9px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+
+
+
+
+app-input-search {
+  position: relative;
+  top: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  margin-top: 10px;
 }

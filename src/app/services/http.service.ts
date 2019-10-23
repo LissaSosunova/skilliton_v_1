@@ -38,7 +38,9 @@ export class HttpService {
   public getTags(): Observable<any> {
     return this.http.get(URL_BACK + '/tags', {headers: this.getHeaders()});
   }
-
+  public getLangs(): Observable<any> {
+    return this.http.get(URL_BACK + '/langs', {headers: this.getHeaders()});
+  }
   // Post data scills/goals/interests from exact info
   public postInitInfo(params: types.PostInitInfo, infoType: string): Observable<any> {
     return this.http.post(URL_BACK + '/user/init-info/' + infoType, params, {headers: this.getHeaders()});
@@ -56,10 +58,18 @@ export class HttpService {
     return this.http.post(URL_BACK + '/user/add-goal', params, {headers: this.getHeaders()});
   }
 
+  public postNewSkill(params: types.AddSkillAPI): Observable<any> {
+    return this.http.post(URL_BACK + '/user/add-skill', params, {headers: this.getHeaders()});
+  }
+
   public uploadAvatar(params: types.AvatarObject): Observable<any> {
     return this.http.post(URL_BACK + '/user/edit-profile', params, {headers: this.getHeaders()});
   }
 
+  public postNewService(params: types.AddServiceAPI): Observable<any> {
+    return this.http.post(URL_BACK + '/user/add-service', params, {headers: this.getHeaders()});
+  }
+  
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {
 
