@@ -1,53 +1,50 @@
-<div class="one-post row" *ngIf="router.url === '/home'">
+<div class="one-post col-xs-12" *ngFor="let post of posts">
         <div class="header-box col-xs-12 row">
                 <div class="left-side col-xs-2">
-                            <i class="material-icons face">face</i>
-
+                <div class="face" [style.background-image]="'url(' + post.author.avatar + ')'"></div>
                 </div>
                 <div class="col-xs-10
-                            head">
+                            head" >
                             <div class="col-xs-6
                             ">
-                            <span class="name">Bill</span>
-                            <br/>
-                            <span>Professor</span>
-                            <br/>
-                            <span>Stanford university</span>
+                            <label class="name">{{ post.author.firstName }}  {{ post.author.lastName }}</label>
+                            <label class="work">{{ post.author.jobPosition }}</label>
+                            <label class="work">{{ post.author.workPlace }}</label>
 
                 </div>
                 <div class="col-xs-6
                 markers">
-                <span class="date-of-post">01/01/2019</span>
-                <i class="material-icons mark">bookmark_border</i>
+                <span class="date-of-post">{{ post.date | date: 'M/dd/yyyy, hh:mm' }} </span>
+                <i class="material-icons mark" (click)="openMorePost(post.id)">more_vert</i>
+                <div class="action-drop-down non-vis"
+                        [id]="'drop' + post.id">
+                        <span>Copy link</span>
+                        <span>Share</span>
+                        <span>Save</span>
+                        <span>Report</span>
+                </div>
                 </div>
             </div>
     <div class="col-xs-10 col-xs-offset-2">
         <p>
-            Data science is a multi-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and
-            insights from structured and unstructured data.[1][2] Data science is the same concept as data mining and big data: "use the most
-            powerful hardware, the most powerful programming systems, and the most efficient algorithms to solve problems".
+                        {{ post.text }} 
         </p>
-        <img src="assets/images/picture.png" class="post-img col-xs-12">
+        <img [src]="post.image" class="post-img col-xs-12">
         <div class="row middle-xs tex-bg">
+               <div class="col-xs-12">
+                       <span class="tags" *ngFor="let tag of post.tags">#{{tag}} </span></div>
+               <div class="col-xs-12 row">
                 <div class="col-xs-2">
-                        150 likes
-                 </div>
-                 <div class="col-xs-2">
-                        13 Dislikes
-                  </div>
-                  <div class="col-xs-2">
-                        2 Comments
-                  </div>
-                  <div class="row col-xs-6 end-xs middle-xs">
-                         <div class="col-xs-6 end-xs top-xs">
-                                Copy link
-                                <i class="material-icons link">link</i>
-                          </div>
-                          <div class="col-xs-6 end-xs top-xs">
-                                Share
-                                <i class="material-icons link">share</i>
-                          </div>
+                        <span class="usfull">{{ post.useful }} Usefull</span> 
                 </div>
+                <div class="col-xs-2">
+                        <span class="usless">{{ post.useles }} Useles</span> 
+                </div>
+                <div class="col-xs-2">
+                        <span class="comm-amount">{{post.comments.commentAmount}} Comments</span> 
+                </div>
+               </div>
+                  
         </div>
 <!-- commentary -->
         <div class="row top-xs tex-bg comment-box">
@@ -56,23 +53,29 @@
                  </div>
 
                   <div class="row col-xs-11 top-xs">
-                         <div class="col-xs-11 top-xs">
-                                <span class="name2">Name Lastname </span> 
-                                <span class="sm-descr">3 days ago</span>
-                                <p class="tex-bg">
-                                        Comment comment comment Comment comment commentComment comment comment Comment comment comment
-                                        Comment comment comment Comment comment commentComment comment comment Comment comment comment
-                                        Comment comment comment Comment comment commentComment comment comment Comment comment comment
+                         <div class="col-xs-9 top-xs">
+                                <span class="name2"> {{post.comments.lastComment.firstName}} {{post.comments.lastComment.lastName}} </span> 
+                                
+                                <p class="">
+                                        {{post.comments.lastComment.text}}
                                     </p>
                           </div>
-                          <div class="col-xs-1 end-xs top-xs">
-                                <i class="material-icons">more_vert</i>
+                          <div class="col-xs-3 end-xs top-xs position-rel">
+                                <span class="sm-descr">{{ post.comments.lastComment.date | date: 'dd/MM/yyyy' }}, </span>
+                                <span class="sm-descr">{{ post.comments.lastComment.date | date: 'HH:mm' }} </span>
+                                <i class="material-icons mark-comment" (click)="openMoreComment(post.id)">more_vert</i>
+                                <div class="action-drop-down-comment non-vis start-xs"
+                                        [id]="'comment' + post.id">
+                                        <span>Reply</span>
+                                        <span>Share</span>
+                                        <span>Report</span>
+                                </div>
                           </div>
                 </div>
-        </div>
-
-        
+        </div>        
+        <div class="col-xs-12 center-xs load-more">Load more</div>
         <div class="row middle-xs tex-bg comment-box">
+                
                 <div class="col-xs-1">
                         <i class="material-icons ava3">account_circle</i>
                  </div>
@@ -84,10 +87,18 @@
                                 >
                                 </app-input-text>
                           </div>
-                          <div class="col-xs-2 around-xs">
-                                <i class="material-icons">insert_emoticon</i>
-                                <i class="material-icons">attach_file</i>
-                                <i class="material-icons">send</i>
+                          <div class="col-xs-2 top-xs position-rel" #myDiv>
+                                <div class="smile-container non-vis"
+                                        [id]="'emo' + post.id"
+                                        >
+                                        <span *ngFor="let emo of emotions" [innerHTML]="emo"
+                                        class="smile"
+                                        (click)="chooseEmo(post.id)"></span>
+                                        </div>
+                                <i class="material-icons smile-icon" (click)="chooseEmo(post.id)">insert_emoticon</i>
+                                <i class="material-icons smile-icon">attach_file</i>
+                                <i class="material-icons smile-icon">send</i>
+                                </div>
                           </div>
                 </div>
         </div>

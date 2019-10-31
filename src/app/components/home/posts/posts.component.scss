@@ -1,12 +1,14 @@
 @import '../../../../scss/variables';
 
 .one-post {
-    border-top: 1px solid map-get($bg-color, 'primary');
+    // border-top: 1px solid map-get($bg-color, 'primary');
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
     padding-top: 20px;
+    border-top: 1px solid map-get($bg-color, 'gray-light');
 }
 
 .markers {
@@ -14,30 +16,90 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
+    position: relative;
+}
+
+.action-drop-down {
+    position: absolute;
+    top: 0px;
+    right: -75px;
+    width: 80px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid map-get($bg-color, 'gray-light');
+    span {
+        display: block;
+        font-size: 0.7em;
+        line-height: 1.7em;
+        &:hover {
+            color: map-get($font-color, 'link');
+            cursor: pointer;
+        }
+    }
+}
+.action-drop-down-comment {
+    position: absolute;
+    top: 0px;
+    right: -85px;
+    width: 80px;
+    background-color: white;
+    
+    border-radius: 8px;
+    border: 1px solid map-get($bg-color, 'gray-light');
+    span {
+        display: block;
+        padding: 3px 10px 3px 10px;
+        font-size: 0.7em;
+        &:hover {
+            color: map-get($font-color, 'link');
+            cursor: pointer;
+        }
+    }
 }
 
 .header-box {
     display: flex;
     flex-direction: row;
     padding: 0px;
-    width: 80%;
+    width: 95%;
 }
 
 .mark {
-    font-size: 40px;
+    position: relative;
+    font-size: 2.3em;
+    font-weight: 800;
+    top: -5px;
+    color: map-get($font-color, 'gray');
+    &:hover {
+        color: map-get($font-color, 'link');
+        cursor: pointer;
+    }
 }
 .date-of-post {
-    font-size: 12px;
+    font-size: 0.75em;
+    font-weight: 400;
+    color: map-get($font-color, 'gray');
 }
 
 .face {
-    font-size: 100px;
+  height: 8em;
+  width: 8em;
+  min-height: 4em;
+  min-width: 4em;
+  align-self: top;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: 140%;
+  background-position: center;
+  cursor: pointer;
 }
 .ava2 {
-    font-size: 60px;
+    font-size: 56px;
+    color:  map-get($font-color, 'gray');
 }
 .ava3 {
-    font-size: 30px;
+    font-size: 2.5em;
 }
 
 .head {
@@ -47,15 +109,35 @@
 }
 
 .name {
-    font-size: 30px;
+    font-size: 1.6em;
+    font-weight: 600;
+    display: block;
+}
+.work {
+    font-size: 1em;
+    font-weight: 400;
+    display: block;
+    color: map-get($font-color, 'gray');
+    line-height: 1.7em;
 }
 .name2 {
-    font-size: 24px;
-    margin-left: 10px;
+    font-size: 1.2em;
+    font-weight: 600;
 }
 .sm-descr {
-    font-size: 16px;
+    font-size: 0.8em;
     color: map-get($font-color, 'gray');
+}
+.mark-comment {
+    position: relative;
+    font-size: 2em;
+    font-weight: 800;
+    top: 10px;
+    color: map-get($font-color, 'gray');
+    &:hover {
+        color: map-get($font-color, 'link');
+        cursor: pointer;
+    }
 }
 .left-side {
     width: 16%;
@@ -63,20 +145,102 @@
 
 .post-img {
     width: 100%;
+    padding: 0px;
 }
 
 .tex-bg {
-    border-bottom: 3px solid map-get($bg-color, 'gray-light');
+    border-bottom: 1px solid map-get($bg-color, 'gray-light');
     padding-bottom: 10px;
+    div {
+        line-height: 1.7em;
+        padding: 0px;
+        div {
+            padding: 0px;
+            div {
+                padding: 0px;
+            }
+        }
+    }
 }
 
 .link {
     margin-left: 10px;
     font-size: 12px;
 }
+.load-more {
+    padding: 15px;
+    font-size: 0.9em;
+    color: map-get($font-color, 'gray');
+    &:hover {
+        color: map-get($font-color, 'link');
+        cursor: pointer;
+    }
+}
 
 .comment-box {
-    padding: 20px 5px 10px 5px;
+    padding: 20px 10px 10px 10px;
     margin: 10px 0px 10px 0px;
-    border: 1px solid map-get($bg-color, 'gray');
+    border: 1px solid map-get($bg-color, 'gray-light');
+    border-radius: 16px;
+    line-height: 1.5em;
+}
+.tags {
+    font-size: 0.9em;
+    font-weight: 400;
+    display: inline;
+    color: map-get($font-color, 'link');
+    line-height: 1.7em;
+    padding-right: 10px;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.usfull {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: map-get($font-color, 'green');
+}
+.usless {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: map-get($font-color, 'error');
+}
+.comm-amount{
+    font-size: 0.9em;
+    font-weight: 500;
+}
+.smile {
+    font-size: 1.7em;
+    line-height: 1.6em;
+    padding: 5px;
+    display: inline;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.smile-container {
+    position: absolute;
+    bottom: 40px;
+    right: 10px;
+    width: 420px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid map-get($bg-color, 'gray-light');
+}
+.position-rel {
+    position: relative;
+}
+.non-vis {
+    display: none;
+}
+
+.smile-icon {
+    font-size: 2.2em;
+    padding-left: 5px;
+    color: map-get($font-color, 'gray-dark');
+    &:hover {
+        cursor: pointer;
+        color: map-get($font-color, 'link');
+    }
 }

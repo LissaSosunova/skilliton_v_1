@@ -31,6 +31,13 @@ export class HttpService {
     return this.http.post(URL_BACK + '/register', params, this.registrOptions);
   }
 
+  public confirmAccaunt(params: string): Observable<any> {
+    return this.http.get(URL_BACK + '/confirm_account?activation_code=' + params);
+  }
+
+  public resendActivationCode(params: string): Observable<any> {
+    return this.http.get(URL_BACK + '/resend_activation_code?activation_code=' + params);
+  }
   public getUser(): Observable<any> {
     return this.http.get(URL_BACK + '/user/me', {headers: this.getHeaders()});
   }
@@ -69,6 +76,10 @@ export class HttpService {
   public postNewService(params: types.AddServiceAPI): Observable<any> {
     return this.http.post(URL_BACK + '/user/add-service', params, {headers: this.getHeaders()});
   }
+
+  public getSearchAll(query: string): Observable<any> {
+    return this.http.get(URL_BACK + '/search/all/?query=' + query, {headers: this.getHeaders()});
+  }
   
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {
@@ -76,7 +87,7 @@ export class HttpService {
     const tokenStr = this.sessionStorage.getValue('_token');
     const tokenType = this.sessionStorage.getValue('tokenType');
     if(tokenStr === "" || tokenStr === null || tokenType === '' || tokenType === null){
-      this.router.navigate(["/login"]);
+      this.router.navigate([""]);
     }
     const token = tokenType + ' ' + tokenStr;
     const headers = new HttpHeaders({'Authorization': token});
@@ -92,7 +103,7 @@ export class HttpService {
     }
 
     const res = r.json();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('');
     return {
       ...res,
       data: res.data || null,
@@ -109,7 +120,7 @@ export class HttpService {
     } catch (err) {
     }
     if (r.status == 404) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     }
 
     return;

@@ -1,9 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Store} from '@ngrx/store';
-import { skillLevel } from '../../../shared/constants/skill-levels';
-import { LoadTags } from '../../../state/actions/filters.actions';
-import { LoadLangsData } from '../../../state/actions/langs.actions';
 import * as _ from 'lodash';
 
 @Component({
@@ -13,9 +9,9 @@ import * as _ from 'lodash';
 })
 export class SkillToShareCardComponent implements OnInit {
   public enableSkill: boolean = true;
-  public skills: Observable<any>;
+  public skills = [] as any;
   private showSkills: boolean = false;
-
+  private initSkills = [] as any;
   constructor(
     private store: Store<any>
     ) { }
@@ -23,7 +19,9 @@ export class SkillToShareCardComponent implements OnInit {
   ngOnInit() {
     const skills$ = this.store.select('user').subscribe((state: any) => {
       if(state !== undefined || state) {
-        this.skills = state.keyData.skills;
+
+        this.initSkills = _.filter(state.keyData.skills, { 'level': null });
+        this.skills = _.differenceBy(state.keyData.skills, this.initSkills, 'id');
         if (state.keyData.skills.length !== 0) {
           this.showSkills = true;
         }

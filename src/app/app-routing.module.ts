@@ -12,21 +12,34 @@ import { SetExactdataPageComponent } from './components/set-exactdata-page/set-e
 import { ServicesComponent } from './components/profile/services/services.component';
 import { StoViewComponent } from './components/profile/sto-view/sto-view.component';
 import { StsViewComponent } from './components/profile/sts-view/sts-view.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
+import { ResendCodeComponent } from './components/resend-code/resend-code.component';
+import { MyMatchesComponent } from './components/profile/my-matches/my-matches.component';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
+    component: LoginComponent
   },
   {
     path: 'confirm_account',
-    redirectTo: 'login',
+    redirectTo: 'confirm',
     pathMatch: 'prefix'
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'resend_activation_code',
+    redirectTo: 'resend-code',
+    pathMatch: 'prefix'
+  },
+  {
+    path: 'confirm',
+    component: ConfirmComponent
+  },
+  {
+    path: 'resend-code',
+    component: ResendCodeComponent
   },
   {
     path: 'registration',
@@ -35,6 +48,13 @@ const routes: Routes = [
   {
     path: 'set-exactdata',
     component: SetExactdataPageComponent,
+    resolve: {
+      user$: GetDataUserResolverService
+    }
+  },
+  {
+    path: 'search',
+    component: SearchComponent,
     resolve: {
       user$: GetDataUserResolverService
     }
@@ -84,6 +104,10 @@ const routes: Routes = [
         resolve: {
           user$: GetDataUserResolverService
         }
+      },
+      {
+        path: 'matches',
+        component: MyMatchesComponent
       }
     ]
   },
@@ -95,6 +119,10 @@ const routes: Routes = [
       user$: GetDataUserResolverService
     }
   },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({

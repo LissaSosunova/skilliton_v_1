@@ -53,7 +53,6 @@ export class MatDefaultChipsComponent extends InputAbstract implements  OnInit {
 
   remove(oneItem: Item): void {
     const index = this.items.indexOf(oneItem);
-    
     if (index >= 0) {
       this.items.splice(index, 1);
     }

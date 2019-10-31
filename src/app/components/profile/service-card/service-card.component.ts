@@ -18,8 +18,8 @@ export class ServiceCardComponent implements OnInit {
   ngOnInit() {
     const services$ = this.store.select('user').subscribe((state: any) => {
       if(state !== undefined || state) {
-        this.services = state.keyData.myServices;
-        if (state.keyData.myServices.length !== 0) {
+        this.services = state.keyData.services;
+        if (state.keyData.services.length !== 0) {
           this.showServices = true;
         }
       }

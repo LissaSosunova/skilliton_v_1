@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store} from '@ngrx/store';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-skill-to-obtain-card',
@@ -9,8 +10,9 @@ import { Store} from '@ngrx/store';
 })
 export class SkillToObtainCardComponent implements OnInit {
   public enableSkill: boolean = true;
-  public skills: Observable<any>;
+  public skills = [] as any;
   private showSkills: boolean = false;
+  private initSkills = [] as any;
   constructor(
     private store: Store<any>
     ) { }
@@ -18,7 +20,8 @@ export class SkillToObtainCardComponent implements OnInit {
   ngOnInit() {
     const goals$ = this.store.select('user').subscribe((state: any) => {
       if(state !== undefined || state) {
-        this.skills = state.keyData.goals;
+        this.initSkills = _.filter(state.keyData.goals, { 'currentLevel': null });
+        this.skills = _.differenceBy(state.keyData.goals, this.initSkills, 'id');
         if (state.keyData.goals.length !== 0) {
           this.showSkills = true;
         }

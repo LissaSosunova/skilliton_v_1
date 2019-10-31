@@ -1,10 +1,14 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { RouterService } from '../../services/router.service';
 import { LocalstorageService } from '../../services/localstorage.service';
 import { SessionstorageService } from '../../services/sessionstorage.service';
+import { NgForm, FormControl } from '@angular/forms';
+import { HttpService } from '../../services/http.service';
+import { Store} from '@ngrx/store';
+import { SetGlobalSearch } from 'src/app/state/actions/global-search.actions';
 
 @Component({
   selector: 'app-top-sidebar',
@@ -15,16 +19,25 @@ export class TopSidebarComponent implements OnInit {
 
   public currParentUrl: string;
   public currChildUrl: string;
+  private searchVis: boolean = false;
+  public searchControl: FormControl;
+  public search: string = '';
+  private unsubscribe$: Subject<void> = new Subject();
+  @Input() public disabled?: boolean = false;
+  @Output() public reset: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(public router: Router,
               private activateRouter: ActivatedRoute,
               private routerService: RouterService,
               private sessionStorageService: SessionstorageService,
               private localstorageService: LocalstorageService,
+              private data: HttpService,
+              private store: Store<any>,
               ) { }
 
   ngOnInit() {
     this.getCurrentRoute();
+    this.initSearchForm();
   }
 
   private getCurrentRoute(): void {
@@ -41,6 +54,11 @@ export class TopSidebarComponent implements OnInit {
       } else {
         this.currChildUrl = '';
       }
+
+      const unknown = url.split("=");
+      if (unknown.length >=2){
+        this.currParentUrl = 'unknownPage';
+      }
     });
    }
 
@@ -48,6 +66,47 @@ export class TopSidebarComponent implements OnInit {
     this.localstorageService.removeValue('user');
     this.sessionStorageService.removeValue('_token');
     this.sessionStorageService.removeValue('tokenType');
-    this.router.navigate(['/login']);
+    this.unsubscribe$.complete();
+    this.router.navigate(['']);
    }
+
+   openSearch() {
+     this.searchVis = !this.searchVis;
+   }
+
+   private initSearchForm(): void {
+    this.searchControl = new FormControl();
+    this.searchControl.valueChanges
+      .pipe(debounceTime(500), distinctUntilChanged(), takeUntil(this.unsubscribe$))
+      .subscribe(query => {
+        if (query) {
+          this.setSearch(query);
+        } else if (!query || query === '') {
+          this.searchVis = false;
+          this.searchControl.reset();
+        }
+      });
+  }
+  setSearch(query: string) {
+    this.data.getSearchAll(query).subscribe((data) => {
+      if (data.error === false || data.status === 200) {
+        this.onReset();
+
+        this.store.dispatch(new SetGlobalSearch(data));
+        this.router.navigate(['/search']);
+      }
+    });
+  }
+  resetSearch () {
+    this.searchControl.reset();
+    this.searchControl = new FormControl();
+  }
+
+  public onReset(): void {
+    if (!this.disabled) {
+      this.searchControl.reset({searchValue: ''});
+      this.searchControl.setValue('');
+      this.reset.emit();
+    }
+  }
 }

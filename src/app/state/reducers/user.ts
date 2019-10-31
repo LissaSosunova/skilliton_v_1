@@ -44,7 +44,7 @@ const userInitState: types.NewUser = {
     interests: [],
     education: [],
     goals: [],
-    myServices: [],
+    services: [],
     workExperience: [],
     skillsSkipped: false,
     goalsSkipped: false
@@ -72,6 +72,11 @@ export function userReducer(state: any, action: any)  {
       state = user;
       return state;
     }
+    case userAction.UserActionTypes.UPDATE_USER: {
+      const user = action.payload.data;
+      state = user;
+      return state;
+    }
     case userAction.UserActionTypes.RESET_USER: {
       state = undefined;
       return state;
@@ -83,13 +88,12 @@ export function userReducer(state: any, action: any)  {
     }
     case userAction.UserActionTypes.UPDATE_USERS_SERVICES: {
       const data = action.payload;
-      state.keyData.myServices = data;
+      state.keyData.services = data;
       return state;
     }
     case userAction.UserActionTypes.UPDATE_USERS_SKILLS: {
       const data = action.payload;
       state.keyData.skills = data;
-      console.log(state);
       return state;
     }
     default:

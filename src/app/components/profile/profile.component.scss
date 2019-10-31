@@ -10,7 +10,7 @@
     align-items: center;
     min-width: 420px;
     min-height: 160px;
-    background-color: map-get($bg-color, 'primary');
+    background-color: map-get($bg-color, 'dark-blue');
     color: map-get($font-color,'inverce');
 }
 
@@ -144,10 +144,6 @@ padding-bottom: 0px;
     color: map-get($font-color, 'primary');
     
 }
-.def {
-color:  map-get($bg-color, 'gray');
-}
-
 .top-bar {
 padding-right: 0px;
 padding-left: 0px;
@@ -155,7 +151,7 @@ padding-left: 0px;
 
 .content-bar-btn {
     padding-top: 20px;
-    background-color: map-get($bg-color, 'primary');
+    background-color: map-get($bg-color, 'dark-blue');
 }
 
 .block-about-user {
@@ -225,7 +221,11 @@ padding-left: 0px;
     font-weight: 500;
     font-size: 1.5em;
     color: map-get($font-color, 'link');
-    padding: 20px 16px 20px 20px; 
+    padding: 20px 16px 20px 20px;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 .user-block {
     padding-left: 16px;

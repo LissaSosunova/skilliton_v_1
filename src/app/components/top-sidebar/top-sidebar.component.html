@@ -11,12 +11,29 @@
             </a>
     </div>
     <div class="col-xs-8 ">
-            <nav *ngIf="currParentUrl !== 'login' && currParentUrl !== 'registration' && currParentUrl !== 'registration-success'">
+            <nav *ngIf="currParentUrl !== 'login' && currParentUrl
+            !== 'registration' && currParentUrl
+            !== 'registration-success' && currParentUrl !== 'unknownPage'">
                 <ul>
+                    <form name="searchControl"
+                    #searchControl="ngForm"
+                    >
+                    <li [ngClass]="{'non-vis': searchVis === false}" class="form-group">
+                        <input type="search"
+                        [value]="search"
+                        class="search-inp-top form-control"
+                        name="search"
+                        [(ngModel)]="searchValue"
+                        #search="ngModel"
+                        (keyup.enter)="setSearch(searchValue)"
+                        >
+                    </li>
+                </form>
+                    <li><i class="material-icons search-btn" (click)="openSearch()">search</i></li>
                     <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><span>Home</span></a></li>
                     <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><span>Library</span></a></li>
                     <li ><a href="#" [routerLink]="'/home'" routerLinkActive="active"><span>My classroom</span></a></li>
-                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><i class="material-icons exit-btn">chat</i></a></li>
+                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><span>Chat</span></a></li>
                     <li><a href="#" [routerLink]="'/profile'" routerLinkActive="active"><i class="material-icons exit-btn">account_circle</i></a></li>
                     <li>
                             <app-lang-switcher></app-lang-switcher>
@@ -25,7 +42,7 @@
                 </ul>
                     <section *ngIf="currParentUrl === 'registration'">
                           <ul>
-                          <li ><a href="#" [routerLink]="'/login'" routerLinkActive="active"><span>Log in</span></a></li>
+                          <li ><a href="#" [routerLink]="''" routerLinkActive="active"><span>Log in</span></a></li>
                           <li>
                               <app-lang-switcher></app-lang-switcher>
                           </li>
@@ -43,21 +60,23 @@
                   </nav>
             <nav *ngIf="currParentUrl === 'registration'">
                 <ul>
-                    <li ><a href="#" [routerLink]="'/login'" routerLinkActive="active"><span>Log in</span></a></li>
+                    <li ><a href="#" [routerLink]="''" routerLinkActive="active"><span>Log in</span></a></li>
                     <li>
                         <app-lang-switcher></app-lang-switcher>
                     </li>
                 </ul>
             </nav>
 
-            <nav *ngIf="currParentUrl === 'registration-success'">
+            <nav *ngIf="currParentUrl === 'unknownPage'">
                     <ul>
-                        <li ><a href="#" [routerLink]="'/login'" routerLinkActive="active"><span>Log in</span></a></li>
+                        <li ><a href="#" [routerLink]="''" routerLinkActive="active"><span>Log in</span></a></li>
+                        <li ><a href="#" [routerLink]="'/registration'" routerLinkActive="active"><span>Sign Up</span></a></li>
                         <li>
                             <app-lang-switcher></app-lang-switcher>
                         </li>
-                    </ul>
-                </nav>
+                        </ul>
+            </nav>
+
 
             <nav *ngIf="currParentUrl === 'login'">
                 <ul>
@@ -70,4 +89,3 @@
     </div>
     </div>
 </header>
-<router-outlet></router-outlet>

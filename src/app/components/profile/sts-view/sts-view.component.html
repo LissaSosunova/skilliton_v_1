@@ -33,7 +33,9 @@
                       </span>
                      </div>
                        <div class="col-xs-8 center-xs">
-                          <span>{{skill.name}}</span>
+                          <span>{{skill.name}}</span><br>
+                          <span *ngIf="skill.isActive === false" class="moderation">On moderation <br></span>
+                          <span *ngIf="skill.isShared === false" class="draft">In draft</span>
                        </div>    
                 </div>
                         

@@ -33,7 +33,9 @@
                     </span>
                    </div>
                      <div class="col-xs-8 center-xs">
-                        <span>{{goal.name}}</span>
+                        <span>{{goal.name}}</span><br>
+                        <span *ngIf="goal.isActive === false" class="moderation">On moderation</span>
+                        <span *ngIf="goal.hidden === true" class="draft">In draft</span>
                      </div>    
               </div>
                       

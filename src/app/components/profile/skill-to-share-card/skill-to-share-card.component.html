@@ -1,110 +1,151 @@
-<div class="row">
-    <div class="col-xs-12">
-        <div class="section-of-block
-                    col-xs-12
-                    col-sm-12
-                    col-md-12
-                    col-lg-12
-                    row
-                    center-xs
-                    services"
-                    *ngIf="!showSkills"
-                    >
-        Add information about skills
+<div class="col-xs-12 row">
+  <!-- If there is no any skill -->
+  <div class="section-of-block
+              col-xs-12
+              col-sm-12
+              col-md-12
+              col-lg-12
+              row
+              center-xs
+              services"
+              *ngIf="!showSkills"
+              >
+      Add information about skills
+  </div>
 </div>
-<div class="col-xs-12 row no-padding">
+  <div class="col-xs-12 row no-padding" >
     <div class="col-xs-12
     col-sm-6
     col-md-6
     col-lg-4
     row
-    margin-bottom"
-    *ngFor="let skill of skills">
-  <div class="col-xs-12
-          header-block
-          row"
-          [ngClass]="{'enable': skill.isActive === true,  'disable': skill.isActive === false}">
-      <div class="col-xs-10
-                title-header-block
-                start-xs"
-                >
-        {{skill.name}}
-      </div> 
-        <div class="col-xs-2 end-xs">
-          <button (click)="goToSubUrl('/profile/about-me')"
-          class="edit-round-btn">
-        <i class="material-icons edit-icon">
-          edit
-        </i>
-        </button>
-        </div>
-        </div>
-        <div class="col-xs-12 description-block start-xs"> {{skill.description}}</div>
-        <div class="col-xs-12 table-block">
-        <table class="table">
-            <tr>
-              <td>Level</td>
-              <td>{{skill.level | skillLevels}}</td>
+    margin-bottom" 
+    *ngFor="let skill of skills"
+    >
+    <div class="section-100">
+      <div class="col-xs-12
+      header-block
+      row"
+      [ngClass]="{'enable': skill.isActive === true, 'disable': skill.isActive === false || skill.isShared === false}">
+  <div class="col-xs-10
+            title-header-block
+            start-xs"
+            >
+    <span>{{skill.name}} </span>
+  </div> 
+    <div class="col-xs-2 end-xs">
+      <button (click)="goToSubUrl('/profile/about-me')"
+      class="edit-round-btn">
+    <i class="material-icons edit-icon">
+      edit
+    </i>
+    </button>
+    </div>
+    </div>
+    <div class="col-xs-12 description-block start-xs"> {{skill.description}}</div>
+    <div class="col-xs-12 table-block">
+    <table class="table">
+        <tr>
+          <td class="padd">Level</td>
+          <td class="padd">{{skill.level | skillLevels}}</td>
+        </tr>
+        <tr>
+            <td class="padd">Education</td>
+            <td class="padd">{{skill.degree}}</td>
+          </tr>
+        <tr>
+            <td class="padd">Education language</td>
+            <td class="padd"><span *ngFor="let lang of skill.educationLanguage">{{lang.name}} </span></td>
+          </tr>
+          <tr>
+            <td class="padd">Relevant expience</td>
+            <td class="padd">{{skill.relevantExperience}}</td>
+          </tr>
+          <tr>
+              <td class="padd">Traning expertise</td>
+              <td class="padd">{{skill.trainingExpertise}}</td>
             </tr>
-            <tr>
-                <td>Education</td>
-                <td>{{skill.degree}}</td>
-              </tr>
-            <tr>
-                <td>Education language</td>
-                <td><span *ngFor="let lang of skill.educationLanguage">{{lang | langs}} </span></td>
-              </tr>
-              <tr>
-                <td>Relevant expience</td>
-                <td>{{skill.relevantExperience}}</td>
-              </tr>
-              <tr>
-                  <td>Traning expertise</td>
-                  <td>{{skill.trainingExpertise}}</td>
-                </tr>
-              <tr>
-              <td>In exchange:</td>
-              <td class="td-with-incl-table"><table class="included-table">
-                <section  *ngIf="skill.share.goal.length !==0">
-                    <tr>
-                        <td>Skills</td>
-                        <td><span *ngFor="let skill of skill.share.goal">{{skill}}</span></td>
+          <tr>
+          <td class="padd">In exchange:</td>
+          <td class="td-with-incl-table">
+            <table class="included-table">
+            <tr *ngIf="skill.share.goal.length !==0">
+                    <td class="padd">Skills</td>
+                    <td class="padd"><span *ngFor="let skill of skill.share.goal">{{skill.name}}</span></td>
+                  </tr>
+            </table>
+            <table *ngIf="skill.share.price.length !==0"  class="included-table">
+                <tr *ngFor="let price of skill.share.price">
+                    
+                    <td class="padd"><span>{{price.type | pricesTypes}}</span></td>
+                    <td class="padd"><span>$ {{price.value}}</span></td>
+                    </tr>
+                  </table>
+              
+              <table *ngIf="skill.share.service === true"  class="included-table">
+                  <tr>
+                      <td class="padd">Service</td>
+                      <td class="padd"> </td>
                       </tr>
-                </section>
-                  
-                  <section *ngIf="skill.share.price.length !==0" >
-                      <tr>
-                        <section  *ngFor="let price of skill.share.price">
-                          <td>{{price.type | pricesTypes}}</td>
-                          <td>$ {{price.value}}</td>
-                        </section>
-                          </tr>
-                  </section>
-                  <section *ngIf="skill.share.service === true" >
-                      <tr>
-                          <td>Service</td>
-                          <td> </td>
-                          </tr>
-                  </section>
-                </table></td>
-            </tr>
-            <tr>
-              <td>Schedule</td>
-              <td>Courses</td>
-            </tr>
-            <tr>
-              <td>Time</td>
-              <td>10:00 - 22:00</td>
-            </tr>
-            <tr>
-              <td>Trial lesson</td>
-              <td *ngIf="skill.share.trial === true">Yes, I do</td>
-              <td *ngIf="skill.share.trial === false">No</td>
-            </tr>
-          </table>
-        </div>
+                    </table>
+            </td>
+        </tr>
+        <tr>
+          <td class="padd">Schedule</td>
+          <td class="padd">Courses</td>
+        </tr>
+        <tr>
+          <td class="padd">Time</td>
+          <td class="padd">10:00 - 22:00</td>
+        </tr>
+        <tr>
+          <td class="padd">Trial lesson</td>
+          <td class="padd" *ngIf="skill.share.trial === true">Yes, I do</td>
+          <td class="padd" *ngIf="skill.share.trial === false">No</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- End of card -->
+    </div>
+
   </div>
+
+  <!-- Init skills -->
+  <div class="col-xs-12
+              col-sm-6
+              col-md-6
+              col-lg-4
+              row
+              margin-bottom"
+              >
+  <div class="section-100" *ngFor="let skill of initSkills">
+    <div class="col-xs-12
+                header-block
+                disable
+                row"
+                >
+    <div class="col-xs-10
+              title-header-block
+              start-xs"
+              >
+              <span>{{skill.name}} </span>
+    </div> 
+      <div class="col-xs-2 end-xs">
+        <button (click)="goToSubUrl('/profile/about-me')"
+        class="edit-round-btn">
+      <i class="material-icons edit-icon">
+        edit
+      </i>
+      </button>
+      </div>
+    </div>
+    <div class="col-xs-12 descr-field-init start-xs">
+        <span>Add some description</span> </div>
+    </div>
+  </div>
+  <!-- End of card init skill-->
 </div>
  <!-- End of includer -->
-  </div>
+
   

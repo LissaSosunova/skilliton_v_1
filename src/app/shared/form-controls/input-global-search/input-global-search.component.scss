@@ -1,0 +1,68 @@
+@import '../../../../scss/variables';
+
+.input-field {
+    padding: 10px;
+    background-color: white;
+    border: 1px solid map-get($bg-color, 'gray-light');
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 47px;
+}
+
+.input {
+    position: relative;
+
+    &__max-length-warning {
+        font-size: 12px;
+        color: map-get($font-color, 'primary');
+    }
+}
+
+.error {
+    color:map-get($font-color, 'error');
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.error-input {
+    border: 1px map-get($font-color, 'error') solid;
+}
+.input-search {
+    border-top-color:black;
+}
+.align {
+    text-align: center;
+}
+
+.block-droop {
+    position: relative;
+    top: -6px;
+    width: 100%;
+    padding: 20px;
+    background-color: map-get($bg-color, 'gray-lighter');
+    border-bottom: 1px solid map-get($bg-color, 'gray-light');
+    border-left: 1px solid map-get($bg-color, 'gray-light');
+    border-right: 1px solid map-get($bg-color, 'gray-light');
+    border-radius: 8px;
+    div {
+        padding: 5px;
+        color: red;
+        &:hover {
+            background-color: white;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    }
+}
+
+.non-vis {
+    display: none;
+}
+.label-optional {
+    font-size: 0.7em;
+    color: map-get($font-color, 'gray');
+}

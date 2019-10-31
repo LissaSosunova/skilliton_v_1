@@ -1,9 +1,9 @@
 <div *ngIf="userUploaded == true"
 class="main-content"
         id="main-content">
-        <section>
-            <app-posts></app-posts>
-    <app-posts></app-posts>
+        <section class="body-home">
+            <div class="all-news">All news</div>
+            <app-posts [user]="user"></app-posts>
         </section>
         
 </div>

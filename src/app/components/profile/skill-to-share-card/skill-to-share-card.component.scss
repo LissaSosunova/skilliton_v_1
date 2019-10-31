@@ -9,22 +9,20 @@
     background-color: white;
   }
   tr {
+    .padd {
+      padding: 10px 10px 10px 10px;
+    }
     td:nth-child(even) {
       width: 70%;
     }
     td {
       vertical-align: top;
       width: 30%;
-      padding: 20px 10px 20px 10px;
     }
   }
 }
 .included-table {
   width: 100%;
-  background-color: #F1F6FA;
-  tr:nth-child(even) {
-    background-color:  #F1F6FA;
-  }
   tr {
     td {
       width: 50%;
@@ -102,4 +100,20 @@
 
 .td-with-incl-table {
   padding: 0px;
+}
+.incl1 {
+  padding: 0px;
+}
+
+.descr-field-init {
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  font-size: 0.8em;
+  min-width: 240px;
+  background-color: white;
+  padding: 20px 16px 20px 16px;
+}
+
+.section-100 {
+  width: 100%;
 }

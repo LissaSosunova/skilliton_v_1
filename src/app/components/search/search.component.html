@@ -1,0 +1,97 @@
+<div class="row content-block col-xs-12 box">
+    <div 
+          class="body-search row col-xs-10 center-xs">
+        <div class="all-news col-xs-4 start-xs">Search</div>
+        <div class="all-news col-xs-8 end-xs">
+            <input
+            type="submit"
+            (click)="goToProfile()" 
+            class="btn
+            primary-btn
+            btn-width-big"    
+            value="Edit my profile">
+        </div>
+
+        <!-- Title Search sections -->
+        <div class="col-xs-12 row center-xs">
+            <div class="col-xs-8 between-xs row">
+                <div class="col-xs-2 tab-expert-class">
+                  <span>All</span>
+                </div>
+                <div class="col-xs-2 tab-expert-class">
+                    <span>Skills</span>
+                  </div>
+                <div class="col-xs-2 tab-expert-class">
+                    <span>People</span>
+                    </div>
+                <div class="col-xs-2 tab-expert-class">
+                    <span>Posts</span>
+                  </div>
+                <div class="col-xs-2 tab-expert-class">
+                    <span>Library</span>
+                  </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+  <div class="col-xs-8 center-xs">
+        <!-- Search -->
+      <form name="searchPageForm"
+            #searchPageForm="ngForm"
+            class="col-xs-12">
+        <app-input-search
+          [maxLength]="100"
+          [control]="searchControl"
+          name="srch"
+          [(ngModel)]="search"
+          #srch="ngModel"
+          [required]="false"
+          [placeholder]="searchPlaceholder">
+  </app-input-search>
+      </form>
+    </div>  
+
+      <div class="col-xs-12
+                  col-sm-12
+                  col-md-10
+                  col-lg-10
+                  row start-xs"> 
+        <span class="title-sect">
+            Skills
+        </span>
+        <app-skills-card
+        class="card-row"
+        [skills]="searchResult.skills"></app-skills-card>
+      </div>
+        
+
+      <div class="col-xs-12
+                  col-sm-12
+                  col-md-10
+                  col-lg-10
+                  row start-xs"> 
+              <span class="title-sect">
+                  People
+              </span>
+          <app-people-card
+          class="card-row"
+          [people]="searchResult.people"></app-people-card>
+        </div>
+
+
+        <div class="col-xs-12
+                  col-sm-12
+                  col-md-10
+                  col-lg-10
+                  row start-xs"> 
+              <span class="title-sect">
+                  Posts
+              </span>
+          <app-posts-card
+          class="card-row"
+          [posts]="searchResult.posts"></app-posts-card>
+        </div>
+          
+        
+    </div>
+</div>

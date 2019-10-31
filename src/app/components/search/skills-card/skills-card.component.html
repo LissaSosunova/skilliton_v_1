@@ -1,0 +1,55 @@
+<div class="col-xs-12 row">
+      <div [ngClass]="{'non-vis': skills.length !== 0 }"
+        class="card col-xs-12">
+      No results for search
+  </div>
+  <div class="card col-xs-12 row" *ngFor="let skill of skills">
+      <div class="left-side
+                  col-xs-4
+                  col-sm-4
+                  col-md-2
+                  col-lg-2">
+          <div class="face" [style.background-image]="'url(' + avatar + ')'"></div>
+          </div>
+          <div class="col-xs-4
+                      col-sm-4
+                      col-md-6
+                      col-lg-6
+                      head
+                      start-xs" >
+                      <div class="name">{{ skill.firstName }}  {{ skill.lastName }}</div>
+                      <div class="work" *ngIf="skill.jobPosition !== null">{{ skill.jobPosition}}</div>
+                        <div class="work" *ngIf="skill.workPlace !== null">{{ skill.workPlace}}</div>
+                     
+                        <div *ngIf="skill.summary !== null">
+                            <label class="summary">{{ skill.summary  || 'No info'}}</label>
+                        </div>
+                      <div *ngIf="skill.skillToShare !== null" class="tab-expert-class">Skills to share <br>
+                        <!-- List of Servises -->
+                        <span class="btn-skill">
+                            {{skill.skillToShare.skillName}}
+                        </span>
+                      </div>
+                      <div *ngIf="skill.skillToObtain !== null" class="tab-expert-class">Skills to obtain <br>
+                          <!-- List of Servises -->
+                          <span  class="btn-skill">
+                              {{skill.skillToObtain.skillName}}
+                          </span>
+                        </div>
+
+          </div>
+          <div class="col-xs-4
+                      col-sm-4
+                      col-md-4
+                      col-lg-4
+                      end-xs top-xs" >
+              <input
+              type="submit"
+              (click)="match()" 
+              class="btn
+              primary-btn
+              btn-match"    
+              value="Match">
+</div>
+  </div>
+</div>
