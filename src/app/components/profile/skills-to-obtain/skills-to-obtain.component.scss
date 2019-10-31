@@ -26,7 +26,7 @@
 .block-droop {
   position: relative;
   text-align: left;
-  top: -10px;
+  top: -20px;
   height: 160px;
   overflow: auto;
   padding: 0px;
@@ -66,6 +66,10 @@
     padding: 10px;
     margin-top: 10px;
     border: 1px solid map-get($bg-color, 'gray-light');
+}
+.add-cont {
+  padding: 10px;
+  margin-top: 10px;
 }
 .no-padd {
     padding-left: 0px;
@@ -138,4 +142,53 @@
 
 .align-left {
   text-align: left;
+}
+
+.block-drop {
+  position: relative;
+  text-align: left;
+  top: -2.3em;
+  height: 160px;
+  overflow: auto;
+  padding: 0px;
+  background-color: map-get($bg-color, 'white');
+  border-bottom: 1px solid map-get($bg-color, 'gray-light');
+  border-left: 1px solid map-get($bg-color, 'gray-light');
+  border-right: 1px solid map-get($bg-color, 'gray-light');
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  div {
+      padding: 5px;
+      color: map-get($font-color, 'primary');
+      &:hover {
+          background-color: map-get($bg-color, 'primary');
+          cursor: pointer;
+          color: map-get($font-color, 'inverse');
+      }
+  }
+}
+.choosed-goals-field {
+  padding: 10px;
+  margin-bottom: 15px;
+  margin-right: 8px;;
+  background-color: white;
+  border: 1px solid map-get($bg-color, 'primary');
+  border-radius: 8px;
+  min-width: 50px;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 47px;
+  span {
+    font-size: 0.8em;
+  }
+}
+.search-position {
+  margin-top: -30px;
+}
+
+.fix-heigth {
+  height: 15px;
+}
+.bg-white {
+  background-color: white;
 }

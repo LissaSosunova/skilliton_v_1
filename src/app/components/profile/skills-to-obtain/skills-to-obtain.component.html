@@ -104,6 +104,20 @@
                 </div>
                 
         </div>
+<!-- Expected result -->
+        <div class="col-xs-12 elem row">
+                <div class="col-xs-3 row-text margin-text">Expected result: </div>
+                <div class="col-xs-9 no-padd">
+                <app-input-textarea
+                name="expRes"
+                #expRes="ngModel"
+                [(ngModel)]="expectedRes"
+                [maxLength]="250"
+                [required]="false">
+                </app-input-textarea>
+                </div>
+                
+        </div>
 
         <div class="col-xs-12 elem row">
                 <div class="col-xs-3 row-text">What are you ready to give in exchange? </div>
@@ -116,7 +130,11 @@
                                 (change)="agreeMoneyHandler($event)">
                                 <span class="checkmark"></span>
                                 </label>
-                        <label class="container-ch  align-left">Service
+        
+                <!-- Share services for payment -->
+<div class="row col-xs-12 no-padd">
+        <div class="col-xs-4 no-padd">
+                <label class="container-ch  align-left">Service
                                 <input type="checkbox"
                                 name="service"
                                 #service="ngModel"
@@ -124,9 +142,60 @@
                                 (change)="agreeServiceHandler($event)"
                                 [disabled]="!!noServicesForSelect">
                                 <span class="checkmark"
-                                [ngClass]="{'disabled-select': noServicesForSelect == true,  'enable-select': noServicesForSelect == false}"></span>
-                                </label>
-                        <label class="container-ch  align-left">Skills
+                                [ngClass]="{'disabled-select': noServicesForSelect == true,  'enable-select': noServicesForSelect == false}">
+                        </span>
+                </label>
+        </div>
+        <div class="col-xs-8 no-padd">
+                <section *ngIf="servicesExpList.length !== 0">
+                <div *ngFor="let option of servicesExpList" class="choosed-goals-field">
+                        <span>{{option.name}} </span>
+                        <button (click)="changeUsersServiceList(option)"
+                        class="btn-remome">
+                                <i class="material-icons remove-icon">
+                                                clear
+                                </i>
+                        </button>
+                </div>
+                </section>
+        </div>
+        </div>
+
+                <!-- Search services -->
+                        <div class="col-xs-12 no-padd">
+                        <section class="search-position" *ngIf="servicesOffered === true">
+                                <app-input-search
+                                [label]="'Select service from your services'"
+                                class="search"
+                                [maxLength]="100"
+                                [control]="searchServicesControl"
+                                name="serviceNames"
+                                [(ngModel)]="serviceName"
+                                #serviceNames="ngModel"
+                                [required]="!!noServicesForSelect"
+                                [placeholder]="skillsPlaceholder"
+                                [requiredFieldError]="'Check service from your list'">
+                                </app-input-search>
+                        
+                                <section *ngIf="openAutoUsersServices"
+                                [ngClass]="{'block-drop': openAutoUsersServices == true,  'non-vis': openAutoUsersServices == false}">
+                                <div *ngFor="let option of optionsUserServises">
+                                        <div (click)="setValueUsersServiceFromDropDown(option)">
+                                        <i class="material-icons plus-icon">
+                                        add_circle_outline
+                                        </i>
+                                        <span>{{option.name}}</span></div>
+                                        </div>
+                                </section>
+                                </section>
+                        </div>
+                                <!-- End of Search services -->  
+
+
+                <!-- SHare skills for payment -->
+<div class="row col-xs-12 no-padd">
+        <div class="col-xs-4 no-padd">
+                <label class="container-ch  align-left">Skills
                                 <input type="checkbox"
                                 name="skillsOffere"
                                 #skillsOffere="ngModel"
@@ -137,12 +206,58 @@
                                 [ngClass]="{'disabled-select': noSkillsForSelect == true,  'enable-select': noSkillsForSelect == false}">
                                 </span>
                                 </label>
-                </div>
+        </div>
+        <div class="col-xs-8">
+        <section *ngIf="skillsExpList.length !== 0">
+                        <div *ngFor="let option of skillsExpList" class="choosed-goals-field">
+                                <span>{{option.name}} </span>
+                                <button (click)="changeUsersSkillList(option)"
+                                class="btn-remome">
+                                        <i class="material-icons remove-icon">
+                                                        clear
+                                        </i>
+                                </button>
+                        </div>
+                        </section>
+        </div>
+</div>
+
+        
+<!-- Search skills -->
+        <div class="col-xs-12 no-padd">
+        <section class="search-position" *ngIf="skillsOffered === true">
+                <app-input-search
+                [label]="'Select skills from your skills to share'"
+                class="search"
+                [maxLength]="100"
+                [control]="searchSkillsControl"
+                name="skillNames"
+                [(ngModel)]="skillsName"
+                #skillNames="ngModel"
+                [required]="!!noSkillsForSelect"
+                [placeholder]="skillsPlaceholder"
+                [requiredFieldError]="'Check skill from your list'">
+                </app-input-search>
+        
+                <section *ngIf="openAutoUsersSkills"
+                [ngClass]="{'block-drop': openAutoUsersSkills == true,  'non-vis': openAutoUsersSkills == false}">
+                <div *ngFor="let option of optionsUserSkills">
+                        <div (click)="setValueUsersSkillsFromDropDown(option)">
+                        <i class="material-icons plus-icon">
+                        add_circle_outline
+                        </i>
+                        <span>{{option.name}}</span></div>
+                        </div>
+                </section>
+                </section>
+        </div>
+                <!-- End of Search skills -->                            
+</div>
                 
         </div>
         <div class="col-xs-12 elem row">
                 <div class="col-xs-3 row-text">Disable (hide from other users)?</div>
-                <label class="container-ch">
+                <label class="container-ch fix-heigth">
                         <input type="checkbox"
                         name="disable"
                         #disable="ngModel"
@@ -196,11 +311,11 @@
                         </div>
                 </div>
         </div>
-        <div class="col-xs-12 row elem">
+        <div class="col-xs-12 row add-cont">
         <div>
         <input
         type="submit"
-        (click)="saveBtn(currentLevel, expectedLevel, withTrial, hidden, goalName, description)" 
+        (click)="saveBtn(currentLevel, expectedLevel, withTrial, hidden, goalName, description, expectedRes)" 
         class="btn
         primary-btn
         btn-width-middle"    
@@ -209,6 +324,12 @@
         [ngClass]="{'disabled': skillsDataForm.invalid}">
         </div>
         </div>
+        <app-alert-modal
+        [header]="headerError"
+        [actionName]="showErrorText"
+        [details]="details"
+        [recomend]="recomend"
+         #infoPopup></app-alert-modal>
         </form> 
         </div>
         </div>  

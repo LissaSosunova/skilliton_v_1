@@ -152,7 +152,7 @@ onSubmit() {
     this.data.postNewService(this.params).subscribe((data) => {
       if (data.error === false || data.status === 200) {
         this.data.getUser().subscribe((res) => {
-          this.store.dispatch(new UpdateUsersServices(res.data.keyData.myServices));
+          this.store.dispatch(new UpdateUsersServices(res.data.keyData.services));
           this.router.navigate(['/profile']);
         });
       }

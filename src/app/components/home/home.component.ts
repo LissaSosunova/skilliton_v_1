@@ -8,7 +8,7 @@ import { LocalstorageService } from '../../services/localstorage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SessionstorageService } from '../../services/sessionstorage.service';
 import { Store} from '@ngrx/store';
-import { LoadUserData } from '../../state/actions/user.actions';
+import { LoadUserData, UpdateUser } from '../../state/actions/user.actions';
 import { LoadTags } from '../../state/actions/filters.actions';
 import {Observable, Subject} from 'rxjs';
 
@@ -42,10 +42,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getUserData();
   }
     private getUserData() {
-
       // Here is example of resolver for this.user
       this.actRoute.data.subscribe(data => {
         this.user = data.user$.data;
+        this.store.dispatch(new UpdateUser(this.user));
         this.userUploaded = true;
         if((this.user.keyData.skills.length === 0 ||
           this.user.keyData.skills == null) &&
@@ -65,7 +65,6 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.dataNotSet = false;
         }
       });
-      this.store.dispatch(new LoadUserData());
   }
 
   private getFilters() {
@@ -81,7 +80,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const dataStorage = this.sessionStorageService.getValue("_token");
     const dataLocal = this.localstorageService.getValue(key);
     if((dataLocal === "" || dataLocal === null || !dataLocal) && (dataStorage === null || dataStorage === "")){
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
     }
   }
   ngOnDestroy() {

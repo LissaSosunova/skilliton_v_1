@@ -1,0 +1,54 @@
+@import '../../../scss/variables';
+.bottom-spacer {
+    height: calc(#{$footer-height} + #{$footer-height});
+}
+
+.content-block {
+    margin-top: calc(#{$header-height} - 3px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 420px;
+    background-color: map-get($bg-color, 'dark-blue');
+    color: map-get($font-color,'inverce');
+    min-height: 1rem;
+}
+.body-search {
+  display: flex;
+  flex-direction: row;
+  padding: 5px  0px  100px  0px;
+  width: 95%;
+  background-color: map-get($bg-color, 'gray-lighter');
+}
+.all-news {
+  padding: 30px 30px 20px 20px;
+  color: map-get($font-color, 'link');
+  font-size: 2.5em;
+  font-weight: 700;
+}
+.tab-expert-class {
+  display: flex;
+  align-items: center;
+  align-content: flex-start;
+  min-height: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+  span {
+      width: 100%;
+      list-style: none;
+      margin: 0;
+      font-size: 1em;
+      font-weight: 600;
+      padding: 15px;
+      &:hover {
+        cursor: pointer;
+      }
+  }
+}
+.card-row {
+  width: 100%;
+}
+.title-sect {
+  margin: 2%;
+}

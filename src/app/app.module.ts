@@ -61,7 +61,8 @@ import { StoreModule } from '@ngrx/store';
 import { TopSidebarComponent } from './components/top-sidebar/top-sidebar.component';
 import { userReducer} from './state/reducers/user';
 import { filtersReducer} from './state/reducers/filters.reducer';
-import { langsReducer} from './state/reducers/langs.reducer';
+import { langsReducer } from './state/reducers/langs.reducer';
+import { globalSearchReducer } from './state/reducers/global-search.reducer';
 import { AlertModalComponent } from './components/modals/alert-modal/alert-modal.component';
 import { LeavePopupComponent } from './components/registration/leave-popup/leave-popup.component';
 import { PopupComponent } from './components/modals/popup/popup.component';
@@ -99,6 +100,15 @@ import { LangsEffects } from './state/effects/langs.effects';
 import { PricesTypesPipe } from './shared/pipes/prices-types.pipe';
 import { SkillLevelsPipe } from './shared/pipes/skill-levels.pipe';
 import { LangsPipe } from './shared/pipes/langs.pipe';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
+import { ResendCodeComponent } from './components/resend-code/resend-code.component';
+import { MyMatchesComponent } from './components/profile/my-matches/my-matches.component';
+import { SearchComponent } from './components/search/search.component';
+import { InputGlobalSearchComponent } from './shared/form-controls/input-global-search/input-global-search.component';
+import { SkillsCardComponent } from './components/search/skills-card/skills-card.component';
+import { PeopleCardComponent } from './components/search/people-card/people-card.component';
+import { PostsCardComponent } from './components/search/posts-card/posts-card.component';
 
 
 @NgModule({
@@ -145,6 +155,15 @@ import { LangsPipe } from './shared/pipes/langs.pipe';
     PricesTypesPipe,
     SkillLevelsPipe,
     LangsPipe,
+    PageNotFoundComponent,
+    ConfirmComponent,
+    ResendCodeComponent,
+    MyMatchesComponent,
+    SearchComponent,
+    InputGlobalSearchComponent,
+    SkillsCardComponent,
+    PeopleCardComponent,
+    PostsCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -199,7 +218,7 @@ import { LangsPipe } from './shared/pipes/langs.pipe';
     HttpClientModule,
     OverlayModule,
     AngularMyDatePickerModule,
-    StoreModule.forRoot({user: userReducer, filters: filtersReducer, langs: langsReducer}),
+    StoreModule.forRoot({user: userReducer, filters: filtersReducer, langs: langsReducer, globalSearch: globalSearchReducer}),
     EffectsModule.forRoot([UserEffects, FiltersEffects, LangsEffects])
   ],
   providers: [

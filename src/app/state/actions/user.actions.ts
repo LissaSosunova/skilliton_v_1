@@ -6,6 +6,7 @@ export enum UserActionTypes {
   LOAD_USER_SUCCESS = '[User] Load User Success',
   LOAD_USER_ERROR = '[User] Load User Error',
   RESET_USER = '[User] Reset User Data',
+  UPDATE_USER = '[User] Update or set User Data',
   UPDATE_USERS_GOALS = '[User] Update User KeyData Goals',
   UPDATE_USERS_SERVICES = '[User] Update User KeyData Services',
   UPDATE_USERS_SKILLS = '[User] Update User KeyData Skills',
@@ -31,6 +32,11 @@ export class ResetUserData implements Action {
 
 export class UpdateUsersGoals implements Action {
   type = UserActionTypes.UPDATE_USERS_GOALS;
+  constructor(public payload) { }
+}
+
+export class UpdateUser implements Action {
+  type = UserActionTypes.UPDATE_USER;
   constructor(public payload) { }
 }
 

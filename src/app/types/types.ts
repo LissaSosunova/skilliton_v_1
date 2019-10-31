@@ -103,7 +103,7 @@ export module types {
     interests: Array<any> | [];
     education: Array<any> | [];
     goals: Array<any> | [];
-    myServices: Array<any> | [];
+    services: Array<any> | [];
     workExperience: Array<any> | [];
     goalsSkipped: boolean;
     skillsSkipped: boolean;
@@ -209,6 +209,39 @@ export module types {
     name?: string;
     services?: Array<number>;
     skills?: Array<number>;
+    expectedResult?: string;
+  }
+
+  export interface AddSkillAPI {
+    certificates?: Array<number> | [null];
+    degree: string;
+    description: string;
+    educationLanguage: Array<any>;
+    experience: string;
+    expertise: string;
+    isShared: boolean | true;
+    level: number;
+    moneyExpected: boolean;
+    name?: string;
+    prices: Array<Price>;
+    recommendations?: Array<any> | [null];
+    serviceExpected: boolean;
+    skillId?: number;
+    skills: Array<any> | [null];
+    skillsExpected: boolean;
+    withTrial: boolean;
+  }
+
+  export interface Price {
+    type: number;
+    currency: string;
+    value: number;
+  }
+
+  export interface AddServiceAPI {
+    id?: number;
+    name?: string;
+    recommendationsMedia?: [null];
   }
 
   export interface AddSkillAPI {

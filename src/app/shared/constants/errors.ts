@@ -20,7 +20,7 @@ export const errorTypes = {
                 recomend: "Please, select a skill from the list or skip this step."},
             {
                 code: 101,
-                title: "In this page you can not ceate new name for Interests. ",
+                title: "You can not ceate new name for Interests. ",
                 recomend: "Please, select an Interest from the list and then press button 'DONE'."}
         ]
     },

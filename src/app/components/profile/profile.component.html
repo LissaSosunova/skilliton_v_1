@@ -73,8 +73,16 @@
                             col-sm-3
                             col-md-3
                             col-lg-3
-                            btn-top-bar"
-                [ngClass]="{'active-btn': activeTopBtn === 'aboutMe' , 'def': activeTopBtn !== 'aboutMe' }"
+                            btn-top-bar
+                            "
+                [ngClass]="{'active-btn': router.url === '/profile' ||
+                                        router.url === '/profile/about-me' ||
+                                        router.url === '/profile/sts-view' ||
+                                        router.url === '/profile/skill-to-share' ||
+                                        router.url === '/profile/sto-view' ||
+                                        router.url === '/profile/skills-to-obtain' ||
+                                        router.url === '/profile/services'}"
+                (click)="goToSubUrl('/profile')"
                 >About me</div>
         <div class="col-xs-3
                     col-sm-3
@@ -90,7 +98,10 @@
                     col-sm-3
                     col-md-3
                     col-lg-3
-                    btn-top-bar">My matches</div>
+                    btn-top-bar"
+                    [ngClass]="{'active-btn': router.url === '/profile/matches' , 'def': router.url !== '/profile/matches' }"
+                    (click)="goToSubUrl('/profile/matches')">
+                    My matches</div>
         </div>
     </div>
 </div>
@@ -178,7 +189,8 @@
                         col-sm-12
                         col-md-12
                         col-lg-12
-                        title-section-block-skills">
+                        title-section-block-skills"
+                        (click)="goToSubUrl('/profile/sts-view')">
                     Skills to share
                     <button (click)="goToSubUrl('/profile/sts-view')"
                             class="edit-round-btn">
@@ -210,7 +222,7 @@
                         col-sm-12
                         col-md-12
                         col-lg-12
-                        title-section-block-skills">
+                        title-section-block-skills" (click)="goToSubUrl('/profile/sto-view')">
                         Skills to obtain
                     <button (click)="goToSubUrl('/profile/sto-view')"
                             class="edit-round-btn">

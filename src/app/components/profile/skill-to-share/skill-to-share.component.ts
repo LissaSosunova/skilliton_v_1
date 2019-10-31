@@ -113,12 +113,12 @@ export class SkillToShareComponent implements OnInit {
       if(state !== undefined || state) {
         this.user = state;
         this.userUploaded = true;
-        this.myGoals = state.keyData.goals;
+        this.myGoals = _.filter(state.keyData.goals, { 'hidden': false });
         this.mySkills = state.keyData.skills;
         this.myGoals.forEach(el => {
           el.srchStr = _.lowerCase(el.name);
           });
-        if(this.user && state.keyData.goals.length === 0 ){
+        if(this.user && this.myGoals.length === 0 ) {
           this.noSkillsForSelect = true;
         }
       }
@@ -427,12 +427,9 @@ valPayment(e, type: number) {
           educationLanguage: this.choosedLang
           };
       }
-      console.log(this.createdSkillToShare);
     this.data.postNewSkill(this.createdSkillToShare).subscribe((resp) => {
-      console.log('resp', resp);
       if (resp.error === false || resp.status === 200) {
         this.data.getUser().subscribe((res) => {
-          console.log('res', res);
           this.store.dispatch(new UpdateUsersSkills(res.data.keyData.skills));
           this.router.navigate(['/profile']);
         });

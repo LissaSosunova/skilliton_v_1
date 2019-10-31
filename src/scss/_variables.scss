@@ -6,19 +6,23 @@ $bg-color: (
   'black': black,
   'primary':rgba(1, 114, 208, 1),
   'happy': rgba(113, 206, 70, 1),
-  'error': rgba(235, 87, 87, 1)
+  'error': rgba(235, 87, 87, 1),
+  'dark-blue': rgba(13, 60, 101, 1),
+  'light-blue': rgba(196, 228, 255, 1)
 );
 
 $font-color: (
     'inverse': white,
     'gray':  rgba(185, 185, 185, 1),
+    'gray-dark':  rgba(155, 155, 155, 1),
     'gray-light': rgba(212, 212, 212, 1),
     'gray-lighter': rgba(241, 241, 241, 1),
     'black': black,
     'primary':rgba(8, 27, 53, 1),
     'warning': rgba(250, 212, 3, 1),
     'error': rgba(235, 87, 87, 1),
-    'link':rgba(1, 114, 208, 1)
+    'link':rgba(1, 114, 208, 1),
+    'green': #2DB191
 );
 
 $header-height: 60px;

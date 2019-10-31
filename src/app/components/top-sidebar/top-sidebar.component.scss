@@ -36,11 +36,13 @@ header {
         ul {
             list-style-type: none;
             margin: 0;
+            padding-top: 10px;
             display: flex;
             li a span {
                 color: map-get($font-color, 'primary');
-                font-size: 1em;
+                font-size: 0.95em;
                 padding: 1.2em;
+                font-weight: 600;
                 &:hover {
                     color: map-get($font-color, 'inverse');
                     background: map-get($bg-color, 'primary');
@@ -57,7 +59,7 @@ header {
 }
 
 .exit-btn {
-    font-size: 30px;
+    font-size: 26px;
     padding-left: 20px;
 
     &:hover {
@@ -65,4 +67,24 @@ header {
         color: red;
         background: none;
     }
+}
+
+.search-btn {
+    font-size: 22px;
+    padding-left: 0px;
+    color: map-get($bg-color, 'gray');
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.search-inp-top {
+    border-bottom: 1px solid map-get($bg-color, 'gray-light');
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 80px;
+}
+.non-vis {
+    display: none;
 }

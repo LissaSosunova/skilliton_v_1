@@ -93,7 +93,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   checkStatusData(data: any): void{
-    setTimeout(() => { this.router.navigate(['/login']) }, 1000);
+    setTimeout(() => { this.router.navigate(['']) }, 1000);
   }
 // Function gets current date
   getDataForDateOptions (): void {

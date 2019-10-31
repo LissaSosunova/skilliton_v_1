@@ -83,7 +83,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
       this.lastName = data.user$.data.profile.lastName;
       this.summary = this.user.profile.profileSummary;
       this.myGoals = this.user.keyData.goals;
-      this.myServices = this.user.keyData.myServices;
+      this.myServices = this.user.keyData.services;
       this.placeOfBirth = this.user.profile.placeOfBirth;
       if (this.user.profile.langs.native !== null) {
         this.langNative = this.user.profile.langs.native + ' (native)';
@@ -99,6 +99,11 @@ export class ProfileComponent implements OnInit,  OnDestroy {
 
   public goToSubUrl(url: string) {
     this.activeUrl = url;
+    if (url === '/profile/matches'){
+      this.activeTopBtn = 'myMatches';
+    } else if (url === '/profile') {
+      this.activeTopBtn = 'aboutMe';
+    }
     this.router.navigate([url]);
     this.getCurrentRoute();
   }
@@ -114,7 +119,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
 
   getErrorCodeApi(data: number, message: string): void {
     if (data === 401) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     }
   }
   checkStatusData(data: any): void{
