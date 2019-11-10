@@ -143,18 +143,21 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
   if (param === 'skills') {
     this.chipsSkills.push({name: option.name, id: option.id});
     this.goToNextPage = true;
+    this.searchControl.reset({ value: '', disabled: false });
     if (this.chipsSkills.length === 20) {
     this.isTagsSkills = false;
   }
   } else if (param === 'goals') {
     this.chipsGoals.push({name: option.name, id: option.id});
     this.goToNextPage = true;
+    this.searchControl.reset({ value: '', disabled: false });
     if (this.chipsGoals.length === 20) {
       this.isTagsGoals = false;
     }
   } else if (param === 'interests') {
     this.chipsInterest.push({name: option.name, id: option.id});
     this.goToNextPage = true;
+    this.searchControl.reset({ value: '', disabled: false });
     if (this.chipsInterest.length === 20) {
     this.isTagsInterests = false;
   }

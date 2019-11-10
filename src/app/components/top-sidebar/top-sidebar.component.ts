@@ -43,8 +43,12 @@ export class TopSidebarComponent implements OnInit {
   private getCurrentRoute(): void {
     this.routerService.getCurrentRoute$().subscribe(url => {
       const urlSegments = url.split('/');
+      const viewMateProfile = urlSegments[1].split(";mate=");
       this.currParentUrl = urlSegments[1];
-      if (this.currParentUrl === '/' || !this.currParentUrl) {
+      if (viewMateProfile.length > 1 ) {
+        this.currParentUrl = viewMateProfile[0];
+      }
+      if (this.currParentUrl === '/' && !this.currParentUrl) {
         this.currParentUrl = 'login';
       }
       if (urlSegments.length > 2) {
@@ -54,9 +58,8 @@ export class TopSidebarComponent implements OnInit {
       } else {
         this.currChildUrl = '';
       }
-
-      const unknown = url.split("=");
-      if (unknown.length >=2){
+      const unknown = url.split("_code=");
+      if (unknown.length > 1 && this.currParentUrl !== 'view-profile') {
         this.currParentUrl = 'unknownPage';
       }
     });
@@ -90,23 +93,10 @@ export class TopSidebarComponent implements OnInit {
   setSearch(query: string) {
     this.data.getSearchAll(query).subscribe((data) => {
       if (data.error === false || data.status === 200) {
-        this.onReset();
-
+        this.searchControl.reset({ value: '', disabled: false });
         this.store.dispatch(new SetGlobalSearch(data));
         this.router.navigate(['/search']);
       }
     });
-  }
-  resetSearch () {
-    this.searchControl.reset();
-    this.searchControl = new FormControl();
-  }
-
-  public onReset(): void {
-    if (!this.disabled) {
-      this.searchControl.reset({searchValue: ''});
-      this.searchControl.setValue('');
-      this.reset.emit();
-    }
   }
 }

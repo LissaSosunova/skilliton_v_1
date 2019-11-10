@@ -12,6 +12,7 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { RouterService } from 'src/app/services/router.service';
 import { HttpService } from '../../services/http.service';
 import { AvatarService } from 'src/app/services/avatar.service';
+import { EditUserProfileService } from '../../services/edit-user-profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -42,6 +43,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   public summary: string;
   public placeOfBirth: any;
   private unsubscribe$: Subject<void> = new Subject<void>();
+  private openSummaryTextarea: boolean = false;
 
   constructor(
     private actRoute: ActivatedRoute,
@@ -54,6 +56,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
     private transferService: TransferService,
     private userSubService: UserSubService,
     private data: HttpService,
+    private editData: EditUserProfileService,
   ) { }
 
   ngOnInit() {
@@ -77,23 +80,26 @@ export class ProfileComponent implements OnInit,  OnDestroy {
    }
 
   private getUserData() {
-    this.actRoute.data.subscribe(data => {
-      this.user = data.user$.data;
-      this.name = data.user$.data.profile.name;
-      this.lastName = data.user$.data.profile.lastName;
-      this.summary = this.user.profile.profileSummary;
-      this.myGoals = this.user.keyData.goals;
-      this.myServices = this.user.keyData.services;
-      this.placeOfBirth = this.user.profile.placeOfBirth;
-      if (this.user.profile.langs.native !== null) {
-        this.langNative = this.user.profile.langs.native + ' (native)';
-      } else {
-        this.langNative = "No information";
+    this.store.dispatch(new LoadUserData());
+    const newUser$ = this.store.select('user').subscribe((state: any) => {
+      if  (state !== undefined)  {
+        this.user = state;
+        this.name = state.profile.name;
+        this.lastName = state.profile.lastName;
+        this.summary = this.user.profile.profileSummary;
+        this.myGoals = this.user.keyData.goals;
+        this.myServices = this.user.keyData.services;
+        this.placeOfBirth = this.user.profile.placeOfBirth;
+        if (this.user.profile.langs.native !== null) {
+          this.langNative = this.user.profile.langs.native.name + ' (native)';
+        } else {
+          this.langNative = "No information";
+        }
+        this.langs = this.user.profile.langs.other;
+        this.mySkills = this.user.keyData.skills;
+        this.myInterests = this.user.keyData.interests;
+        this.userUploaded = true;
       }
-      this.langs = this.user.profile.langs.other;
-      this.mySkills = this.user.keyData.skills;
-      this.myInterests = this.user.keyData.interests;
-      this.userUploaded = true;
     });
   }
 
@@ -116,7 +122,18 @@ export class ProfileComponent implements OnInit,  OnDestroy {
       }
     });
   }
-
+  openEditSummary() {
+    this.openSummaryTextarea = !this.openSummaryTextarea;
+  }
+  saveNewSummary(newVal) {
+    if(newVal !== null) {
+      this.editData.sendData('profileSummary', newVal);
+      this.openSummaryTextarea = false;
+    }
+  }
+  cancelEditSumm() {
+    this.openSummaryTextarea = false;
+  }
   getErrorCodeApi(data: number, message: string): void {
     if (data === 401) {
       this.router.navigate(['']);

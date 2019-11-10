@@ -71,6 +71,14 @@
         }
     }
 }
+.edit-icon {
+    margin-right: 15px;
+    color:map-get($bg-color, 'gray');
+    &:hover {
+        cursor: pointer;
+        color:map-get($bg-color, 'white');
+    }
+}
 
 .edit-icon-ava-position {
     position: relative;
@@ -82,15 +90,27 @@
     font-size: 20px;
 }
 .summary {
+    position: relative;
     margin-top: 15px;
-    border-radius: 8px;
-    background-color: map-get($bg-color, 'white');
     padding: 20px;
     span {
         font-size: 15px;
-        color: map-get($font-color,'gray');
+        color: map-get($bg-color, 'white');
     }
-    
+}
+.edit-summary-btn {
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    .create-icon {
+        font-size: 20px;
+        color:map-get($bg-color, 'gray');
+        margin-right: 20px;
+        &:hover {
+            cursor: pointer;
+            color:map-get($bg-color, 'white');
+        }
+    }
 }
 
 .header-text-block {
@@ -156,17 +176,26 @@ padding-left: 0px;
 
 .block-about-user {
     margin-top: 20px;
-    padding: 20px 0px 20px 0px;
+    padding: 16px 0px 16px 0px;
     border-radius: 8px;
     background-color: white;
+    box-shadow: 5px 5px 7px -8px #000000;
     .section-of-block {
-        width: 20%;
+        width: 100%;
     }
 }
-
-.section-of-skill-list {
+.no-padd {
     padding-left: 0px;
     padding-right: 0px;;
+}
+.section-of-skill-list {
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: white;
+    border: 1px solid map-get($bg-color, 'gray-light');
+    box-shadow: 5px 5px 7px -8px #000000;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 .edit-btn {
     height: 20px;
@@ -181,31 +210,16 @@ padding-left: 0px;
     }
 }
 
-.edit-round-btn {
-    width: 1.8em;
-    height: 1.8em;
-    border-radius: 50%;
-    background-color: map-get($bg-color, 'white');
-    border: 1px solid  map-get($bg-color, 'gray');
-    .edit-icon {
-        font-size: 0.8em;
-        color: map-get($font-color, 'gray');
-    }
+.edit-btn-section {
+    font-size: 0.75em;
+    color: white;
+    font-weight: 500;
+    height: 20px;
+    border: 0px;
+    background-color: transparent;
     &:hover {
-        background-color: map-get($bg-color, 'primary');
         cursor: pointer;
-        .edit-icon {
-            color: map-get($font-color, 'gray-lighter');
-        }
     }
-}
-
-.title-section-block {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 600;
 }
 
 .content-section-block {
@@ -227,9 +241,6 @@ padding-left: 0px;
         cursor: pointer;
     }
 }
-.user-block {
-    padding-left: 16px;
-}
 .btn-interest {
     background-color: map-get($bg-color, 'white');
     border-radius: 8px;
@@ -245,7 +256,7 @@ padding-left: 0px;
     min-height: 70px;
 }
 .spec-pad {
-    padding: 16px 0px 16px 0px;
+    padding: 20px 0px 16px 0px;
 }
 .followers-count {
     font-size: 0.6em;
@@ -253,4 +264,30 @@ padding-left: 0px;
 .margin-bottom {
     margin-bottom: 40px;
 }
-
+.header-section-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    min-width: 240px;
+    padding: 16px;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: map-get($font-color, 'inverse');
+    background-color: map-get($bg-color, 'primary');
+    box-shadow: 5px 5px 7px -8px #000000;
+    span {
+        margin-left: 40%;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+  }
+  .title-section-block {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}

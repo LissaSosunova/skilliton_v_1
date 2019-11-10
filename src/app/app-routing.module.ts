@@ -1,22 +1,24 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { RegistrationComponent } from './components/registration/registration.component';
-import { LoginComponent } from './components/login/login.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { AboutMeComponent } from './components/profile/about-me/about-me.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
+import { GeneralComponent } from './components/profile/about-me/general/general.component';
+import { GetDataUserResolverService } from './resolvers/get-data-user-resolver.service';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { MyMatchesComponent } from './components/profile/my-matches/my-matches.component';
+import { NgModule } from '@angular/core';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { ResendCodeComponent } from './components/resend-code/resend-code.component';
+import { Routes, RouterModule } from '@angular/router';
+import { SearchComponent } from './components/search/search.component';
+import { ServicesComponent } from './components/profile/services/services.component';
+import { SetExactdataPageComponent } from './components/set-exactdata-page/set-exactdata-page.component';
 import { SkillsToObtainComponent } from './components/profile/skills-to-obtain/skills-to-obtain.component';
 import { SkillToShareComponent } from './components/profile/skill-to-share/skill-to-share.component';
-import { GetDataUserResolverService } from './resolvers/get-data-user-resolver.service';
-import { SetExactdataPageComponent } from './components/set-exactdata-page/set-exactdata-page.component';
-import { ServicesComponent } from './components/profile/services/services.component';
 import { StoViewComponent } from './components/profile/sto-view/sto-view.component';
 import { StsViewComponent } from './components/profile/sts-view/sts-view.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { ConfirmComponent } from './components/confirm/confirm.component';
-import { ResendCodeComponent } from './components/resend-code/resend-code.component';
-import { MyMatchesComponent } from './components/profile/my-matches/my-matches.component';
-import { SearchComponent } from './components/search/search.component';
+import { VeiwProfileComponent } from './components/mates/veiw-profile.component';
 
 const routes: Routes = [
   {
@@ -62,16 +64,19 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    resolve: {
-      user$: GetDataUserResolverService
-    },
     children: [
       {
         path: 'about-me',
         component: AboutMeComponent,
         resolve: {
           user$: GetDataUserResolverService
-        }
+        },
+        children: [
+          {
+            path: 'general',
+            component: GeneralComponent
+          }
+        ]
       },
       {
         path: 'sto-view',
@@ -110,6 +115,11 @@ const routes: Routes = [
         component: MyMatchesComponent
       }
     ]
+  },
+  {
+    path: 'view-profile',
+    component: VeiwProfileComponent,
+    pathMatch: 'prefix'
   },
   {
     path: 'home',

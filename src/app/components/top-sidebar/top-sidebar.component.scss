@@ -38,11 +38,13 @@ header {
             margin: 0;
             padding-top: 10px;
             display: flex;
+            align-items: center;
             li a span {
                 color: map-get($font-color, 'primary');
                 font-size: 0.95em;
                 padding: 1.2em;
                 font-weight: 600;
+                margin-top: 5px;
                 &:hover {
                     color: map-get($font-color, 'inverse');
                     background: map-get($bg-color, 'primary');
@@ -61,6 +63,7 @@ header {
 .exit-btn {
     font-size: 26px;
     padding-left: 20px;
+    padding-top: 5px;
 
     &:hover {
         cursor: pointer;

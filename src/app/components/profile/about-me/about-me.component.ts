@@ -8,6 +8,7 @@ import { Observable, Subject } from 'rxjs';
 import {Store} from '@ngrx/store';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { LoadUserData } from '../../../state/actions/user.actions';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'app-about-me',
@@ -21,18 +22,24 @@ export class AboutMeComponent implements OnInit {
   public activeUrl: string = '/profile/about-me';
   @Input() currTab: string;
   @Input() userUploaded: boolean = false;
+  @Output() user$: any;
   @ViewChild('placesRef', {static: true}) placesRef: GooglePlaceDirective;
+  public currParentUrl: string;
+  public currChildUrl: string;
 
   constructor(
     private data: HttpService,
+    private actRoute: ActivatedRoute,
     private router: Router,
-    private transferService: TransferService,
+    private routerService: RouterService,
     private store: Store<types.NewUser>,
-    private activatedRoute: ActivatedRoute,
+
   ) { }
 
   ngOnInit() {
+    
     this.init();
+    this.getCurrentRoute();
   }
 
 
@@ -41,9 +48,22 @@ export class AboutMeComponent implements OnInit {
     const user$ = this.store.select('user').subscribe((state: any) => {
       if(state !== undefined || state) {
         this.user = state;
+        this.user$ = this.user;
         this.userUploaded = true;
       }
     });
   }
+
+  private getCurrentRoute(): void {
+    this.routerService.getCurrentRoute$().subscribe(url => {
+      const urlSegments = url.split('/');
+      this.currParentUrl = urlSegments[2];
+      if (urlSegments.length > 2) {
+        this.currChildUrl = urlSegments[3];
+      } else {
+        this.currChildUrl = '';
+      }
+    });
+   }
 
 }

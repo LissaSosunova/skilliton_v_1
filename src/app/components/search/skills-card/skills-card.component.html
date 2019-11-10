@@ -24,16 +24,16 @@
                         <div *ngIf="skill.summary !== null">
                             <label class="summary">{{ skill.summary  || 'No info'}}</label>
                         </div>
-                      <div *ngIf="skill.skillToShare !== null" class="tab-expert-class">Skills to share <br>
+                      <div *ngIf="skill.skillToShare.length !== 0" class="tab-expert-class">Skills to share <br>
                         <!-- List of Servises -->
-                        <span class="btn-skill">
-                            {{skill.skillToShare.skillName}}
+                        <span class="btn-skill" *ngFor="let skillTS of skill.skillToShare">
+                            {{skillTS.skillName}}
                         </span>
                       </div>
-                      <div *ngIf="skill.skillToObtain !== null" class="tab-expert-class">Skills to obtain <br>
+                      <div *ngIf="skill.skillToObtain.length !== 0" class="tab-expert-class">Skills to obtain <br>
                           <!-- List of Servises -->
-                          <span  class="btn-skill">
-                              {{skill.skillToObtain.skillName}}
+                          <span  class="btn-skill" *ngFor="let skillTO of skill.skillToObtain">
+                              {{skillTO.skillName}}
                           </span>
                         </div>
 

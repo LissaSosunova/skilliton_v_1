@@ -1,4 +1,4 @@
-<div class="col-xs-12 row">
+<div class="col-xs-12 row no-padding">
     <!-- If there is no any skill -->
     <div class="section-of-block
                 col-xs-12
@@ -7,20 +7,21 @@
                 col-lg-12
                 row
                 center-xs
-                services"
+                services
+                no-padding"
                 *ngIf="!showSkills"
                 >
         Add information about skills
     </div>
     <div class="col-xs-12 row no-padding" >
-    <div class="col-xs-12
-    col-sm-6
-    col-md-6
-    col-lg-4
-    row
-    margin-bottom"
-    *ngFor="let skill of skills"
-    >
+        <div class="col-xs-12
+        col-sm-12
+        col-md-12
+        col-lg-12
+        row
+        let-skills" 
+        *ngFor="let skill of skills"
+        >
  <section class="section-100">
   <div class="col-xs-12
           header-block
@@ -33,90 +34,95 @@
         {{skill.name}}
       </div> 
         <div class="col-xs-2 end-xs">
-          <button (click)="goToSubUrl('/profile/about-me')"
-          class="edit-round-btn">
-        <i class="material-icons edit-icon">
-          edit
-        </i>
-        </button>
+          <!-- open btn -->
+          <span class="edit" (click)="openSkill(skill.goalId)"> <i class="material-icons">
+              keyboard_arrow_down
+          </i>
+          </span>
         </div>
         </div>
+        <div class="col-xs-12 non-vis"
+        [id]="'goal' + skill.goalId">
         <div [ngSwitch]="skill.expectedResult !== ''" class="col-xs-12 description-block start-xs">
-          <span *ngSwitchCase="true">{{skill.expectedResult}}</span>
-          <span *ngSwitchCase="false">Add some description</span> 
-          <span *ngSwitchDefault>Add some description</span> </div>
-        <div class="col-xs-12 table-block">
-        <table class="table">
-            <tr>
-              <td>In exchange:</td>
-              <td>
-                <table class="included-table">
-                  <tr *ngIf="skill.skills.length !==0">
-                        <td class="padd">Skills</td>
-                        <td class="padd"><span *ngFor="let skil of skill.skills">{{skil.name}}</span></td>
-                      </tr>
-                </table>
-                <table class="included-table">
-                    <tr *ngIf="skill.services.length !==0">
-                          <td class="padd">Services</td>
-                          <td class="padd"><span *ngFor="let service of skill.services">{{service.name}}</span></td>
+            <span *ngSwitchCase="true">{{skill.expectedResult}}</span>
+            <span *ngSwitchCase="false">Add some description</span> 
+            <span *ngSwitchDefault>Add some description</span> </div>
+          <div class="col-xs-12 table-block">
+          <table class="table">
+              <tr>
+                <td class="padd">In exchange:</td>
+                <td class="td-with-incl-table">
+                  <table class="included-table">
+                    <tr *ngIf="skill.skills.length !==0">
+                          <td class="padd">Skills</td>
+                          <td class="padd"><span *ngFor="let skil of skill.skills">{{skil.name}}</span></td>
                         </tr>
                   </table>
-                <table *ngIf="skill.moneyOffered === true"  class="included-table">
-                    <tr>
-                        <td class="padd">Money</td>
-                        <td class="padd"> </td>
-                        </tr>
-                      </table>
-              </td>
-            </tr>
-            <tr>
-              <td>Schedule</td>
-              <td>Courses</td>
-            </tr>
-            <tr>
-              <td>Time</td>
-              <td>10:00 - 22:00</td>
-            </tr>
-            <tr>
-              <td>Trial lesson</td>
-              <td *ngIf="skill.withTrial === true">Yes, I would like</td>
-              <td *ngIf="skill.withTrial === false">No</td>
-            </tr>
-          </table>
+                  <table class="included-table">
+                      <tr *ngIf="skill.services.length !==0">
+                            <td class="padd">Services</td>
+                            <td class="padd"><span *ngFor="let service of skill.services">{{service.name}}</span></td>
+                          </tr>
+                    </table>
+                  <table *ngIf="skill.moneyOffered === true"  class="included-table">
+                      <tr>
+                          <td class="padd">Money</td>
+                          <td class="padd"> </td>
+                          </tr>
+                        </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="padd">Schedule</td>
+                <td class="padd">Courses</td>
+              </tr>
+              <tr>
+                <td class="padd">Time</td>
+                <td class="padd">10:00 - 22:00</td>
+              </tr>
+              <tr>
+                <td class="padd">Trial lesson</td>
+                <td class="padd" *ngIf="skill.withTrial === true">Yes, I would like</td>
+                <td class="padd" *ngIf="skill.withTrial === false">No</td>
+              </tr>
+            </table>
+          </div>
+
         </div>
+
+        
   </section>
   </div>
   <!-- Init skills -->
   <div class="col-xs-12
-              col-sm-6
-              col-md-6
-              col-lg-4
+              col-sm-12
+              col-md-12
+              col-lg-12
               row
-              margin-bottom" 
+              margin-bottom"
               >
   <div class="section-100" *ngFor="let skill of initSkills">
-      <div class="col-xs-12
-                  header-block
-                  disable
-                  row"
-                  >
-      <div class="col-xs-10
-                title-header-block
-                start-xs"
+    <div class="col-xs-12
+                header-block
+                disable
+                row"
                 >
-        <span>{{skill.name}} </span>
-      </div> 
+    <div class="col-xs-10
+              title-header-block
+              start-xs"
+              >
+              <span>{{skill.name}} </span>
+    </div> 
   <div class="col-xs-2 end-xs">
-          <button (click)="goToSubUrl('/profile/about-me')"
-          class="edit-round-btn">
-        <i class="material-icons edit-icon">
-          edit
-        </i>
-        </button>
+          <!-- open btn -->
+          <span class="edit" (click)="openSkill(skill.goalId)"> <i class="material-icons">
+              keyboard_arrow_down
+          </i>
+          </span>
       </div>
     </div>
-    <div class="col-xs-12 descr-field-init start-xs"> 
+    <div  class="col-xs-12 descr-field-init start-xs non-vis"
+    [id]="'goal' + skill.goalId"> 
           <span>Add some description</span> </div>
     </div>
   </div>
