@@ -80,6 +80,18 @@ export class HttpService {
   public getSearchAll(query: string): Observable<any> {
     return this.http.get(URL_BACK + '/search/all/?query=' + query, {headers: this.getHeaders()});
   }
+
+  // Edit profile function
+  public postNewProfileData(params: any): Observable<any> {
+    return this.http.post(URL_BACK + '/user/edit-profile', params, {headers: this.getHeaders()});
+  }
+
+// Other users
+
+public getMate(params: string): Observable<any> {
+  return this.http.get(URL_BACK + '/user/profile/' + params, {headers: this.getHeaders()});
+}
+
   
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {

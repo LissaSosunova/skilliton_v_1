@@ -46,8 +46,36 @@
             <span class="name">{{name}} </span>
             <span class="name">{{lastName}}</span> 
             <br/>
-            <div  class="summary">
-                    <span>{{summary || "No summary"}}</span>
+            <div  class="summary row">
+                    <div *ngIf="openSummaryTextarea == false" class="edit-summary-btn" (click)="openEditSummary()">
+                                <i class="material-icons create-icon">
+                                                create
+                                </i>
+                    </div>
+
+                    <span *ngIf="openSummaryTextarea == false">{{summary || "No summary"}}</span>
+
+                    <div class="col-xs-10" *ngIf="openSummaryTextarea == true"> 
+                        <app-input-textarea
+                        name="summary"
+                        #summary="ngModel"
+                        [(ngModel)]="summaryValue"
+                        [placeholder]="'add description (max 300 characters)'"
+                        [maxLength]="300"
+                        [required]="false"></app-input-textarea>
+                    </div>
+                        <div class="col-xs-2 middle-xs center-xs">
+                        <span *ngIf="openSummaryTextarea == true" (click)="saveNewSummary(summaryValue)">
+                        <i class="material-icons edit-icon">
+                                        save
+                        </i>
+                        </span>
+                        <span *ngIf="openSummaryTextarea == true" (click)="cancelEditSumm()">
+                        <i class="material-icons edit-icon">
+                                cancel_presentation
+                        </i>
+                        </span>               
+                    </div>
             </div>
             <div class="col-lg-12 bar-bg start-xs">
                     <app-progress-bar
@@ -77,6 +105,7 @@
                             "
                 [ngClass]="{'active-btn': router.url === '/profile' ||
                                         router.url === '/profile/about-me' ||
+                                        router.url === '/profile/about-me/general' ||
                                         router.url === '/profile/sts-view' ||
                                         router.url === '/profile/skill-to-share' ||
                                         router.url === '/profile/sto-view' ||
@@ -106,20 +135,30 @@
     </div>
 </div>
 
+<div class="row center-xs no-padd">
+        <div class="col-xs-12
+        col-sm-12
+        col-md-10
+        col-lg-8
+        end-xs
+        no-padd
+        row">
 <!-- Section about User -->
-<div class="row center-xs user-block">
+<div class="col-xs-6
+            col-sm-6
+            col-md-3
+            col-lg-3
+            center-xs
+            user-block
+            no-padd">
     <div *ngIf="userUploaded == true && router.url === '/profile'"
         class="col-xs-12
-        col-sm-12
-        col-md-8
-        col-lg-8
         center-xs
-        row
         block-about-user">
         <div class="section-of-block row start-xs">
             <div class="col-xs-12 title-section-block">
                 From
-                <button (click)="goToSubUrl('/profile/about-me')"
+                <button (click)="goToSubUrl('/profile/about-me/general')"
                         class="edit-btn">edit</button>
                 </div>
             <div class="colxs-12 content-section-block">
@@ -149,17 +188,18 @@
         <div class="section-of-block row start-xs">
                 <div class="col-xs-12 title-section-block">
                     Languages 
-                    <button (click)="goToSubUrl('/profile/about-me')"
+                    <button (click)="goToSubUrl('/profile/about-me/general')"
                         class="edit-btn">edit</button>
                     </div>
-                <div class="colxs-12 content-section-block">
+                <div class="col-xs-12 content-section-block">
                         {{ langNative }}
-                </div>
-                <section *ngIf="langs.lenght !==0">
+                <div *ngIf="langs.lenght !==0">
                         <div  *ngFor="let lang of langs"> 
                                 <span>{{ lang.name}}</span>
-                            </div>
-                </section>
+                                </div>
+                        </div>
+                </div>
+                
         </div>
         <div class="section-of-block row start-xs">
                 <div class="col-xs-12 title-section-block">
@@ -176,135 +216,131 @@
 
 <!-- Content os Shared skills -->
 
-<div class="row center-xs margin-bottom">
-    <div *ngIf="userUploaded == true && router.url === '/profile'"
-    class="col-xs-12
-            col-sm-12
-            col-md-8
-            col-lg-8
+<div class="row
             center-xs
-            row
+            margin-bottom
+            col-xs-6
+            col-sm-6
+            col-md-9
+            col-lg-9">
+    <div *ngIf="userUploaded == true && router.url === '/profile'"
+            class="col-xs-12
+            col-sm-12
+            col-md-12
+            col-lg-12
             spec-pad">
             <div class="col-xs-12
                         col-sm-12
                         col-md-12
                         col-lg-12
-                        title-section-block-skills"
-                        (click)="goToSubUrl('/profile/sts-view')">
-                    Skills to share
+                        header-section-block">
+                    <span class="link-title" (click)="goToSubUrl('/profile/sts-view')">Skills to share</span>
                     <button (click)="goToSubUrl('/profile/sts-view')"
-                            class="edit-round-btn">
-                        <i class="material-icons edit-icon">
+                            class="edit-btn-section"> 
                             edit
-                        </i>
                     </button>
                     </div>
         <div class="section-of-skill-list col-xs-12 start-xs">
-                <section>
-                        <app-skill-to-share-card></app-skill-to-share-card>
-                </section>
+                <app-skill-to-share-card></app-skill-to-share-card>
                 </div>
             </div>
-</div>
 
-<!-- Content os Skills to obtain -->
+    <!-- Content os Skills to obtain -->
 
-<div class="row center-xs">
-    <div *ngIf="userUploaded == true && router.url === '/profile'"
-    class="col-xs-12
+<div *ngIf="userUploaded == true && router.url === '/profile'"
+class="col-xs-12
+col-sm-12
+col-md-12
+col-lg-12
+center-xs
+row
+spec-pad">
+<div class="col-xs-12
             col-sm-12
-            col-md-8
-            col-lg-8
-            center-xs
-            row
-            spec-pad">
-            <div class="col-xs-12
-                        col-sm-12
-                        col-md-12
-                        col-lg-12
-                        title-section-block-skills" (click)="goToSubUrl('/profile/sto-view')">
-                        Skills to obtain
-                    <button (click)="goToSubUrl('/profile/sto-view')"
-                            class="edit-round-btn">
-                        <i class="material-icons edit-icon">
-                            edit
-                        </i>
-                    </button>
-                    </div>
-                    
-        <div class="section-of-skill-list col-xs-12 start-xs">
-                <section>
-                        <app-skill-to-obtain-card></app-skill-to-obtain-card>
-                </section>
-        </div>        
-    </div>
+            col-md-12
+            col-lg-12
+            header-section-block">
+            <span class="link-title" (click)="goToSubUrl('/profile/sto-view')">Skills to obtain</span>
+        <button (click)="goToSubUrl('/profile/sto-view')"
+        class="edit-btn-section"> 
+        edit
+        </button>
+        </div>
+        
+<div class="section-of-skill-list col-xs-12 start-xs">
+    <section>
+            <app-skill-to-obtain-card></app-skill-to-obtain-card>
+    </section>       
+</div>
 </div>
 
 <!-- Content os Services -->
 
-<div class="row center-xs">
-        <div *ngIf="userUploaded == true && router.url === '/profile'"
-        class="col-xs-12
+<div *ngIf="userUploaded == true && router.url === '/profile'"
+class="col-xs-12
+    col-sm-12
+    col-md-12
+    col-lg-12
+    center-xs
+    row
+    spec-pad">
+    <div class="col-xs-12
                 col-sm-12
-                col-md-8
-                col-lg-8
-                center-xs
-                row
-                spec-pad">
-                <div class="col-xs-12
-                            col-sm-12
-                            col-md-12
-                            col-lg-12
-                            title-section-block-skills">
-                            Services
-                            <button (click)="goToSubUrl('/profile/services')"
-                            class="edit-round-btn">
-                        <i class="material-icons edit-icon">
-                            edit
-                        </i>
-                    </button>
-                        </div>
-                        
-            <div class="section-of-skill-list col-xs-12 start-xs">
-                    <section>
-                            <app-service-card></app-service-card>
-                    </section>
-            </div>        
-        </div>
-    </div>
-   
+                col-md-12
+                col-lg-12
+                header-section-block">
+                <span class="link-title" (click)="goToSubUrl('/profile/services')">Services</span>
+                <button (click)="goToSubUrl('/profile/services')"
+                class="edit-btn-section"> 
+                edit
+        </button>
+            </div>
+            
+<div class="section-of-skill-list col-xs-12 start-xs">
+        <section>
+                <app-service-card></app-service-card>
+        </section>       
+</div>
+</div>
+
 
 <!-- Content os Interests -->
-<div class="row center-xs">
-        <div *ngIf="userUploaded == true && router.url === '/profile'"
-        class="col-xs-12
+
+<div *ngIf="userUploaded == true && router.url === '/profile'"
+class="col-xs-12
+    col-sm-12
+    col-md-12
+    col-lg-12
+    center-xs
+    row
+    spec-pad">
+    <div class="col-xs-12
                 col-sm-12
-                col-md-8
-                col-lg-8
-                center-xs
-                row
-                spec-pad">
-                <div class="col-xs-12
-                            col-sm-12
-                            col-md-12
-                            col-lg-12
-                            title-section-block-skills">
-                            Interests
-                            <button (click)="goToSubUrl('/profile/about-me')"
-                                    class="edit-round-btn">
-                                <i class="material-icons edit-icon">
-                                    edit
-                                </i>
-                            </button>
-                        </div>
-                        
-            <div class="section-of-skill-list col-xs-12 start-xs">
-                    <section>
-                            <app-interests-card></app-interests-card>
-                    </section>
-            </div>        
-        </div>
-    </div>
+                col-md-12
+                col-lg-12
+                header-section-block">
+                <span class="link-title">Interests</span>
+                <button (click)="goToSubUrl('/profile/about-me')"
+                class="edit-btn-section"> 
+                edit
+                </button>
+            </div>
+            
+<div class="section-of-skill-list col-xs-12 start-xs">
+        <section>
+                <app-interests-card></app-interests-card>
+        </section>     
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
 
 <div *ngIf="router.url === '/profile'" class="bottom-spacer"></div>
 <div class="router-outlet col-xs-12">

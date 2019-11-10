@@ -55,6 +55,7 @@ export class SkillsToObtainComponent implements OnInit {
   public userUploaded: boolean;
   private moneyOffered: boolean = true;
   private servicesOffered: boolean = false;
+  private servicesSearch: boolean = false;
   private skillsOffered: boolean = false;
   private skillsOffereArr = [] as any;
   private hidden: boolean = false;
@@ -91,12 +92,16 @@ export class SkillsToObtainComponent implements OnInit {
         this.user = state;
         this.userUploaded = true;
         this.myGoals = state.keyData.goals;
+        this.myGoals.forEach(el => {
+          el.id = el.tagId;
+          });
         this.mySkills = _.filter(state.keyData.skills, { 'isShared': true });
         if(this.user && this.mySkills.length === 0 ){
           this.noSkillsForSelect = true;
         } else {
           this.mySkills.forEach(el => {
             el.srchStr = _.lowerCase(el.name);
+            el.id = el.tagId;
             });
         }
         if(this.user && state.keyData.services.length === 0 ){
@@ -218,6 +223,7 @@ public setValueUsersSkillsFromDropDown(option) {
   this.skillsExpList.push({name: option.name, id: option.id});
   this.skillsArrAPI.push(option.id);
   this.openAutoUsersSkills = false;
+  this.searchSkillsControl.reset({ value: '', disabled: false });
 }
 
 // Search for users services
@@ -253,13 +259,13 @@ public changeUsersServiceList(option): void {
     return n === option.id;
   });
   this.servicesExpList = newList;
-
 }
 
 public setValueUsersServiceFromDropDown(option) {
   this.servicesExpList.push({name: option.name, id: option.id});
   this.servicesArrAPI.push(option.id);
   this.openAutoUsersServices = false;
+  this.searchServicesControl.reset({ value: '', disabled: false });
 }
 
   // Function of chanching selects
@@ -268,9 +274,27 @@ public setValueUsersServiceFromDropDown(option) {
   }
   agreeServiceHandler(e) {
     this.servicesOffered = e.target.checked;
+    if (e.target.checked === true) {
+      this.servicesExpList = this.myServices;
+      this.servicesExpList.forEach((el) => {
+        this.servicesArrAPI.push(el.id);
+      });
+    } else {
+      this.servicesExpList = [];
+      this.servicesArrAPI = [];
+    }
   }
   agreeSkillsHandler(e) {
     this.skillsOffered = e.target.checked;
+    if (e.target.checked === true) {
+      this.skillsExpList = this.mySkills;
+      this.skillsExpList.forEach((el) => {
+        this.skillsArrAPI.push(el.id);
+      });
+    } else {
+      this.skillsExpList = [];
+      this.skillsArrAPI = [];
+    }
   }
   hiddenHandler(e) {
     this.hidden = e.target.checked;
@@ -278,6 +302,7 @@ public setValueUsersServiceFromDropDown(option) {
   trialHandler(e) {
     this.withTrial = e.target.checked;
   }
+
 
   // Send API
   public saveBtn(

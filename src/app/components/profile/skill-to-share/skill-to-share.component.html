@@ -30,7 +30,7 @@
             <div class="choosed-skill-field">
                     {{choosedSkillname}}
                     <button (click)="changeSkill()"
-                    class="btn-remome"
+                    class="btn-remove"
                     >
                             <i class="material-icons remove-icon">
                                             clear
@@ -39,8 +39,8 @@
             </div>
           </section>
 
-          <!-- Search -->
-        <section class="col-xs-9 no-padd" *ngIf="!showChoosedSkill">
+          <!-- Search skills -->
+        <section class="col-xs-9 no-padd search-section" *ngIf="!showChoosedSkill">
           <app-input-search
           class="no-margin search"
                   [maxLength]="100"
@@ -188,7 +188,7 @@
             <div class="choosed-lang-field" *ngFor="let option of choosedLangname">
               <span>{{option.name}} </span>
                     <button (click)="changeLang(option)"
-                    class="btn-remome"
+                    class="btn-remove"
                     >
                             <i class="material-icons remove-icon">
                                             clear
@@ -196,7 +196,7 @@
                     </button>
             </div>
           </section>
-          <section class="col-xs-12 no-padd">
+          <section class="col-xs-12 no-padd search-section ">
               <app-input-search
                       class="no-margin search"
                       [maxLength]="100"
@@ -265,33 +265,42 @@
   <div class="col-xs-3 row-text">
     What do want in exchange?  <span class="required-star">*</span>
   </div>
+
   <div class="col-xs-9 no-padd">
-      <label class="container-ch  align-left">Skills 
-          <input type="checkbox"
-          name="skillsExp"
-          #skillsExp="ngModel"
-          [(ngModel)]="skillsExpected"
-          (change)="agreeSkillsHandler($event)"
-          [disabled]="!!noSkillsForSelect">
-          <span class="checkmark"
-          [ngClass]="{'disabled-select': noSkillsForSelect == true,  'enable-select': noSkillsForSelect == false}">
-          </span>
+      <div class="row col-xs-12 no-padd">
+      <div class="col-xs-4 no-padd">
+          <label class="container-ch  align-left">Skills <span *ngIf="skillsExpList.length !== 0">remove all</span>
+            <input type="checkbox"
+            name="skillsExp"
+            #skillsExp="ngModel"
+            [(ngModel)]="skillsExpected"
+            (change)="agreeSkillsHandler($event)"
+            [disabled]="!!noSkillsForSelect">
+            <span class="checkmark"
+            [ngClass]="{'disabled-select': noSkillsForSelect == true,  'enable-select': noSkillsForSelect == false}">
+            </span>
+                          </label>
+  </div>
+
+  <div class="col-xs-8">    
           <section *ngIf="skillsExpList.length !== 0">
               <div *ngFor="let option of skillsExpList" class="choosed-goals-field">
                   <span>{{option.name}} </span>
-                  <button (click)="changeGoalsList(option)"
-                  class="btn-remome">
+                  <button (click)="changeGoalsList(option, $event)"
+                  class="btn-remove">
                           <i class="material-icons remove-icon">
                                           clear
                           </i>
                   </button>
               </div>
             </section>
- </label>
+</div>
+</div>
+
 
 <!-- Search goals -->
 <div class="col-xs-12 no-padd">
-    <section *ngIf="skillsExpected === true">
+    <section *ngIf="skillsExpected === true" class="no-padd search-section">
       <app-input-search
         [label]="'Select skills from your skills to obtain'"
         class="search"
@@ -306,7 +315,7 @@
       </app-input-search>
   
         <section *ngIf="openAutoGoals === true"
-          [ngClass]="{'block-drop': openAutoGoals == true,  'non-vis': openAutoGoals == false}">
+          [ngClass]="{'block-drop-goals': openAutoGoals == true,  'non-vis': openAutoGoals == false}">
           <div *ngFor="let option of optionsGoals">
                   <div (click)="setValueGoalsFromDropDown(option)">
                   <i class="material-icons plus-icon">

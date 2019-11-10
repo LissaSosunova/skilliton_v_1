@@ -16,12 +16,6 @@ export class SkillsCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    // const skills$ = this.store.select('globalSearch').subscribe((state: any) => {
-    //   if  (state !== undefined)  {
-
-    //   }
-    // });
   }
 
   match() {

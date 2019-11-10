@@ -22,7 +22,13 @@ export const errorTypes = {
                 code: 101,
                 title: "You can not ceate new name for Interests. ",
                 recomend: "Please, select an Interest from the list and then press button 'DONE'."}
-        ]
+        ],
+        editProfile: [
+            {code: 100, title: 'You can not seve empty value.'},
+            {code: 101, title: 'Code 100'},
+            {code: 102, title: 'Check your data and try again.'},
+            {code: 103, title: "Data is not correct: you must to set coreect birthday (in the past) and You must be over 14 years old."}
+        ],
     },
     api:{
         registration: [

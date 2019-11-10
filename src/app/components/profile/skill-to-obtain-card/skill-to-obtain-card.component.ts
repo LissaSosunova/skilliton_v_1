@@ -21,10 +21,20 @@ export class SkillToObtainCardComponent implements OnInit {
     const goals$ = this.store.select('user').subscribe((state: any) => {
       if(state !== undefined || state) {
         this.initSkills = _.filter(state.keyData.goals, { 'currentLevel': null });
-        this.skills = _.differenceBy(state.keyData.goals, this.initSkills, 'id');
+        this.skills = _.differenceBy(state.keyData.goals, this.initSkills, 'goalId');
         if (state.keyData.goals.length !== 0) {
           this.showSkills = true;
         }
+      }
+    });
+  }
+
+  public openSkill(id) {
+    const name = 'goal' + id;
+    const elems = Array.from(document.getElementsByTagName('div'));
+    elems.forEach((el) => {
+      if (el.id === name) {
+        el.classList.toggle('non-vis');
       }
     });
   }

@@ -63,6 +63,7 @@ import { userReducer} from './state/reducers/user';
 import { filtersReducer} from './state/reducers/filters.reducer';
 import { langsReducer } from './state/reducers/langs.reducer';
 import { globalSearchReducer } from './state/reducers/global-search.reducer';
+import { mateReducer } from './state/reducers/mate.reducer';
 import { AlertModalComponent } from './components/modals/alert-modal/alert-modal.component';
 import { LeavePopupComponent } from './components/registration/leave-popup/leave-popup.component';
 import { PopupComponent } from './components/modals/popup/popup.component';
@@ -109,6 +110,12 @@ import { InputGlobalSearchComponent } from './shared/form-controls/input-global-
 import { SkillsCardComponent } from './components/search/skills-card/skills-card.component';
 import { PeopleCardComponent } from './components/search/people-card/people-card.component';
 import { PostsCardComponent } from './components/search/posts-card/posts-card.component';
+import { VeiwProfileComponent } from './components/mates/veiw-profile.component';
+import { MateInterestCardComponent } from './components/mates/interest-card/interest-card.component';
+import { MateSkillToShareCardComponent } from './components/mates/skill-to-share-card/skill-to-share-card.component';
+import { MateSkillToObtainCardComponent } from './components/mates/skill-to-obtain-card/skill-to-obtain-card.component';
+import { MateServiceCardComponent } from './components/mates/service-card/service-card.component';
+import { GeneralComponent } from './components/profile/about-me/general/general.component';
 
 
 @NgModule({
@@ -164,6 +171,12 @@ import { PostsCardComponent } from './components/search/posts-card/posts-card.co
     SkillsCardComponent,
     PeopleCardComponent,
     PostsCardComponent,
+    VeiwProfileComponent,
+    MateInterestCardComponent,
+    MateSkillToShareCardComponent,
+    MateSkillToObtainCardComponent,
+    MateServiceCardComponent,
+    GeneralComponent
   ],
   imports: [
     BrowserModule,
@@ -218,7 +231,11 @@ import { PostsCardComponent } from './components/search/posts-card/posts-card.co
     HttpClientModule,
     OverlayModule,
     AngularMyDatePickerModule,
-    StoreModule.forRoot({user: userReducer, filters: filtersReducer, langs: langsReducer, globalSearch: globalSearchReducer}),
+    StoreModule.forRoot({user: userReducer,
+      filters: filtersReducer,
+      langs: langsReducer,
+      globalSearch: globalSearchReducer,
+      mateProfile: mateReducer}),
     EffectsModule.forRoot([UserEffects, FiltersEffects, LangsEffects])
   ],
   providers: [

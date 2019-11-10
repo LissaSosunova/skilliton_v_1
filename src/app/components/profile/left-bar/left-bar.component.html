@@ -20,8 +20,8 @@ class="tabs-nav
     <div class="col-xs-12
                 tab-expert-class
                 border-right start-xs"
-    [ngClass]="{'not-active-tab': currChildUrl !== 'about-me',  'active': currChildUrl === 'about-me'}"
-                (click)="switcher('/profile/about-me', 'general')">
+    [ngClass]="{'not-active-tab': currChildUrl !== '/about-me/general',  'active': currChildUrl === '/about-me/general'}"
+                (click)="switcher('/profile/about-me/general', 'general')">
                 <span>
                     General
                 </span>
@@ -32,7 +32,7 @@ class="tabs-nav
             [ngClass]="{'not-active-tab': currTab !== 'placedYourVeLived',  'active': currTab === 'placedYourVeLived'}"
                 (click)="switcher('/profile/about-me', 'placedYourVeLived')">
                 <span>
-                    Placed your’ve lived
+                    Places of residence
                 </span>
     </div>
     <div class="col-xs-12
@@ -78,4 +78,3 @@ class="tabs-nav
 </div>
 </div>
 </div>
-<router-outlet></router-outlet>

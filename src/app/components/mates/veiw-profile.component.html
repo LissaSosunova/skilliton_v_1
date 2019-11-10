@@ -1,0 +1,276 @@
+<!-- Header section -->
+<section class="row content-block" *ngIf="mateUploaded === true">
+    <div class="col-xs-10
+    col-sm-10
+    col-md-8
+    col-lg-8
+    row
+    middle-xs">
+</div>
+    <div class="header
+                col-xs-10
+                col-sm-10
+                col-md-8
+                col-lg-8
+                row
+                middle-xs">   
+        <div class="planets
+                col-xs-2
+                col-sm-2
+                col-md-2
+                col-lg-2">
+           <!-- <img src="assets/images/einstain.png"> -->
+           <label for="avatar-input">
+                <img src="assets/images/einstain.png"
+                 class="avatar">
+                <input id="avatar-input" 
+                      type="file" 
+                      name="image" 
+                      (change)="uploadAvatar($event)"
+                      accept=".png, .jpg, .jpeg"
+                      enctype="multipart/form-data" #uploadFile>
+        
+            </label>
+                    <!-- <span class="edit-icon-ava-position">
+                        <button (click)="uploadAvatar($event)" class="edit-round-btn">
+                            <i class="material-icons edit-icon">
+                                edit
+                            </i>
+                        </button></span> -->
+        </div>
+        <div class="col-xs-10
+                col-sm-10
+                col-md-10
+                col-lg-10
+                header-text-block">
+            <span class="name">{{mate.profile.name}} </span>
+            <span class="name">{{mate.profile.lastName}}</span> 
+            <br/>
+            <div  class="summary">
+                    <span>{{mate.summary || "No summary"}}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section top menu -->
+<div class="row center-xs content-bar-btn" *ngIf="mateUploaded === true">
+    
+    <div class="col-xs-10
+                col-sm-10
+                col-md-8
+                col-lg-8
+                top-bar
+                center-xs row">
+        <div class="col-xs-12 row top-bar">
+                <div class="col-xs-6
+                            col-sm-6
+                            col-md-6
+                            col-lg-6
+                            btn-top-bar
+                            "
+                [ngClass]="{'active-btn': activeUrl === '/view-profile'}"
+                (click)="goToSubUrl('/profile')"
+                >About {{mate.profile.name}}</div>
+        <div class="col-xs-6
+                    col-sm-6
+                    col-md-6
+                    col-lg-6
+                    btn-top-bar">Posts of  {{mate.profile.name}}</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row center-xs no-padd" *ngIf="mateUploaded === true">
+    <div class="col-xs-12
+    col-sm-12
+    col-md-10
+    col-lg-8
+    end-xs
+    no-padd
+    row">
+<!-- Section about User -->
+<div class="col-xs-6
+        col-sm-6
+        col-md-3
+        col-lg-3
+        center-xs
+        user-block
+        no-padd">
+<div *ngIf="mateUploaded == true"
+    class="col-xs-12
+    center-xs
+    block-about-user">
+    <div class="section-of-block row start-xs">
+        <div class="col-xs-12 title-section-block">
+            From
+           
+            </div>
+        <div class="colxs-12 content-section-block" *ngIf="mate.profile.placeOfBirth !== null">
+                <span>{{mate.profile.placeOfBirth.city || "No information"}}  {{ " " + mate.profile.placeOfBirth.country || ""}}</span>
+        </div>
+        <div class="colxs-12 content-section-block" *ngIf="mate.profile.placeOfBirth == null">
+            <span>No information</span>
+    </div>
+    </div>
+    <div class="section-of-block row start-xs">
+            <div class="col-xs-12 title-section-block">
+                Live in 
+                </div>
+            <div class="colxs-12 content-section-block" *ngIf="mate.profile.placeOfResidence !== null">
+                    <span>{{mate.profile.placeOfResidence.city || "No information"}} {{ " " + mate.profile.placeOfResidence.country || ""}}</span>
+            </div>
+            <div class="colxs-12 content-section-block" *ngIf="mate.profile.placeOfResidence == null">
+                <span>No information</span>
+        </div>
+    </div>
+    <div class="section-of-block row start-xs">
+            <div class="col-xs-12 title-section-block">
+                Studied at 
+                
+                </div>
+            <div class="colxs-12 content-section-block">
+                    <span> No information</span>
+            </div>
+    </div>
+    <div class="section-of-block row start-xs">
+            <div class="col-xs-12 title-section-block">
+                Languages 
+                
+                </div>
+            <div class="colxs-12 content-section-block">
+             <section *ngIf="mate.profile.langs.native !== null">
+                    <div > 
+                            <span>{{mate.profile.langs.native.name || ""}}
+                              <span class="native"> (native)</span></span>
+                    </div>
+            </section>
+            <section *ngIf="mate.profile.langs.other.length !==0">
+                <div *ngFor="let lang of mate.profile.langs.other"> 
+                    <span >{{lang.name}}</span>
+            </div>
+        </section>
+  <!--  </div>
+    <div class="section-of-block row start-xs">
+            <div class="col-xs-12 title-section-block">
+                Workplace 
+                
+                </div>
+            <div class="colxs-12 content-section-block">
+                     <span>{{user.profile.placeOfBirth || "No information"}}</span> -->
+            </div>
+    </div>
+</div>
+</div>
+
+<!-- Content os Shared skills -->
+
+<div class="row
+        center-xs
+        margin-bottom
+        col-xs-6
+        col-sm-6
+        col-md-9
+        col-lg-9"
+        *ngIf="mateUploaded === true"
+        >
+<div *ngIf="mate.keyData.skills.length !== 0"
+        class="col-xs-12
+        col-sm-12
+        col-md-12
+        col-lg-12
+        spec-pad">
+        <div class="col-xs-12
+                    col-sm-12
+                    col-md-12
+                    col-lg-12
+                    header-section-block">
+                <span class="link-title" (click)="goToSubUrl('/profile/sts-view')">Skills to share</span>
+                </div>
+    <div class="section-of-skill-list col-xs-12 start-xs">
+            <mate-skill-to-share-card></mate-skill-to-share-card>
+            </div>
+        </div>
+
+<!-- Content os Skills to obtain -->
+
+<div *ngIf="mate.keyData.goals.length !== 0"
+class="col-xs-12
+col-sm-12
+col-md-12
+col-lg-12
+center-xs
+row
+spec-pad">
+<div class="col-xs-12
+        col-sm-12
+        col-md-12
+        col-lg-12
+        header-section-block">
+        <span class="link-title" (click)="goToSubUrl('/profile/sto-view')">Skills to obtain</span>
+    </div>
+    
+<div class="section-of-skill-list col-xs-12 start-xs">
+<section>
+        <mate-skill-to-obtain-card></mate-skill-to-obtain-card>
+</section>       
+</div>
+</div>
+
+<!-- Content os Services -->
+
+<div  *ngIf="mate.keyData.services.length !== 0"
+class="col-xs-12
+col-sm-12
+col-md-12
+col-lg-12
+center-xs
+row
+spec-pad">
+<div class="col-xs-12
+            col-sm-12
+            col-md-12
+            col-lg-12
+            header-section-block">
+            <span class="link-title">Services</span>
+            
+        </div>
+        
+<div class="section-of-skill-list col-xs-12 start-xs">
+    <section>
+            <mate-service-card></mate-service-card>
+    </section>       
+</div>
+</div>
+
+
+<!-- Content os Interests -->
+
+<div *ngIf="mate.keyData.interests.length !== 0"
+class="col-xs-12
+col-sm-12
+col-md-12
+col-lg-12
+center-xs
+row
+spec-pad">
+<div class="col-xs-12
+            col-sm-12
+            col-md-12
+            col-lg-12
+            header-section-block">
+            <span class="link-title">Interests</span>
+            
+        </div>
+        
+<div class="section-of-skill-list col-xs-12 start-xs">
+    <section>
+            <mate-interest-card></mate-interest-card>
+    </section>     
+</div>
+</div>
+</div>
+
+</div>
+</div>

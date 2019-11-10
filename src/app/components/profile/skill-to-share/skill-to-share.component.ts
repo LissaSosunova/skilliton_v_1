@@ -115,8 +115,12 @@ export class SkillToShareComponent implements OnInit {
         this.userUploaded = true;
         this.myGoals = _.filter(state.keyData.goals, { 'hidden': false });
         this.mySkills = state.keyData.skills;
+        this.mySkills.forEach(el => {
+          el.id = el.tagId;
+          });
         this.myGoals.forEach(el => {
           el.srchStr = _.lowerCase(el.name);
+          el.id = el.tagId;
           });
         if(this.user && this.myGoals.length === 0 ) {
           this.noSkillsForSelect = true;
@@ -156,12 +160,14 @@ export class SkillToShareComponent implements OnInit {
     this.choosedLangname.push({name: option.name, id: option.id});
     this.openAutoLangs = false;
     this.langRequired = false;
+    this.searchLangsControl.reset({ value: '', disabled: false });
   }
 
   public setValueGoalsFromDropDown(option) {
     this.skillsExpList.push({name: option.name, id: option.id});
     this.choosedGoals.push(option.id);
     this.openAutoGoals = false;
+    this.searchGoalsControl.reset({ value: '', disabled: false });
   }
 // Create new tag of skill
   public setValue(val) {
@@ -282,18 +288,13 @@ export class SkillToShareComponent implements OnInit {
     }
   }
 
-  public changeGoalsList(option): void {
+  public changeGoalsList(option, e): void {
     this.skillsExpected = true;
     const newList = _.filter(this.skillsExpList, function (f) { return f.id !== option.id; });
     const goalsAPI = _.remove(this.choosedGoals, (n) => {
       return n === option.id;
     });
     this.skillsExpList = newList;
-    if (newList.length === 0 ) {
-      this.skillsExpected = false;
-    } else {
-      this.skillsExpected = true;
-    }
   }
 
   // Functions of chanching selects payment
@@ -305,6 +306,15 @@ export class SkillToShareComponent implements OnInit {
   }
   agreeSkillsHandler(e) {
     this.skillsExpected = e.target.checked;
+    if (e.target.checked === true) {
+      this.skillsExpList = this.myGoals;
+      this.skillsExpList.forEach((el) => {
+        this.choosedGoals.push(el.id);
+      });
+    } else {
+      this.skillsExpList = [];
+      this.choosedGoals = [];
+    }
   }
   isShatedHandler(e) {
     this.isShared = e.target.checked;

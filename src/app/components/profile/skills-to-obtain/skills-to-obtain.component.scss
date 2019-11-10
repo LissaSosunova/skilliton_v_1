@@ -23,30 +23,6 @@
     }
 }
 
-.block-droop {
-  position: relative;
-  text-align: left;
-  top: -20px;
-  height: 160px;
-  overflow: auto;
-  padding: 0px;
-  background-color: map-get($bg-color, 'white');
-  border-bottom: 1px solid map-get($bg-color, 'gray-light');
-  border-left: 1px solid map-get($bg-color, 'gray-light');
-  border-right: 1px solid map-get($bg-color, 'gray-light');
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  div {
-      padding: 5px;
-      color: map-get($font-color, 'primary');
-      &:hover {
-          background-color: map-get($bg-color, 'primary');
-          cursor: pointer;
-          color: map-get($font-color, 'inverse');
-      }
-  }
-}
-
 .non-vis {
   display: none;
 }
@@ -107,7 +83,7 @@
   height: 47px;
 }
 
-.btn-remome {
+.btn-remove {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -144,13 +120,44 @@
   text-align: left;
 }
 
-.block-drop {
+.search-section {
   position: relative;
+}
+.block-drop {
+  position: absolute;
   text-align: left;
-  top: -2.3em;
+  width: 99.7%;
+  top: 66px;
   height: 160px;
   overflow: auto;
   padding: 0px;
+  z-index: 200;
+  background-color: map-get($bg-color, 'white');
+  border-bottom: 1px solid map-get($bg-color, 'gray-light');
+  border-left: 1px solid map-get($bg-color, 'gray-light');
+  border-right: 1px solid map-get($bg-color, 'gray-light');
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  div {
+      padding: 5px;
+      color: map-get($font-color, 'primary');
+      &:hover {
+          background-color: map-get($bg-color, 'primary');
+          cursor: pointer;
+          color: map-get($font-color, 'inverse');
+      }
+  }
+}
+
+.block-drop-goals {
+  position: absolute;
+  text-align: left;
+  width: 99.7%;
+  top: 92px;
+  height: 160px;
+  overflow: auto;
+  padding: 0px;
+  z-index: 200;
   background-color: map-get($bg-color, 'white');
   border-bottom: 1px solid map-get($bg-color, 'gray-light');
   border-left: 1px solid map-get($bg-color, 'gray-light');

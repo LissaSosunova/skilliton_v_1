@@ -17,11 +17,15 @@
                 form-group"
                 >
                 <div class="col-xs-12">
-                        Add the skills you would like to share and indicate the current level of ownership
+                        Add a skill you would like to obtain and indicate your current level of proficiency
                 </div>
 
-        <div class="col-xs-12 elem">
-        <section *ngIf="!showChoosedSkill">
+        <div class="col-xs-12 elem row">
+                <div class="col-xs-3 row-text margin-text">
+                Add skill <span class="required-star">*</span>
+                </div>
+                <!-- Search skill -->
+        <section *ngIf="!showChoosedSkill" class="col-xs-9 no-padd search-section">
                 <app-input-search
                         [maxLength]="100"
                         [control]="searchControl"
@@ -33,6 +37,16 @@
                         [requiredFieldError]="'You can not to continue without any goal'"
                 >
                 </app-input-search>
+                <section *ngIf="openAuto === true"
+                        [ngClass]="{'block-drop': openAuto == true,  'non-vis': openAuto == false}">
+                        <div *ngFor="let option of options">
+                                <div (click)="setValueFromDropDown(option)">
+                                <i class="material-icons plus-icon">
+                                add_circle_outline
+                                </i>
+                                <span>{{option.name}} </span></div>
+                                </div>
+                        </section>
                 <span *ngIf="showBtn"
                 [ngClass]="{'non-vis': showBtn == false}">Add new skill?   </span>
                 <input
@@ -41,23 +55,12 @@
                 [ngClass]="{'btn primary-btn btn-height-small btn-width-small': showBtn == true,  'non-vis': showBtn == false}"  
                 value="Add"
                 >
-                </section>
-
-                        <section *ngIf="openAuto === true" 
-                        [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
-                        <div *ngFor="let option of options">
-                                <div (click)="setValueFromDropDown(option)">
-                                <i class="material-icons plus-icon">
-                                add_circle_outline
-                                </i>
-                                <span>{{option.name}} </span></div>
-                                </div>
-                        </section>    
-        <section *ngIf="showChoosedSkill" class="choosed-skill-field">
+                </section>    
+        <section *ngIf="showChoosedSkill" class="choosed-skill-field col-xs-9">
                 <div>
                         {{choosedSkillname}}
                         <button (click)="changeSkill()"
-                        class="btn-remome"
+                        class="btn-remove"
                         >
                                 <i class="material-icons remove-icon">
                                                 clear
@@ -134,7 +137,7 @@
                 <!-- Share services for payment -->
 <div class="row col-xs-12 no-padd">
         <div class="col-xs-4 no-padd">
-                <label class="container-ch  align-left">Service
+                <label class="container-ch  align-left">Services <span *ngIf="servicesExpList.length !== 0">remove all</span>
                                 <input type="checkbox"
                                 name="service"
                                 #service="ngModel"
@@ -151,7 +154,7 @@
                 <div *ngFor="let option of servicesExpList" class="choosed-goals-field">
                         <span>{{option.name}} </span>
                         <button (click)="changeUsersServiceList(option)"
-                        class="btn-remome">
+                        class="btn-remove">
                                 <i class="material-icons remove-icon">
                                                 clear
                                 </i>
@@ -162,8 +165,8 @@
         </div>
 
                 <!-- Search services -->
-                        <div class="col-xs-12 no-padd">
-                        <section class="search-position" *ngIf="servicesOffered === true">
+                <div class="col-xs-12 no-padd">
+                        <section class="search-position search-section" *ngIf="servicesOffered === true">
                                 <app-input-search
                                 [label]="'Select service from your services'"
                                 class="search"
@@ -178,7 +181,7 @@
                                 </app-input-search>
                         
                                 <section *ngIf="openAutoUsersServices"
-                                [ngClass]="{'block-drop': openAutoUsersServices == true,  'non-vis': openAutoUsersServices == false}">
+                                [ngClass]="{'block-drop-goals': openAutoUsersServices == true,  'non-vis': openAutoUsersServices == false}">
                                 <div *ngFor="let option of optionsUserServises">
                                         <div (click)="setValueUsersServiceFromDropDown(option)">
                                         <i class="material-icons plus-icon">
@@ -195,8 +198,8 @@
                 <!-- SHare skills for payment -->
 <div class="row col-xs-12 no-padd">
         <div class="col-xs-4 no-padd">
-                <label class="container-ch  align-left">Skills
-                                <input type="checkbox"
+                <label class="container-ch  align-left">Skills <span *ngIf="skillsExpList.length !== 0">remove all</span>
+                        <input type="checkbox"
                                 name="skillsOffere"
                                 #skillsOffere="ngModel"
                                 [(ngModel)]="skillsOffered"
@@ -212,7 +215,7 @@
                         <div *ngFor="let option of skillsExpList" class="choosed-goals-field">
                                 <span>{{option.name}} </span>
                                 <button (click)="changeUsersSkillList(option)"
-                                class="btn-remome">
+                                class="btn-remove">
                                         <i class="material-icons remove-icon">
                                                         clear
                                         </i>
@@ -225,7 +228,7 @@
         
 <!-- Search skills -->
         <div class="col-xs-12 no-padd">
-        <section class="search-position" *ngIf="skillsOffered === true">
+        <section class="search-position search-section" *ngIf="skillsOffered === true">
                 <app-input-search
                 [label]="'Select skills from your skills to share'"
                 class="search"
@@ -240,7 +243,7 @@
                 </app-input-search>
         
                 <section *ngIf="openAutoUsersSkills"
-                [ngClass]="{'block-drop': openAutoUsersSkills == true,  'non-vis': openAutoUsersSkills == false}">
+                [ngClass]="{'block-drop-goals': openAutoUsersSkills == true,  'non-vis': openAutoUsersSkills == false}">
                 <div *ngFor="let option of optionsUserSkills">
                         <div (click)="setValueUsersSkillsFromDropDown(option)">
                         <i class="material-icons plus-icon">

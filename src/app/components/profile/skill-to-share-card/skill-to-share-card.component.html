@@ -1,4 +1,4 @@
-<div class="col-xs-12 row">
+<div class="col-xs-12 row no-padding">
   <!-- If there is no any skill -->
   <div class="section-of-block
               col-xs-12
@@ -7,7 +7,8 @@
               col-lg-12
               row
               center-xs
-              services"
+              services
+              no-padding"
               *ngIf="!showSkills"
               >
       Add information about skills
@@ -15,11 +16,11 @@
 </div>
   <div class="col-xs-12 row no-padding" >
     <div class="col-xs-12
-    col-sm-6
-    col-md-6
-    col-lg-4
+    col-sm-12
+    col-md-12
+    col-lg-12
     row
-    margin-bottom" 
+    let-skills" 
     *ngFor="let skill of skills"
     >
     <div class="section-100">
@@ -34,14 +35,15 @@
     <span>{{skill.name}} </span>
   </div> 
     <div class="col-xs-2 end-xs">
-      <button (click)="goToSubUrl('/profile/about-me')"
-      class="edit-round-btn">
-    <i class="material-icons edit-icon">
-      edit
-    </i>
-    </button>
+<!-- open btn -->
+        <span class="edit" (click)="openSkill(skill.skillId)"> <i class="material-icons">
+            keyboard_arrow_down
+        </i>
+        </span>
     </div>
     </div>
+    <div class="col-xs-12 non-vis"
+    [id]="'skill' + skill.skillId">
     <div class="col-xs-12 description-block start-xs"> {{skill.description}}</div>
     <div class="col-xs-12 table-block">
     <table class="table">
@@ -106,16 +108,17 @@
       </table>
     </div>
 
-    <!-- End of card -->
+    </div>
+        <!-- End of card -->
     </div>
 
   </div>
 
   <!-- Init skills -->
   <div class="col-xs-12
-              col-sm-6
-              col-md-6
-              col-lg-4
+              col-sm-12
+              col-md-12
+              col-lg-12
               row
               margin-bottom"
               >
@@ -132,15 +135,15 @@
               <span>{{skill.name}} </span>
     </div> 
       <div class="col-xs-2 end-xs">
-        <button (click)="goToSubUrl('/profile/about-me')"
-        class="edit-round-btn">
-      <i class="material-icons edit-icon">
-        edit
-      </i>
-      </button>
+        <!-- open btn -->
+        <span class="edit" (click)="openSkill(skill.skillId)"> <i class="material-icons">
+            keyboard_arrow_down
+        </i>
+        </span>
       </div>
     </div>
-    <div class="col-xs-12 descr-field-init start-xs">
+    <div class="col-xs-12 descr-field-init start-xs non-vis"
+          [id]="'skill' + skill.skillId">
         <span>Add some description</span> </div>
     </div>
   </div>

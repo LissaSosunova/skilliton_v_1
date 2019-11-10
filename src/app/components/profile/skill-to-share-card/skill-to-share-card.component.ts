@@ -19,12 +19,21 @@ export class SkillToShareCardComponent implements OnInit {
   ngOnInit() {
     const skills$ = this.store.select('user').subscribe((state: any) => {
       if(state !== undefined || state) {
-
         this.initSkills = _.filter(state.keyData.skills, { 'level': null });
-        this.skills = _.differenceBy(state.keyData.skills, this.initSkills, 'id');
+        this.skills = _.differenceBy(state.keyData.skills, this.initSkills, 'skillId');
         if (state.keyData.skills.length !== 0) {
           this.showSkills = true;
         }
+      }
+    });
+  }
+
+  public openSkill(id) {
+    const name = 'skill' + id;
+    const elems = Array.from(document.getElementsByTagName('div'));
+    elems.forEach((el) => {
+      if (el.id === name) {
+        el.classList.toggle('non-vis');
       }
     });
   }
