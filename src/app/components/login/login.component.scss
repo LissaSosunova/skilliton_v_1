@@ -18,7 +18,7 @@
     padding: 60px;
     background-color: map-get($bg-color, 'primary');
     color: white;
-    height: 100vh;
+    height: calc(100vh - #{$header-height});
 }
 
 .right-side-block {

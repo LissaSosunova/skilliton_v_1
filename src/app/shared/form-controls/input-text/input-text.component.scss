@@ -10,6 +10,7 @@
     box-sizing: border-box;
     display: inline-block;
     height: 47px;
+    font-family: "Montserrat", sans-serif;
 }
 
 .input {
@@ -27,4 +28,8 @@
 
 .error-input {
     border: 1px map-get($font-color, 'error') solid;
+}
+.label-optional {
+    font-size: 0.7em;
+    color: map-get($font-color, 'gray');
 }

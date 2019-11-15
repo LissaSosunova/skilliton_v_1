@@ -1,0 +1,109 @@
+<div class="row middle-xs show-content main">
+  <!-- General form -->
+      <div class="col-xs-12">
+        <form name="editPlacesForm"
+          #editPlacesForm="ngForm"
+          class="col-xs-12
+          no-padd
+          form-group">
+           
+          <div class="col-xs-12 elem row">
+             <!-- First -->
+              <div class="col-xs-3 row-text margin-text">
+                  I am from
+              </div>
+              <div class="col-xs-9 no-padd row" *ngIf="editablePlaceFrom == true">
+                  <div class="col-xs-10 no-padd">
+                      <app-input-text
+                      name="firstName"
+                      [(ngModel)]="firstNameOfUser"
+                      #firstName="ngModel"
+                      [placeholder]="'Function temporarily unavailable'"
+                      [disabled]="true"
+                      >
+                    </app-input-text> 
+                  </div>
+                  <div class="col-xs-2 no-padd btn-save center-xs middle-xs">
+                      <span (click)="saveNewName('firstName', firstNameOfUser)">
+                            <i class="material-icons edit-icon">
+                                            save
+                            </i>
+                      </span>
+                      <span (click)="cancelPlaceFrom()">
+                          <i class="material-icons edit-icon">
+                              cancel_presentation
+                          </i>
+                    </span>
+                  </div>
+              </div>
+              
+              <div class="col-xs-9 name-field no-padd row" *ngIf="editablePlaceFrom == false">
+                  <div class="col-xs-10 inner-text" *ngIf="user.profile.placeOfBirth !== null">
+                      <span >{{user.profile.placeOfBirth }} </span>
+                  </div>
+                  <div class="col-xs-10 inner-text" *ngIf="user.profile.placeOfBirth == null">
+                     <span>Not set</span>
+                 </div>
+                  <div class="col-xs-2 no-padd btn-edit center-xs middle-xs">
+                      <span (click)="changePlaceFrom()">
+                            <i class="material-icons edit-icon">
+                                            create
+                            </i>
+                      </span>
+                  </div>
+              </div>
+
+               <!-- Last name -->
+              <div class="col-xs-3 row-text margin-text">
+                  I live in
+                </div>
+
+                <div class="col-xs-9 no-padd row" *ngIf="editablePlaceLive == true">
+                    <div class="col-xs-10 no-padd">
+                        <app-input-text
+                        name="lastName"
+                        [(ngModel)]="lastNameOfUser"
+                        #lastName="ngModel"
+                        [placeholder]="'Function temporarily unavailable'"
+                        [disabled]="true"
+                        >
+                      </app-input-text> 
+                      <span class="error" *ngIf="lastNameErr === true">{{ errorLastNameText}}</span>
+                    </div>
+                    <div class="col-xs-2 no-padd btn-save center-xs middle-xs">
+                        <span (click)="saveNewLastName('lastName', lastNameOfUser)">
+                            <i class="material-icons edit-icon">
+                                            save
+                            </i>
+                      </span>
+                        <span (click)="chancelPlaceLive()">
+                            <i class="material-icons edit-icon">
+                                cancel_presentation
+                            </i>
+                      </span>
+                    </div>
+                </div>
+
+                <div class="col-xs-9 name-field no-padd row" *ngIf="editablePlaceLive == false">
+                    <div class="col-xs-10 inner-text" *ngIf="user.profile.placeOfResidence !== null">
+                        <span >{{user.profile.placeOfResidence }} </span>
+                    </div>
+                    <div class="col-xs-10 inner-text" *ngIf="user.profile.placeOfResidence == null">
+                       <span>Not set</span>
+                   </div>
+                    <div class="col-xs-2 no-padd btn-edit center-xs middle-xs">
+                        <span (click)="changePlaceLive()">
+                              <i class="material-icons edit-icon">
+                                              create
+                              </i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+               
+               
+          </form>
+      </div>
+</div>        
+
+

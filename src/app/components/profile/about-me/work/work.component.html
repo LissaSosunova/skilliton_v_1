@@ -1,0 +1,194 @@
+<div class="row middle-xs show-content main">
+  <!-- General form -->
+      <div class="col-xs-12" *ngIf="workExist === true" >         
+          <div class="col-xs-12 elem row" *ngFor="let work of user.keyData.workExperience">
+             <!-- Workplace -->
+              <div class="col-xs-3 row-text margin-text">
+                <span>From {{work.periodOfTime.dateFrom | date: 'MM.yyyy'}} </span><br>
+                <span *ngIf="work.periodOfTime.dateTo !== null">Until {{work.periodOfTime.dateTo | date: 'MM.yyyy'}}:</span>
+                <span *ngIf="work.periodOfTime.dateTo === null">Until nowadays: </span>
+              </div>              
+              <div class="col-xs-9 name-field no-padd row">
+                  <div class="col-xs-12 inner-text" >
+                      <span class="company">{{ work.name }}</span> <br>
+                  </div>
+              </div>
+
+               <!-- Position -->
+              <div class="col-xs-3 row-text margin-text">
+                Position:
+                </div>
+                <div class="col-xs-9 name-field no-padd row">
+                    <div class="col-xs-12 inner-text" >
+                      <span class="position">{{ work.position }}</span>
+                   </div>
+                </div>
+            </div>
+          </div>
+            <!-- Add form -->
+        <div class="col-xs-12" *ngIf="editableWork == true">     
+            <form name="editWorkForm"
+                  #editWorkForm="ngForm"
+                  class="col-xs-12
+                  no-padd
+                  form-group">
+            <div class="col-xs-12 elem row">
+                <div class="col-xs-3 row-text margin-text">
+                  Add workplace
+                </div>
+                <div class="col-xs-9 no-padd row" >
+                    <section *ngIf="nameSeted == true" class="col-xs-12 start-xs no-padd" >
+                        <div class="choosed-skill-field">
+                                {{companyName}}
+                                <button (click)="changeWorkplace()"
+                                class="btn-remove"
+                                >
+                                        <i class="material-icons remove-icon">
+                                                        clear
+                                        </i>
+                                </button>
+                        </div>
+                      </section>
+                          <div class="col-xs-12 no-padd searchRes start-xs"
+                          *ngIf="openSearchBlock == true">
+                              <app-input-search
+                              class="search"
+                              [maxLength]="100"
+                              [control]="searchControl"
+                              [value]="searchControl.value"
+                              name="compName"
+                              [(ngModel)]="workPlace"
+                              #compName="ngModel"
+                              [required]="true"
+                              [placeholder]="''"
+                              [requiredFieldError]="'Check skill from your list'">
+                            </app-input-search>
+                            <!-- Drop down -->
+                            <section *ngIf="openAutoSearch === true" appClickOutside (mClickOutside)="outsideSearchClick()"
+                              [ngClass]="{'block-drop': openAutoSearch == true,  'non-vis': openAutoSearch == false}">
+                              <div *ngFor="let option of options" appClickOutside>
+                                      <div (click)="setValueFromDropDown(option)">
+                                      <i class="material-icons plus-icon">
+                                      add_circle_outline
+                                      </i>
+                                      <span>{{option.companyName}}</span></div>
+                                      </div>
+                              </section>
+                          </div>
+                    
+                </div>
+
+                <div class="col-xs-3 row-text margin-text">
+                    Add position
+                  </div>
+                  <div class="col-xs-9 no-padd row" >
+                    <div class="col-xs-12 no-padd">
+                        <app-input-text
+                        name="place"
+                        [(ngModel)]="workPosition"
+                        #place="ngModel"
+                        [placeholder]="''"
+                        [disabled]="false"
+                        [required]="true"
+                        >
+                      </app-input-text> 
+                    </div>
+                  </div>
+                  <!-- Period -->
+                  <div class="col-xs-3 row-text margin-text">
+                      Add period
+                    </div>
+                    <div class="col-xs-9 no-padd row period-field" >
+                        <section *ngIf="positionSeted == true" class="col-xs-12 start-xs no-padd" >
+                            <div class="choosed-skill-field">
+                                    {{companyName}}
+                                    <button (click)="changeWorkplace()"
+                                    class="btn-remove"
+                                    >
+                                            <i class="material-icons remove-icon">
+                                                            clear
+                                            </i>
+                                    </button>
+                            </div>
+                          </section>
+                      <div class="col-xs-12 no-padd row">
+                          <div class="col-xs-12"> From
+                              <app-input-datepicker
+                              [floatLabel]="'auto'"
+                              [disabled]="false"
+                              [format]="'dd MM yyyy'"
+                              [(ngModel)]="fromDate"
+                              [required]="true"
+                              [errorText]="'Date is required'"
+                              name="from"
+                              (change)="changeDate('fromDate', $event, fromDate)"
+                              [errorTextDate]="errorTextDate">
+                          </app-input-datepicker>
+                          </div>
+                          <div class="col-xs-12" *ngIf="currentlyPeriod === false"> To
+                              <app-input-datepicker
+                              [floatLabel]="'auto'"
+                              [disabled]="false"
+                              [format]="'dd MM yyyy'"
+                              [(ngModel)]="toDate"
+                              [required]="false"
+                              [errorText]="'Date is required'"
+                              name="to"
+                              (change)="changeDate('toDate', $event, toDate)"
+                              [errorTextDate]="errorTextDate">
+                          </app-input-datepicker>
+                          </div>
+                          <div class="col-xs-6">
+                              <label class="container-ch-sm  align-check"> I currently work here 
+                                  <input type="checkbox"
+                                    name="currPeriod"
+                                    #currPeriod="ngModel"
+                                    [(ngModel)]="currentlyPeriod"
+                                    (change)="changeDate('currPeriod', $event, currentlyPeriod)">
+                                  <span class="checkmark-sm"></span>
+                                  </label>
+                           </div>
+                      </div>
+                    </div>
+
+                  <!-- Add button -->
+                    <div class="col-xs-12 elem2 row">
+                        <div class="col-xs-3 row-text margin-text">
+                          
+                        </div>
+                        <div class="col-xs-9 no-padd row">
+                            <div class="col-xs-12 no-padd">
+                                <input
+                                type="submit"
+                                (click)="saveBtn(workPlace, workPosition, currentlyPeriod, fromDate)" 
+                                class="btn
+                                primary-btn
+                                btn-width-middle"    
+                                value="Add workplace"
+                                [disabled]="editWorkForm.invalid"
+                                [ngClass]="{'disabled': editWorkForm.invalid}">
+                            </div>
+                        </div>
+                    </div>
+              </div>
+
+            </form>
+                  <!-- End add form -->
+
+</div>        
+<div class="col-xs-12" *ngIf="editableWork == false">
+    <!-- Add -->
+      <div class="col-xs-12 elem2 row" >
+        <div class="col-xs-3 row-text margin-text">
+          
+        </div>
+        <div class="col-xs-9 no-padd row">
+            <div class="col-xs-12 no-padd">
+              <div class="add-workpalce center-xs middle-xs" (click)="addWork()">
+                Add Workplace +
+              </div>
+            </div>
+        </div>
+      </div>
+    <!-- End add btn -->
+</div>

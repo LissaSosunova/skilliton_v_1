@@ -5,11 +5,10 @@ import { errorTypes } from '../../shared/constants/errors';
 import { HttpService } from '../../services/http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { types } from '../../types/types';
-import { Observable, Subject} from 'rxjs';
+import { Subject} from 'rxjs';
 import * as _ from 'lodash';
 import { AlertModalComponent } from '../modals/alert-modal/alert-modal.component';
 import { Store} from '@ngrx/store';
-import { ResetUserData } from '../../state/actions/user.actions';
 import { LoadTags } from '../../state/actions/filters.actions';
 
 @Component({
@@ -92,9 +91,8 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
         this.user.keyData.skillsSkipped === false) {
         this.activePage = "skills";
       } else if ((this.user.keyData.goals.length === 0 ||
-        this.user.keyData.goals == null) &&
-        this.user.keyData.skillsSkipped === true
-        && this.user.keyData.goalsSkipped === false) {
+        this.user.keyData.goals == null) && 
+        this.user.keyData.goalsSkipped === false) {
         this.activePage = "goals";
       } else if(this.user.keyData.interests.length === 0 ||
         this.user.keyData.interests == null && (this.activePage !== "skills" && this.activePage !== "goals")) {
@@ -130,6 +128,10 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
     this.infoPopup.open();
   }
 
+  // Click outside of search
+  public outsideSearchClick(): void {
+    this.openAuto = false;
+  }
 
   public skipField(page: string, name: string) {
     // Temporary method for continue work if API skip answered error with status 200
@@ -160,13 +162,39 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
     this.searchControl.reset({ value: '', disabled: false });
     if (this.chipsInterest.length === 20) {
     this.isTagsInterests = false;
+    }
   }
-}
-}
+  }
+
+  // RemoveChips Skills
+  public changeSkillsList(option): void {
+    const newList = _.filter(this.chipsSkills, (f) => { return f.id !== option.id; });
+    this.chipsSkills = newList;
+    if (this.chipsSkills.length === 0) {
+      this.goToNextPage = false;
+    }
+  }
+
+  // RemoveChips Goals
+  public changeGoalsList(option): void {
+    const newList = _.filter(this.chipsGoals, (f) => { return f.id !== option.id; });
+    this.chipsGoals = newList;
+    if (this.chipsGoals.length === 0) {
+      this.goToNextPage = false;
+    }
+  }
+
+  // RemoveChips Interests
+  public changechipsInterestList(option): void {
+    const newList = _.filter(this.chipsInterest, (f) => { return f.id !== option.id; });
+    this.chipsInterest = newList;
+    if (this.chipsInterest.length === 0) {
+      this.goToNextPage = false;
+    }
+  }
 
   public goNext(page: string) {
     let params = {};
-    // this.goToNextPage = false;
     this.activePage = page;
     if (page === 'goals' && this.chipsSkills.length !== 0 ) {
       this.chipsSkills.forEach(el => {

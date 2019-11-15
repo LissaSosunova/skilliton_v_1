@@ -130,7 +130,7 @@
 
                    <div class="col-xs-9 name-field no-padd row" *ngIf="editableBirthDay == false">
                        <div class="col-xs-10 inner-text">
-                           {{user.profile.birthDate}}
+                           {{user.profile.birthDate | date}}
                        </div>
                        <div class="col-xs-2 no-padd btn-edit center-xs middle-xs">
                            <span (click)="changeBirthday()">

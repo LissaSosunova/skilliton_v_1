@@ -23,6 +23,7 @@ public showMaxInputMessageError: boolean = false;
 public maxLengthLimit: number;
 public showContent: boolean = false;
 public placeholder?: string;
+@Input() label?: string;
 
 constructor() {
   super();

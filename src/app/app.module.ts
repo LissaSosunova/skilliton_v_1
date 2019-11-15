@@ -116,6 +116,9 @@ import { MateSkillToShareCardComponent } from './components/mates/skill-to-share
 import { MateSkillToObtainCardComponent } from './components/mates/skill-to-obtain-card/skill-to-obtain-card.component';
 import { MateServiceCardComponent } from './components/mates/service-card/service-card.component';
 import { GeneralComponent } from './components/profile/about-me/general/general.component';
+import { PlacesOfResidenceComponent } from './components/profile/about-me/places-of-residence/places-of-residence.component';
+import { WorkComponent } from './components/profile/about-me/work/work.component';
+import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
 
 
 @NgModule({
@@ -176,7 +179,10 @@ import { GeneralComponent } from './components/profile/about-me/general/general.
     MateSkillToShareCardComponent,
     MateSkillToObtainCardComponent,
     MateServiceCardComponent,
-    GeneralComponent
+    GeneralComponent,
+    PlacesOfResidenceComponent,
+    WorkComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,

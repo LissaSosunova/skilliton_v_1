@@ -86,6 +86,14 @@ export class HttpService {
     return this.http.post(URL_BACK + '/user/edit-profile', params, {headers: this.getHeaders()});
   }
 
+  public postWork(params: types.AddWork): Observable<any> {
+    return this.http.post(URL_BACK + '/user/add-work', params, {headers: this.getHeaders()});
+  }
+
+  public getWork(): Observable<any> {
+    return this.http.get(URL_BACK + '/work', {headers: this.getHeaders()});
+  }
+
 // Other users
 
 public getMate(params: string): Observable<any> {

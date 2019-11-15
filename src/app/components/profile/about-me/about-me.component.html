@@ -7,14 +7,22 @@
         ">
           <div class="col-xs-3">
                   <app-left-bar
-                  [currChildUrl]="'/about-me/general'"></app-left-bar>
+                  [currChildUrl]="currChildUrl"></app-left-bar>
           </div>
             <div class="col-xs-9">
                 <div class="col-xs-12 elem row" *ngIf="userUploaded === true">
                   <div class="col-xs-12 center-xs" *ngIf="currChildUrl === 'general'">
                      <app-general
                      [user]='user$'></app-general>
-                  </div>                    
+                  </div>
+                  <div class="col-xs-12 center-xs" *ngIf="currChildUrl === 'places-of-residence'">
+                    <app-places-of-residence
+                    [user]='user$'></app-places-of-residence>
+                  </div> 
+                  <div class="col-xs-12 center-xs" *ngIf="currChildUrl === 'work'">
+                    <app-work
+                    [user]='user$'></app-work>
+                  </div>                  
             </div>
           </div>  
         </div>
