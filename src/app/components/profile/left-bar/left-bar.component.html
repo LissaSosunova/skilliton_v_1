@@ -20,7 +20,7 @@ class="tabs-nav
     <div class="col-xs-12
                 tab-expert-class
                 border-right start-xs"
-    [ngClass]="{'not-active-tab': currChildUrl !== '/about-me/general',  'active': currChildUrl === '/about-me/general'}"
+    [ngClass]="{'not-active-tab': currChildUrl !== 'general',  'active': currChildUrl === 'general'}"
                 (click)="switcher('/profile/about-me/general', 'general')">
                 <span>
                     General
@@ -29,8 +29,8 @@ class="tabs-nav
     <div class="col-xs-12
                 tab-expert-class
                 border-right start-xs"
-            [ngClass]="{'not-active-tab': currTab !== 'placedYourVeLived',  'active': currTab === 'placedYourVeLived'}"
-                (click)="switcher('/profile/about-me', 'placedYourVeLived')">
+            [ngClass]="{'not-active-tab': currChildUrl !== 'places-of-residence',  'active': currChildUrl === 'places-of-residence'}"
+                (click)="switcher('/profile/about-me/places-of-residence', 'places-of-residence')">
                 <span>
                     Places of residence
                 </span>
@@ -38,10 +38,19 @@ class="tabs-nav
     <div class="col-xs-12
                 tab-expert-class
                 border-right start-xs"
-            [ngClass]="{'not-active-tab': currTab !== 'workAndEducation',  'active': currTab === 'workAndEducation'}"
+            [ngClass]="{'not-active-tab': currChildUrl !== 'work',  'active': currChildUrl === 'work'}"
+                (click)="switcher('/profile/about-me/work', 'work')">
+                <span>
+                    Work
+                </span>
+    </div>
+    <div class="col-xs-12
+                tab-expert-class
+                border-right start-xs"
+            [ngClass]="{'not-active-tab': currChildUrl !== 'education',  'active': currChildUrl === 'education'}"
                 (click)="switcher('/profile/about-me', 'workAndEducation')">
                 <span>
-                    Work and Education 
+                   Education 
                 </span>
     </div>
     <div class="col-xs-12

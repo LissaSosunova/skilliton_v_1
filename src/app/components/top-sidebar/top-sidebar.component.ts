@@ -48,7 +48,7 @@ export class TopSidebarComponent implements OnInit {
       if (viewMateProfile.length > 1 ) {
         this.currParentUrl = viewMateProfile[0];
       }
-      if (this.currParentUrl === '/' && !this.currParentUrl) {
+      if ((this.currParentUrl === '/' || this.currChildUrl === '') && !this.currParentUrl) {
         this.currParentUrl = 'login';
       }
       if (urlSegments.length > 2) {

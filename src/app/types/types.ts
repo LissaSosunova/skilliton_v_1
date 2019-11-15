@@ -248,4 +248,14 @@ export module types {
     profile: ProfileUser;
     keyData: KeyData;
   }
+
+  export interface AddWork {
+      id?: number;
+      name?: string;
+      periodOfTime: {
+        dateFrom: string;
+        dateTo?: string;
+      };
+      position: string;
+  }
 }

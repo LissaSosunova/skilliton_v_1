@@ -1,13 +1,63 @@
 @import '../../../../scss/variables';
 .errorTextDate {
-    color:map-get($font-color, 'error');
+    color: map-get($font-color, 'error');
     font-size: 12px;
 }
 
 .input-field {
     height: 47px;
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 97%;
+    width: 100%;
     margin-bottom: 5px;
+}
+
+mat-form-field ::ng-deep  {
+    .mat-form-field-underline {
+        display: none;
+    }
+    .mat-form-field-infix {
+        margin-top: 5px;
+        width: auto !important;
+        padding: 5px 7px 8px 8px;
+    }
+    .mat-form-field-suffix {
+        bottom: 11px;
+        
+        padding: 5px 7px 8px 8px;
+        .mat-datepicker-toggle {
+            .mat-button, .mat-icon-button, .mat-stroked-button {
+                background-color: transparent !important;
+            }
+            div {
+                background-color: rgba(185, 185, 185, 0.1);
+                border-radius: 4px;
+                padding: 1px 3px 3px 1px;
+            }
+            
+        }
+    }
+    .mat-form-field-label {
+        margin-top: 9px;
+        margin-left: 10px;
+    }
+    .mat-form-field-wrapper {
+        padding-bottom: 0 !important;
+        border: 1px solid map-get($font-color, 'gray');
+        border-radius: 8px;
+        padding: 5px;
+        background-color: white;
+    }
+    .mat-form-field-label-wrapper {
+        padding: 5px;
+        
+    }
+    .mat-icon-button {
+        background-color: white;
+    }
+    .mat-form-field-flex {
+        width: 100% !important;
+        align-content: center;
+    }
+    .mat-input-element {
+        // padding: 5px;
+    }
 }

@@ -19,6 +19,8 @@ import { SkillToShareComponent } from './components/profile/skill-to-share/skill
 import { StoViewComponent } from './components/profile/sto-view/sto-view.component';
 import { StsViewComponent } from './components/profile/sts-view/sts-view.component';
 import { VeiwProfileComponent } from './components/mates/veiw-profile.component';
+import { PlacesOfResidenceComponent } from './components/profile/about-me/places-of-residence/places-of-residence.component';
+import { WorkComponent } from './components/profile/about-me/work/work.component';
 
 const routes: Routes = [
   {
@@ -75,6 +77,14 @@ const routes: Routes = [
           {
             path: 'general',
             component: GeneralComponent
+          },
+          {
+            path: 'places-of-residence',
+            component: PlacesOfResidenceComponent
+          },
+          {
+            path: 'work',
+            component: WorkComponent
           }
         ]
       },

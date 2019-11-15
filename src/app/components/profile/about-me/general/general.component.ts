@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild, Input, Output, ElementRef } from '@angular/core';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { HttpService } from '../../../../services/http.service';
-import { LoadUserData, UpdateUsersGoals } from 'src/app/state/actions/user.actions';
+import { LoadUserData } from 'src/app/state/actions/user.actions';
 import { NgForm, FormControl } from '@angular/forms';
 import { Observable, Subject, BehaviorSubject} from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -46,6 +46,7 @@ private editableOtherLang: boolean = false;
 // Datepicker
 private minimalYear: number;
 public checkDate: number;
+public birthDate: string;
 // Errors
 private errorTextDate: string;
 private ERROR_API: any = errorTypes.api.registration;
@@ -197,12 +198,7 @@ private errorSexText: string;
         params.push(o.id);
       });
       this.editData.sendData('otherLang', params);
-      this.store.dispatch(new LoadUserData());
-      const newUser$ = this.store.select('user').subscribe((state: any) => {
-        if  (state !== undefined)  {
-          this.user = state;
-        }
-      });
+      this.updateUserData();
       if (this.user.profile.langs.other.length === 0 ) {
         this.editableOtherLang = false;
     }
@@ -262,6 +258,7 @@ private errorSexText: string;
     }
     // Function checks correct date in input datepicker
   public checkDatePicker(event, birthdayDate: string): void {
+
     this.checkDate = +(this.datePipe.transform(birthdayDate, "yyyy"));
     if(this.checkDate >= this.minimalYear){
       let result = _.find(this.ERROR_APP, function(o) { return o.code == 103; });
@@ -276,6 +273,7 @@ private errorSexText: string;
     if (birthdayDate !== null) {
       const newVal = this.datePipe.transform(birthdayDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
       this.editData.sendData('birthDate', newVal);
+      this.updateUserData();
       this.editableBirthDay = false;
     }
   }
@@ -299,5 +297,14 @@ private errorSexText: string;
     let result = _.find(this.ERROR_APP, function(o) { return o.code == data; });
     this.showEqualError = true;
     this.errorAPP = result.title;
+  }
+
+  public updateUserData(): void {
+    this.store.dispatch(new LoadUserData());
+    const newUser$ = this.store.select('user').subscribe((state: any) => {
+      if  (state !== undefined)  {
+        this.user = state;
+      }
+    });
   }
 }
