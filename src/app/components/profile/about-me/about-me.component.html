@@ -22,7 +22,11 @@
                   <div class="col-xs-12 center-xs" *ngIf="currChildUrl === 'work'">
                     <app-work
                     [user]='user$'></app-work>
-                  </div>                  
+                  </div>
+                  <div class="col-xs-12 center-xs" *ngIf="currChildUrl === 'education'">
+                      <app-education
+                      [user]='user$'></app-education>
+                    </div>                  
             </div>
           </div>  
         </div>

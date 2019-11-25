@@ -18,7 +18,14 @@
                   keyboard_arrow_down
               </i>
             </span>
-           </div>   
+           </div> 
+<span *ngIf="notifications.active.length !==0">
+      <section *ngFor="let item of notifications.active">
+            <div class="col-xs-2 end-xs">
+                     {{item.matchId}}
+            </div>
+         </section>
+</span>
     </div>
     <div class="choosed-skill-field row">
         

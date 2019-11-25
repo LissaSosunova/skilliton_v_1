@@ -8,8 +8,10 @@
                   col-xs-4
                   col-sm-4
                   col-md-2
-                  col-lg-2">
-          <div class="face" [style.background-image]="'url(' + avatar + ')'"></div>
+                  col-lg-2"
+                  (click)="viewProfile(skill.userEmail)">
+          <div class="face" [style.background-image]="'url(' + avatar + ')'"
+          (click)="viewProfile(skill.userEmail)" ></div>
           </div>
           <div class="col-xs-4
                       col-sm-4
@@ -25,14 +27,18 @@
                             <label class="summary">{{ skill.summary  || 'No info'}}</label>
                         </div>
                       <div *ngIf="skill.skillToShare.length !== 0" class="tab-expert-class">Skills to share <br>
-                        <!-- List of Servises -->
-                        <span class="btn-skill" *ngFor="let skillTS of skill.skillToShare">
+                        <!-- List of skills to share -->
+                        <span class="btn-skill"
+                              *ngFor="let skillTS of skill.skillToShare"
+                              (click)="sendReqTS(skillTS.skillId)">
                             {{skillTS.skillName}}
                         </span>
                       </div>
                       <div *ngIf="skill.skillToObtain.length !== 0" class="tab-expert-class">Skills to obtain <br>
-                          <!-- List of Servises -->
-                          <span  class="btn-skill" *ngFor="let skillTO of skill.skillToObtain">
+                          <!-- List of skills to obtaine -->
+                          <span  class="btn-skill"
+                                *ngFor="let skillTO of skill.skillToObtain"
+                                (click)="sendReqTO(skillTO.skillId)">
                               {{skillTO.skillName}}
                           </span>
                         </div>
@@ -45,7 +51,7 @@
                       end-xs top-xs" >
               <input
               type="submit"
-              (click)="match()" 
+              (click)="match(skill.skillToShare, skill.skillToObtain)" 
               class="btn
               primary-btn
               btn-match"    

@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   public myServices: Array<any>;
   public currParentUrl: string;
   @ViewChild('currChildUrl', {static: false}) public currChildUrl: string;
+  @ViewChild('summaryValue', {static: true}) public summaryValue: string;
   @ViewChild('uploadFile', {static: true}) public uploadFile: ElementRef;
   subscription: Subscription;
   public name: string;
@@ -85,6 +86,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
     const newUser$ = this.store.select('user').subscribe((state: any) => {
       if  (state !== undefined)  {
         this.user = state;
+        console.log(this.user)
         if  (state !== undefined || state && state.skills.length > 1)  {
           this.goals = state.keyData.goals;
         }
@@ -92,6 +94,9 @@ export class ProfileComponent implements OnInit,  OnDestroy {
         this.name = state.profile.name;
         this.lastName = state.profile.lastName;
         this.summary = this.user.profile.profileSummary;
+        if (this.summary !== '') {
+          this.summaryValue = this.summary;
+        }
         this.myGoals = this.user.keyData.goals;
         this.myServices = this.user.keyData.services;
         this.placeOfBirth = this.user.profile.placeOfBirth;
@@ -107,6 +112,8 @@ export class ProfileComponent implements OnInit,  OnDestroy {
         this.user.profile.langs.native !== null ?
         this.langNative = this.user.profile.langs.native.name + ' (native)': this.langNative = "No information";
         this.user.profile.langs.native !== null ?
+        this.counter = this.counter + 10 : this.counter = this.counter;
+        this.user.keyData.education.length !==0 ? 
         this.counter = this.counter + 10 : this.counter = this.counter;
         this.langs = this.user.profile.langs.other;
         this.mySkills = this.user.keyData.skills;

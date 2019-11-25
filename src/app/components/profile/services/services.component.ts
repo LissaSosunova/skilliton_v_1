@@ -93,7 +93,6 @@ export class ServicesComponent implements OnInit {
     this.options = result1;
     const search = _.filter(this.tagsServices, o => _.includes(o.srchStr, querySearch));
     this.openAuto = true;
-// ЖДАТЬ КОГДА ОПРЕДЕЛИТСЯ ОТСЕИВАНИЕ ПО ИМЕНИ ИЛИ АЙДИ
     if (this.user) {
       const result = _.differenceBy(search, this.myServices, 'id');
       this.options = result;
@@ -126,6 +125,10 @@ export class ServicesComponent implements OnInit {
     this.showChoosedService = false;
     this.choosedService = null;
     this.showBtn = false;
+  }
+
+  public outsideSearchClick(): void {
+    this.openAuto = false;
   }
 // Upload files https://www.tutsmake.com/new-angular-7-upload-file-image-example/
 fileProgress(fileInput: any) {

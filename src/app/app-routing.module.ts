@@ -21,6 +21,7 @@ import { StsViewComponent } from './components/profile/sts-view/sts-view.compone
 import { VeiwProfileComponent } from './components/mates/veiw-profile.component';
 import { PlacesOfResidenceComponent } from './components/profile/about-me/places-of-residence/places-of-residence.component';
 import { WorkComponent } from './components/profile/about-me/work/work.component';
+import { EducationComponent } from './components/profile/about-me/education/education.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,10 @@ const routes: Routes = [
           {
             path: 'work',
             component: WorkComponent
+          },
+          {
+            path: 'education',
+            component: EducationComponent
           }
         ]
       },

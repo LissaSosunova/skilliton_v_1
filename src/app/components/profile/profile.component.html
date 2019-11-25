@@ -56,10 +56,10 @@
 
                     <div class="col-xs-10" *ngIf="openSummaryTextarea == true"> 
                         <app-input-textarea
-                        name="summary"
-                        #summary="ngModel"
+                        name="summaryV"
+                        [value]="summaryValue"
+                        #summaryV="ngModel"
                         [(ngModel)]="summaryValue"
-                        [placeholder]="'add description (max 300 characters)'"
                         [maxLength]="300"
                         [required]="false"></app-input-textarea>
                     </div>
@@ -111,7 +111,8 @@
                                         router.url === '/profile/skills-to-obtain' ||
                                         router.url === '/profile/services' ||
                                         router.url === '/profile/about-me/places-of-residence' ||
-                                        router.url === '/profile/about-me/work'}"
+                                        router.url === '/profile/about-me/work' ||
+                                        router.url === '/profile/about-me/education'}"
                 (click)="goToSubUrl('/profile')"
                 >About me</div>
         <div class="col-xs-3
@@ -179,11 +180,14 @@
         <div class="section-of-block row start-xs">
                 <div class="col-xs-12 title-section-block">
                     Studied at 
-                    <button (click)="goToSubUrl('/profile/about-me/places-of-residence')"
+                    <button (click)="goToSubUrl('/profile/about-me/education')"
                         class="edit-btn">edit</button>
                     </div>
-                <div class="colxs-12 content-section-block">
-                        <!-- <span>{{user.profile.placeOfBirth || "No information"}}</span> -->
+                <div class="colxs-12 content-section-block" *ngIf="user.keyData.education.length !== 0">
+                <div *ngFor="let educPlace of user.keyData.education">{{educPlace.name}}</div>
+                </div>
+                <div class="colxs-12 content-section-block" *ngIf="user.keyData.education.length === 0">
+                <div>No information</div>
                 </div>
         </div>
         <div class="section-of-block row start-xs">
@@ -210,6 +214,9 @@
                     </div>
                 <div class="colxs-12 content-section-block" *ngIf="user.keyData.workExperience.length !== 0">
                        <div *ngFor="let work of user.keyData.workExperience">{{work.name}}</div>
+                </div>
+                <div class="colxs-12 content-section-block" *ngIf="user.keyData.workExperience.length === 0">
+                <div>No information</div>
                 </div>
         </div>
     </div>

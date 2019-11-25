@@ -258,4 +258,16 @@ export module types {
       };
       position: string;
   }
+
+  export interface AddEducation {
+      degree?: string;
+      id?: number;
+      name?: string;
+      periodOfTime: {
+        dateFrom: string;
+        dateTo?: string;
+      };
+      specialization?: string;
+      type: number;
+  }
 }

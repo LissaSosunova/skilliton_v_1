@@ -96,6 +96,13 @@ export function userReducer(state: any, action: any)  {
       state.keyData.skills = data;
       return state;
     }
+    case userAction.UserActionTypes.UPDATE_USERS_NOTIFICATIONS_MATCHES: {
+      const data = action.payload;
+      if(state !== undefined){
+        state.notifications.active = data;
+      }
+      return state;
+    }
     default:
       return state;
     }

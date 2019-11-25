@@ -79,7 +79,6 @@ import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 import { SetExactdataPageComponent } from './components/set-exactdata-page/set-exactdata-page.component';
 import { InputSearchComponent } from './shared/form-controls/input-search/input-search.component';
 import { TagInputModule } from 'ngx-chips';
-import { MatDefaultChipsComponent } from './shared/form-controls/mat-default-chips/mat-default-chips.component';
 import {DemoMaterialModule} from './material-module';
 import { InputTrimDirective } from './shared/directives/input-trim.directive';
 import { DropdownItemsComponent } from './shared/components/dropdown-items/dropdown-items.component';
@@ -119,6 +118,9 @@ import { GeneralComponent } from './components/profile/about-me/general/general.
 import { PlacesOfResidenceComponent } from './components/profile/about-me/places-of-residence/places-of-residence.component';
 import { WorkComponent } from './components/profile/about-me/work/work.component';
 import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
+import { EducationComponent } from './components/profile/about-me/education/education.component';
+import { EducationLevelsPipe } from './shared/pipes/education-levels.pipe';
+import { RecomedationsCardComponent } from './components/profile/my-matches/recomedations-card/recomedations-card.component';
 
 
 @NgModule({
@@ -146,7 +148,6 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
     InputCustomDatepickerComponent,
     SetExactdataPageComponent,
     InputSearchComponent,
-    MatDefaultChipsComponent,
     InputTrimDirective,
     DropdownItemsComponent,
     ProgressBarComponent,
@@ -182,7 +183,10 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
     GeneralComponent,
     PlacesOfResidenceComponent,
     WorkComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    EducationComponent,
+    EducationLevelsPipe,
+    RecomedationsCardComponent
   ],
   imports: [
     BrowserModule,
@@ -248,7 +252,7 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
     AlertModalComponent,
     LeavePopupComponent,
     PopupComponent,
-    ErrorModalComponent,
+    ErrorModalComponent
   ],
   bootstrap: [AppComponent]
 })

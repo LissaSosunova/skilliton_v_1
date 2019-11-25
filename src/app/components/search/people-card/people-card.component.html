@@ -9,7 +9,8 @@
                     col-sm-4
                     col-md-2
                     col-lg-2">
-            <div class="face" [style.background-image]="'url(' + avatar + ')'"></div>
+            <div class="face" [style.background-image]="'url(' + avatar + ')'"
+            (click)="viewProfile(person.userEmail)"></div>
             </div>
             <div class="col-xs-4
                         col-sm-4
@@ -33,7 +34,7 @@
 <!-- Interested -->
                 <input
                 type="submit"
-                (click)="interested()" 
+                (click)="interested(person.userEmail)" 
                 class="btn
                 secondary-btn
                 btn-match"    

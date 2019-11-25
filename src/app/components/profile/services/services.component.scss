@@ -22,12 +22,15 @@
         background-color: map-get($bg-color, 'gray-light');
     }
 }
-
-.block-droop {
+.serch-conteiner {
   position: relative;
+}
+.block-droop {
+  position: absolute;
   text-align: left;
-  top: -20px;
+  top: 66px;
   height: 160px;
+  width: 99.7%;
   overflow: auto;
   padding: 0px;
   background-color: map-get($bg-color, 'white');

@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent implements OnInit {
-
+  private photo: string;
   constructor() { }
 
   ngOnInit() {
+    this.photo = 'assets/images/not_found.png';
   }
 
 }

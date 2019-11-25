@@ -20,6 +20,7 @@ export class InputTextareaComponent extends InputAbstract implements OnInit {
   public showMaxInputMessageError: boolean = false;
   public maxLengthLimit: number;
   public showContent: boolean = false;
+  public value?: string;
   
   constructor() {
     super();

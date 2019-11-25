@@ -23,8 +23,6 @@ export class PeopleCardComponent implements OnInit {
 
     // const skills$ = this.store.select('globalSearch').subscribe((state: any) => {
     //   if  (state !== undefined)  {
-
-
     //   }
     // });
   }
@@ -37,6 +35,20 @@ export class PeopleCardComponent implements OnInit {
         this.router.navigate(['/view-profile', {mate: email}]);
       }
     });
+  }
+
+  public interested(mail: string): void {
+    this.data.getSubscriptionMate(mail, true).subscribe((resp) => {
+      console.log(resp);
+    })
+
+  }
+
+  public notInterested(mail: string): void {
+    this.data.getSubscriptionMate(mail, false).subscribe((resp) => {
+      console.log(resp);
+    })
+
   }
 
 }
