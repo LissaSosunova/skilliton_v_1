@@ -1,0 +1,26 @@
+<app-popup 
+class="content-width"
+    *ngIf="popup.isOpened"
+    [config]="popupConfig"
+    (onClose)="onClose()"
+    [actionName]="actionName"
+    [header]="header"
+    [fotter_2_ActionName]="fotter_2_ActionName"
+    [fotter_2_CancelName]= "fotter_2_CancelName"
+    [footerType]="footerType"
+    [isHeaderCloseBtn]="isHeaderCloseBtn"
+    >
+  <div id="popupConteiner"
+  class="body-text center-xs">
+    <label class="action-name">{{actionName}}</label><br>
+  </div>
+  <div class="row col-xs-12 center-xs">
+    <div class="row col-xs-10 avatars">
+      <div class="avatar1 col-xs-5" [style.background-image]="'url(' + avatar1 + ')'"></div>
+    
+      <div class="avatar2 col-xs-5" [style.background-image]="'url(' + avatar2 + ')'"></div>
+    </div>
+    <label class="details">{{details}}</label><br>
+        <label>{{recomend}}</label>
+  </div>
+</app-popup> 

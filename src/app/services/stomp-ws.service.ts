@@ -60,27 +60,9 @@ export class StompWsService {
         console.log('notify: ' + sdkEvent.body);
         if(sdkEvent.body.length > 2 ) {
           console.log(sdkEvent.body, sdkEvent.body.length);
-          // _this.store.dispatch(new UpdateUsersNotificationsMatches(sdkEvent.body));
+          _this.store.dispatch(new UpdateUsersNotificationsMatches(sdkEvent.body));
         }
       });
-
-      _this.stompClient.subscribe(pathes.income, function (sdkEvent) {
-        if(sdkEvent.body.length > 2 ) {
-          let parse =  JSON.parse(sdkEvent.body);
-          console.log('income: ' + sdkEvent.body, parse);
-          _this.store.dispatch(new UpdateUsersNotificationsMatches(parse));
-        }
-      });
-
-      // _this.stompClient.subscribe(pathes.outcome, function (sdkEvent) {
-      //   // this.onMessageReceived(sdkEvent);
-      //   // console.log('outcome: ' + sdkEvent)
-      // });
-
-      // _this.stompClient.subscribe(pathes.active, function (sdkEvent) {
-      //   // this.onMessageReceived(sdkEvent);
-      //   // console.log('active: ' + sdkEvent)
-      // })
     }, this.errorCallBack);
     
 }

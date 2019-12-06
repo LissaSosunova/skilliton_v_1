@@ -13,6 +13,7 @@
   z-index: 101;
   justify-content: center;
   overflow: auto;
+  background-color: rgba(13, 60, 101, 0.4);
 
   &.center-center {
     align-items: center;
@@ -29,7 +30,9 @@
   background-color: #F2F2F2;
   color: map-get($font-color,'primary');
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+  min-width: 250px;
   max-width: 50%;
+  border-radius: 16px;
 }
 
 
@@ -44,7 +47,18 @@
     line-height: 1;
   }
 }
-
+.g-form-popup__header-error {
+  border-bottom: 1px solid #e6e6e6;
+  padding: 25px 40px;
+  margin: 0 -40px 30px;
+  position: relative;
+  background-color:  #e9c1c1;
+  span {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1;
+  }
+}
 .g-form-popup__header-close-btn {
   float: right;
 }
@@ -53,7 +67,14 @@
   margin-top: 30px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
+}
+
+.g-form-popup__footer2 {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .g-form-popup__footer-close-btn,
@@ -74,26 +95,26 @@
 // }
 
 .g-form-popup__close-btn-wrap {
-  width: 22px;
-  height: 22px;
+  width: 60px;
+  height: 30px;
   position: absolute;
   top: 25px;
   right: 40px;
 }
 
-// .g-form-popup__footer__close-btn {
-//   margin-left: 20px;
-// }
+.m-btn-congrats {
+  width: 180px;
+  height: 30px;
+  padding: 2px 5px 2px 5px;
+  margin-bottom: 20px;
+  }
 
 .m-btn {
-width: 20px;
-height: 20px;
-border: 1px solid  rgba(28, 32, 1, 0.5);
-box-shadow: 0 1px 6px rgba(28, 32, 1, 0.5);
+width: 60px;
+height: 30px;
 padding: 2px;
 i {
-  font-size: 14px;
-  color: #1c2001;
+  font-size: 20px;
 }
 }
 
@@ -125,11 +146,7 @@ background-color: #fb7e53;
 }
 }
 .confirm {
-background-color: #dde98f;
 &:hover {
   cursor: pointer;
-  i {
-    color: #9bb00f;
-  }
 }
 }

@@ -20,11 +20,25 @@
                         Add a skill you would like to obtain and indicate your current level of proficiency
                 </div>
 
-        <div class="col-xs-12 elem row">
+        <div class="col-xs-12 elem row" appClickOutside (mClickOutside)="outsideSearchClick()">
                 <div class="col-xs-3 row-text margin-text">
                 Add skill <span class="required-star">*</span>
+                </div>  
+        <section *ngIf="showChoosedSkill" class="choosed-skill-field col-xs-9">
+                <div>
+                        {{choosedSkillname}}
+                        <button (click)="changeSkill()"
+                        class="btn-remove"
+                        >
+                                <i class="material-icons remove-icon">
+                                                clear
+                                </i>
+                        </button>
                 </div>
-                <!-- Search skill -->
+
+
+                
+        </section><!-- Search skill -->
         <section *ngIf="!showChoosedSkill" class="col-xs-9 no-padd search-section">
                 <app-input-search
                         [maxLength]="100"
@@ -55,29 +69,19 @@
                 [ngClass]="{'btn primary-btn btn-height-small btn-width-small': showBtn == true,  'non-vis': showBtn == false}"  
                 value="Add"
                 >
-                </section>    
-        <section *ngIf="showChoosedSkill" class="choosed-skill-field col-xs-9">
-                <div>
-                        {{choosedSkillname}}
-                        <button (click)="changeSkill()"
-                        class="btn-remove"
-                        >
-                                <i class="material-icons remove-icon">
-                                                clear
-                                </i>
-                        </button>
+                </section>  
+        <section  *ngIf="newSkill" class="col-xs-12 row no-padd end-xs">
+                <div class="col-xs-9 no-padd start-xs">
+                                <app-input-textarea
+                                name="skillDescr"
+                                #skillDescr="ngModel"
+                                [(ngModel)]="description"
+                                [placeholder]="'Write here a little description about skill witch you want to add'"
+                                [maxLength]="250"
+                                [required]="newSkill"
+                                [requiredFieldError]="'You can not to save new skill without any description'">
+                                </app-input-textarea>
                 </div>
-        </section>
-        <section  *ngIf="newSkill">
-                        <app-input-textarea
-                        name="skillDescr"
-                        #skillDescr="ngModel"
-                        [(ngModel)]="description"
-                        [placeholder]="'Write here a little description about skill witch you want to add'"
-                        [maxLength]="250"
-                        [required]="newSkill"
-                        [requiredFieldError]="'You can not to save new skill without any description'">
-                        </app-input-textarea>
                 </section>
         </div>
         <div class="col-xs-12 elem row">

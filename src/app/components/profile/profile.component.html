@@ -132,7 +132,10 @@
                     btn-top-bar"
                     [ngClass]="{'active-btn': router.url === '/profile/matches' , 'def': router.url !== '/profile/matches' }"
                     (click)="goToSubUrl('/profile/matches')">
-                    My matches</div>
+                    My matches
+                    <!-- Span for notifications -->
+                <!-- <span *ngIf="user.notifications.active !== []">{{user.notifications.active.length}}</span> -->
+                </div>
         </div>
     </div>
 </div>

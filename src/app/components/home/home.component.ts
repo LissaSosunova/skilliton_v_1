@@ -4,7 +4,6 @@ import * as _ from 'lodash';
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, Output, Input } from '@angular/core';
 import { errorTypes } from '../../shared/constants/errors';
 import { HttpService } from '../../services/http.service';
-import { StompWsService } from '../../services/stomp-ws.service';
 import { LocalstorageService } from '../../services/localstorage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SessionstorageService } from '../../services/sessionstorage.service';
@@ -16,7 +15,7 @@ import {Observable, Subject} from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
   @Output() user: types.NewUser = {} as types.NewUser;
@@ -26,7 +25,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   @Output() activePage: string;
   @Output() tags: any;
 
-  webSocketAPI: StompWsService;
 
   constructor(
     private actRoute: ActivatedRoute,
@@ -34,14 +32,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     private sessionStorageService: SessionstorageService,
     private localstorageService: LocalstorageService,
     private router: Router,
-    private store: Store<any>,
+    private transferService: TransferService,
+    private store: Store<any>
   ) { }
 
   ngOnInit() {
     this.getDataFromLocalStorage('user');
     this.getFilters();
     this.getUserData();
-    this.onSockets();
   }
     private getUserData() {
       // Here is example of resolver for this.user
@@ -85,14 +83,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigate(['']);
     }
   }
-  public onSockets(): void {
-    this.webSocketAPI = new StompWsService(this.store);
-    this.webSocketAPI._connect();
-  }
   ngOnDestroy() {
     this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-    this.webSocketAPI._disconnect();
-  }
-
+    this.unsubscribe$.complete(); }
 }

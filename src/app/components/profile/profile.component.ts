@@ -13,6 +13,7 @@ import { RouterService } from 'src/app/services/router.service';
 import { HttpService } from '../../services/http.service';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { EditUserProfileService } from '../../services/edit-user-profile.service';
+import { StompWsService } from '../../services/stomp-ws.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +21,6 @@ import { EditUserProfileService } from '../../services/edit-user-profile.service
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit,  OnDestroy {
-  // @ViewChild('user', {static: false}) public user: types.NewUser = {} as types.NewUser;
   @Input() user: types.NewUser = {} as types.NewUser;
   @Output() userUploaded: boolean = false;
   @Output() dataNotSet: boolean = true;
@@ -47,6 +47,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   private openSummaryTextarea: boolean = false;
   public counter: number;
+  webSocketAPI: StompWsService;
 
   constructor(
     private actRoute: ActivatedRoute,
@@ -65,6 +66,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   ngOnInit() {
     this.getUserData();
     this.activeTopBtn = 'aboutMe';
+    this.onSockets();
   }
 
   private getCurrentRoute(): void {
@@ -81,12 +83,16 @@ export class ProfileComponent implements OnInit,  OnDestroy {
     });
    }
 
+   public onSockets(): void {
+    this.webSocketAPI = new StompWsService(this.store);
+    this.webSocketAPI._connect();
+  }
+
   private getUserData() {
     this.store.dispatch(new LoadUserData());
     const newUser$ = this.store.select('user').subscribe((state: any) => {
       if  (state !== undefined)  {
         this.user = state;
-        console.log(this.user)
         if  (state !== undefined || state && state.skills.length > 1)  {
           this.goals = state.keyData.goals;
         }
@@ -119,6 +125,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
         this.mySkills = this.user.keyData.skills;
         this.myInterests = this.user.keyData.interests;
         this.userUploaded = true;
+
       }
     });
   }
@@ -172,5 +179,6 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.webSocketAPI._disconnect();
   }
 }

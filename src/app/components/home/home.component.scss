@@ -1,20 +1,22 @@
 @import '../../../scss/variables';
 .main-content {
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-bottom: $footer-height;
-    margin-top: calc(#{$header-height} - 3px);
-    background-color: map-get($bg-color, 'dark-blue');
-}
-.body-home {
-    background-color: white;
     padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: $footer-height;
+    // margin-top: calc(#{$header-height} - 3px);
+    background-color: map-get($bg-color, 'dark-blue');
+    height: 100%;
+}
+.body-home {
+    height: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: map-get($bg-color, 'dark-blue');
 }
 .all-news {
     margin-top: calc(#{$header-height} - 3px);
     padding: 30px 30px 20px 20px;
-    color: map-get($font-color, 'link');
+    color: map-get($font-color, 'inverse');
     font-size: 2.5em;
     font-weight: 700;
 }

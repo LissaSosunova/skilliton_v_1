@@ -152,3 +152,7 @@ input[type="file"] {
     cursor: pointer;
   }
 }
+.curr-services {
+  padding-top: 20px;
+  border-top: 1px solid map-get($font-color, 'gray');
+}

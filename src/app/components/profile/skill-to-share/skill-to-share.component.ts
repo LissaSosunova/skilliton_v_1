@@ -37,7 +37,7 @@ export class SkillToShareComponent implements OnInit {
   private selectedTagsId = [] as  any;
   private newTags = [] as  any;
   public activeUrl: string = 'skills-to-share';
-  @Input() valueSearch: any;
+  // @Input() valueSearch: any;
   public tags: any;
   public tagsSkills = [] as  any;
   public langs = [] as  any;
@@ -332,13 +332,23 @@ degreeHandler(e, openOther?: boolean) {
     } else {
       el.val = false;
     }
-    if (openOther === true) {
+    if (!openOther) {
+      this.otherRequired = false;
+    }
+    if ( openOther === false) {
+      this.otherRequired = false;
+    } else if (openOther === true) {
       this.otherRequired = true;
       this.otherRequiredErr = 'If you choosed "Other" you must to fill this area';
     }
   });
 }
 
+//  Close search by click outside
+public outsideSearchClick(): void {
+  this.openAuto = false;
+  this.showBtn = true;
+}
 // Set prices
 pricingSet(e, name: string) {
   if (e.target.checked === true) {

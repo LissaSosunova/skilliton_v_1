@@ -24,6 +24,7 @@ public maxLengthLimit: number;
 public showContent: boolean = false;
 public placeholder?: string;
 @Input() label?: string;
+public value?: string;
 
 constructor() {
   super();

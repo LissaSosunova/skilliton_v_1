@@ -6,7 +6,6 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { SetGlobalSearch } from 'src/app/state/actions/global-search.actions';
 import { HttpService } from '../../services/http.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoadUserData } from 'src/app/state/actions/user.actions';
 
 
 @Component({
@@ -39,7 +38,6 @@ private unsubscribe$: Subject<void> = new Subject();
         this.loaded = true;
       }
     });
-    this.store.dispatch(new LoadUserData());
   }
 
   // Search for global skill to obtain

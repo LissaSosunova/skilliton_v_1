@@ -33,7 +33,7 @@
       <div class="col-xs-12 description-block start-xs"> {{skill.description}}</div>
       <div class="col-xs-12 table-block">
       <table class="table">
-          <tr>
+          <tr *ngIf="skill.level !== null">
             <td class="padd">Level</td>
             <td class="padd">{{skill.level | skillLevels}}</td>
           </tr>

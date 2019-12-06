@@ -20,11 +20,6 @@ export class PeopleCardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    // const skills$ = this.store.select('globalSearch').subscribe((state: any) => {
-    //   if  (state !== undefined)  {
-    //   }
-    // });
   }
 
   viewProfile(email: string) {
@@ -40,7 +35,7 @@ export class PeopleCardComponent implements OnInit {
   public interested(mail: string): void {
     this.data.getSubscriptionMate(mail, true).subscribe((resp) => {
       console.log(resp);
-    })
+    });
 
   }
 

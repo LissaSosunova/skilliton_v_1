@@ -1,0 +1,111 @@
+<div class="col-xs-12 row">
+    <div class="card col-xs-12 row">
+      <div class="left-side
+                  col-xs-4
+                  col-sm-4
+                  col-md-2
+                  col-lg-2">
+          <div class="face" [style.background-image]="'url(' + avatar + ')'"
+          (click)="viewProfile(match.userEmail)"></div>
+          </div>
+          <div class="col-xs-4
+                      col-sm-4
+                      col-md-6
+                      col-lg-6
+                      head
+                      start-xs" >
+                      <div class="name">{{ match.firstName }}  {{ match.lastName }}</div>
+                      <div class="work" *ngIf="match.jobPosition !== null">{{ match.jobPosition}}</div>
+                        <div class="work" *ngIf="match.workPlace !== null">{{ match.workPlace}}</div>
+                     
+                        <div *ngIf="match.summary !== null">
+                            <label class="summary">{{ match.summary  || 'No info'}}</label>
+                        </div>
+                      <div *ngIf="match.skillToShare !== null" class="tab-expert-class">Skills to share <br>
+                        <span class="btn-skill" *ngFor="let skillTS of match.skillToShare"
+                        (click)="openDetialsBlock(match.matchId)">
+                            {{skillTS.skillName}}
+
+                            <!-- Drop STS -->
+                         <div class="open-details non-vis"
+                         [id]="match.matchId">
+                         <div class="skill-name-title">Skill: 
+                           <span class="skill-name">{{skillTS.skillName}}</span>
+                         </div>
+                         <div class="skill-name-title">To excange:</div>
+                         <span>
+                           <!-- Skills -->
+                           <section class="skill-name-title" *ngIf="skillTS.inExchange.skillsToObtain.length !==0">
+                               Skills: 
+                               <span class="skill-name" *ngFor="let t of skillTS.inExchange.skillsToObtain">
+                                   {{t.name}}
+                              </span>
+                           </section>
+                           <!-- Services -->
+                           <section class="skill-name-title" *ngIf="skillTS.inExchange.money == true">
+                             <span class="skill-name">Services <i class="material-icons">check</i></span>
+                           </section>
+                           <section class="skill-name-title" *ngIf="skillTS.inExchange.money == true">
+                               <span class="skill-name-title">Money: </span>
+                               <div class="skill-name" *ngFor="let m of skillTS.inExchange.fee">
+                                   <span class="skill-name-title">{{m.type | pricesTypes}}: </span>
+                                   <span class="skill-name">{{m.value}} ({{m.currency}})</span>
+                               </div>
+                             </section>
+                           </span>
+                       </div>
+                        </span>
+                      </div>
+                      <div *ngIf="match.skillToObtain !== null" class="tab-expert-class">Skills to obtain <br>
+                          <!-- List of Servises -->
+                          <span  class="btn-skill" *ngFor="let skillTO of match.skillToObtain"
+                          (click)="openDetialsBlock(match.matchId)">
+                              {{skillTO.skillName}}
+
+                              <!-- Drop STO -->
+                          <div class="open-details non-vis"
+                          [id]="match.matchId">
+                          <div class="skill-name-title">Skill: 
+                            <span class="skill-name">{{skillTO.skillName}}</span>
+                          </div>
+                          <div class="skill-name-title">To excange:</div>
+                          <span>
+                            <!-- Skills -->
+                            <section class="skill-name-title" *ngIf="skillTO.inExchange.skillsToShare.length !==0">
+                                Skills: 
+                                <span class="skill-name" *ngFor="let t of skillTO.inExchange.skillsToShare">
+                                    {{t.name}} 
+                               </span>
+                            </section>
+                            <!-- Services -->
+                            <section *ngIf="skillTO.inExchange.services.length !==0">
+                              <span class="skill-name-title">Services: 
+                                  <span class="skill-name" *ngFor="let s of skillTO.inExchange.services">
+                                      {{s.name}} 
+                                  </span>
+                              </span>
+                            </section>
+                            <section class="skill-name-title" *ngIf="skillTO.inExchange.money == true">
+                              <span class="skill-name">Money <i class="material-icons">check</i></span>
+                            </section>
+                            </span>
+                        </div>
+                          </span>
+                        </div>
+    
+          </div>
+          <div class="col-xs-4
+                      col-sm-4
+                      col-md-4
+                      col-lg-4
+                      end-xs top-xs" >
+              <input
+              type="submit"
+              (click)="dismatch(match.matchId)"  
+              class="btn
+              secondary-btn
+              btn-match"    
+              value="Dismatch">
+    </div>
+    </div>
+    </div>

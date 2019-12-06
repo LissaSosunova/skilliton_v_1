@@ -42,7 +42,7 @@ export class AboutMeComponent implements OnInit {
   }
 
 
-  private init(): void {
+  private init() {
     this.store.dispatch(new LoadUserData());
     const user$ = this.store.select('user').subscribe((state: any) => {
       if(state !== undefined || state) {
@@ -53,7 +53,7 @@ export class AboutMeComponent implements OnInit {
     });
   }
 
-  private getCurrentRoute(): void {
+  private getCurrentRoute() {
     this.routerService.getCurrentRoute$().subscribe(url => {
       const urlSegments = url.split('/');
       this.currParentUrl = urlSegments[2];

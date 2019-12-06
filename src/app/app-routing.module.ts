@@ -120,10 +120,7 @@ const routes: Routes = [
       },
       {
         path: 'services',
-        component: ServicesComponent,
-        resolve: {
-          user$: GetDataUserResolverService
-        }
+        component: ServicesComponent
       },
       {
         path: 'matches',
@@ -145,8 +142,13 @@ const routes: Routes = [
     }
   },
   {
+    path: 'page-not-found',
+    component: PageNotFoundComponent,
+  },
+  {
     path: '**',
-    component: PageNotFoundComponent
+    redirectTo: 'page-not-found',
+    pathMatch: 'prefix'
   }
 ];
 

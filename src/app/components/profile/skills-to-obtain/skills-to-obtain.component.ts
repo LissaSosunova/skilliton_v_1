@@ -302,7 +302,11 @@ public setValueUsersServiceFromDropDown(option) {
   trialHandler(e) {
     this.withTrial = e.target.checked;
   }
-
+//  Close search by click outside
+public outsideSearchClick(): void {
+  this.openAuto = false;
+  this.showBtn = true;
+}
 
   // Send API
   public saveBtn(

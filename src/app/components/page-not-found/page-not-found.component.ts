@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-page-not-found',
@@ -12,5 +12,4 @@ export class PageNotFoundComponent implements OnInit {
   ngOnInit() {
     this.photo = 'assets/images/not_found.png';
   }
-
 }

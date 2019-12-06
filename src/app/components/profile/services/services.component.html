@@ -107,6 +107,14 @@
                 [ngClass]="{'disabled': serviceDataForm.invalid}">
         </div>
         </form>
+        <div class="col-xs-12
+                curr-services"
+                *ngIf="userUploaded === true && user.keyData.services.length !==0">
+                <app-chips
+                [options]="myServices"
+                (onChanged)="onChanged($event)">
+                </app-chips>
+        </div>     
     </div>
-    </div>        
+    </div> 
 </div>

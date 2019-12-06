@@ -98,7 +98,7 @@ export function userReducer(state: any, action: any)  {
     }
     case userAction.UserActionTypes.UPDATE_USERS_NOTIFICATIONS_MATCHES: {
       const data = action.payload;
-      if(state !== undefined){
+      if (state !== undefined) {
         state.notifications.active = data;
       }
       return state;

@@ -1,13 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewChild, Input, Output, ElementRef } from '@angular/core';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import * as _ from 'lodash';
 import { HttpService } from '../../../services/http.service';
-import { Store} from '@ngrx/store';
-import { LoadUserData, UpdateUsersServices } from '../../../state/actions/user.actions';
-import { NgForm, FormControl } from '@angular/forms';
-import { Observable, Subject} from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
-import { StompWsService } from '../../../services/stomp-ws.service';
-import { types } from '../../../types/types';
+import { Store } from '@ngrx/store';
+import { RouterService } from 'src/app/services/router.service';
+import { LoadUserData } from '../../../state/actions/user.actions';
 
 @Component({
   selector: 'app-my-matches',
@@ -16,50 +12,88 @@ import { types } from '../../../types/types';
 })
 export class MyMatchesComponent implements OnInit {
   @Output() activeTopBtn: 'myMatches';
-  public recomendations: Array<any>;
-  public notifications: types.Notifications;
-  webSocketAPI: StompWsService;
+  @Output() user: any;
+  @Output() userIncomingMatches = [] as any;
+  private incomUploaded: boolean = false;
+  private openIncome: boolean = false;
+  @Output() userOutcomingMatches = [] as any;
+  private outcomUploaded: boolean = false;
+  private openOutcome: boolean = false;
+  @Output() userActiveMatches = [] as any;
+  private activeUploaded: boolean = false;
+  private openActive: boolean = false;
+  @Output() userRecomendations = [] as any;
+  private recomedationsUploaded: boolean = false;
+  private openRecomendations: boolean = false;
+  @Output() userInterested = [] as any;
+  private interestedUploaded: boolean = false;
+  private openInterested: boolean = false;
+
   constructor(
     private data: HttpService,
+    private routerService: RouterService,
     private store: Store<any>,
-  ) { }
+) { }
 
   ngOnInit() {
-    this.init();
-    this.onSockets();
+    this.getDataForMatches();
+    this.uploadUserFromState();
+    // Заглушки для рекомендаций
+    this.userRecomendations = [];
+    this.recomedationsUploaded = true;
   }
-  init() {
-    this.notifications = {
-      ignored: [],
-      deferred: [],
-      system: [],
-      chats: [],
-      active: []
-    }
-    this.data.getRecomendations().subscribe((data) => {
-      // console.log(data);
+  public uploadUserFromState() {
+    this.store.select('user').subscribe((state) => {
+      if (state !== undefined) {
+        this.user = state;
+        this.userInterested = this.user.contacts;
+        this.interestedUploaded = true;
+        console.log(this.user)
+      }
     })
   }
-
-  public onSockets(): void {
-    this.webSocketAPI = new StompWsService(this.store);
-    this.webSocketAPI._connect();
-    this.getNotifications();
+  public getDataForMatches() {
+    this.data.getIncomingMatches().subscribe((data) => {
+      this.userIncomingMatches = data.data;
+      this.incomUploaded = true;
+    });
+    this.data.getOutcomingMatches().subscribe((data) => {
+      this.userOutcomingMatches = data.data;
+      this.outcomUploaded = true;
+    });
+    this.data.getActiveMatches().subscribe((data) => {
+      this.userActiveMatches = data.data;
+      this.activeUploaded = true;
+    });
+  }
+  openOut() {
+    this.openOutcome = !this.openOutcome;
+  }
+  openIn() {
+    this.openIncome = !this.openIncome;
+  }
+  openAct() {
+    this.openActive = !this.openActive;
+  }
+  openRec() {
+    this.openRecomendations = !this.openRecomendations;
+  }
+  openInt() {
+    this.openInterested = !this.openInterested;
   }
 
-  public getNotifications(): void {
-    setTimeout(() => {
-      const notify$ = this.store.select('user').subscribe((state: any) => {
-        if(state !== undefined) {
-          this.notifications = state.notifications;
-          console.log(this.notifications);
-        }
-      });
-    }, 5000);
-    
+  onChanged(chengeType:any){
+    if (chengeType === true) {
+      this.getDataForMatches();
+    }
   }
-
-  ngOnDestroy() {
-    this.webSocketAPI._disconnect();
+  onChangedPerson(mail:any) {
+    this.data.getSubscriptionMate(mail, false).subscribe((resp) => {
+      if (resp.error == false) {
+        this.store.dispatch(new LoadUserData());
+        this.uploadUserFromState();
+        console.log('unsubcsribe: ', mail)
+      }
+    });
   }
 }

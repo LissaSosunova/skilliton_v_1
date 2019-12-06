@@ -1,9 +1,10 @@
 <div *ngIf="userUploaded == true"
-class="main-content"
-        id="main-content">
+class="main-content">
         <section class="body-home">
-            <div class="all-news">All news</div>
-            <app-posts [user]="user"></app-posts>
+            <div class="all-news">Home</div>
+            <div class="col-xs-12 row">
+                <app-posts ></app-posts>
+            </div>
         </section>
         
 </div>

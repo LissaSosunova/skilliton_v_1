@@ -22,7 +22,8 @@ import { EditUserProfileService } from '../../../../services/edit-user-profile.s
 })
 export class GeneralComponent implements OnInit {
 @Output() currChildUrl: 'general';
-@ViewChild('editGeneralForm', { read: true, static: false  }) public editGeneralForm: NgForm;
+@ViewChild('firstNameOfUser', {static: true}) public firstNameOfUser: string;
+@ViewChild('lastNameOfUser', {static: true}) public lastNameOfUser: string;
 @Input() user: any;
 public userUploaded: boolean = false;
 public searchLangsControl: FormControl;
@@ -82,6 +83,7 @@ private errorSexText: string;
       const user$$ = this.store.select('user').subscribe((state: any) => {
         if(state !== undefined || state) {
           this.user = state;
+          this.firstNameOfUser = this.user.profile.name;
           if (this.user.profile.sex == 1 ) {
             this.maleSelect = true;
           } else {
@@ -206,6 +208,7 @@ private errorSexText: string;
     // First name
     private changeFirstName() {
       this.editableFirstName = !this.editableFirstName;
+      console.log()
     }
     private cancelName() {
       this.errorFirstNameText = '';

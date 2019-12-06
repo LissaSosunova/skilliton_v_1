@@ -1,0 +1,47 @@
+<div class="col-xs-12 row">
+  <div class="card col-xs-12 row">
+    <div class="left-side
+                col-xs-4
+                col-sm-4
+                col-md-2
+                col-lg-2">
+        <div class="face" [style.background-image]="'url(' + avatar + ')'"
+        (click)="viewProfile(person.email)" ></div>
+        </div>
+        <div class="col-xs-4
+                    col-sm-4
+                    col-md-6
+                    col-lg-6
+                    head
+                    start-xs" >
+                    <div class="name">{{ person.firstName }}  {{ person.lastName }}</div>
+                    <div class="work" *ngIf="person.jobPosition !== null">{{ person.jobPosition}}</div>
+                      <div class="work" *ngIf="person.workPlace !== null">{{ person.workPlace}}</div>
+                   
+                      <div *ngIf="person.summary !== null">
+                          <label class="summary">{{ person.summary  || 'No info'}}</label>
+                      </div>
+        </div>
+        <div class="col-xs-4
+                    col-sm-4
+                    col-md-4
+                    col-lg-4
+                    end-xs top-xs" >
+            <input
+            type="submit"
+            (click)="viewProfile(person.email)" 
+            class="btn
+            primary-btn
+            btn-match"    
+            value="View Profile">
+  
+            <input
+                  type="submit"
+                  (click)="change(person.email)" 
+                  class="btn
+                  secondary-btn
+                  btn-match"    
+                  value="Not interested">
+  </div>
+  </div>
+  </div>

@@ -9,62 +9,156 @@
  <!-- Empty Space -->
  <div class="col-xs-12 no-padd">
     <div class="choosed-skill-field row">
-        
            <div class="col-xs-10 start-xs">
-              <span>Incoming matches</span>
+              <span class="header-block">Incoming matches</span>
            </div> 
-           <div class="col-xs-2 end-xs">
+           <div class="col-xs-2 end-xs"  *ngIf="openIncome == false" (click)="openIn()">
               <span class="edit"> <i class="material-icons">
                   keyboard_arrow_down
               </i>
             </span>
-           </div> 
-<span *ngIf="notifications.active.length !==0">
-      <section *ngFor="let item of notifications.active">
-            <div class="col-xs-2 end-xs">
-                     {{item.matchId}}
+           </div>
+           <div class="col-xs-2 end-xs"  *ngIf="openIncome == true" (click)="openIn()">
+               <span class="edit"> <i class="material-icons">
+                   keyboard_arrow_up
+               </i>
+             </span>
             </div>
-         </section>
-</span>
+           <div class="col-xs-12" *ngIf="incomUploaded == true && openIncome == true">
+              <!-- Incomung matches -->
+              <section [ngSwitch]="userIncomingMatches.length ===0">
+                 <div *ngSwitchCase="true">No matches</div>
+                 <div *ngSwitchCase="false"> <span *ngFor="let match of userIncomingMatches">
+                     <app-incoming-matches-card
+                        [match]="match"
+                        (onChanged)="onChanged($event)">
+                    </app-incoming-matches-card>
+                    </span></div>
+              </section>
+           </div> 
     </div>
     <div class="choosed-skill-field row">
         
         <div class="col-xs-10 start-xs">
-           <span>Matched</span>
+           <span class="header-block">Matched</span>
         </div> 
-        <div class="col-xs-2 end-xs">
-           <span class="edit"> <i class="material-icons">
-              keyboard_arrow_down
-           </i>
-         </span>
-        </div>   
+        <div class="col-xs-2 end-xs"  *ngIf="openActive == false" (click)="openAct()">
+            <span class="edit"> <i class="material-icons">
+                keyboard_arrow_down
+            </i>
+          </span>
+         </div>
+         <div class="col-xs-2 end-xs"  *ngIf="openActive == true" (click)="openAct()">
+             <span class="edit"> <i class="material-icons">
+                 keyboard_arrow_up
+             </i>
+           </span>
+          </div>
+          <div class="col-xs-12" *ngIf="activeUploaded == true && openActive == true">
+            <!-- Active matches -->
+            <section [ngSwitch]="userActiveMatches.length ===0">
+                  <div *ngSwitchCase="true">No matches</div>
+                  <div *ngSwitchCase="false">
+                     <span *ngFor="let match of userActiveMatches">
+                        <app-active-matches-card
+                           [match]="match"
+                           (onChanged)="onChanged($event)">
+                        </app-active-matches-card>
+                        </span>
+                  </div>
+               </section>
+            </div> 
  </div>
 
  <div class="choosed-skill-field row">
     <div class="col-xs-10 start-xs">
-       <span>Outgoing matches</span>
+       <span class="header-block">Outgoing matches</span>
     </div> 
-    <div class="col-xs-2 end-xs">
-       <span class="edit"> <i class="material-icons">
-          keyboard_arrow_down
-       </i>
-     </span>
-    </div>   
+    <div class="col-xs-2 end-xs"  *ngIf="openOutcome == false" (click)="openOut()">
+         <span class="edit"> <i class="material-icons">
+             keyboard_arrow_down
+         </i>
+       </span>
+      </div>
+      <div class="col-xs-2 end-xs"  *ngIf="openOutcome == true" (click)="openOut()">
+          <span class="edit"> <i class="material-icons">
+              keyboard_arrow_up
+          </i>
+        </span>
+       </div>
+       <div class="col-xs-12" *ngIf="outcomUploaded == true && openOutcome == true">
+         <!-- Outcoming matches -->
+         <section [ngSwitch]="userOutcomingMatches.length ===0">
+            <div *ngSwitchCase="true">No matches</div>
+            <div *ngSwitchCase="false">
+                  <span *ngFor="let match of userOutcomingMatches">
+                     <app-outcoming-matches-card
+                        [match]="match"
+                        (onChanged)="onChanged($event)">
+                     </app-outcoming-matches-card>
+                     </span>
+            </div>
+         </section>   
+      </div> 
   </div>
   <div class="choosed-skill-field row">
       <div class="col-xs-10 start-xs">
-         <span>Recomendation</span>
+         <span class="header-block">Recomendation</span>
       </div> 
-      <div class="col-xs-2 end-xs">
-         <span class="edit"> <i class="material-icons">
-            keyboard_arrow_down
-         </i>
-       </span>
-      </div>   
+      <div class="col-xs-2 end-xs"  *ngIf="openRecomendations == false" (click)="openRec()">
+            <span class="edit"> <i class="material-icons">
+                keyboard_arrow_down
+            </i>
+          </span>
+         </div>
+         <div class="col-xs-2 end-xs"  *ngIf="openRecomendations == true" (click)="openRec()">
+             <span class="edit"> <i class="material-icons">
+                 keyboard_arrow_up
+             </i>
+           </span>
+          </div>
+          <div class="col-xs-12" *ngIf="recomedationsUploaded == true && openRecomendations == true">
+            <!-- Recomedations -->
+            <section [ngSwitch]="userRecomendations.length ===0">
+               <div *ngSwitchCase="true">No matches</div>
+               <div *ngSwitchCase="false">
+                    
+               </div>
+            </section>  
+         </div> 
     </div> 
-    </div>  
+
+
+    <div class="choosed-skill-field row">
+      <div class="col-xs-10 start-xs">
+         <span class="header-block">My contacts</span>
+      </div> 
+      <div class="col-xs-2 end-xs"  *ngIf="openOutcome == false" (click)="openInt()">
+           <span class="edit"> <i class="material-icons">
+               keyboard_arrow_down
+           </i>
+         </span>
+        </div>
+        <div class="col-xs-2 end-xs"  *ngIf="openOutcome == true" (click)="openInt()">
+            <span class="edit"> <i class="material-icons">
+                keyboard_arrow_up
+            </i>
+          </span>
+         </div>
+         <div class="col-xs-12" *ngIf="interestedUploaded == true && openInterested == true">
+            <!-- Interested matches -->
+            <section [ngSwitch]="userInterested.length ===0">
+               <div *ngSwitchCase="true">No persons</div>
+               <div *ngSwitchCase="false"> <span *ngFor="let person of userInterested">
+                   <app-interested-persons
+                      [person]="person"
+                      (onChanged)="onChangedPerson($event)">
+                  </app-interested-persons>
+                  </span></div>
+            </section>
+         </div> 
+        </div> 
+      </div>   
     </div>
   </div>        
-  
-  
   
