@@ -1,1 +1,15 @@
-<p>error-modal works!</p>
+<app-popup 
+class="content-width"
+    *ngIf="popup.isOpened"
+    [config]="popupConfig"
+    (onClose)="onClose()"
+    [actionName]="actionName"
+    [header]="header"
+    >
+  <div id="popupConteiner"
+  class="body-text">
+    <label>{{actionName}}</label><br>
+    <label class="details">{{details}}</label><br>
+    <label>{{recomend}}</label>
+  </div>
+</app-popup> 

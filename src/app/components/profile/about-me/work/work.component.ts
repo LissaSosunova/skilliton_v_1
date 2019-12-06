@@ -16,7 +16,7 @@ import { LoadUserData } from 'src/app/state/actions/user.actions';
 })
 export class WorkComponent implements OnInit {
   @Output() currChildUrl: 'work';
-  @ViewChild('editWorkForm', { read: true, static: false  }) public editWorkForm: NgForm;
+  @ViewChild('editWorkForm', {static: true}) public editWorkForm: NgForm;
   @Input() user: any;
   public userUploaded: boolean = false;
   public companies: Array<any>;
@@ -156,10 +156,10 @@ export class WorkComponent implements OnInit {
       this.choosedComp = false;
       this.openSearchBlock = true;
     }
-    private saveBtn(workPlace, workPosition, currentlyPeriod, fromDate): void {
+    private saveBtn(workPlace, workPosition, currentlyPeriod, fromDate, toDate): void {
       this.dateFrom = this.datePipe.transform(fromDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
       if (this.toDate !== null) {
-        this.toDate = this.datePipe.transform(fromDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        this.toDate = this.datePipe.transform(toDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
       }
       if (this.choosedComp === false) {
         this.setAPIdata = {

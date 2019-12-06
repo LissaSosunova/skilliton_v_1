@@ -1,25 +1,25 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, Output  } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { postExapleAPI } from '../../../shared/constants/post-exaple';
-import { ChatEmotions } from '../../../shared/constants/chat-emotions';
+import { postExapleAPI } from '../../shared/constants/post-exaple';
+import { ChatEmotions } from '../../shared/constants/chat-emotions';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements OnInit  {
+export class PostsComponent implements OnInit {
   @Input() user: any;
-  private photo: string;
+
   public emotions = ChatEmotions;
   public postsAPI = postExapleAPI.data.posts ;
-  public posts = [] as any;
+  @Output() posts = [] as any;
   constructor(
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.photo = 'assets/images/post-exaple.jpg';
+
     this.posts = this.postsAPI;
   }
 

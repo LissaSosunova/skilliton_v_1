@@ -69,7 +69,7 @@
           flex-direction: row;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
-          justify-content: flex-end;
+          justify-content: center;
 }
 
 .g-form-popup__footer-close-btn,
@@ -96,12 +96,9 @@
 }
 
 .m-btn {
-  width: 40px;
+  width: 65px;
   height: 40px;
   border: 0px;
-  border-radius: 50%;
-  -webkit-box-shadow: 0 1px 12px rgba(28, 32, 1, 0.5);
-          box-shadow: 0 1px 12px rgba(28, 32, 1, 0.5);
 }
 
 .m-btn i {
@@ -125,7 +122,7 @@
 }
 
 .confirm {
-  background-color: #dde98f;
+  
 }
 
 .confirm:hover {

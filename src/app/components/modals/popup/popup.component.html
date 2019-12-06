@@ -2,10 +2,10 @@
 
         <div id="{{generatedId}}" class="g-form-popup__popup">
             <!-- Header -->
-            <div class="g-form-popup__header" *ngIf="conf.isHeader">
+            <div class="g-form-popup__header" *ngIf="conf.isHeader && footerType !== 2">
               <div class="g-form-popup__close-btn-wrap" (click)="closePopup()">
                 <button class="close-btn m-radio-btn"
-                     *ngIf="conf.isHeaderCloseBtn"
+                     *ngIf="isHeaderCloseBtn"
                      [disabled]="conf.footer.isSubmitLoading || conf.footer.isRemoveLoading"
                         >
                   <i class="material-icons">close</i>
@@ -20,8 +20,8 @@
             </ng-content>
             <!--/ Body -->
       
-            <!-- Footer -->
-            <div class="g-form-popup__footer" *ngIf="conf.isFooter">
+            <!-- Footer 1 -->
+            <div class="g-form-popup__footer" *ngIf="conf.isFooter && footerType === 1">
                 <!-- submit btn -->
                 <div class="g-form-popup__footer-submit-btn"
                   [ngStyle]="{'order': submitBtnOrder}"
@@ -30,11 +30,11 @@
                   <button *ngIf="!conf.footer.isSubmitLoading"
                         md-raised-button
                         color="primary"
-                        class="m-btn confirm"
+                        class="m-btn confirm primary-btn"
                         (click)="submit()"
                         type="submit"
                         form="conf.formId"
-                        [disabled]="conf.footer.isSubmitLoading || conf.footer.isRemoveLoading || submitDisabled"
+                        [disabled]="conf.footer.isSubmitLoading || conf.footer.isRemoveLoading"
                             >
                     <i class="material-icons">check</i>
                   </button>
@@ -55,7 +55,33 @@
                 <!--/ close btn -->
       
             </div>
-            <!--/ Footer -->
+            <!--/ Footer 1-->
+
+            <!-- Footer 2 -->
+      <div class="g-form-popup__footer2" *ngIf="conf.isFooter && footerType === 2">
+        <!-- submit btn -->
+        <div class="g-form-popup__footer-submit-btn"         
+          >
+          <button
+                md-raised-button
+                color="primary"
+                class="m-btn-congrats confirm primary-btn"
+                (click)="doAction($event)"
+                type="submit"
+                    >
+                    {{fotter_2_ActionName}}
+          </button>
+
+        </div>
+        <div class="g-form-popup__footer-submit-btn"         
+          >
+
+          <a (click)="closePopup()"> {{fotter_2_CancelName}}</a>
+        </div>
+
+        <!--/ submit btn -->
+    </div>
+    <!--/ Footer 2 -->
         </div>
       </section>
       

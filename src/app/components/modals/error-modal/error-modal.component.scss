@@ -1,0 +1,15 @@
+@import '../../../../scss/variables';
+.details {
+  font-size: 0.85em;
+  color: map-get($font-color,'error');
+  font-style: oblique;
+}
+
+.body-text {
+  line-height: 2.2em;
+  font-size: 1em;
+}
+
+.content-width {
+  max-width: 50%;
+}

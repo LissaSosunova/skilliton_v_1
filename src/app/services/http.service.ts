@@ -94,13 +94,44 @@ export class HttpService {
     return this.http.get(URL_BACK + '/work', {headers: this.getHeaders()});
   }
 
+  public getEducation(): Observable<any> {
+    return this.http.get(URL_BACK + '/education', {headers: this.getHeaders()});
+  }
+
+  public postEducation(params: types.AddEducation): Observable<any> {
+    return this.http.post(URL_BACK + '/user/add-education', params, {headers: this.getHeaders()});
+  }
+
 // Other users
 
 public getMate(params: string): Observable<any> {
   return this.http.get(URL_BACK + '/user/profile/' + params, {headers: this.getHeaders()});
-}
+  }
 
-  
+  // Matches for page 'My matches'
+  public getIncomingMatches(): Observable<any> {
+    return this.http.get(URL_BACK + '/matches/income', {headers: this.getHeaders()});
+  }
+  public getOutcomingMatches(): Observable<any> {
+    return this.http.get(URL_BACK + '/matches/outcome', {headers: this.getHeaders()});
+  }
+  public getActiveMatches(): Observable<any> {
+    return this.http.get(URL_BACK + '/matches/active', {headers: this.getHeaders()});
+  }
+  public getConfirmMaych(params: number, action: boolean): Observable<any> {
+    return this.http.get(URL_BACK + '/match/' + params + '/confirm/' + action, {headers: this.getHeaders()});
+  }
+  public postReqMatchShare(id: number): Observable<any> {
+    return this.http.get(URL_BACK + '/match/share?skillId=' + id, {headers: this.getHeaders()});
+  }
+  public postReqMatchObtain(id: number): Observable<any> {
+    return this.http.get(URL_BACK + '/match/obtain?goalId=' + id, {headers: this.getHeaders()});
+  }
+  // Subscription on posts of other user
+  public getSubscriptionMate(mail: string, interested: boolean): Observable<any> {
+    return this.http.get(URL_BACK + '/match/' + mail + '/subscribe/' + interested, {headers: this.getHeaders()});
+  }
+
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {
 

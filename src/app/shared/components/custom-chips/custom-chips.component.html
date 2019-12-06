@@ -1,0 +1,9 @@
+  <div class="choosed-field" *ngFor="let option of options">
+    <span>{{option.name}} </span>
+          <button (click)="change(option)"
+          class="btn-remove">
+                  <i class="material-icons remove-icon">
+                                  clear
+                  </i>
+          </button>
+  </div>

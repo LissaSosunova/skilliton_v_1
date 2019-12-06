@@ -73,13 +73,11 @@ import { AboutMeComponent } from './components/profile/about-me/about-me.compone
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './state/effects/user.effects';
 import { FiltersEffects } from './state/effects/filters.effects';
-import { PostsComponent } from './components/home/posts/posts.component';
+import { PostsComponent } from './components/posts/posts.component';
 import { InputCustomDatepickerComponent } from './shared/form-controls/input-custom-datepicker/input-custom-datepicker.component';
 import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 import { SetExactdataPageComponent } from './components/set-exactdata-page/set-exactdata-page.component';
 import { InputSearchComponent } from './shared/form-controls/input-search/input-search.component';
-import { TagInputModule } from 'ngx-chips';
-import { MatDefaultChipsComponent } from './shared/form-controls/mat-default-chips/mat-default-chips.component';
 import {DemoMaterialModule} from './material-module';
 import { InputTrimDirective } from './shared/directives/input-trim.directive';
 import { DropdownItemsComponent } from './shared/components/dropdown-items/dropdown-items.component';
@@ -119,6 +117,16 @@ import { GeneralComponent } from './components/profile/about-me/general/general.
 import { PlacesOfResidenceComponent } from './components/profile/about-me/places-of-residence/places-of-residence.component';
 import { WorkComponent } from './components/profile/about-me/work/work.component';
 import { ClickOutsideDirective } from './shared/directives/click-outside.directive';
+import { EducationComponent } from './components/profile/about-me/education/education.component';
+import { EducationLevelsPipe } from './shared/pipes/education-levels.pipe';
+import { IncomingMatchesCardComponent } from './components/profile/my-matches/incoming-matches-card/incoming-matches-card.component';
+import { OutcomingMatchesCardComponent } from './components/profile/my-matches/outcoming-matches-card/outcoming-matches-card.component';
+import { ActiveMatchesCardComponent } from './components/profile/my-matches/active-matches-card/active-matches-card.component';
+import { CustomChipsComponent } from './shared/components/custom-chips/custom-chips.component';
+import { InterestedPersonsComponent } from './components/profile/my-matches/interested-persons/interested-persons.component';
+import { CongratsPopupComponent } from './components/modals/congrats-popup/congrats-popup.component';
+import { PostViewComponent } from './components/posts/post-view/post-view.component';
+import { PostCardComponent } from './components/posts/post-card/post-card.component';
 
 
 @NgModule({
@@ -146,7 +154,6 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
     InputCustomDatepickerComponent,
     SetExactdataPageComponent,
     InputSearchComponent,
-    MatDefaultChipsComponent,
     InputTrimDirective,
     DropdownItemsComponent,
     ProgressBarComponent,
@@ -182,7 +189,17 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
     GeneralComponent,
     PlacesOfResidenceComponent,
     WorkComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    EducationComponent,
+    EducationLevelsPipe,
+    IncomingMatchesCardComponent,
+    OutcomingMatchesCardComponent,
+    ActiveMatchesCardComponent,
+    CustomChipsComponent,
+    InterestedPersonsComponent,
+    CongratsPopupComponent,
+    PostViewComponent,
+    PostCardComponent
   ],
   imports: [
     BrowserModule,
@@ -233,7 +250,6 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    TagInputModule,
     HttpClientModule,
     OverlayModule,
     AngularMyDatePickerModule,
@@ -249,6 +265,7 @@ import { ClickOutsideDirective } from './shared/directives/click-outside.directi
     LeavePopupComponent,
     PopupComponent,
     ErrorModalComponent,
+    CongratsPopupComponent
   ],
   bootstrap: [AppComponent]
 })

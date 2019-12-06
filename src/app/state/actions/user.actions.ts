@@ -10,6 +10,7 @@ export enum UserActionTypes {
   UPDATE_USERS_GOALS = '[User] Update User KeyData Goals',
   UPDATE_USERS_SERVICES = '[User] Update User KeyData Services',
   UPDATE_USERS_SKILLS = '[User] Update User KeyData Skills',
+  UPDATE_USERS_NOTIFICATIONS_MATCHES = '[User] Update User Notifications Matches',
 }
 
 export class LoadUserData implements Action {
@@ -47,6 +48,11 @@ export class UpdateUsersServices implements Action {
 
 export class UpdateUsersSkills implements Action {
   type = UserActionTypes.UPDATE_USERS_SKILLS;
+  constructor(public payload) { }
+}
+
+export class UpdateUsersNotificationsMatches implements Action {
+  type = UserActionTypes.UPDATE_USERS_NOTIFICATIONS_MATCHES;
   constructor(public payload) { }
 }
 

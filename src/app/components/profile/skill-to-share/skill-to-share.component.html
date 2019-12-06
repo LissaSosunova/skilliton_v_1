@@ -22,7 +22,7 @@
         Add the skills you would like to share and indicate the current level of ownership
       </div>
 
-    <div class="col-xs-12 elem row">
+    <div class="col-xs-12 elem row" appClickOutside (mClickOutside)="outsideSearchClick()">
         <div class="col-xs-3 row-text margin-text">
           Add skill <span class="required-star">*</span>
         </div>
@@ -54,9 +54,9 @@
           >
           </app-input-search>
 
-          <section *ngIf="openAuto === true" 
+          <section *ngIf="openAuto === true"
           [ngClass]="{'block-drop': openAuto == true,  'non-vis': openAuto == false}">
-          <div *ngFor="let option of options">
+          <div *ngFor="let option of options" >
                   <div (click)="setValueFromDropDown(option)">
                   <i class="material-icons plus-icon">
                   add_circle_outline
@@ -138,7 +138,7 @@
                     name="other"
                     #other="ngModel"
                     [(ngModel)]="arrDegree[4].val"
-                    (change)="degreeHandler($event, true)">
+                    (change)="degreeHandler($event, arrDegree[4].val)">
                     <span class="checkmark">
                     </span>
                     </label>

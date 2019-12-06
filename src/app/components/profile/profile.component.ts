@@ -13,6 +13,7 @@ import { RouterService } from 'src/app/services/router.service';
 import { HttpService } from '../../services/http.service';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { EditUserProfileService } from '../../services/edit-user-profile.service';
+import { StompWsService } from '../../services/stomp-ws.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +21,6 @@ import { EditUserProfileService } from '../../services/edit-user-profile.service
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit,  OnDestroy {
-  // @ViewChild('user', {static: false}) public user: types.NewUser = {} as types.NewUser;
   @Input() user: types.NewUser = {} as types.NewUser;
   @Output() userUploaded: boolean = false;
   @Output() dataNotSet: boolean = true;
@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   public myServices: Array<any>;
   public currParentUrl: string;
   @ViewChild('currChildUrl', {static: false}) public currChildUrl: string;
+  @ViewChild('summaryValue', {static: true}) public summaryValue: string;
   @ViewChild('uploadFile', {static: true}) public uploadFile: ElementRef;
   subscription: Subscription;
   public name: string;
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   private openSummaryTextarea: boolean = false;
   public counter: number;
+  webSocketAPI: StompWsService;
 
   constructor(
     private actRoute: ActivatedRoute,
@@ -64,6 +66,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   ngOnInit() {
     this.getUserData();
     this.activeTopBtn = 'aboutMe';
+    this.onSockets();
   }
 
   private getCurrentRoute(): void {
@@ -80,6 +83,11 @@ export class ProfileComponent implements OnInit,  OnDestroy {
     });
    }
 
+   public onSockets(): void {
+    this.webSocketAPI = new StompWsService(this.store);
+    this.webSocketAPI._connect();
+  }
+
   private getUserData() {
     this.store.dispatch(new LoadUserData());
     const newUser$ = this.store.select('user').subscribe((state: any) => {
@@ -92,6 +100,9 @@ export class ProfileComponent implements OnInit,  OnDestroy {
         this.name = state.profile.name;
         this.lastName = state.profile.lastName;
         this.summary = this.user.profile.profileSummary;
+        if (this.summary !== '') {
+          this.summaryValue = this.summary;
+        }
         this.myGoals = this.user.keyData.goals;
         this.myServices = this.user.keyData.services;
         this.placeOfBirth = this.user.profile.placeOfBirth;
@@ -108,10 +119,13 @@ export class ProfileComponent implements OnInit,  OnDestroy {
         this.langNative = this.user.profile.langs.native.name + ' (native)': this.langNative = "No information";
         this.user.profile.langs.native !== null ?
         this.counter = this.counter + 10 : this.counter = this.counter;
+        this.user.keyData.education.length !==0 ? 
+        this.counter = this.counter + 10 : this.counter = this.counter;
         this.langs = this.user.profile.langs.other;
         this.mySkills = this.user.keyData.skills;
         this.myInterests = this.user.keyData.interests;
         this.userUploaded = true;
+
       }
     });
   }
@@ -165,5 +179,6 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+    this.webSocketAPI._disconnect();
   }
 }

@@ -13,7 +13,8 @@
     <div class="col-xs-8 ">
             <nav *ngIf="currParentUrl !== 'login' && currParentUrl
             !== 'registration' && currParentUrl
-            !== 'registration-success' && currParentUrl !== 'unknownPage'">
+            !== 'registration-success' && currParentUrl !== 'unknownPage'
+            && currParentUrl !== 'page-not-found'">
                 <ul>
                     <form name="searchControl"
                     #searchControl="ngForm"
@@ -30,10 +31,11 @@
                     </li>
                 </form>
                     <li><i class="material-icons search-btn" (click)="openSearch()">search</i></li>
-                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><span>Home</span></a></li>
-                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><span>Library</span></a></li>
-                    <li ><a href="#" [routerLink]="'/home'" routerLinkActive="active"><span>My classroom</span></a></li>
-                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><span>Chat</span></a></li>
+                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><i class="material-icons exit-btn" alt="Home page">home</i></a></li>
+                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><i class="material-icons exit-btn">local_library</i></a></li>
+                    <li ><a href="#" [routerLink]="'/home'" routerLinkActive="active"><i class="material-icons exit-btn">class</i></a></li>
+                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><i class="material-icons exit-btn">chat</i></a></li>
+                    <li><a href="#" [routerLink]="'/profile'" routerLinkActive="active"><i class="material-icons exit-btn">notifications</i></a></li>
                     <li><a href="#" [routerLink]="'/profile'" routerLinkActive="active"><i class="material-icons exit-btn">account_circle</i></a></li>
                     <li>
                             <app-lang-switcher></app-lang-switcher>
@@ -67,7 +69,7 @@
                 </ul>
             </nav>
 
-            <nav *ngIf="currParentUrl === 'unknownPage'">
+            <nav *ngIf="currParentUrl === 'unknownPage' || currParentUrl === 'page-not-found'">
                     <ul>
                         <li ><a href="#" [routerLink]="''" routerLinkActive="active"><span>Log in</span></a></li>
                         <li ><a href="#" [routerLink]="'/registration'" routerLinkActive="active"><span>Sign Up</span></a></li>

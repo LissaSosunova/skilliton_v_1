@@ -52,9 +52,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.isLogin = false;
     this.getDataFromLocalStorage('user');
-
-    // this.infoPopup.onClose();
-    
   }
   public openLogin (): void {
       this.isLogin == false ? this.isLogin = true : this.isLogin = false;

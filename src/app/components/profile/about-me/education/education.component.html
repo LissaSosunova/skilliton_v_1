@@ -1,0 +1,225 @@
+<div class="row middle-xs show-content main">
+
+    <div class="col-xs-12 no-padd" *ngIf="user.keyData.education.length !==0" >         
+    <div class="col-xs-12 elem row" *ngFor="let educ of user.keyData.education">
+        <!-- Education place -->
+        <div class="col-xs-3 row-text margin-text">
+          <span>From {{educ.periodOfTime.dateFrom | date: 'MM.yyyy'}} </span><br>
+          <span *ngIf="educ.periodOfTime.dateTo !== null">Until {{educ.periodOfTime.dateTo | date: 'MM.yyyy'}}:</span>
+          <span *ngIf="educ.periodOfTime.dateTo === null">Until nowadays: </span>
+        </div>              
+        <div class="col-xs-9 name-field no-padd row">
+            <div class="col-xs-12 inner-text" >
+                <span class="company">{{ educ.name }}</span> <br>
+            </div>
+        </div>
+ <!-- Specialisation -->
+ <div class="col-xs-3 row-text margin-text" *ngIf="educ.type !== 2 && educ.type !== 3">
+    Specialization:
+  </div>
+  <div class="col-xs-9 name-field no-padd row" *ngIf="educ.type !== 2 && educ.type !== 3">
+      <div class="col-xs-12 inner-text" >
+        <span class="position">{{ educ.specialization }}</span>
+      </div>
+  </div>
+          <!-- Degree -->
+        <div class="col-xs-3 row-text margin-text" *ngIf="educ.type !== 2 && educ.type !== 3">
+            Degree:
+          </div>
+          <div class="col-xs-9 name-field no-padd row" *ngIf="educ.type !== 2 && educ.type !== 3">
+              <div class="col-xs-12 inner-text" >
+                <span class="position">{{ educ.degree }}</span>
+              </div>
+          </div>
+      </div>
+    </div>
+
+
+
+
+
+
+  <form name="editEducationForm"
+  #editEducationForm="ngForm"
+  class="col-xs-12
+  no-padd
+  form-group">
+    <div class="col-xs-12 elem row" *ngIf="editableEducation == true">
+        <div class="col-xs-3 row-text margin-text">
+           {{type | educationLevels }} name
+        </div>
+        <div class="col-xs-9 no-padd row" >
+            <section *ngIf="nameSeted == true" class="col-xs-12 start-xs no-padd" >
+                <div class="choosed-skill-field">
+                        {{placeName}}
+                        <button (click)="changeEducationPlace()"
+                        class="btn-remove"
+                        >
+                                <i class="material-icons remove-icon">
+                                                clear
+                                </i>
+                        </button>
+                </div>
+              </section>
+                  <div class="col-xs-12 no-padd search-container start-xs"
+                  *ngIf="nameSeted == false">
+                      <app-input-search
+                      class="search"
+                      [maxLength]="100"
+                      [control]="searchControl"
+                      name="placeName"
+                      [(ngModel)]="educationPlace"
+                      #placeName="ngModel"
+                      [required]="true"
+                      [placeholder]="''"
+                      [requiredFieldError]="'Set place'">
+                    </app-input-search>
+                    <!-- Drop down -->
+                    <section *ngIf="openAutoSearch === true" appClickOutside (mClickOutside)="outsideSearchClick()"
+                      [ngClass]="{'block-drop': openAutoSearch == true,  'non-vis': openAutoSearch == false}">
+                      <div *ngFor="let option of options" appClickOutside>
+                              <div (click)="setValueFromDropDown(option)">
+                              <i class="material-icons plus-icon">
+                              add_circle_outline
+                              </i>
+                              <span>{{option.name}}</span></div>
+                              </div>
+                      </section>
+                  </div>
+            
+        </div>
+<!-- Specialisation -->
+        <div class="col-xs-3 row-text margin-text" *ngIf="type !== 2 && type !== 3">
+            Specialization
+          </div>
+          <div class="col-xs-9 no-padd row" *ngIf="type !== 2 && type !== 3">
+            <div class="col-xs-12 no-padd">
+                <app-input-text
+                name="specialization"
+                [(ngModel)]="specializationName"
+                #specialization="ngModel"
+                [placeholder]="''"
+                [disabled]="false"
+                [required]="true"
+                >
+              </app-input-text> 
+            </div>
+          </div>
+<!-- Degree -->
+          <div class="col-xs-3 row-text margin-text" *ngIf="type !== 2 && type !== 3">
+              Degree
+            </div>
+            <div class="col-xs-9 no-padd row" *ngIf="type !== 2 && type !== 3">
+              <div class="col-xs-12 no-padd">
+                  <app-input-text
+                  name="degree"
+                  [(ngModel)]="degreeName"
+                  #degree="ngModel"
+                  [placeholder]="''"
+                  [disabled]="false"
+                  [required]="true"
+                  >
+                </app-input-text> 
+              </div>
+            </div>
+
+          <!-- Period -->
+          <div class="col-xs-3 row-text margin-text">
+              Add period
+            </div>
+            <div class="col-xs-9 no-padd row period-field" >
+              <div class="col-xs-12 no-padd row">
+                  <div class="col-xs-12"> From
+                      <app-input-datepicker
+                      [floatLabel]="'auto'"
+                      [disabled]="false"
+                      [format]="'dd MM yyyy'"
+                      [(ngModel)]="fromDate"
+                      [required]="true"
+                      [errorText]="'Date is required'"
+                      name="from"
+                      (change)="changeDate('fromDate', $event, fromDate)"
+                      [errorTextDate]="errorTextDate">
+                  </app-input-datepicker>
+                  </div>
+                  <div class="col-xs-12" *ngIf="currentlyPeriod === false"> To
+                      <app-input-datepicker
+                      [floatLabel]="'auto'"
+                      [disabled]="false"
+                      [format]="'dd MM yyyy'"
+                      [(ngModel)]="toDate"
+                      [required]="false"
+                      [errorText]="'Date is required'"
+                      name="to"
+                      (change)="changeDate('toDate', $event, toDate)"
+                      [errorTextDate]="errorTextDate">
+                  </app-input-datepicker>
+                  </div>
+                  <div class="col-xs-6">
+                      <label class="container-ch-sm  align-check"> I currently study here
+                          <input type="checkbox"
+                            name="currPeriod"
+                            #currPeriod="ngModel"
+                            [(ngModel)]="currentlyPeriod"
+                            (change)="changeDate('currPeriod', $event, currentlyPeriod)">
+                          <span class="checkmark-sm"></span>
+                          </label>
+                   </div>
+              </div>
+            </div>
+
+          <!-- Add button -->
+            <div class="col-xs-12 elem2 row">
+                <div class="col-xs-3 row-text margin-text">
+                  
+                </div>
+                <div class="col-xs-9 no-padd row">
+                    <div class="col-xs-12 no-padd">
+                        <input
+                        type="submit"
+                        (click)="saveBtn(educationPlace, degreeName, specializationName, currentlyPeriod, fromDate, toDate)" 
+                        class="btn
+                        primary-btn
+                        btn-width-middle"    
+                        value="Add education"
+                        [disabled]="editEducationForm.invalid"
+                        [ngClass]="{'disabled': editEducationForm.invalid}">
+                        <!-- Cancel -->
+                        <input
+                        (click)="cancel($event)" 
+                        class="btn
+                        secondary-btn
+                        btn-width-middle
+                        cancel-btn"    
+                        value="Cancel">
+                    </div>
+                </div>
+            </div>
+      </div>
+
+</form>
+
+<div class="col-xs-12" *ngIf="editableEducation == false">
+    <!-- Add -->
+      <div class="col-xs-12 elem2 row" >
+        <div class="col-xs-3 row-text margin-text">
+          
+        </div>
+        <div class="col-xs-9 no-padd row">
+            <div class="col-xs-12 no-padd education-add-conteiner">
+              <div class="add-education center-xs middle-xs" (click)="addEducation()">
+                Add Education +
+              </div>
+              <div class="col-xs-12 education-type" *ngIf="chooseEducationType">
+                  <div *ngFor="let option of [0,1,2,3,4]">
+                      <div (click)="openForm(option)">
+                      <span>{{ option | educationLevels}}</span></div>
+                      </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    <!-- End add btn -->
+</div>
+
+</div>

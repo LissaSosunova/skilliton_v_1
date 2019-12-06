@@ -47,7 +47,7 @@
             <span class="name">{{mate.profile.lastName}}</span> 
             <br/>
             <div  class="summary">
-                    <span>{{mate.summary || "No summary"}}</span>
+                <span>{{mate.profile.profileSummary || "No summary"}}</span>
             </div>
         </div>
     </div>
@@ -130,9 +130,15 @@
                 Studied at 
                 
                 </div>
-            <div class="colxs-12 content-section-block">
-                    <span> No information</span>
-            </div>
+                <section [ngSwitch]="mate.keyData.education !==0">
+                    <div *ngSwitchCase="false" class="colxs-12 content-section-block">
+                        <span> No information</span>
+                    </div>
+                    <div *ngSwitchCase="true" class="colxs-12 content-section-block">
+                        <div *ngFor="let item of mate.keyData.education"> {{item.name}}</div>
+                    </div>
+                </section>
+            
     </div>
     <div class="section-of-block row start-xs">
             <div class="col-xs-12 title-section-block">
@@ -149,18 +155,25 @@
             <section *ngIf="mate.profile.langs.other.length !==0">
                 <div *ngFor="let lang of mate.profile.langs.other"> 
                     <span >{{lang.name}}</span>
-            </div>
-        </section>
-  <!--  </div>
-    <div class="section-of-block row start-xs">
-            <div class="col-xs-12 title-section-block">
-                Workplace 
-                
                 </div>
-            <div class="colxs-12 content-section-block">
-                     <span>{{user.profile.placeOfBirth || "No information"}}</span> -->
-            </div>
+            </section>
+        </div>
     </div>
+    <div class="section-of-block row start-xs">
+        <div class="col-xs-12 title-section-block">
+            Workplace 
+            
+            </div>
+            <section [ngSwitch]="mate.keyData.workExperience !==0">
+                <div *ngSwitchCase="false" class="colxs-12 content-section-block">
+                    <span> No information</span>
+                </div>
+                <div *ngSwitchCase="true" class="colxs-12 content-section-block">
+                    <div *ngFor="let item of mate.keyData.workExperience"> {{item.name}}</div>
+                </div>
+            </section>
+        
+</div>
 </div>
 </div>
 

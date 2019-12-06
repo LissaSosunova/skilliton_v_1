@@ -6,6 +6,7 @@
           [placeholder]="placeholder"
           [required]="required"
           [maxLength]="maxLength"
+          [value]='value'
           [ngClass]="{'error-input': (control.invalid
           || control.hasError('required')
           || !!control.errors?.minlength?.requiredLength

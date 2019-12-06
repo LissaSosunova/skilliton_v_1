@@ -1,0 +1,34 @@
+<div class="col-xs-12 one-post">
+  <div class="col-xs-12 row head middle-xs">
+      <div class="col-xs-3 middle-xs row no-padding head-position">
+        <div class="rate">  {{post.author.rate}}</div>
+          <div class="face" [style.background-image]="'url(' + post.author.avatar + ')'"></div>
+      </div>
+      <div class="col-xs-7 no-padding">
+          <span class="name">{{ post.author.firstName }}  {{ post.author.lastName }}</span>
+      </div>  
+      <div class="col-xs-2 no-padding end-xs" *ngIf="post.author.top === true">
+            <img class="pin"  src="assets/images/icon_pin_top.svg">
+    </div>    
+  </div>
+  <section *ngIf="post.image !== null">
+      <div  class="col-xs-12 img-post no-padding" [style.background-image]="'url(' + post.image + ')'">
+        </div>
+        <div class="col-xs-12">
+            {{ textShort }} 
+        </div>
+  </section>
+  <section *ngIf="post.image === null">
+        <div class="col-xs-12">
+            {{ textLong }} 
+        </div>
+  </section>
+  <div class="col-xs-12 row bottom-section">
+      <div class="col-xs-6 start-xs">
+              <span class="usfull">  Useful</span> 
+      </div>
+      <div class="col-xs-6 end-xs">
+              <span class="usless">  Useless</span> 
+      </div>
+      </div>
+</div>

@@ -23,6 +23,7 @@ export class TopSidebarComponent implements OnInit {
   public searchControl: FormControl;
   public search: string = '';
   private unsubscribe$: Subject<void> = new Subject();
+  @Input() notFound?: boolean = false;
   @Input() public disabled?: boolean = false;
   @Output() public reset: EventEmitter<void> = new EventEmitter<void>();
 
@@ -40,7 +41,7 @@ export class TopSidebarComponent implements OnInit {
     this.initSearchForm();
   }
 
-  private getCurrentRoute(): void {
+  public getCurrentRoute() {
     this.routerService.getCurrentRoute$().subscribe(url => {
       const urlSegments = url.split('/');
       const viewMateProfile = urlSegments[1].split(";mate=");
@@ -48,7 +49,7 @@ export class TopSidebarComponent implements OnInit {
       if (viewMateProfile.length > 1 ) {
         this.currParentUrl = viewMateProfile[0];
       }
-      if ((this.currParentUrl === '/' || this.currChildUrl === '') && !this.currParentUrl) {
+      if ((this.currParentUrl === '/' || this.currChildUrl === '' || this.currParentUrl === '') && !this.currParentUrl) {
         this.currParentUrl = 'login';
       }
       if (urlSegments.length > 2) {

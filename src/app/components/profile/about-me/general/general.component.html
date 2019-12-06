@@ -1,12 +1,6 @@
 <div class="row middle-xs show-content main">
     <!-- General form -->
         <div class="col-xs-12" *ngIf="userUploaded === true">
-          <form name="editGeneralForm"
-            #editGeneralForm="ngForm"
-            class="col-xs-12
-            no-padd
-            form-group">
-             
             <div class="col-xs-12 elem row">
                <!-- First -->
                 <div class="col-xs-3 row-text margin-text">
@@ -16,9 +10,9 @@
                     <div class="col-xs-10 no-padd">
                         <app-input-text
                         name="firstName"
+                        [value]="user.profile.name"
                         [(ngModel)]="firstNameOfUser"
                         #firstName="ngModel"
-                        [placeholder]="user.profile.name"
                         >
                       </app-input-text> 
                       <span class="error" *ngIf="firstNameErr === true">{{ errorFirstNameText}}</span>
@@ -58,10 +52,10 @@
                   <div class="col-xs-9 no-padd row" *ngIf="editableLastName == true">
                       <div class="col-xs-10 no-padd">
                           <app-input-text
+                          [value]="user.profile.lastName"
                           name="lastName"
                           [(ngModel)]="lastNameOfUser"
                           #lastName="ngModel"
-                          [placeholder]="user.profile.lastName"
                           >
                         </app-input-text> 
                         <span class="error" *ngIf="lastNameErr === true">{{ errorLastNameText}}</span>
@@ -317,7 +311,6 @@
                             </div>
                         </div>
                        </div>
-            </form>
         </div>
   </div>        
   

@@ -138,6 +138,7 @@ export module types {
     formId?: string;
     isFooter?: boolean;
     isHeader?: boolean;
+    isError?: boolean;
     footer?: {
         isCloseBtn?: boolean;
         closeBtnText?: string;
@@ -149,8 +150,10 @@ export module types {
         removeBtnText?: string;
         isRemoveLoading?: boolean;
         btnOrder?: string[];
+        footerType?: number;
     };
   }
+
   export interface Filters {
     interests: Array<InterestTag>;
     skills: Array<SkillTag>;
@@ -257,5 +260,31 @@ export module types {
         dateTo?: string;
       };
       position: string;
+  }
+
+  export interface AddEducation {
+      degree?: string;
+      id?: number;
+      name?: string;
+      periodOfTime: {
+        dateFrom: string;
+        dateTo?: string;
+      };
+      specialization?: string;
+      type: number;
+  }
+
+  export interface Match {
+    avatar: string | null;
+    firstName: string;
+    jobPosition: string;
+    lastName: string;
+    matchId: number;
+    rate: number;
+    skillToObtain: Array<any> | [];
+    skillToShare: Array<any> | [];
+    summary: string;
+    userEmail: string;
+    workPlace: any;
   }
 }

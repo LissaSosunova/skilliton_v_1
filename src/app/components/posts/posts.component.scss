@@ -1,0 +1,15 @@
+@import '../../../scss/variables';
+
+.no-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+.non-vis {
+    display: none;
+}
+
+.direction-posts {
+  display: flex;
+  flex-direction: row;
+}

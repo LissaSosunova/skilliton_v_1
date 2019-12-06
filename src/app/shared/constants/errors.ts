@@ -29,6 +29,9 @@ export const errorTypes = {
             {code: 102, title: 'Check your data and try again.'},
             {code: 103, title: "Data is not correct: you must to set coreect birthday (in the past) and You must be over 14 years old."}
         ],
+        matches: [
+            {code: 406, title: "Skills don't match!"}
+        ]
     },
     api:{
         registration: [
@@ -45,6 +48,9 @@ export const errorTypes = {
             // Для примера зарезервивровать можно
             {code: 415, title: "You sent incorrect data. Details: "},
             {code: 416, title: "Empty/"}
+        ],
+        search: [
+            {code: 406, title: "Skills don't match!"}
         ]
     }
   };

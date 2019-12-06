@@ -1,0 +1,50 @@
+@import '../../../../scss/variables';
+.avatar1 {
+  margin-left: 3em;
+  height: 8em;
+  width: 8em;
+  border-radius: 50%;
+  border: 1px solid white;
+  background-repeat: no-repeat;
+  background-size: 130%;
+  background-position: center;
+  z-index: 105;
+}
+.avatar2 {
+  margin-left: -1.5em;
+  height: 8em;
+  width: 8em;
+  border-radius: 50%;
+  border: 1px solid white;
+  background-repeat: no-repeat;
+  background-size: 130%;
+  background-position: center;
+  z-index: 106;
+}
+
+
+.details {
+  font-size: 0.85em;
+  color: map-get($font-color,'error');
+  font-style: oblique;
+}
+
+.body-text {
+  line-height: 2.2em;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.content-width {
+  max-width: 50%;
+}
+
+.action-name {
+  padding: 20px;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.avatars {
+  margin-bottom: 20px;
+}

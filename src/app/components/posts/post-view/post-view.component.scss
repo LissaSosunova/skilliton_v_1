@@ -4,13 +4,16 @@
     // border-top: 1px solid map-get($bg-color, 'primary');
     display: flex;
     flex-direction: column;
-    width: 100%;
-    margin-bottom: 30px;
     padding-bottom: 20px;
     padding-top: 20px;
-    border-top: 1px solid map-get($bg-color, 'gray-light');
+    border-radius: 16px;
+    background-color: white;
+    border: 5px solid map-get($bg-color, 'dark-blue');
 }
-
+.no-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 .markers {
     font-size: 20px;
     display: flex;
@@ -83,10 +86,8 @@
 }
 
 .face {
-  height: 8em;
-  width: 8em;
-  min-height: 4em;
-  min-width: 4em;
+  height: 3em;
+  width: 3em;
   align-self: top;
   border-radius: 50%;
   background-repeat: no-repeat;

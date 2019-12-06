@@ -44,7 +44,6 @@ export class ServicesComponent implements OnInit {
     private data: HttpService,
     private router: Router,
     private store: Store<types.NewUser>,
-    private actRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -52,7 +51,6 @@ export class ServicesComponent implements OnInit {
     this.initSearchForm();
   }
   private init(): void {
-    this.store.dispatch(new LoadUserData());
     this.store.dispatch(new LoadTags());
     const tags$ = this.store.select('filters').subscribe((state: any) => {
       if  (state !== undefined || state && state.skills.length > 1)  {
@@ -63,12 +61,13 @@ export class ServicesComponent implements OnInit {
   }
 
   private getUserData(): void {
-
-    this.actRoute.data.subscribe(data => {
-      this.user = data.user$.data;
-      this.myServices =  data.user$.data.keyData.services;
-      this.userUploaded = true;
-    });
+    this.store.select('user').subscribe((store) => {
+      if (store !== undefined) {
+        this.user = store;
+        this.myServices =  store.keyData.services;
+        this.userUploaded = true;
+      }
+    })
 }
 
   private initSearchForm(): void {
@@ -93,7 +92,6 @@ export class ServicesComponent implements OnInit {
     this.options = result1;
     const search = _.filter(this.tagsServices, o => _.includes(o.srchStr, querySearch));
     this.openAuto = true;
-// ЖДАТЬ КОГДА ОПРЕДЕЛИТСЯ ОТСЕИВАНИЕ ПО ИМЕНИ ИЛИ АЙДИ
     if (this.user) {
       const result = _.differenceBy(search, this.myServices, 'id');
       this.options = result;
@@ -111,6 +109,7 @@ export class ServicesComponent implements OnInit {
     this.choosedService = option.id;
     this.choosedServicename = option.name;
     this.openAuto = false;
+    this.searchControl.reset({ value: '', disabled: false });
   }
   public setValue(val) {
     if (val !== null) {
@@ -127,21 +126,27 @@ export class ServicesComponent implements OnInit {
     this.choosedService = null;
     this.showBtn = false;
   }
-// Upload files https://www.tutsmake.com/new-angular-7-upload-file-image-example/
-fileProgress(fileInput: any) {
-  this.fileData = <File>fileInput.target.files[0];
-  this.btnConfirm = true;
-}
+  public onChanged(item) {
+    const result = _.remove(this.myServices, {id: item.id});
+  }
+  public outsideSearchClick(): void {
+    this.openAuto = false;
+  }
+  // Upload files https://www.tutsmake.com/new-angular-7-upload-file-image-example/
+  fileProgress(fileInput: any) {
+    this.fileData = <File>fileInput.target.files[0];
+    this.btnConfirm = true;
+  }
 
-onSubmit() {
-  const formData = new FormData();
-  formData.append('file', this.fileData);
-  // this.http.post('url/to/your/api', formData)
-  //   .subscribe(res => {
-  //     console.log(res);
-  //     alert('SUCCESS !!');
-  //   })
-}
+  onSubmit() {
+    const formData = new FormData();
+    formData.append('file', this.fileData);
+    // this.http.post('url/to/your/api', formData)
+    //   .subscribe(res => {
+    //     console.log(res);
+    //     alert('SUCCESS !!');
+    //   })
+  }
 
   saveBtn() {
     if (typeof this.choosedService === 'number') {
@@ -153,7 +158,9 @@ onSubmit() {
       if (data.error === false || data.status === 200) {
         this.data.getUser().subscribe((res) => {
           this.store.dispatch(new UpdateUsersServices(res.data.keyData.services));
-          this.router.navigate(['/profile']);
+          this.changeService();
+          this.getUserData();
+          this.searchControl.reset({ value: '', disabled: false });
         });
       }
     });
