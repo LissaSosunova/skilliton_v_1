@@ -48,7 +48,6 @@ export class MyMatchesComponent implements OnInit {
         this.user = state;
         this.userInterested = this.user.contacts;
         this.interestedUploaded = true;
-        console.log(this.user)
       }
     })
   }
@@ -92,7 +91,6 @@ export class MyMatchesComponent implements OnInit {
       if (resp.error == false) {
         this.store.dispatch(new LoadUserData());
         this.uploadUserFromState();
-        console.log('unsubcsribe: ', mail)
       }
     });
   }

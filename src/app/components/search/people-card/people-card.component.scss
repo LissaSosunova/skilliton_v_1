@@ -10,7 +10,7 @@
 .card {
   background-color: map-get($bg-color, 'white');
   border-radius: 16px;
-  padding: 20px;
+  padding: 8px;
   min-height: 70px;
   margin-bottom: 1em;
 }
@@ -22,7 +22,7 @@
 }
 
 .name {
-  font-size: 1.2em;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 .work {
@@ -32,22 +32,40 @@
   line-height: 1.7em;
 }
 .summary {
-  font-size: 1em;
+  font-size: 0.875rem;
   font-weight: 400;
   color: map-get($font-color, 'primary');
   line-height: 1.7em;
 }
+.head-position {
+  position: relative;
+}
+.rate {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  margin-left: -15px;
+  height: 20px;
+  width: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 8px 8px 8px 8px;
+  color: map-get($font-color, 'primary');
+  border-radius: 50%;
+  border: 1px solid map-get($bg-color, 'gray');
+  z-index: 110;
+}
 .face {
-  height: 6em;
-  width: 6em;
-  min-height: 4em;
-  min-width: 4em;
+  height: 8em;
+  width: 8em;
   align-self: top;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-size: 140%;
   background-position: center;
   cursor: pointer;
+  margin-right: -10px;
+  z-index: 100;
 }
 
 .btn-service {
@@ -72,7 +90,7 @@
   display: none;
 }
 .btn-match {
-  max-width: 180px;
+  max-width: 170px;
   width: 80%;
   font-size: 16px;
 }

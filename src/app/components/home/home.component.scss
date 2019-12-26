@@ -2,10 +2,10 @@
 .main-content {
     padding-left: 20px;
     padding-right: 20px;
-    padding-bottom: $footer-height;
+    padding-bottom: 30px;
     // margin-top: calc(#{$header-height} - 3px);
     background-color: map-get($bg-color, 'dark-blue');
-    height: 100%;
+    min-height: calc(100vh - #{$header-height});
 }
 .body-home {
     height: 100%;
@@ -19,4 +19,7 @@
     color: map-get($font-color, 'inverse');
     font-size: 2.5em;
     font-weight: 700;
+}
+.posts {
+    padding-bottom: 60px;
 }

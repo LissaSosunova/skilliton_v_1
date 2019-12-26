@@ -3,20 +3,25 @@
       class="card col-xs-12">
     No results for search
 </div>
-<div class="card col-xs-12 row" *ngFor="let skill of skills">
-    <div class="left-side
-                col-xs-4
+<div class="card col-xs-12 row top-xs" *ngFor="let skill of skills">
+    <div class="col-xs-4
                 col-sm-4
-                col-md-2
-                col-lg-2"
-                >
-        <div class="face" [style.background-image]="'url(' + avatar + ')'"
-        (click)="viewProfile(skill.userEmail)" ></div>
+                col-md-4
+                col-lg-2
+                middle-xs
+                row
+                no-padding
+                head-position
+                left-side">
+                    
+          <div class="face" [style.background-image]="'url(' + avatar + ')'"
+            (click)="viewProfile(skill.userEmail)"></div>
+            <div class="rate">  {{skill.rate}}</div>
         </div>
         <div class="col-xs-4
                     col-sm-4
-                    col-md-6
-                    col-lg-6
+                    col-md-4
+                    col-lg-4
                     head
                     start-xs" >
                     <div class="name">{{ skill.firstName }}  {{ skill.lastName }}</div>
@@ -26,9 +31,18 @@
                       <div *ngIf="skill.summary !== null">
                           <label class="summary">{{ skill.summary  || 'No info'}}</label>
                       </div>
-                    <div *ngIf="skill.skillToShare.length !== 0" class="tab-expert-class">Skills to share <br>
+                   
+
+        </div>
+        <div class="col-xs-4
+                    col-sm-4
+                    col-md-4
+                    col-lg-6
+                    start-xs top-xs skills" >
+                    <div *ngIf="skill.skillToShare.length !== 0" class="skill-block">
+                      <div class="section-name">Skills to share</div>
                       <!-- List of skills to share -->
-                      <span class="btn-skill"
+                      <div class="btn-skill"
                             *ngFor="let skillTS of skill.skillToShare"
                             (click)="openDetialsBlock(skillTS.skillId)">
                           {{skillTS.skillName}}
@@ -65,9 +79,10 @@
                                     match
                                   </div>
                               </div>
-                      </span>
+                            </div>
                     </div>
-                    <div *ngIf="skill.skillToObtain.length !== 0" class="tab-expert-class">Skills to obtain <br>
+                    <div *ngIf="skill.skillToObtain.length !== 0" class="skill-block">
+                      <div class="section-name">Skills to obtain</div>
                         <!-- List of skills to obtaine -->
                         <span  class="btn-skill"
                               *ngFor="let skillTO of skill.skillToObtain"
@@ -108,20 +123,6 @@
                               </div>
                         </span>
                       </div>
-
-        </div>
-        <div class="col-xs-4
-                    col-sm-4
-                    col-md-4
-                    col-lg-4
-                    end-xs top-xs" >
-            <input
-            type="submit"
-            (click)="viewProfile(skill.userEmail)"
-            class="btn
-            primary-btn
-            btn-match"    
-            value="Veiw profile">
 </div>
 </div>
 <app-alert-modal

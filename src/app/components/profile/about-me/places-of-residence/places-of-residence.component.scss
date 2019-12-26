@@ -28,11 +28,12 @@
 .block-drop {
   position: absolute;
   text-align: left;
-  width: 99.7%;
+  width:  calc(100% - 32px);
   top: 66px;
+  left: 16px;
   height: 160px;
   overflow: auto;
-  padding: 0px;
+  margin-right: 16px;
   z-index: 200;
   background-color: map-get($bg-color, 'white');
   border-bottom: 1px solid map-get($bg-color, 'gray-light');
@@ -74,9 +75,6 @@
     font-size: 0.7rem;
     line-height: 1rem;
 }
-.inner-text {
-  padding-top: 8px;
-}
 
 .margin-text {
   margin-top: 2em;
@@ -95,7 +93,7 @@
 .name-field {
   position: relative;
   top: 10px;
-  padding: 0px;
+  padding: 12px 10px 2px 10px;
   margin-bottom: 15px;
   background-color: white;
   border: 1px solid map-get($bg-color, 'gray-light');
@@ -105,6 +103,9 @@
   display: flex;
   height: 47px;
   text-align: left;
+  &:hover {
+    cursor: pointer;
+  }
 }
 .choosed-lang-field {
   padding: 10px;
@@ -136,9 +137,8 @@
 }
 
 .btn-save {
-  padding: 8px 2px 8px 2px;
-  margin-bottom: 15px;
-  margin-top: 10px;
+  padding: 12px 2px 8px 2px;
+  margin-top: 15px;
   width: 100%;
   height: 46px;
   color: map-get($bg-color, 'gray');
@@ -149,6 +149,15 @@
       cursor: pointer;
       color: map-get($bg-color, 'primary');
     }
+  }
+}
+
+.edit-icon {
+  margin-right: 15px;
+  height: 18px;
+  &:hover {
+    cursor: pointer;
+    color: map-get($bg-color, 'primary');
   }
 }
 
@@ -219,4 +228,9 @@
     cursor: pointer;
     color: map-get($font-color, 'primary');
   }
+}
+.country {
+ font-size: 0.8rem;
+ color: map-get($font-color, 'primary');
+ font-weight: 500;
 }

@@ -5,15 +5,17 @@
     </div>
     <div class="card col-xs-12 row" *ngFor="let person of people">
         <div class="left-side
-                    col-xs-4
-                    col-sm-4
+                    col-xs-3
+                    col-sm-3
                     col-md-2
-                    col-lg-2">
-            <div class="face" [style.background-image]="'url(' + avatar + ')'"
+                    col-lg-2 middle-xs row no-padding head-position">
+                    
+          <div class="face" [style.background-image]="'url(' + avatar + ')'"
             (click)="viewProfile(person.userEmail)"></div>
+            <div class="rate">  {{person.rate}}</div>
             </div>
-            <div class="col-xs-4
-                        col-sm-4
+            <div class="col-xs-5
+                        col-sm-5
                         col-md-6
                         col-lg-6
                         head
@@ -30,23 +32,30 @@
             <div class="col-xs-4
                         col-sm-4
                         col-md-4
-                        col-lg-4 end-xs top-xs" >
+                        col-lg-4 end-xs middle-xs"
+                        [ngSwitch]="person.interested === true">
 <!-- Interested -->
-                <input
-                type="submit"
-                (click)="interested(person.userEmail)"
-                class="btn
-                secondary-btn
-                btn-match"    
-                value="Interesting">
-<!-- VIew profile -->
-                <input
-                type="submit"
-                (click)="viewProfile(person.userEmail)" 
-                class="btn
-                primary-btn
-                btn-match"    
-                value="View profile">
+
+    <span *ngSwitchCase="true">
+        <input
+        type="submit"
+        (click)="unsubscribe(person.userEmail, person.lastName, person.firstName)"
+        class="btn
+        secondary-btn
+        btn-match"    
+        value="Unfollow">
+    </span>
+    <span *ngSwitchCase="false">
+        <input
+        type="submit"
+        (click)="subscribe(person.userEmail, person.lastName, person.firstName)"
+        class="btn
+        secondary-btn
+        btn-match"    
+        value="Follow">
+    </span>
+
+
   </div>
     </div>
   </div>

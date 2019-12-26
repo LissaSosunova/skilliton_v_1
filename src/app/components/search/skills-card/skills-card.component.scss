@@ -10,7 +10,7 @@
 .card {
   background-color: map-get($bg-color, 'white');
   border-radius: 16px;
-  padding: 20px;
+  padding: 8px;
   min-height: 70px;
   margin-bottom: 1em;
 }
@@ -22,57 +22,71 @@
 }
 
 .name {
-  font-size: 1.2em;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 .work {
-  font-size: 1em;
+  font-size: 0.75rem;
   font-weight: 400;
   color: map-get($font-color, 'gray');
   line-height: 1.7em;
 }
 .summary {
-  font-size: 1em;
+  font-size: 0.875rem;
   font-weight: 400;
   color: map-get($font-color, 'primary');
   line-height: 1.7em;
 }
+.head-position {
+  position: relative;
+}
+.rate {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  margin-left: -15px;
+  height: 20px;
+  width: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 8px 8px 8px 8px;
+  color: map-get($font-color, 'primary');
+  border-radius: 50%;
+  border: 1px solid map-get($bg-color, 'gray');
+  z-index: 110;
+}
 .face {
-  height: 6em;
-  width: 6em;
-  min-height: 4em;
-  min-width: 4em;
+  height: 8em;
+  width: 8em;
   align-self: top;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-size: 140%;
   background-position: center;
   cursor: pointer;
+  margin-right: -10px;
+  z-index: 100;
 }
 
 .btn-skill {
-  position: relative;
   background-color: map-get($bg-color, 'white');
   border-radius: 8px;
   padding: 6px 15px 6px 15px; 
   border: 1px solid map-get($bg-color, 'gray');
   font-size: 0.85em;
-  margin: 5px;
+  margin: 5px 10px 5px 0px;
+  display: inline;
   &:hover {
     background-color: map-get($bg-color, 'light-blue');
     cursor: pointer;
   }
 }
 
-.tab-expert-class {
-  line-height: 3em;
-  width: 100%;
-  list-style: none;
-  margin: 0;
+.skill-block {
   font-size: 1em;
-  font-weight: 600;
-  padding: 15px;
+  line-height: 2em;
   position: relative;
+
 }
 .open-details {
   position: absolute;
@@ -89,7 +103,7 @@
   display: none;
 }
 .btn-match {
-  max-width: 180px;
+  max-width: 170px;
   width: 80%;
   font-size: 16px;
 }
@@ -124,4 +138,16 @@
   font-size: 0.85em;
   font-weight: 400;
   line-height: 2.5em;
+}
+.section-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.skills {
+  padding: 0px 16px 20px 16px;
+}
+.left-side {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }

@@ -2,6 +2,9 @@
 .bottom-spacer {
     height: calc(#{$footer-height} + #{$footer-height});
 }
+.bg-gray {
+    background-color: map-get($bg-color, 'gray-lighter');
+}
 
 .content-block {
     margin-top: calc(#{$header-height} - 3px);

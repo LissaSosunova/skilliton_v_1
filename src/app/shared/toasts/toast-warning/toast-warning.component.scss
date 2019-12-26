@@ -1,0 +1,13 @@
+@import '../../../../scss/variables';
+
+.toast-warn {
+  display: flex;
+  background-color: map-get($bg-color, 'warning');
+  color: map-get($font-color, 'primary');
+  font-size: 15px;
+  padding: 16px 16px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0.8;
+}
