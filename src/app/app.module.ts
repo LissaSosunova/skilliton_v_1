@@ -60,6 +60,7 @@ import { SelectComponent } from './shared/form-controls/select/select.component'
 import { StoreModule } from '@ngrx/store';
 import { TopSidebarComponent } from './components/top-sidebar/top-sidebar.component';
 import { userReducer} from './state/reducers/user';
+import { locationsReducer} from './state/reducers/locations.reducer';
 import { filtersReducer} from './state/reducers/filters.reducer';
 import { langsReducer } from './state/reducers/langs.reducer';
 import { globalSearchReducer } from './state/reducers/global-search.reducer';
@@ -73,6 +74,7 @@ import { AboutMeComponent } from './components/profile/about-me/about-me.compone
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './state/effects/user.effects';
 import { FiltersEffects } from './state/effects/filters.effects';
+import { LocationsEffects } from './state/effects/locations.effects';
 import { PostsComponent } from './components/posts/posts.component';
 import { InputCustomDatepickerComponent } from './shared/form-controls/input-custom-datepicker/input-custom-datepicker.component';
 import { AngularMyDatePickerModule } from 'angular-mydatepicker';
@@ -127,6 +129,9 @@ import { InterestedPersonsComponent } from './components/profile/my-matches/inte
 import { CongratsPopupComponent } from './components/modals/congrats-popup/congrats-popup.component';
 import { PostViewComponent } from './components/posts/post-view/post-view.component';
 import { PostCardComponent } from './components/posts/post-card/post-card.component';
+import { ToastSuccessComponent } from './shared/toasts/toast-success/toast-success.component';
+import { ToastWarningComponent } from './shared/toasts/toast-warning/toast-warning.component';
+import { ToastFailComponent } from './shared/toasts/toast-fail/toast-fail.component';
 
 
 @NgModule({
@@ -199,7 +204,10 @@ import { PostCardComponent } from './components/posts/post-card/post-card.compon
     InterestedPersonsComponent,
     CongratsPopupComponent,
     PostViewComponent,
-    PostCardComponent
+    PostCardComponent,
+    ToastSuccessComponent,
+    ToastWarningComponent,
+    ToastFailComponent
   ],
   imports: [
     BrowserModule,
@@ -257,8 +265,14 @@ import { PostCardComponent } from './components/posts/post-card/post-card.compon
       filters: filtersReducer,
       langs: langsReducer,
       globalSearch: globalSearchReducer,
-      mateProfile: mateReducer}),
-    EffectsModule.forRoot([UserEffects, FiltersEffects, LangsEffects])
+      mateProfile: mateReducer,
+    locations: locationsReducer}),
+    EffectsModule.forRoot([UserEffects, FiltersEffects, LangsEffects, LocationsEffects])
+  ],
+  entryComponents: [
+    ToastSuccessComponent,
+    ToastFailComponent,
+    ToastWarningComponent
   ],
   providers: [
     AlertModalComponent,

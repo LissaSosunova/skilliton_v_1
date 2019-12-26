@@ -18,6 +18,10 @@ body {
     overflow-x: hidden;
   }
 
+html {
+  background-color: map-get($bg-color , 'primary');
+}
+
 // MAIN FONT
 @font-face{
     font-family: 'Montserrat';
@@ -25,7 +29,11 @@ body {
     font-weight: 400;
     font-style: normal;
   }
-
+  .mat-snack-bar-container {
+    box-shadow: none !important;
+    margin-top: 0px !important;
+    border-radius: 0px !important;
+  }
 
 //   MATERIAL ICONS
 
@@ -134,7 +142,7 @@ input, button {
   width: 280px;
 }
 .btn-width-middle {
-    width: 180px;
+    width: 170px;
 }
 .btn-width-small {
   width: 60px;

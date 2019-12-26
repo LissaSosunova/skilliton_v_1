@@ -96,31 +96,32 @@ export class ProfileComponent implements OnInit,  OnDestroy {
         if  (state !== undefined || state && state.skills.length > 1)  {
           this.goals = state.keyData.goals;
         }
-        this.counter = 10;
+        this.counter = 12.5;
         this.name = state.profile.name;
         this.lastName = state.profile.lastName;
         this.summary = this.user.profile.profileSummary;
         if (this.summary !== '') {
           this.summaryValue = this.summary;
+          this.counter = this.counter + 12.5;
         }
         this.myGoals = this.user.keyData.goals;
         this.myServices = this.user.keyData.services;
         this.placeOfBirth = this.user.profile.placeOfBirth;
         this.placeOfResidence = this.user.profile.placeOfResidence;
         this.user.profile.profileSummary !== null ?
-        this.counter = this.counter + 10 : this.counter = this.counter;
+        this.counter = this.counter + 12.5 : this.counter = this.counter;
         this.user.profile.placeOfBirth !== null ?
-        this.counter = this.counter + 10 : this.counter = this.counter;
+        this.counter = this.counter + 12.5 : this.counter = this.counter;
         this.user.profile.placeOfResidence !== null ?
-        this.counter = this.counter + 10 : this.counter = this.counter;
+        this.counter = this.counter + 12.5 : this.counter = this.counter;
         this.user.profile.langs.other.length !== 0 ?
-        this.counter = this.counter + 10 : this.counter = this.counter;
+        this.counter = this.counter + 12.5 : this.counter = this.counter;
         this.user.profile.langs.native !== null ?
         this.langNative = this.user.profile.langs.native.name + ' (native)': this.langNative = "No information";
         this.user.profile.langs.native !== null ?
-        this.counter = this.counter + 10 : this.counter = this.counter;
+        this.counter = this.counter + 12.5 : this.counter = this.counter;
         this.user.keyData.education.length !==0 ? 
-        this.counter = this.counter + 10 : this.counter = this.counter;
+        this.counter = this.counter + 12.5 : this.counter = this.counter;
         this.langs = this.user.profile.langs.other;
         this.mySkills = this.user.keyData.skills;
         this.myInterests = this.user.keyData.interests;

@@ -132,6 +132,19 @@ public getMate(params: string): Observable<any> {
     return this.http.get(URL_BACK + '/match/' + mail + '/subscribe/' + interested, {headers: this.getHeaders()});
   }
 
+  // Search locations
+  // Get all
+  public getAllLocations(): Observable<any> {
+    return this.http.get(URL_BACK + '/locations/full', {headers: this.getHeaders()});
+  }
+  // Get all counries
+  public getAllCountries(): Observable<any> {
+    return this.http.get(URL_BACK + '/locations', {headers: this.getHeaders()});
+  }
+  // Get cities by country ID
+  public getCitiesByID(id: number): Observable<any> {
+    return this.http.get(URL_BACK + '/locations/' + id, {headers: this.getHeaders()});
+  }
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {
 

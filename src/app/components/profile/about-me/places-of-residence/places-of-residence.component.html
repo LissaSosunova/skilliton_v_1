@@ -1,107 +1,199 @@
 <div class="row middle-xs show-content main">
   <!-- General form -->
       <div class="col-xs-12">
-        <form name="editPlacesForm"
+        <form name="editPlaceOfBirthForm"
           #editPlacesForm="ngForm"
           class="col-xs-12
           no-padd
           form-group">
            
           <div class="col-xs-12 elem row">
-             <!-- First -->
+             <!-- Place of birth -->
               <div class="col-xs-3 row-text margin-text">
                   I am from
               </div>
               <div class="col-xs-9 no-padd row" *ngIf="editablePlaceFrom == true">
-                  <div class="col-xs-10 no-padd">
-                      <app-input-text
-                      name="firstName"
-                      [(ngModel)]="firstNameOfUser"
-                      #firstName="ngModel"
-                      [placeholder]="'Function temporarily unavailable'"
-                      [disabled]="true"
-                      >
-                    </app-input-text> 
+                  <div class="col-xs-6 search-section" *ngIf="choosedCountryname == ''">
+                        <app-input-search
+                        class="no-margin search"
+                        [maxLength]="100"
+                        [control]="searchCountriesControl"
+                        name="countrName"
+                        [(ngModel)]="countrNames"
+                        #countrName="ngModel"
+                        [required]="true"
+                        [placeholder]="'Country'"
+                        [requiredFieldError]="'You must to choose country first'">
+                        </app-input-search>
+                        <section *ngIf="openAutoCountr === true"
+                        [ngClass]="{'block-drop': openAutoCountr == true,  'non-vis': openAutoCountr == false}">
+                        <div *ngFor="let option of options" >
+                                <div (click)="setValueCountriesFromDropDown(option)">
+                                <i class="material-icons plus-icon">
+                                add_circle_outline
+                                </i>
+                                <span>{{option.country}} </span>
+                                </div>
+                                </div>
+                    </section>
                   </div>
-                  <div class="col-xs-2 no-padd btn-save center-xs middle-xs">
-                      <span (click)="saveNewName('firstName', firstNameOfUser)">
-                            <i class="material-icons edit-icon">
-                                            save
-                            </i>
-                      </span>
-                      <span (click)="cancelPlaceFrom()">
-                          <i class="material-icons edit-icon">
-                              cancel_presentation
-                          </i>
-                    </span>
-                  </div>
+                    <div class="col-xs-6 search-section" *ngIf="choosedCityname == '' && choosedCountryname !== ''">
+                            <app-input-search
+                            class="no-margin search"
+                            [maxLength]="100"
+                            [control]="searchCityControl"
+                            name="cityName"
+                            [(ngModel)]="cityNames"
+                            #cityName="ngModel"
+                            [required]="true"
+                            [placeholder]="'City'"
+                            [requiredFieldError]="'You must to choose city'">
+                            </app-input-search>
+                            <section *ngIf="openAutoCity === true"
+                        [ngClass]="{'block-drop': openAutoCity == true,  'non-vis': openAutoCity == false}">
+                        <div *ngFor="let option of optionsCity" >
+                                <div (click)="setValueCity(option)">
+                                <i class="material-icons plus-icon">
+                                add_circle_outline
+                                </i>
+                                <span>{{option}} </span>
+                                </div>
+                                </div>
+                    </section>
+                      </div>  
+                      <div class="col-xs-12 row no-padd center-xs middle-xs">
+                            <div class="col-xs-6">
+                                    <span *ngIf="choosedCountryname !== ''" class="country">{{choosedCountryname}} </span>
+                                    <span *ngIf="choosedCityname !== ''" class="country">, {{choosedCityname}}
+                                        </span>
+                                        
+                                    
+                                </div>
+                                <div class="col-xs-6">
+                                        <span *ngIf="choosedCityname !== ''" (click)="savePlaceOfBirth()">
+                                                <i class="material-icons edit-icon">
+                                                    check
+                                                </i>
+                                            </span>
+                                            <span *ngIf="choosedCountryname !== ''" (click)="cancelPlaceFrom()">
+                                                <i class="material-icons edit-icon">
+                                                    close
+                                                </i>
+                                        </span>
+                                </div>
+                    </div>
               </div>
               
-              <div class="col-xs-9 name-field no-padd row" *ngIf="editablePlaceFrom == false">
-                  <div class="col-xs-10 inner-text" *ngIf="user.profile.placeOfBirth !== null">
-                      <span >{{user.profile.placeOfBirth }} </span>
+              <div class="col-xs-9 no-padd row" *ngIf="editablePlaceFrom == false" (click)="changePlaceFrom()">
+                  <div class="col-xs-10 row no-padd name-field" *ngIf="user.profile.placeOfBirth !== null">
+                        <span class="col-xs-1 start-xs no-padd">
+                            <img class="edit-icon"  src="assets/images/svg-icons/edit_btn.svg">
+                            </span>
+                            <span class="col-xs-10 center-xs no-padd">
+                                {{user.profile.placeOfBirth.city }},
+                                {{user.profile.placeOfBirth.country }} </span>
                   </div>
-                  <div class="col-xs-10 inner-text" *ngIf="user.profile.placeOfBirth == null">
-                     <span>Not set</span>
-                 </div>
-                  <div class="col-xs-2 no-padd btn-edit center-xs middle-xs">
-                      <span (click)="changePlaceFrom()">
-                            <i class="material-icons edit-icon">
-                                            create
-                            </i>
-                      </span>
-                  </div>
-              </div>
-
-               <!-- Last name -->
-              <div class="col-xs-3 row-text margin-text">
-                  I live in
-                </div>
-
-                <div class="col-xs-9 no-padd row" *ngIf="editablePlaceLive == true">
-                    <div class="col-xs-10 no-padd">
-                        <app-input-text
-                        name="lastName"
-                        [(ngModel)]="lastNameOfUser"
-                        #lastName="ngModel"
-                        [placeholder]="'Function temporarily unavailable'"
-                        [disabled]="true"
-                        >
-                      </app-input-text> 
-                      <span class="error" *ngIf="lastNameErr === true">{{ errorLastNameText}}</span>
-                    </div>
-                    <div class="col-xs-2 no-padd btn-save center-xs middle-xs">
-                        <span (click)="saveNewLastName('lastName', lastNameOfUser)">
-                            <i class="material-icons edit-icon">
-                                            save
-                            </i>
-                      </span>
-                        <span (click)="chancelPlaceLive()">
-                            <i class="material-icons edit-icon">
-                                cancel_presentation
-                            </i>
-                      </span>
-                    </div>
-                </div>
-
-                <div class="col-xs-9 name-field no-padd row" *ngIf="editablePlaceLive == false">
-                    <div class="col-xs-10 inner-text" *ngIf="user.profile.placeOfResidence !== null">
-                        <span >{{user.profile.placeOfResidence }} </span>
-                    </div>
-                    <div class="col-xs-10 inner-text" *ngIf="user.profile.placeOfResidence == null">
-                       <span>Not set</span>
-                   </div>
-                    <div class="col-xs-2 no-padd btn-edit center-xs middle-xs">
-                        <span (click)="changePlaceLive()">
-                              <i class="material-icons edit-icon">
-                                              create
-                              </i>
+                  <div class="col-xs-10 row name-field no-padd" *ngIf="user.profile.placeOfBirth == null">
+                        <span class="col-xs-1 start-xs no-padd">
+                        <img class="edit-icon"  src="assets/images/svg-icons/edit_btn.svg">
                         </span>
-                    </div>
-                </div>
+                        <span class="col-xs-10 center-xs no-padd"> Not set</span>
+                 </div>
+              </div>
             </div>
                
-               
+        <div class="col-xs-12 elem row">
+        <!-- Live -->
+            <div class="col-xs-3 row-text margin-text">
+                I live in
+            </div>
+                <div class="col-xs-9 no-padd row" *ngIf="editablePlaceLive == true">
+                    <div class="col-xs-6 search-section" *ngIf="choosedCountryname == ''">
+                        <app-input-search
+                        class="no-margin search"
+                        [maxLength]="100"
+                        [control]="searchCountriesControlLive"
+                        name="countrName2"
+                        [(ngModel)]="countrNames2"
+                        #countrName2="ngModel"
+                        [required]="true"
+                        [placeholder]="'Country'"
+                        [requiredFieldError]="'You must to choose country first'">
+                        </app-input-search>
+                        <section *ngIf="openAutoCountr === true"
+                        [ngClass]="{'block-drop': openAutoCountr == true,  'non-vis': openAutoCountr == false}">
+                        <div *ngFor="let option of options" >
+                                <div (click)="setValueCountriesFromDropDown(option)">
+                                <i class="material-icons plus-icon">
+                                add_circle_outline
+                                </i>
+                                <span>{{option.country}} </span>
+                                </div>
+                                </div>
+                    </section>
+                    </div>
+                    <div class="col-xs-6 search-section" *ngIf="choosedCityname == '' && choosedCountryname !== ''">
+                            <app-input-search
+                            class="no-margin search"
+                            [maxLength]="100"
+                            [control]="searchCityControlLive"
+                            name="cityName2"
+                            [(ngModel)]="cityNames2"
+                            #cityName2="ngModel"
+                            [required]="true"
+                            [placeholder]="'City'"
+                            [requiredFieldError]="'You must to choose city'">
+                            </app-input-search>
+                        <section *ngIf="openAutoCity === true"
+                        [ngClass]="{'block-drop': openAutoCity == true,  'non-vis': openAutoCity == false}">
+                        <div *ngFor="let option of optionsCity" >
+                                <div (click)="setValueCity(option)">
+                                <i class="material-icons plus-icon">
+                                add_circle_outline
+                                </i>
+                                <span>{{option}} </span>
+                                </div>
+                                </div>
+                    </section>
+                    </div>  
+                    <div class="col-xs-12 row no-padd center-xs middle-xs">
+                            <div class="col-xs-6">
+                                    <span *ngIf="choosedCountryname !== ''" class="country">{{choosedCountryname}} </span>
+                                    <span *ngIf="choosedCityname !== ''" class="country">, {{choosedCityname}}
+                                        </span>   
+                                </div>
+                                <div class="col-xs-6">
+                                        <span *ngIf="choosedCityname !== ''" (click)="savePlaceOfLive()">
+                                                <i class="material-icons edit-icon">
+                                                    check
+                                                </i>
+                                            </span>
+                                            <span *ngIf="choosedCountryname !== ''" (click)="cancelPlaceLive()">
+                                                <i class="material-icons edit-icon">
+                                                    close
+                                                </i>
+                                        </span>
+                                </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-9 no-padd row" *ngIf="editablePlaceLive == false" (click)="changePlaceLive()">
+                        <div class="col-xs-10 row no-padd name-field" *ngIf="user.profile.placeOfResidence !== null">
+                              <span class="col-xs-1 start-xs no-padd">
+                                  <img class="edit-icon"  src="assets/images/svg-icons/edit_btn.svg">
+                                  </span>
+                                  <span class="col-xs-10 center-xs no-padd">
+                                      {{user.profile.placeOfResidence.city }},
+                                      {{user.profile.placeOfResidence.country }} </span>
+                        </div>
+                        <div class="col-xs-10 row name-field no-padd" *ngIf="user.profile.placeOfResidence == null">
+                              <span class="col-xs-1 start-xs no-padd">
+                              <img class="edit-icon"  src="assets/images/svg-icons/edit_btn.svg">
+                              </span>
+                              <span class="col-xs-10 center-xs no-padd"> Not set</span>
+                       </div>
+                    </div>
+            </div>
           </form>
       </div>
 </div>        

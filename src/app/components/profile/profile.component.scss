@@ -1,6 +1,6 @@
 @import '../../../scss/variables';
 .bottom-spacer {
-    height: calc(#{$footer-height} + #{$footer-height});
+    height: #{$footer-height};
 }
 
 .content-block {
@@ -290,4 +290,10 @@ padding-left: 0px;
     justify-content: space-between;
     align-items: center;
     font-weight: 600;
+}
+.m-content {
+    background-color: map-get($bg-color, 'gray-lighter');
+}
+.router-outlet {
+    background-color: map-get($bg-color, 'gray-lighter');
 }

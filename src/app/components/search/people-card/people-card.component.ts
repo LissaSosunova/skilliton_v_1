@@ -1,3 +1,4 @@
+import { ToastsService } from './../../../services/toasts.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Store} from '@ngrx/store';
 import * as _ from 'lodash';
@@ -17,6 +18,7 @@ export class PeopleCardComponent implements OnInit {
     private store: Store<any>,
     private data: HttpService,
     public router: Router,
+    public toastService: ToastsService
   ) { }
 
   ngOnInit() {
@@ -32,17 +34,17 @@ export class PeopleCardComponent implements OnInit {
     });
   }
 
-  public interested(mail: string): void {
+  public subscribe(mail: string, lastName: string, name: string): void {
     this.data.getSubscriptionMate(mail, true).subscribe((resp) => {
-      console.log(resp);
+      this.toastService.openToastSuccess("You are following " + lastName + " " +name + "'s post and library updates.");
     });
 
   }
 
-  public notInterested(mail: string): void {
+  public unsubscribe(mail: string, lastName: string, name: string): void {
     this.data.getSubscriptionMate(mail, false).subscribe((resp) => {
-      console.log(resp);
-    })
+      this.toastService.openToastWarning("You stop following " + lastName + " " +name + "'s post and library updates.");
+    });
 
   }
 
