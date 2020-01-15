@@ -141,10 +141,9 @@
                 
                 </div>
             <div class="colxs-12 content-section-block">
-             <section *ngIf="mate.profile.langs.native !== null">
-                    <div > 
-                            <span>{{mate.profile.langs.native.name || ""}}
-                              <span class="native"> (native)</span></span>
+             <section *ngIf="mate.profile.langs.native.length !==0">
+                    <div *ngFor="let lang of mate.profile.langs.native"> 
+                        <span>{{lang.name}} (native)</span>
                     </div>
             </section>
             <section *ngIf="mate.profile.langs.other.length !==0">

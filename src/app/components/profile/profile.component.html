@@ -201,8 +201,14 @@
                     <button (click)="goToSubUrl('/main/profile/about-me/general')"
                         class="edit-btn">edit</button>
                     </div>
+                    
                 <div class="col-xs-12 content-section-block">
-                        {{ langNative }}
+                    <div *ngIf="langsNative.length !==0">
+                        <div  *ngFor="let lang of langsNative"> 
+                            <span>{{ lang.name}} (native)</span>
+                            </div>
+                        </div>
+                    
                 <div *ngIf="langs.length !==0">
                         <div  *ngFor="let lang of langs"> 
                                 <span>{{ lang.name}}</span>

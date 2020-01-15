@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   public activeTopBtn: string;
   public transferData: any;
   public activeUrl: any;
-  public langNative: any;
+  public langsNative: any;
   public myServices: Array<any>;
   public currParentUrl: string;
   @ViewChild('currChildUrl', {static: false}) public currChildUrl: string;
@@ -85,7 +85,6 @@ export class ProfileComponent implements OnInit,  OnDestroy {
 
 
   private getUserData() {
-   
     const newUser$ = this.store.select('user').subscribe((state: any) => {
       if  (state !== undefined)  {
         this.user = state;
@@ -112,17 +111,15 @@ export class ProfileComponent implements OnInit,  OnDestroy {
         this.counter = this.counter + 12.5 : this.counter = this.counter;
         this.user.profile.langs.other.length !== 0 ?
         this.counter = this.counter + 12.5 : this.counter = this.counter;
-        this.user.profile.langs.native !== null ?
-        this.langNative = this.user.profile.langs.native.name + ' (native)': this.langNative = "No information";
-        this.user.profile.langs.native !== null ?
+        this.user.profile.langs.native.length !== 0 ?
         this.counter = this.counter + 12.5 : this.counter = this.counter;
         this.user.keyData.education.length !==0 ? 
         this.counter = this.counter + 12.5 : this.counter = this.counter;
+        this.langsNative = this.user.profile.langs.native;
         this.langs = this.user.profile.langs.other;
         this.mySkills = this.user.keyData.skills;
         this.myInterests = this.user.keyData.interests;
         this.userUploaded = true;
-
       }
     });
   }
