@@ -36,6 +36,6 @@ export class StoViewComponent implements OnInit {
   }
 
   addSkill() {
-    this.router.navigate(['/profile/skills-to-obtain']);
+    this.router.navigate(['/main/profile/skills-to-obtain']);
   }
 }

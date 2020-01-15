@@ -30,39 +30,37 @@ public searchLangsControl: FormControl;
 public searchOtherLangsControl: FormControl;
 public langs = [] as  any;
 public optionsLangs: any;
-private universitySelected: boolean = true;
+public universitySelected: boolean = true;
 private unsubscribe$: Subject<void> = new Subject();
 // Mail and Femail
-private maleSelect: boolean = false;
-private femaleSelect: boolean = false;
+public maleSelect: boolean = false;
+public femaleSelect: boolean = false;
 // Make editable
-private editableFirstName: boolean = false;
-private editableLastName: boolean = false;
-private editableBirthDay: boolean = false;
-private editableNativeLang: boolean = false;
-private openAutoNative: boolean = false;
-private openAutoOtherLang: boolean = false;
-private nativeLangRequired: boolean = false;
-private editableOtherLang: boolean = false;
+public editableFirstName: boolean = false;
+public editableLastName: boolean = false;
+public editableBirthDay: boolean = false;
+public openAutoNative: boolean = false;
+public openAutoOtherLang: boolean = false;
+public nativeLangRequired: boolean = false;
 // Datepicker
-private minimalYear: number;
+public minimalYear: number;
 public checkDate: number;
 public birthDate: string;
 // Errors
-private errorTextDate: string;
+public errorTextDate: string;
 private ERROR_API: any = errorTypes.api.registration;
 private ERROR_APP: any = errorTypes.app.editProfile;
 public errorAPP: string;
 public showEqualError: boolean = false;
 
 private firstNameErr:  boolean = false;
-private errorFirstNameText: string;
+public errorFirstNameText: string;
 
 private lastNameErr:  boolean = false;
-private errorLastNameText: string;
+public errorLastNameText: string;
 
 private sexErr:  boolean = false;
-private errorSexText: string;
+public errorSexText: string;
 
   constructor(
     private data: HttpService,
@@ -159,22 +157,18 @@ private errorSexText: string;
         this.openAutoOtherLang = false;
       }
     }
-    private changeNative() {
-      this.editableNativeLang = !this.editableNativeLang;
-      this.nativeLangRequired = true;
-    }
-    private cancelNative() {
-      this.errorFirstNameText = '';
-      this.firstNameErr = false;
-      this.editableNativeLang = false;
-    }
 
     public setValueNativeFromDropDown(option) {
-      this.editData.sendData('nativeLang', option.id);
+      this.user.profile.langs.native.push({name: option.name, id: option.id, native: option.native});
+      let params = [];
+      this.user.profile.langs.native.forEach((o) => {
+        params.push(o.id);
+      });
+      this.editData.sendData('nativeLang', params);
       this.openAutoNative = false;
       this.nativeLangRequired = false;
-      this.editableNativeLang = false;
       this.searchLangsControl.reset({ value: '', disabled: false });
+
     }
     public setValueOtherFromDropDown(option) {
       this.user.profile.langs.other.push({name: option.name, id: option.id, native: option.native});
@@ -184,11 +178,7 @@ private errorSexText: string;
       });
       this.editData.sendData('otherLang', params);
       this.openAutoOtherLang = false;
-      this.editableOtherLang = false;
       this.searchOtherLangsControl.reset({ value: '', disabled: false });
-    }
-    private changeOtherLangs() {
-      this.editableOtherLang = !this.editableOtherLang;
     }
     private changeOtherLangItem(option) {
       let params = [];
@@ -201,9 +191,18 @@ private errorSexText: string;
       });
       this.editData.sendData('otherLang', params);
       this.updateUserData();
-      if (this.user.profile.langs.other.length === 0 ) {
-        this.editableOtherLang = false;
     }
+    private changeNativeLangItem(option) {
+      let params = [];
+      const deletItem = _.remove(this.user.profile.langs.native, {id: option.id});
+      const langAPI = _.remove(this.user.profile.langs.native, (n) => {
+        return n === option.id;
+      });
+      this.user.profile.langs.native.forEach((o) => {
+        params.push(o.id);
+      });
+      this.editData.sendData('nativeLang', params);
+      this.updateUserData();
     }
     // First name
     private changeFirstName() {
@@ -238,7 +237,7 @@ private errorSexText: string;
       this.lastNameErr = false;
       this.editableLastName = false;
     }
-    private saveNewLastName (key: string, newVal) {
+    private saveNewData (key: string, newVal) {
       if (newVal === null) {
         let result = _.find(this.ERROR_APP, ((o) => { return o.code == 100; }) );
         this.getErrorCodeApp(100);

@@ -33,6 +33,7 @@
   align-items: center;
   align-content: flex-start;
   min-height: 30px;
+  font-size: 14px;
   &:hover {
     cursor: pointer;
   }
@@ -53,4 +54,20 @@
 }
 .title-sect {
   margin: 2%;
+  font-size: 14px;
+  color: map-get($bg-color, 'primary');
+  font-weight: 500;
+}
+.all-chats {
+  margin: 0px 16px 0px 16px;
+  padding: 23px 16px 5px 16px;
+  color: map-get($font-color, 'primary');
+  font-size: 18px;
+  font-weight: 500;
+  max-height: 56px;
+  border-bottom: 1px solid map-get($bg-color, 'gray');
+}
+.no-padd {
+  padding-left: 0px;
+  padding-right: 0px;
 }

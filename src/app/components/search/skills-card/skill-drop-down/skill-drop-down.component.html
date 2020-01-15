@@ -1,0 +1,87 @@
+<div *ngIf="skill && type==='skillTS'" class="main-block">
+  <div class="skill-name-title"><span>{{name}}  wants to share </span>
+    <div class="skill-name1">{{skill.skillName}}</div>
+  </div>
+  <div class="skill-exch">In exchange:</div>
+  <!-- Skills -->
+  <div class="exch-row" *ngIf="skill.inExchange.skillsToObtain.length !==0">
+    <div class="red left-row">&nbsp;</div>
+    <div class="middle-row1">Skills:</div>
+    <div class="middle-row2">
+      <div class="skill-name" *ngFor="let t of skill.inExchange.skillsToObtain">
+        {{t.name}}
+      </div>
+    </div>
+  </div>
+    <!-- Services -->
+    <div class="exch-row"  *ngIf="skill.inExchange.services == true">
+      <div class="blue left-row">&nbsp;</div>
+      <div class="middle-row1">Services:</div>
+      <div class="middle-row2">
+        <i class="material-icons">check</i>
+      </div>
+    </div>
+
+    <!-- Money -->
+
+    <div class="exch-row" *ngIf="skill.inExchange.money == true">
+      <div class="yellow left-row">&nbsp;</div>
+      <div class="middle-row1">Money:</div>
+      <div class="middle-row2">
+        <span class="skill-name" *ngFor="let m of skill.inExchange.fee">
+            <div>{{m.value}} ({{m.currency}}) for {{m.type | pricesTypes}}</div>
+     </span>
+      </div>
+    </div>
+  
+    <div  class="btn-match-mini"
+    (click)="submith(skill.skillId)">
+      Match
+    </div>
+</div>
+<!-- Skills to obtain -->
+<div *ngIf="skill && type==='skillTO'" class="main-block">
+  <div class="skill-name-title"><span>{{name}}  wants to obtain:  </span>
+    <div class="skill-name">{{skill.skillName}}</div>
+  </div>
+  <div class="skill-exch">In exchange:</div>
+  <!-- Skills -->
+  <div class="exch-row" *ngIf="skill.inExchange.skillsToShare.length !==0">
+    <div class="red left-row">&nbsp;</div>
+    <div class="middle-row1">Skills:</div>
+    <div class="middle-row2">
+      <span class="skill-name" *ngFor="let t of skill.inExchange.skillsToShare">
+        {{t.name}}
+   </span>
+    </div>
+  </div>
+    <!-- Services -->
+    <div class="exch-row"  *ngIf="skill.inExchange.services.length !==0">
+      <div class="blue left-row">&nbsp;</div>
+      <div class="middle-row1">Services:</div>
+      <div class="middle-row2">
+        <span class="skill-name" *ngFor="let s of skill.inExchange.services">
+          {{s.name}} 
+      </span>
+      </div>
+    </div>
+
+    <!-- Money -->
+
+    <div class="exch-row" *ngIf="skill.inExchange.money == true">
+      <div class="yellow left-row">&nbsp;</div>
+      <div class="middle-row1">Money:</div>
+      <div class="middle-row2">
+        <i class="material-icons">check</i>
+      </div>
+    </div>
+  
+    <div  class="btn-match-mini"
+    (click)="submith(skill.skillId)">
+      Match
+    </div>
+</div>
+
+
+
+

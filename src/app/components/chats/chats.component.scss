@@ -1,0 +1,59 @@
+@import '../../../scss/variables';
+.main-content {
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 30px;
+  // margin-top: calc(#{$header-height} - 3px);
+  background-color: map-get($bg-color, 'dark-blue');
+  min-height: calc(100vh - #{$header-height} + 20px);
+}
+.body-home {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 16px;
+  background-color: map-get($bg-color, 'white');
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.all-chats {
+  margin-top: calc(#{$header-height} - 3px);
+  padding: 23px 16px 5px 16px;
+  color: map-get($font-color, 'primary');
+  font-size: 18px;
+  font-weight: 500;
+  max-height: 56px;
+  border-bottom: 1px solid map-get($bg-color, 'gray-light');
+  background-color: map-get($bg-color, 'white');
+}
+.chats {
+  padding: 0px 0px 16px 0px;
+  background-color: map-get($bg-color, 'white');
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  height: calc(100% - 120px);
+  flex-wrap: nowrap;
+}
+.no-padd {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.bg-white {
+  background-color: map-get($bg-color, 'white');
+}
+.arrow {
+  font-size: 24px;
+  color: map-get($bg-color, 'gray');
+  &:hover {
+    color: map-get($bg-color, 'primary');
+    cursor: pointer;
+  }
+}
+.position-fix {
+  position: relative;
+}
+.chat-conteiner {
+  padding: 27px 8px 8px 8px;
+  width: 100%;
+}

@@ -138,3 +138,27 @@
 .draft {
   color: map-get($font-color, 'error');
 }
+.add-skill {
+  margin-bottom: 15px;
+  background-color: white;
+  border: 1px solid map-get($bg-color, 'primary');
+  border-style: dashed;
+  border-radius: 8px;
+  width: 320px;
+  height: 50px;
+  box-sizing: border-box;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: map-get($bg-color, 'primary');
+  &:hover {
+    background-color: map-get($bg-color, 'gray-light');
+    cursor: pointer;
+  }
+}
+.btn-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

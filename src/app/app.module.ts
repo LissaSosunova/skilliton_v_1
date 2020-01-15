@@ -65,6 +65,7 @@ import { filtersReducer} from './state/reducers/filters.reducer';
 import { langsReducer } from './state/reducers/langs.reducer';
 import { globalSearchReducer } from './state/reducers/global-search.reducer';
 import { mateReducer } from './state/reducers/mate.reducer';
+import { chatsReducer } from './state/reducers/chats.reducer';
 import { AlertModalComponent } from './components/modals/alert-modal/alert-modal.component';
 import { LeavePopupComponent } from './components/registration/leave-popup/leave-popup.component';
 import { PopupComponent } from './components/modals/popup/popup.component';
@@ -98,6 +99,7 @@ import { ServiceCardComponent } from './components/profile/service-card/service-
 import { InterestsCardComponent } from './components/profile/interests-card/interests-card.component';
 import { StsViewComponent } from './components/profile/sts-view/sts-view.component';
 import { LangsEffects } from './state/effects/langs.effects';
+import { ChatsEffects} from './state/effects/chats.effects';
 import { PricesTypesPipe } from './shared/pipes/prices-types.pipe';
 import { SkillLevelsPipe } from './shared/pipes/skill-levels.pipe';
 import { LangsPipe } from './shared/pipes/langs.pipe';
@@ -132,6 +134,13 @@ import { PostCardComponent } from './components/posts/post-card/post-card.compon
 import { ToastSuccessComponent } from './shared/toasts/toast-success/toast-success.component';
 import { ToastWarningComponent } from './shared/toasts/toast-warning/toast-warning.component';
 import { ToastFailComponent } from './shared/toasts/toast-fail/toast-fail.component';
+import { SkillDropDownComponent } from './components/search/skills-card/skill-drop-down/skill-drop-down.component';
+import { ChatsComponent } from './components/chats/chats.component';
+import { ChatListComponent } from './components/chats/chat-list/chat-list.component';
+import { LastMessagePipe } from './shared/pipes/last-message.pipe';
+import { ChatWindowComponent } from './components/chats/chat-window/chat-window.component';
+import { ChatItemComponent } from './components/chats/chat-list/chat-item/chat-item.component';
+import { RequestItemComponent } from './components/chats/chat-list/request-item/request-item.component';
 
 
 @NgModule({
@@ -207,7 +216,14 @@ import { ToastFailComponent } from './shared/toasts/toast-fail/toast-fail.compon
     PostCardComponent,
     ToastSuccessComponent,
     ToastWarningComponent,
-    ToastFailComponent
+    ToastFailComponent,
+    SkillDropDownComponent,
+    ChatsComponent,
+    ChatListComponent,
+    LastMessagePipe,
+    ChatWindowComponent,
+    ChatItemComponent,
+    RequestItemComponent
   ],
   imports: [
     BrowserModule,
@@ -261,13 +277,15 @@ import { ToastFailComponent } from './shared/toasts/toast-fail/toast-fail.compon
     HttpClientModule,
     OverlayModule,
     AngularMyDatePickerModule,
-    StoreModule.forRoot({user: userReducer,
+    StoreModule.forRoot({
+      user: userReducer,
       filters: filtersReducer,
       langs: langsReducer,
       globalSearch: globalSearchReducer,
       mateProfile: mateReducer,
-    locations: locationsReducer}),
-    EffectsModule.forRoot([UserEffects, FiltersEffects, LangsEffects, LocationsEffects])
+      locations: locationsReducer,
+      chats: chatsReducer}),
+    EffectsModule.forRoot([UserEffects, FiltersEffects, LangsEffects, LocationsEffects, ChatsEffects])
   ],
   entryComponents: [
     ToastSuccessComponent,

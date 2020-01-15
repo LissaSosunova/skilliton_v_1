@@ -1,0 +1,106 @@
+@import '../../../../../scss/variables';
+.btn-match-mini {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  line-height: 2em;
+  margin-top: 5px;
+  text-align: center;
+  height: 40px;
+  font-size: 12px;
+  font-weight: 500;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color:  map-get($bg-color, 'primary');
+  color: white;
+  &:hover {
+    background-color: map-get($bg-color, 'light-blue');
+    cursor: pointer;
+    color: map-get($bg-color, 'primary');
+  }
+}
+.skill-name {
+  font-size: 0.7rem;
+  line-height: 1.7em;
+  font-weight: 400;
+  i {
+    font-size: 0.65rem;
+    color:  map-get($bg-color, 'primary');
+    font-weight: 800;
+  }
+}
+.skill-name1 {
+  font-size: 0.7rem;
+  line-height: 1.7em;
+  font-weight: 600;
+}
+.skill-name-title {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 2em;
+  padding: 6px;
+  border-bottom: 1px solid  map-get($bg-color, 'gray');
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
+.section-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.skills {
+  padding: 0px 16px 20px 16px;
+}
+.left-side {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.main-block {
+  z-index: 800;
+  border-radius: 8px;
+  padding: 0px;
+  background-color: white;
+  color: map-get($font-color, 'primary');
+  border: 1px solid map-get($bg-color, 'gray');
+  border-bottom: 0px;
+}
+.skill-exch {
+  padding: 10px;
+}
+.exch-row {
+  margin-left: 10px;
+  width: 280px;
+  border-radius: 8px;
+  border: 1px solid map-get($bg-color, 'gray');
+  border-left: 0px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+.left-row {
+  width: 7px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  min-height: 100%;
+}
+.middle-row1 {
+  width: 70px;
+  padding: 10px;
+  border-right: 1px solid map-get($bg-color, 'gray-light');
+}
+.middle-row2 {
+  width: 220px;
+  padding: 10px;
+}
+.red {
+  background-color: map-get($bg-color, 'error');
+}
+.blue {
+  background-color: #2DB191;
+}
+.yellow {
+  background-color: map-get($bg-color, 'warning');
+}

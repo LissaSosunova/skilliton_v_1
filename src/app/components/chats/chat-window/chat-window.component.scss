@@ -1,0 +1,37 @@
+@import '../../../../scss/variables';
+.no-padd {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.main-window {
+  border-bottom-right-radius: 16px;
+  border-top-right-radius: 16px;
+  border: 1px solid map-get($bg-color, 'gray-light');
+}
+.header {
+  background-color: map-get($bg-color, 'light-blue');
+  border-top-right-radius: 16px;
+  border-bottom: 1px solid map-get($bg-color, 'gray-light');
+  padding: 18px 16px 19px 24px;
+  color: map-get($font-color, 'primary');
+  line-height: 22px;
+  label {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  span {
+    font-size: 12px;
+  }
+}
+.messege-box {
+  padding: 6px 16px 16px 16px; 
+}
+.start-lesson {
+  background-color: map-get($bg-color, 'dark-blue');
+  padding: 7px 16px 7px 16px;
+  span {
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+  }
+}

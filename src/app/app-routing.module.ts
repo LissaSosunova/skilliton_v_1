@@ -22,6 +22,8 @@ import { VeiwProfileComponent } from './components/mates/veiw-profile.component'
 import { PlacesOfResidenceComponent } from './components/profile/about-me/places-of-residence/places-of-residence.component';
 import { WorkComponent } from './components/profile/about-me/work/work.component';
 import { EducationComponent } from './components/profile/about-me/education/education.component';
+import { ChatsComponent } from './components/chats/chats.component';
+import { ChatWindowComponent } from './components/chats/chat-window/chat-window.component';
 
 const routes: Routes = [
   {
@@ -51,95 +53,100 @@ const routes: Routes = [
     component: RegistrationComponent
   },
   {
-    path: 'set-exactdata',
-    component: SetExactdataPageComponent,
-    resolve: {
-      user$: GetDataUserResolverService
-    }
-  },
-  {
-    path: 'search',
-    component: SearchComponent,
-    resolve: {
-      user$: GetDataUserResolverService
-    }
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
+    path: 'main',
+    component: HomeComponent,
     children: [
       {
-        path: 'about-me',
-        component: AboutMeComponent,
-        resolve: {
-          user$: GetDataUserResolverService
-        },
+        path: 'profile',
+        component: ProfileComponent,
         children: [
           {
-            path: 'general',
-            component: GeneralComponent
+            path: 'about-me',
+            component: AboutMeComponent,
+            children: [
+              {
+                path: 'general',
+                component: GeneralComponent
+              },
+              {
+                path: 'places-of-residence',
+                component: PlacesOfResidenceComponent
+              },
+              {
+                path: 'work',
+                component: WorkComponent
+              },
+              {
+                path: 'education',
+                component: EducationComponent
+              }
+            ]
           },
           {
-            path: 'places-of-residence',
-            component: PlacesOfResidenceComponent
+            path: 'sto-view',
+            component: StoViewComponent,
+            resolve: {
+              user$: GetDataUserResolverService
+            }
           },
           {
-            path: 'work',
-            component: WorkComponent
+            path: 'skills-to-obtain',
+            component: SkillsToObtainComponent,
+            resolve: {
+              user$: GetDataUserResolverService
+            }
           },
           {
-            path: 'education',
-            component: EducationComponent
+            path: 'skill-to-share',
+            component: SkillToShareComponent
+          },
+          {
+            path: 'sts-view',
+            component: StsViewComponent,
+            resolve: {
+              user$: GetDataUserResolverService
+            }
+          },
+          {
+            path: 'services',
+            component: ServicesComponent
+          },
+          {
+            path: 'matches',
+            component: MyMatchesComponent
           }
         ]
       },
       {
-        path: 'sto-view',
-        component: StoViewComponent,
+        path: 'search',
+        component: SearchComponent,
         resolve: {
           user$: GetDataUserResolverService
         }
       },
       {
-        path: 'skills-to-obtain',
-        component: SkillsToObtainComponent,
+        path: 'view-profile',
+        component: VeiwProfileComponent,
+        pathMatch: 'prefix'
+      },
+      {
+        path: 'set-exactdata',
+        component: SetExactdataPageComponent,
         resolve: {
           user$: GetDataUserResolverService
         }
       },
       {
-        path: 'skill-to-share',
-        component: SkillToShareComponent
-      },
-      {
-        path: 'sts-view',
-        component: StsViewComponent,
-        resolve: {
-          user$: GetDataUserResolverService
-        }
-      },
-      {
-        path: 'services',
-        component: ServicesComponent
-      },
-      {
-        path: 'matches',
-        component: MyMatchesComponent
+        path: 'chats',
+        component: ChatsComponent,
+        children: [
+          {
+            path: 'chat-window/:chatId',
+            component: ChatWindowComponent
+          }
+        ]
       }
     ]
-  },
-  {
-    path: 'view-profile',
-    component: VeiwProfileComponent,
-    pathMatch: 'prefix'
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-    // Resolver
-    resolve: {
-      user$: GetDataUserResolverService
-    }
   },
   {
     path: 'page-not-found',

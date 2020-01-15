@@ -18,7 +18,7 @@ import * as _ from 'lodash';
 export class ServicesComponent implements OnInit {
   @ViewChild('serviceDataForm', { read: true, static: false  }) public serviceDataForm: NgForm;
   public user: Observable<types.NewUser>;
-  public activeUrl: string = '/profile/services';
+  public activeUrl: string = '/main/profile/services';
   public searchControl: FormControl;
   private unsubscribe$: Subject<void> = new Subject();
   private openAuto: boolean = false;

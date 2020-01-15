@@ -49,79 +49,34 @@
 
                           <div class="open-details non-vis"
                                 [id]="skillTS.skillId">
-                                <div class="skill-name-title">Skill: 
-                                  <span class="skill-name">{{skillTS.skillName}}</span>
-                                </div>
-                                <div class="skill-name-title">To excange:</div>
-                                <span>
-                                  <!-- Skills -->
-                                  <section class="skill-name-title" *ngIf="skillTS.inExchange.skillsToObtain.length !==0">
-                                      Skills: 
-                                      <span class="skill-name" *ngFor="let t of skillTS.inExchange.skillsToObtain">
-                                          {{t.name}}
-                                     </span>
-                                  </section>
-                                  <!-- Services -->
-                                  <section class="skill-name-title" *ngIf="skillTS.inExchange.money == true">
-                                    <span class="skill-name">Services <i class="material-icons">check</i></span>
-                                  </section>
-                                  <section class="skill-name-title" *ngIf="skillTS.inExchange.money == true">
-                                      <span class="skill-name-title">Money: </span>
-                                      <div class="skill-name" *ngFor="let m of skillTS.inExchange.fee">
-                                          <span class="skill-name-title">{{m.type | pricesTypes}}: </span>
-                                          <span class="skill-name">{{m.value}} ({{m.currency}})</span>
-                                      </div>
-                                    </section>
-                                  </span>
-
-                                  <div  class="btn-match-mini"
-                                  (click)="openDetialsBlock(skillTS.skillId, 'sendReqTS')">
-                                    match
-                                  </div>
+                                <app-skill-drop-down
+                                [skill]="skillTS"
+                                [type]="'skillTS'"
+                                [name]="skill.firstName"
+                                (sendReq)="openDetialsBlock(skillTS.skillId, 'sendReqTS')">
+                                </app-skill-drop-down>
+                                <!--  -->
                               </div>
                             </div>
                     </div>
                     <div *ngIf="skill.skillToObtain.length !== 0" class="skill-block">
                       <div class="section-name">Skills to obtain</div>
                         <!-- List of skills to obtaine -->
-                        <span  class="btn-skill"
+                        <div  class="btn-skill"
                               *ngFor="let skillTO of skill.skillToObtain"
                               (click)="openDetialsBlock(skillTO.goalId)">
                             {{skillTO.skillName}}
 
                             <div class="open-details non-vis"
                                 [id]="skillTO.goalId">
-                                <div class="skill-name-title">Skill: 
-                                  <span class="skill-name">{{skillTO.skillName}}</span>
-                                </div>
-                                <div class="skill-name-title">To excange:</div>
-                                <span>
-                                  <!-- Skills -->
-                                  <section class="skill-name-title" *ngIf="skillTO.inExchange.skillsToShare.length !==0">
-                                      Skills: 
-                                      <span class="skill-name" *ngFor="let t of skillTO.inExchange.skillsToShare">
-                                          {{t.name}} 
-                                     </span>
-                                  </section>
-                                  <!-- Services -->
-                                  <section *ngIf="skillTO.inExchange.services.length !==0">
-                                    <span class="skill-name-title">Services: 
-                                        <span class="skill-name" *ngFor="let s of skillTO.inExchange.services">
-                                            {{s.name}} 
-                                        </span>
-                                    </span>
-                                  </section>
-                                  <section class="skill-name-title" *ngIf="skillTO.inExchange.money == true">
-                                    <span class="skill-name">Money <i class="material-icons">check</i></span>
-                                  </section>
-                                  </span>
 
-                                  <div  class="btn-match-mini"
-                                  (click)="openDetialsBlock(skillTO.goalId, 'sendReqTO')">
-                                    match
-                                  </div>
+                                <app-skill-drop-down
+                                [skill]="skillTO"
+                                [type]="'skillTO'"
+                                [name]="skill.firstName"
+                                (sendReq)="openDetialsBlock(skillTO.goalId, 'sendReqTO')">
+                                </app-skill-drop-down>
                               </div>
-                        </span>
                       </div>
 </div>
 </div>

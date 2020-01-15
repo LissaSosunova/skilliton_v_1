@@ -3,8 +3,8 @@
         <div class="col-xs-12" *ngIf="userUploaded === true">
             <div class="col-xs-12 elem row">
                <!-- First -->
-                <div class="col-xs-3 row-text margin-text">
-                    First name
+                <div class="col-xs-3 row-text margin-text start-xs">
+                    Full name
                 </div>
                 <div class="col-xs-9 no-padd row" *ngIf="editableFirstName == true">
                     <div class="col-xs-10 no-padd">
@@ -13,6 +13,7 @@
                         [value]="user.profile.name"
                         [(ngModel)]="firstNameOfUser"
                         #firstName="ngModel"
+                        [placeholder]="'First name'"
                         >
                       </app-input-text> 
                       <span class="error" *ngIf="firstNameErr === true">{{ errorFirstNameText}}</span>
@@ -37,16 +38,14 @@
                     </div>
                     <div class="col-xs-2 no-padd btn-edit center-xs middle-xs">
                         <span (click)="changeFirstName()">
-                              <i class="material-icons edit-icon">
-                                              create
-                              </i>
+                            <img class="edit-pencil"  src="assets/images/svg-icons/edit_btn.svg">
                         </span>
                     </div>
                 </div>
 
                  <!-- Last name -->
                 <div class="col-xs-3 row-text margin-text">
-                    Last name
+                     
                   </div>
 
                   <div class="col-xs-9 no-padd row" *ngIf="editableLastName == true">
@@ -56,12 +55,13 @@
                           name="lastName"
                           [(ngModel)]="lastNameOfUser"
                           #lastName="ngModel"
+                          [placeholder]="'Last name'"
                           >
                         </app-input-text> 
                         <span class="error" *ngIf="lastNameErr === true">{{ errorLastNameText}}</span>
                       </div>
                       <div class="col-xs-2 no-padd btn-save center-xs middle-xs">
-                          <span (click)="saveNewLastName('lastName', lastNameOfUser)">
+                          <span (click)="saveNewData('lastName', lastNameOfUser)">
                               <i class="material-icons edit-icon">
                                               save
                               </i>
@@ -80,16 +80,14 @@
                       </div>
                       <div class="col-xs-2 no-padd btn-edit center-xs middle-xs">
                           <span (click)="changeLastName()">
-                                <i class="material-icons edit-icon">
-                                                create
-                                </i>
+                            <img class="edit-pencil"  src="assets/images/svg-icons/edit_btn.svg">
                           </span>
                       </div>
                   </div>
               </div>
               <!-- Birthday -->
               <div class="col-xs-12 elem row">
-                   <div class="col-xs-3 row-text margin-text">
+                   <div class="col-xs-3 row-text margin-text start-xs">
                       Birthday
                    </div>
 
@@ -128,9 +126,7 @@
                        </div>
                        <div class="col-xs-2 no-padd btn-edit center-xs middle-xs">
                            <span (click)="changeBirthday()">
-                                 <i class="material-icons edit-icon">
-                                                 create
-                                 </i>
+                                <img class="edit-pencil"  src="assets/images/svg-icons/edit_btn.svg"> 
                            </span>
                        </div>
                    </div>
@@ -139,7 +135,7 @@
                  <!-- Sex -->
                  <div class="col-xs-12 elem row">
 
-                     <div class="col-xs-3 row-text margin-text-2">
+                     <div class="col-xs-3 row-text margin-text-2 start-xs">
                         Sex
                      </div>
                      <div class="col-xs-9 no-padd row">
@@ -171,28 +167,13 @@
   
                    <div class="col-xs-12 elem row">
                       <!-- First -->
-                       <div class="col-xs-3 row-text margin-text">
+                       <div class="col-xs-3 row-text margin-text start-xs">
                           Native language
-                       </div>
-                       <div class="col-xs-9 name-field no-padd row" *ngIf="editableNativeLang === false">
-                           <div class="col-xs-10 inner-text" *ngIf="user.profile.langs.native !== null">
-                               <span >{{user.profile.langs.native.name }} </span>
-                           </div>
-                           <div class="col-xs-10 inner-text" *ngIf="user.profile.langs.native == null">
-                              <span>Not set</span>
-                          </div>
-                           <div class="col-xs-2 no-padd btn-edit center-xs middle-xs">
-                               <span (click)="changeNative()">
-                                     <i class="material-icons edit-icon">
-                                                     create
-                                     </i>
-                               </span>
-                           </div>
                        </div>
 
                        <!-- Search lang native -->
-                       <div class="col-xs-9 no-padd row" *ngIf="editableNativeLang === true">
-                          <div class="col-xs-10 no-padd lang-margin search-section">
+                       <div class="col-xs-9 no-padd row">
+                          <div class="col-xs-12 no-padd lang-margin search-section">
                               <app-input-search
                                     class="no-margin search"
                                     [maxLength]="20"
@@ -216,40 +197,41 @@
                                     <span class="lang-native">({{option.name}})</span></div>
                                     </div>
                             </section>
-
-                          </div>
-                          <div class="col-xs-2 no-padd btn-save center-xs middle-xs">
-                              <span (click)="cancelNative()">
-                                  <i class="material-icons edit-icon">
-                                      cancel_presentation
-                                  </i>
-                            </span>
                           </div>
                       </div>
+
+
+                      <div class="col-xs-3 row-text margin-text start-xs">
+                             
+                    </div>
+                   <div class="col-xs-9 no-padd row"  *ngIf="user.profile.langs.native.length !== 0">
+                       <div class="col-xs-12 no-padd start-xs row">
+                           <span class="choosed-otherLangs-field"
+                           *ngFor="let lang of user.profile.langs.native">
+                               <span>{{lang.name}} </span>
+                               <button (click)="changeNativeLangItem(lang)"
+                              class="btn-remove">
+                                      <i class="material-icons remove-icon">
+                                                      clear
+                                      </i>
+                              </button>
+                           </span>
+                       </div>
+                   </div>
+
+
+
                      </div>
   
                      <div class="col-xs-12 elem row">
                         <!-- Other langs -->
-                         <div class="col-xs-3 row-text margin-text">
+                         <div class="col-xs-3 row-text margin-text start-xs">
                             Languages
                          </div>
                          
-                         <!-- No ifo -->
-                         <div class="col-xs-9 name-field no-padd row"  *ngIf="user.profile.langs.other.length == 0 && editableOtherLang === false">
-                            <div class="col-xs-10 inner-text">
-                                Not set
-                            </div>
-                            <div class="col-xs-2 no-padd btn-edit center-xs middle-xs">
-                                <span (click)="changeOtherLangs()">
-                                      <i class="material-icons edit-icon">
-                                                      create
-                                      </i>
-                                </span>
-                            </div>
-                        </div>
                         <!-- Search other langs -->
-                        <div class="col-xs-9 no-padd row" *ngIf="editableOtherLang === true">
-                            <div class="col-xs-10 no-padd lang-margin search-section"
+                        <div class="col-xs-9 no-padd row">
+                            <div class="col-xs-12 no-padd lang-margin search-section"
                             [ngClass]="{'make-higther': openAutoOtherLang == true}">
                                 <app-input-search
                                       class="no-margin search"
@@ -275,23 +257,13 @@
                               </section>
   
                             </div>
-                            <div class="col-xs-2 no-padd btn-save center-xs middle-xs">
-                                <span (click)="saveNewLastName('native', langName)">
-                                    <i class="material-icons edit-icon">
-                                                    save
-                                    </i>
-                              </span>
-                                <span (click)="cancelNative()">
-                                    <i class="material-icons edit-icon">
-                                        cancel_presentation
-                                    </i>
-                              </span>
-                            </div>
                         </div>
-
+                        <div class="col-xs-3 row-text margin-text start-xs">
+                             
+                         </div>
                         <div class="col-xs-9 no-padd row"  *ngIf="user.profile.langs.other.length !== 0">
-                            <div class="col-xs-10 no-padd start-xs">
-                                <div class="choosed-otherLangs-field"
+                            <div class="col-xs-12 no-padd start-xs row">
+                                <span class="choosed-otherLangs-field"
                                 *ngFor="let lang of user.profile.langs.other">
                                     <span>{{lang.name}} </span>
                                     <button (click)="changeOtherLangItem(lang)"
@@ -300,13 +272,6 @@
                                                            clear
                                            </i>
                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-xs-2 no-padd btn-add center-xs middle-xs">
-                                <span (click)="changeOtherLangs()">
-                                      <i class="material-icons add-icon">
-                                                      add
-                                      </i>
                                 </span>
                             </div>
                         </div>

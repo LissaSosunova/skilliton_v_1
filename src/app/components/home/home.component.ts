@@ -11,6 +11,7 @@ import { Store} from '@ngrx/store';
 import { LoadUserData, UpdateUser } from '../../state/actions/user.actions';
 import { LoadTags } from '../../state/actions/filters.actions';
 import {Observable, Subject} from 'rxjs';
+import { StompWsService } from '../../services/stomp-ws.service';
 
 @Component({
   selector: 'app-home',
@@ -18,12 +19,13 @@ import {Observable, Subject} from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  @Output() user: types.NewUser = {} as types.NewUser;
+  public user: types.NewUser = {} as types.NewUser;
   private unsubscribe$: Subject<void> = new Subject<void>();
   private dataNotSet: boolean;
   @Output() userUploaded: boolean = false;
   @Output() activePage: string;
   @Output() tags: any;
+  webSocketAPI: StompWsService;
 
 
   constructor(
@@ -40,31 +42,44 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getDataFromLocalStorage('user');
     this.getFilters();
     this.getUserData();
+    this.onSockets();
+  }
+  public onSockets(): void {
+    this.webSocketAPI = new StompWsService(this.store);
+    this.webSocketAPI._connect();
   }
     private getUserData() {
-      // Here is example of resolver for this.user
-      this.actRoute.data.subscribe(data => {
-        this.user = data.user$.data;
-        this.store.dispatch(new UpdateUser(this.user));
-        this.userUploaded = true;
-        if((this.user.keyData.skills.length === 0 ||
-          this.user.keyData.skills == null) &&
-          this.user.keyData.skillsSkipped === false) {
-          this.dataNotSet = true;
-          this.router.navigate(['/set-exactdata']);
-        } else if ((this.user.keyData.goals.length === 0 ||
-          this.user.keyData.goals == null)
-          && this.user.keyData.goalsSkipped === false) {
-          this.dataNotSet = true;
-          this.router.navigate(['/set-exactdata']);
-        } else if(this.user.keyData.interests.length === 0 ||
-          this.user.keyData.interests == null) {
-          this.dataNotSet = true;
-          this.router.navigate(['/set-exactdata']);
-        } else {
-          this.dataNotSet = false;
+      this.store.dispatch(new LoadUserData());
+      const newUser$ = this.store.select('user').subscribe((state: any) => {
+        if (state !== undefined) {
+          this.user = state;
+          this.userUploaded = true;
+          if((this.user.keyData.skills.length === 0 ||
+            this.user.keyData.skills == null) &&
+            this.user.keyData.skillsSkipped === false) {
+            this.dataNotSet = true;
+            this.router.navigate(['/set-exactdata']);
+          } else if ((this.user.keyData.goals.length === 0 ||
+            this.user.keyData.goals == null)
+            && this.user.keyData.goalsSkipped === false) {
+            this.dataNotSet = true;
+            this.router.navigate(['/set-exactdata']);
+          } else if(this.user.keyData.interests.length === 0 ||
+            this.user.keyData.interests == null) {
+            this.dataNotSet = true;
+            this.router.navigate(['/set-exactdata']);
+          } else {
+            this.dataNotSet = false;
+          }
         }
       });
+      // Here is example of resolver for this.user
+      // this.actRoute.data.subscribe(data => {
+      //   this.user = data.user$.data;
+      //   this.store.dispatch(new LoadUserData());
+      //   // this.store.dispatch(new UpdateUser(this.user));
+        
+      // });
   }
 
   private getFilters() {
@@ -85,5 +100,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.unsubscribe$.next();
-    this.unsubscribe$.complete(); }
+    this.unsubscribe$.complete();
+    this.webSocketAPI._disconnect();
+  }
 }

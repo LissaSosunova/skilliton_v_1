@@ -102,18 +102,18 @@
                             col-lg-3
                             btn-top-bar
                             "
-                [ngClass]="{'active-btn': router.url === '/profile' ||
-                                        router.url === '/profile/about-me' ||
-                                        router.url === '/profile/about-me/general' ||
-                                        router.url === '/profile/sts-view' ||
-                                        router.url === '/profile/skill-to-share' ||
-                                        router.url === '/profile/sto-view' ||
-                                        router.url === '/profile/skills-to-obtain' ||
-                                        router.url === '/profile/services' ||
-                                        router.url === '/profile/about-me/places-of-residence' ||
-                                        router.url === '/profile/about-me/work' ||
-                                        router.url === '/profile/about-me/education'}"
-                (click)="goToSubUrl('/profile')"
+                [ngClass]="{'active-btn': router.url === '/main/profile' ||
+                                        router.url === '/main/profile/about-me' ||
+                                        router.url === '/main/profile/about-me/general' ||
+                                        router.url === '/main/profile/sts-view' ||
+                                        router.url === '/main/profile/skill-to-share' ||
+                                        router.url === '/main/profile/sto-view' ||
+                                        router.url === '/main/profile/skills-to-obtain' ||
+                                        router.url === '/main/profile/services' ||
+                                        router.url === '/main/profile/about-me/places-of-residence' ||
+                                        router.url === '/main/profile/about-me/work' ||
+                                        router.url === '/main/profile/about-me/education'}"
+                (click)="goToSubUrl('/main/profile')"
                 >About me</div>
         <div class="col-xs-3
                     col-sm-3
@@ -130,8 +130,8 @@
                     col-md-3
                     col-lg-3
                     btn-top-bar"
-                    [ngClass]="{'active-btn': router.url === '/profile/matches' , 'def': router.url !== '/profile/matches' }"
-                    (click)="goToSubUrl('/profile/matches')">
+                    [ngClass]="{'active-btn': router.url === '/main/profile/matches' , 'def': router.url !== '/main/profile/matches' }"
+                    (click)="goToSubUrl('/main/profile/matches')">
                     My matches
                     <!-- Span for notifications -->
                 <!-- <span *ngIf="user.notifications.active !== []">{{user.notifications.active.length}}</span> -->
@@ -156,14 +156,14 @@
             center-xs
             user-block
             no-padd">
-    <div *ngIf="userUploaded == true && router.url === '/profile'"
+    <div *ngIf="userUploaded == true && router.url === '/main/profile'"
         class="col-xs-12
         center-xs
         block-about-user">
         <div class="section-of-block row start-xs">
             <div class="col-xs-12 title-section-block">
                 From
-                <button (click)="goToSubUrl('/profile/about-me/places-of-residence')"
+                <button (click)="goToSubUrl('/main/profile/about-me/places-of-residence')"
                         class="edit-btn">edit</button>
                 </div>
             <div class="colxs-12 content-section-block" [ngSwitch]="placeOfBirth !== null">
@@ -174,7 +174,7 @@
         <div class="section-of-block row start-xs">
                 <div class="col-xs-12 title-section-block">
                     Live in 
-                    <button (click)="goToSubUrl('/profile/about-me/places-of-residence')"
+                    <button (click)="goToSubUrl('/main/profile/about-me/places-of-residence')"
                         class="edit-btn">edit</button>
                     </div>
                 <div class="colxs-12 content-section-block" [ngSwitch]="placeOfResidence !== null">
@@ -185,7 +185,7 @@
         <div class="section-of-block row start-xs">
                 <div class="col-xs-12 title-section-block">
                     Studied at 
-                    <button (click)="goToSubUrl('/profile/about-me/education')"
+                    <button (click)="goToSubUrl('/main/profile/about-me/education')"
                         class="edit-btn">edit</button>
                     </div>
                 <div class="colxs-12 content-section-block" *ngIf="user.keyData.education.length !== 0">
@@ -198,11 +198,17 @@
         <div class="section-of-block row start-xs">
                 <div class="col-xs-12 title-section-block">
                     Languages 
-                    <button (click)="goToSubUrl('/profile/about-me/general')"
+                    <button (click)="goToSubUrl('/main/profile/about-me/general')"
                         class="edit-btn">edit</button>
                     </div>
+                    
                 <div class="col-xs-12 content-section-block">
-                        {{ langNative }}
+                    <div *ngIf="langsNative.length !==0">
+                        <div  *ngFor="let lang of langsNative"> 
+                            <span>{{ lang.name}} (native)</span>
+                            </div>
+                        </div>
+                    
                 <div *ngIf="langs.length !==0">
                         <div  *ngFor="let lang of langs"> 
                                 <span>{{ lang.name}}</span>
@@ -214,7 +220,7 @@
         <div class="section-of-block row start-xs">
                 <div class="col-xs-12 title-section-block">
                     Workplaces
-                    <button (click)="goToSubUrl('/profile/about-me/work')"
+                    <button (click)="goToSubUrl('/main/profile/about-me/work')"
                         class="edit-btn">edit</button>
                     </div>
                 <div class="colxs-12 content-section-block" *ngIf="user.keyData.workExperience.length !== 0">
@@ -236,7 +242,7 @@
             col-sm-6
             col-md-9
             col-lg-9">
-    <div *ngIf="userUploaded == true && router.url === '/profile'"
+    <div *ngIf="userUploaded == true && router.url === '/main/profile'"
             class="col-xs-12
             col-sm-12
             col-md-12
@@ -247,8 +253,8 @@
                         col-md-12
                         col-lg-12
                         header-section-block">
-                    <span class="link-title" (click)="goToSubUrl('/profile/sts-view')">Skills to share</span>
-                    <button (click)="goToSubUrl('/profile/sts-view')"
+                    <span class="link-title" (click)="goToSubUrl('/main/profile/sts-view')">Skills to share</span>
+                    <button (click)="goToSubUrl('/main/profile/sts-view')"
                             class="edit-btn-section"> 
                             edit
                     </button>
@@ -260,7 +266,7 @@
 
     <!-- Content os Skills to obtain -->
 
-<div *ngIf="userUploaded == true && router.url === '/profile'"
+<div *ngIf="userUploaded == true && router.url === '/main/profile'"
 class="col-xs-12
 col-sm-12
 col-md-12
@@ -273,8 +279,8 @@ spec-pad">
             col-md-12
             col-lg-12
             header-section-block">
-            <span class="link-title" (click)="goToSubUrl('/profile/sto-view')">Skills to obtain</span>
-        <button (click)="goToSubUrl('/profile/sto-view')"
+            <span class="link-title" (click)="goToSubUrl('/main/profile/sto-view')">Skills to obtain</span>
+        <button (click)="goToSubUrl('/main/profile/sto-view')"
         class="edit-btn-section"> 
         edit
         </button>
@@ -289,7 +295,7 @@ spec-pad">
 
 <!-- Content os Services -->
 
-<div *ngIf="userUploaded == true && router.url === '/profile'"
+<div *ngIf="userUploaded == true && router.url === '/main/profile'"
 class="col-xs-12
     col-sm-12
     col-md-12
@@ -302,8 +308,8 @@ class="col-xs-12
                 col-md-12
                 col-lg-12
                 header-section-block">
-                <span class="link-title" (click)="goToSubUrl('/profile/services')">Services</span>
-                <button (click)="goToSubUrl('/profile/services')"
+                <span class="link-title" (click)="goToSubUrl('/main/profile/services')">Services</span>
+                <button (click)="goToSubUrl('/main/profile/services')"
                 class="edit-btn-section"> 
                 edit
         </button>
@@ -319,7 +325,7 @@ class="col-xs-12
 
 <!-- Content os Interests -->
 
-<div *ngIf="userUploaded == true && router.url === '/profile'"
+<div *ngIf="userUploaded == true && router.url === '/main/profile'"
 class="col-xs-12
     col-sm-12
     col-md-12
@@ -333,7 +339,7 @@ class="col-xs-12
                 col-lg-12
                 header-section-block">
                 <span class="link-title">Interests</span>
-                <button (click)="goToSubUrl('/profile/about-me')"
+                <button (click)="goToSubUrl('/main/profile/about-me')"
                 class="edit-btn-section"> 
                 edit
                 </button>
@@ -355,7 +361,7 @@ class="col-xs-12
 
 
 
-<div *ngIf="router.url === '/profile'" class="bottom-spacer"></div>
+<div *ngIf="router.url === '/main/profile'" class="bottom-spacer"></div>
 <div class="router-outlet col-xs-12">
     <router-outlet></router-outlet>
 </div>

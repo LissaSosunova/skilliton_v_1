@@ -10,7 +10,7 @@
 .card {
   background-color: map-get($bg-color, 'white');
   border-radius: 16px;
-  padding: 8px;
+  padding: 24px 8px 24px 8px;
   min-height: 70px;
   margin-bottom: 1em;
 }
@@ -22,17 +22,19 @@
 }
 
 .name {
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
+  color: map-get($bg-color, 'primary');
+  padding-top: 5px;
 }
 .work {
-  font-size: 0.75rem;
-  font-weight: 400;
+  font-size: 12px;
+  font-weight: 300;
   color: map-get($font-color, 'gray');
   line-height: 1.7em;
 }
 .summary {
-  font-size: 0.875rem;
+  font-size: 12px;
   font-weight: 400;
   color: map-get($font-color, 'primary');
   line-height: 1.7em;
@@ -45,9 +47,9 @@
   display: flex;
   justify-content: center;
   margin-left: -15px;
-  height: 20px;
-  width: 20px;
-  font-size: 0.75rem;
+  height: 16px;
+  width: 16px;
+  font-size: 0.65rem;
   font-weight: 600;
   padding: 8px 8px 8px 8px;
   color: map-get($font-color, 'primary');
@@ -56,8 +58,8 @@
   z-index: 110;
 }
 .face {
-  height: 8em;
-  width: 8em;
+  height: 6em;
+  width: 6em;
   align-self: top;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -73,7 +75,7 @@
   border-radius: 8px;
   padding: 6px 15px 6px 15px; 
   border: 1px solid map-get($bg-color, 'gray');
-  font-size: 0.85em;
+  font-size: 12px;
   margin: 5px 10px 5px 0px;
   display: inline;
   &:hover {
@@ -89,15 +91,11 @@
 
 }
 .open-details {
+  padding: 0px;
   position: absolute;
   bottom: 26px;
-  left: 1px;
-  width: 120px;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: white;
-  color: map-get($font-color, 'primary');
-  border: 1px solid map-get($bg-color, 'gray');
+  left: -25%;
+  width: 305px;
 }
 .non-vis {
   display: none;
@@ -140,8 +138,8 @@
   line-height: 2.5em;
 }
 .section-name {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
 }
 .skills {
   padding: 0px 16px 20px 16px;

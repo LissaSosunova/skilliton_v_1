@@ -1,0 +1,41 @@
+<!-- Hide or open chat-list details -->
+<div class="col-xs-12 no-padd end-xs" 
+(click)="hideChatList()">
+  <i class="material-icons arrow" *ngIf="isOpenedChatList === true">
+    format_indent_decrease
+</i>
+<i class="material-icons arrow" *ngIf="isOpenedChatList === false">
+  format_indent_increase
+</i>
+</div>
+<!-- Requests -->
+<div class="col-xs-12
+            row
+            start-xs"
+    [ngClass]="{'chat-list-regular': isOpenedChatList === true, 'hidden-chat-list-block': isOpenedChatList === false}"
+    *ngFor="let chat of requestsList">
+    <app-request-item
+      (click)="openChatWindow(chat.chatId)"
+      class="col-xs-12 no-padd row"
+      [chat]="chat"
+      [activeChat]="activeChat"
+      [isOpenedChatList]="isOpenedChatList">
+    </app-request-item>
+</div>
+
+<!-- Chats -->
+<div class="col-xs-12
+            row
+            start-xs"
+    [ngClass]="{'chat-list-regular': isOpenedChatList === true, 'hidden-chat-list-block': isOpenedChatList === false}"
+    *ngFor="let chat of chatList">
+
+    <app-chat-item
+      (click)="openChatWindow(chat.id)"
+      class="col-xs-12 no-padd row"
+      [chat]="chat"
+      [activeChat]="activeChat"
+      [isOpenedChatList]="isOpenedChatList">
+    </app-chat-item>
+</div>
+

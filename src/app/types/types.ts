@@ -95,7 +95,7 @@ export module types {
 
   export interface Langs {
     other: Array<Lang> | [];
-    native: null | Lang;
+    native: Array<Lang> | [];
   }
 
   export interface KeyData {

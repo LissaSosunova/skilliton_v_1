@@ -38,7 +38,7 @@ export const initialState: State = {
 export function filtersReducer(state = initialState, action: any): State {
   switch (action.type) {
     case filtersAction.FiltersActionTypes.LOAD_TAGS_SUCCESS: {
-      if(action.payload){
+      if (action.payload) {
         const tags = action.payload.data;
         const sortSkillsByFilter = _.orderBy(tags.skills, ['name', 'id'], ['asc', 'desc']);
         const sortInterestsByFilter = _.orderBy(tags.interests, ['name', 'id'], ['asc', 'desc']);

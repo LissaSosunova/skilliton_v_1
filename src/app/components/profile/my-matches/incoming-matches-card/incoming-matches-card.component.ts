@@ -37,7 +37,7 @@ export class IncomingMatchesCardComponent implements OnInit {
     this.data.getMate(params).subscribe((data) => {
       if (data.error === false || data.status === 200) {
         this.store.dispatch(new LoadMates(data));
-        this.router.navigate(['/view-profile', {mate: email}]);
+        this.router.navigate(['/main/view-profile', {mate: email}]);
       }
     });
   }
