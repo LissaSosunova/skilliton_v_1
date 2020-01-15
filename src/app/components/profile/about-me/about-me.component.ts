@@ -19,7 +19,7 @@ export class AboutMeComponent implements OnInit {
 
   public user: Observable<types.NewUser>;
   @Input() myGoals = [] as any;
-  public activeUrl: string = '/profile/about-me';
+  public activeUrl: string = '/main/profile/about-me';
   @Input() currTab: string;
   @Input() userUploaded: boolean = false;
   @Output() user$: any;
@@ -43,7 +43,7 @@ export class AboutMeComponent implements OnInit {
 
 
   private init() {
-    this.store.dispatch(new LoadUserData());
+    // this.store.dispatch(new LoadUserData());
     const user$ = this.store.select('user').subscribe((state: any) => {
       if(state !== undefined || state) {
         this.user = state;
@@ -56,9 +56,9 @@ export class AboutMeComponent implements OnInit {
   private getCurrentRoute() {
     this.routerService.getCurrentRoute$().subscribe(url => {
       const urlSegments = url.split('/');
-      this.currParentUrl = urlSegments[2];
-      if (urlSegments.length > 2) {
-        this.currChildUrl = urlSegments[3];
+      this.currParentUrl = urlSegments[3];
+      if (urlSegments.length > 3) {
+        this.currChildUrl = urlSegments[4];
       } else {
         this.currChildUrl = '';
       }

@@ -145,6 +145,14 @@ public getMate(params: string): Observable<any> {
   public getCitiesByID(id: number): Observable<any> {
     return this.http.get(URL_BACK + '/locations/' + id, {headers: this.getHeaders()});
   }
+  // Get chat list
+  public getChatList(): Observable<any> {
+    return this.http.get(URL_BACK + '/chat/chat-list', {headers: this.getHeaders()});
+  }
+  // Get chat by ID
+  public getChat(id: number): Observable<any> {
+    return this.http.get(URL_BACK + '/chat/events/' + id, {headers: this.getHeaders()});
+  }
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {
 

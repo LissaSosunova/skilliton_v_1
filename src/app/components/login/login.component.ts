@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit {
       this.token = data.accessToken;
       this.sessionStorageService.setValue(this.token, '_token');
       this.sessionStorageService.setValue(tokenType, 'tokenType');
-      this.router.navigate(['/home']);
+      this.router.navigate(['/main']);
     }
   }
   public onPopupOpen(): void {

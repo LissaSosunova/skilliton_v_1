@@ -1,0 +1,90 @@
+@import '../../../../../scss/variables';
+.chat-list-block {
+  border-bottom-left-radius: 16px;
+  border-top-left-radius: 16px;
+  border: 1px solid map-get($bg-color, 'gray-light');
+  padding: 24px 16px 20px 16px;
+  &:hover {
+    cursor: pointer;
+    background-color: map-get($bg-color, 'gray-lighter');
+    .name {
+      color: map-get($font-color, 'primary');
+    }
+    .exch-skills {
+      color: map-get($font-color, 'gray');
+    }
+    .last-message {
+      color: map-get($font-color, 'link');
+    }
+  }
+  margin-bottom: 8px;
+}
+.active-block {
+  background-color: map-get($bg-color, 'dark-blue');
+  .name, .exch-skills, .last-message {
+    color: white;
+  }
+}
+
+.hidden-chat-list-block {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  max-width: 100px;
+  border: 1px solid map-get($bg-color, 'gray-light');
+  padding: 24px 24px 24px 24px;
+  &:hover {
+    cursor: pointer;
+    background-color: map-get($bg-color, 'gray-lighter');
+    .name {
+      color: map-get($font-color, 'primary');
+    }
+    .exch-skills {
+      color: map-get($font-color, 'gray');
+    }
+    .last-message {
+      color: map-get($font-color, 'link');
+    }
+  }
+  margin-bottom: 8px;
+}
+
+.avatar {
+  height: 47px;
+  width: 47px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: 130%;
+  background-position: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.no-padd {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.name {
+  font-weight: 500;
+  font-size: 14px;
+  color: map-get($font-color, 'primary');
+  padding-left: 5px;
+  padding-right: 0px;
+  line-height: 17px;
+}
+.exch-skills {
+  font-weight: 500;
+  font-size: 8px;
+  color: map-get($font-color, 'gray');
+  padding-left: 5px;
+  padding-right: 0px;
+  padding-top: 2px;
+}
+.last-message {
+  font-weight: 400;
+  font-size: 12px;
+  color: map-get($font-color, 'link');
+  padding-left: 5px;
+  padding-right: 0px;
+  line-height: 15px;
+  padding-top: 10px;
+}

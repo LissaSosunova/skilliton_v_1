@@ -1,0 +1,58 @@
+<div *ngIf="chatsUploaded == true"
+    class="main-content row center-xs">
+        <section class="body-home
+                        row
+                        center-xs
+                        top-xs
+                        col-xs-12
+                        col-sm-12
+                        col-md-10
+                        col-lg-10">
+            <div class="col-xs-12
+                        col-sm-12
+                        col-md-10
+                        col-lg-10
+                        start-xs
+                        bg-white
+                        no-padd">
+                <div class="all-chats">
+                  Chats
+                  </div>
+            </div>
+
+            <!-- If there is no chat list -->
+            <div class="col-xs-10
+                        col-sm-10
+                        col-md-8
+                        col-lg-8
+                        row
+                        middle-xs
+                        center-xs"
+                        *ngIf="chatsExsist.value === false"> After you matched with someone, there will appear a hat with this person </div>
+<!-- It chats exist -->
+
+              <div class="col-xs-12
+              col-sm-12
+              col-md-10
+              col-lg-10
+              row
+              top-xs
+              chats"
+              *ngIf="chatsExsist | async">
+                  <app-chat-list
+                  [ngClass]="chatWidth"
+                  *ngIf="chatsExsist | async"
+                  [typeChat]="chat"
+                  [chatList]="chatList"
+                  [requestsList]="requestsList"
+                  (setChatWidth)="setChatWidth($event)"
+                  (goToChat)="goToChat($event)"></app-chat-list>
+
+                <div class="chat-conteiner"
+                      *ngIf="router.url !== '/main/chats'">
+                  <app-chat-window
+                      [chatId]="chatId.value"></app-chat-window>
+                </div>
+            </div>
+        </section>
+</div>

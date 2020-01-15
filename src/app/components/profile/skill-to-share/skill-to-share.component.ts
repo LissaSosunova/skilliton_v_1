@@ -451,7 +451,7 @@ valPayment(e, type: number) {
       if (resp.error === false || resp.status === 200) {
         this.data.getUser().subscribe((res) => {
           this.store.dispatch(new UpdateUsersSkills(res.data.keyData.skills));
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/main/profile']);
         });
       }
     });

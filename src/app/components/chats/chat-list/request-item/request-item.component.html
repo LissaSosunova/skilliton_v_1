@@ -1,0 +1,28 @@
+<div class="col-xs-12
+            row
+            start-xs"
+ [ngClass]="{'chat-list-block': isOpenedChatList === true, 'hidden-chat-list-block': isOpenedChatList === false, 'active-block': activeChat == chat.chatId}">
+
+<div class="no-padd
+            col-xs-3 
+            col-sm-3
+            col-md-2
+            col-lg-2">
+  <div class="avatar" [style.background-image]="'url(' + photo + ')'"></div>
+</div>
+<div class="col-xs-9 
+            col-sm-9
+            col-md-10
+            col-lg-10 row"
+      *ngIf="isOpenedChatList === true">
+  <div class="col-xs-12 name">
+    {{chat.partnerName}} {{chat.partnerLastName}}
+  </div>
+  <div class="col-xs-12 exch-skills">
+    {{chat.matchedSkillName}} 
+  </div>
+  <div class="col-xs-12 last-message">
+    New request!
+  </div>
+</div>
+</div>

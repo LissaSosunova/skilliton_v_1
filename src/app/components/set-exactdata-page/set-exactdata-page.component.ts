@@ -99,7 +99,7 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
         this.activePage = "interests";
       } else if (this.user.keyData.interests.length !== 0 && 
         (this.activePage !== "skills" && this.activePage !== "goals") ){
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/main');
       }
     });
 }
@@ -294,7 +294,7 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
         this.chipsSkills = [];
         this.goToNextPage = false;
       } else if (typeof data === 'object' && !page) {
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/main');
       }
     }
   }

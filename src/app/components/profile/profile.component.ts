@@ -13,7 +13,7 @@ import { RouterService } from 'src/app/services/router.service';
 import { HttpService } from '../../services/http.service';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { EditUserProfileService } from '../../services/edit-user-profile.service';
-import { StompWsService } from '../../services/stomp-ws.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   private unsubscribe$: Subject<void> = new Subject<void>();
   private openSummaryTextarea: boolean = false;
   public counter: number;
-  webSocketAPI: StompWsService;
+
 
   constructor(
     private actRoute: ActivatedRoute,
@@ -66,7 +66,6 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   ngOnInit() {
     this.getUserData();
     this.activeTopBtn = 'aboutMe';
-    this.onSockets();
   }
 
   private getCurrentRoute(): void {
@@ -83,13 +82,10 @@ export class ProfileComponent implements OnInit,  OnDestroy {
     });
    }
 
-   public onSockets(): void {
-    this.webSocketAPI = new StompWsService(this.store);
-    this.webSocketAPI._connect();
-  }
+
 
   private getUserData() {
-    this.store.dispatch(new LoadUserData());
+   
     const newUser$ = this.store.select('user').subscribe((state: any) => {
       if  (state !== undefined)  {
         this.user = state;
@@ -133,9 +129,9 @@ export class ProfileComponent implements OnInit,  OnDestroy {
 
   public goToSubUrl(url: string) {
     this.activeUrl = url;
-    if (url === '/profile/matches'){
+    if (url === '/main/profile/matches'){
       this.activeTopBtn = 'myMatches';
-    } else if (url === '/profile') {
+    } else if (url === '/main/profile') {
       this.activeTopBtn = 'aboutMe';
     }
     this.router.navigate([url]);
@@ -180,6 +176,5 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-    this.webSocketAPI._disconnect();
   }
 }

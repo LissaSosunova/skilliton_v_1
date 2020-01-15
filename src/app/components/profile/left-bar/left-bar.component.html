@@ -8,7 +8,7 @@ class="tabs-nav
             <div class="col-xs-12
             tab-back-arr
                 start-xs "
-                (click)="switcher('/profile', 'general')">
+                (click)="switcher('/main/profile', 'general')">
                 <i class="material-icons back-icon">
                         keyboard_arrow_left
                 </i>
@@ -21,7 +21,7 @@ class="tabs-nav
                 tab-expert-class
                 border-right start-xs"
     [ngClass]="{'not-active-tab': currChildUrl !== 'general',  'active': currChildUrl === 'general'}"
-                (click)="switcher('/profile/about-me/general', 'general')">
+                (click)="switcher('/main/profile/about-me/general', 'general')">
                 <span>
                     General
                 </span>
@@ -30,7 +30,7 @@ class="tabs-nav
                 tab-expert-class
                 border-right start-xs"
             [ngClass]="{'not-active-tab': currChildUrl !== 'places-of-residence',  'active': currChildUrl === 'places-of-residence'}"
-                (click)="switcher('/profile/about-me/places-of-residence', 'places-of-residence')">
+                (click)="switcher('/main/profile/about-me/places-of-residence', 'places-of-residence')">
                 <span>
                     Places of residence
                 </span>
@@ -39,7 +39,7 @@ class="tabs-nav
                 tab-expert-class
                 border-right start-xs"
             [ngClass]="{'not-active-tab': currChildUrl !== 'work',  'active': currChildUrl === 'work'}"
-                (click)="switcher('/profile/about-me/work', 'work')">
+                (click)="switcher('/main/profile/about-me/work', 'work')">
                 <span>
                     Work
                 </span>
@@ -48,7 +48,7 @@ class="tabs-nav
                 tab-expert-class
                 border-right start-xs"
             [ngClass]="{'not-active-tab': currChildUrl !== 'education',  'active': currChildUrl === 'education'}"
-                (click)="switcher('/profile/about-me/education', 'education')">
+                (click)="switcher('/main/profile/about-me/education', 'education')">
                 <span>
                    Education 
                 </span>
@@ -56,7 +56,7 @@ class="tabs-nav
     <div class="col-xs-12
                 tab-expert-class"
             [ngClass]="{'not-active-tab': currChildUrl !== 'skills-to-obtain',  'active': currChildUrl === 'skills-to-obtain'}"
-                (click)="switcher('/profile/sto-view', 'skills-to-obtain')">
+                (click)="switcher('/main/profile/sto-view', 'skills-to-obtain')">
                 <span>
                       Skills to obtain
                 </span>
@@ -64,7 +64,7 @@ class="tabs-nav
     <div class="col-xs-12
         tab-expert-class"
         [ngClass]="{'not-active-tab': currChildUrl !== 'skills-to-share',  'active': currChildUrl === 'skills-to-share'}"
-        (click)="switcher('/profile/sts-view', 'skills-to-share')">
+        (click)="switcher('/main/profile/sts-view', 'skills-to-share')">
         <span>
             Skills to share
         </span>
@@ -80,7 +80,7 @@ class="tabs-nav
 <div class="col-xs-12
     tab-expert-class"
     [ngClass]="{'not-active-tab':  currChildUrl !== 'services',  'active':  currChildUrl === 'services'}"
-    (click)="switcher('/profile/services', 'myServices')">
+    (click)="switcher('/main/profile/services', 'myServices')">
     <span>
         My services
     </span>

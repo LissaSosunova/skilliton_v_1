@@ -10,7 +10,7 @@
 .card {
   background-color: map-get($bg-color, 'white');
   border-radius: 16px;
-  padding: 8px;
+  padding: 24px 8px 24px 8px;
   min-height: 70px;
   margin-bottom: 1em;
 }
@@ -22,17 +22,18 @@
 }
 
 .name {
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
+  color: map-get($bg-color, 'primary');
 }
 .work {
-  font-size: 1em;
+  font-size: 12px;
   font-weight: 400;
   color: map-get($font-color, 'gray');
   line-height: 1.7em;
 }
 .summary {
-  font-size: 0.875rem;
+  font-size: 12px;
   font-weight: 400;
   color: map-get($font-color, 'primary');
   line-height: 1.7em;
@@ -45,10 +46,10 @@
   display: flex;
   justify-content: center;
   margin-left: -15px;
-  height: 20px;
-  width: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  height: 16px;
+  width: 16px;
+  font-size: 0.65rem;
+  font-weight: 400;
   padding: 8px 8px 8px 8px;
   color: map-get($font-color, 'primary');
   border-radius: 50%;
@@ -56,8 +57,8 @@
   z-index: 110;
 }
 .face {
-  height: 8em;
-  width: 8em;
+  height: 6em;
+  width: 6em;
   align-self: top;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -90,7 +91,12 @@
   display: none;
 }
 .btn-match {
-  max-width: 170px;
+  max-width: 120px;
   width: 80%;
   font-size: 16px;
+}
+.left-side {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }

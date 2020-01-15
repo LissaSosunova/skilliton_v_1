@@ -365,7 +365,7 @@ public outsideSearchClick(): void {
         if (data.error === false || data.status === 200) {
           this.data.getUser().subscribe((res) => {
             this.store.dispatch(new UpdateUsersGoals(res.data.keyData.goals));
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/main/profile']);
           });
         }
       });

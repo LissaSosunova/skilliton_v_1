@@ -6,7 +6,7 @@
                 col-lg-12
                 row">
     <div class="col-xs-4">
-            <a [routerLink]="'/home'" routerLinkActive="active" class="logo">
+            <a [routerLink]="'/main'" routerLinkActive="active" class="logo">
                 <img src="assets/images/skilliton_logo.png" class="logo-img">
             </a>
     </div>
@@ -31,12 +31,12 @@
                     </li>
                 </form>
                     <li><i class="material-icons search-btn" (click)="openSearch()">search</i></li>
-                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><i class="material-icons exit-btn" alt="Home page">home</i></a></li>
-                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><i class="material-icons exit-btn">local_library</i></a></li>
-                    <li ><a href="#" [routerLink]="'/home'" routerLinkActive="active"><i class="material-icons exit-btn">class</i></a></li>
-                    <li><a href="#" [routerLink]="'/home'" routerLinkActive="active"><i class="material-icons exit-btn">chat</i></a></li>
-                    <li><a href="#" [routerLink]="'/profile'" routerLinkActive="active"><i class="material-icons exit-btn">notifications</i></a></li>
-                    <li><a href="#" [routerLink]="'/profile'" routerLinkActive="active"><i class="material-icons exit-btn">account_circle</i></a></li>
+                    <li><a href="#" [routerLink]="'/main'" routerLinkActive="active"><i class="material-icons exit-btn" alt="Home page">home</i></a></li>
+                    <li><a href="#" [routerLink]="'/main'" routerLinkActive="active"><i class="material-icons exit-btn">local_library</i></a></li>
+                    <li ><a href="#" [routerLink]="'/main'" routerLinkActive="active"><i class="material-icons exit-btn">class</i></a></li>
+                    <li><a href="#" [routerLink]="'/main/chats'" routerLinkActive="active"><i class="material-icons exit-btn">chat</i></a></li>
+                    <li><a href="#" [routerLink]="'/main/profile'" routerLinkActive="active"><i class="material-icons exit-btn">notifications</i></a></li>
+                    <li><a href="#" [routerLink]="'/main/profile'" routerLinkActive="active"><i class="material-icons exit-btn">account_circle</i></a></li>
                     <li>
                             <app-lang-switcher></app-lang-switcher>
                         </li>

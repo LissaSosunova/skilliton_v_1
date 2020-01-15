@@ -36,7 +36,7 @@ export class StsViewComponent implements OnInit {
   }
 
   addSkill() {
-    this.router.navigate(['/profile/skill-to-share']);
+    this.router.navigate(['/main/profile/skill-to-share']);
   }
 
 }

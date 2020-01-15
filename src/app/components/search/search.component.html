@@ -7,16 +7,8 @@
                 col-md-10
                 col-lg-10
                 center-xs">
-        <div class="all-news col-xs-4 start-xs">Search</div>
-        <div class="all-news col-xs-8 end-xs">
-            <input
-            type="submit"
-            (click)="goToProfile()" 
-            class="btn
-            primary-btn
-            btn-width-big"    
-            value="Edit my profile">
-        </div>
+        <div class="col-xs-10 start-xs all-chats">Search</div>
+        
 
         <!-- Title Search sections -->
         <div class="col-xs-12 row center-xs">
@@ -40,11 +32,11 @@
         </div>
 
         <!-- Content -->
-  <div class="col-xs-8 center-xs">
+  <div class="col-xs-7 center-xs no-padd">
         <!-- Search -->
       <form name="searchPageForm"
             #searchPageForm="ngForm"
-            class="col-xs-12">
+            class="col-xs-12 no-padd">
         <app-input-search
           [maxLength]="100"
           [control]="searchControl"

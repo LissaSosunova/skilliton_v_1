@@ -60,7 +60,7 @@ export class TopSidebarComponent implements OnInit {
         this.currChildUrl = '';
       }
       const unknown = url.split("_code=");
-      if (unknown.length > 1 && this.currParentUrl !== 'view-profile') {
+      if (unknown.length > 1 && this.currParentUrl !== 'main/view-profile') {
         this.currParentUrl = 'unknownPage';
       }
     });
@@ -96,7 +96,7 @@ export class TopSidebarComponent implements OnInit {
       if (data.error === false || data.status === 200) {
         this.searchControl.reset({ value: '', disabled: false });
         this.store.dispatch(new SetGlobalSearch(data));
-        this.router.navigate(['/search']);
+        this.router.navigate(['/main/search']);
       }
     });
   }

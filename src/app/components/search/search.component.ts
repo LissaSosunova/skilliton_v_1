@@ -63,6 +63,6 @@ private unsubscribe$: Subject<void> = new Subject();
   }
 
   goToProfile () {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/main/profile']);
   }
 }
