@@ -1,0 +1,24 @@
+
+<div class="col-xs-12 row no-padd"
+    *ngIf="message.content.isMine === false && message.content.status !==0">
+  <div  class="col-xs-12 day center-xs">{{message.time | date:'mediumDate'}}</div>
+  <div class="col-xs-10 not-mine message start-xs" [innerHTML]="message.content.text">
+   
+    </div>
+    <div class="col-xs-2 time-and-check-not-mine">
+     <i #myCheck class="material-icons readed none-vis">check</i>
+      <div class="time">{{message.time | date:'H:mm:ss':'UTC'}}</div>
+    </div>
+</div>
+
+<div class="col-xs-12 row no-padd"
+    *ngIf="message.content.isMine === true && message.content.status !==0">
+  <div  class="col-xs-12 day center-xs">{{message.time | date:'mediumDate'}}</div>
+  <div class="col-xs-2 time-and-check">
+    <i #myCheck class="material-icons readed none-vis">check</i>
+    <div class="time">{{message.time | date:'H:mm:ss':'UTC'}}</div>
+  </div>
+  <div class="col-xs-10 mine message start-xs"  [innerHTML]="message.content.text">
+   
+    </div>
+</div>

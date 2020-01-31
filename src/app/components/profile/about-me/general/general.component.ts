@@ -207,7 +207,6 @@ public errorSexText: string;
     // First name
     private changeFirstName() {
       this.editableFirstName = !this.editableFirstName;
-      console.log()
     }
     private cancelName() {
       this.errorFirstNameText = '';

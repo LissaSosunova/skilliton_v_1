@@ -28,20 +28,22 @@
                         row
                         middle-xs
                         center-xs"
-                        *ngIf="chatsExsist.value === false"> After you matched with someone, there will appear a hat with this person </div>
-<!-- It chats exist -->
+                        *ngIf="chatsExsist.value === false && requestsExsist.value === false"> After you matched with someone, there will appear a hat with this person </div>
+<!-- Chats exist -->
 
               <div class="col-xs-12
               col-sm-12
               col-md-10
               col-lg-10
               row
+              box
               top-xs
               chats"
-              *ngIf="chatsExsist | async">
+              *ngIf="(chatsExsist | async) || (requestsExsist | async)">
                   <app-chat-list
+                  class="scroll-height"
                   [ngClass]="chatWidth"
-                  *ngIf="chatsExsist | async"
+                  *ngIf="(chatsExsist | async) || (requestsExsist | async)"
                   [typeChat]="chat"
                   [chatList]="chatList"
                   [requestsList]="requestsList"

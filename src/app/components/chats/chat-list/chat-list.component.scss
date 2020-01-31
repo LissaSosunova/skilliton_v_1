@@ -68,5 +68,16 @@
   position: relative;
 }
 .hiddenChatListWidth {
-  flex-basis: 10%;
+  flex-basis: 14%;
+  min-width: 130px;
+}
+.position-relative {
+  position: relative;
+}
+.fixed {
+  position: absolute;
+  right: 0px;
+}
+.margin-28 {
+  margin-top: 28px;
 }

@@ -2,15 +2,15 @@
 .main-content {
   padding-left: 0px;
   padding-right: 0px;
-  padding-bottom: 30px;
+  padding-bottom: 0px;
   // margin-top: calc(#{$header-height} - 3px);
   background-color: map-get($bg-color, 'dark-blue');
-  min-height: calc(100vh - #{$header-height} + 20px);
+  min-height: calc(100vh - #{$header-height});
 }
 .body-home {
   padding-left: 20px;
   padding-right: 20px;
-  padding-bottom: 16px;
+  padding-bottom: 10px;
   background-color: map-get($bg-color, 'white');
   display: flex;
   align-items: baseline;
@@ -32,8 +32,9 @@
   display: flex;
   align-items: stretch;
   justify-content: flex-start;
-  height: calc(100% - 120px);
+  height: calc(100vh - 120px);
   flex-wrap: nowrap;
+  overflow: hidden;
 }
 .no-padd {
   padding-left: 0px;
@@ -56,4 +57,11 @@
 .chat-conteiner {
   padding: 27px 8px 8px 8px;
   width: 100%;
+  position: relative;
+}
+
+.scroll-height {
+  max-height: calc(80vh + 75px);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
