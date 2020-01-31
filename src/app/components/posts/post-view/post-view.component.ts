@@ -11,7 +11,6 @@ private photo: string;
   constructor() { }
 
   ngOnInit() {
-    console.log('one post', this.post);
     this.photo = 'assets/images/post-exaple.jpg';
   }
 

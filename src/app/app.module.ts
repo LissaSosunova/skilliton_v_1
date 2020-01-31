@@ -141,6 +141,8 @@ import { LastMessagePipe } from './shared/pipes/last-message.pipe';
 import { ChatWindowComponent } from './components/chats/chat-window/chat-window.component';
 import { ChatItemComponent } from './components/chats/chat-list/chat-item/chat-item.component';
 import { RequestItemComponent } from './components/chats/chat-list/request-item/request-item.component';
+import { MessagesComponent } from './components/chats/chat-window/messages/messages.component';
+import { TextareaChatComponent } from './shared/form-controls/textarea-chat/textarea-chat.component';
 
 
 @NgModule({
@@ -223,7 +225,9 @@ import { RequestItemComponent } from './components/chats/chat-list/request-item/
     LastMessagePipe,
     ChatWindowComponent,
     ChatItemComponent,
-    RequestItemComponent
+    RequestItemComponent,
+    MessagesComponent,
+    TextareaChatComponent
   ],
   imports: [
     BrowserModule,

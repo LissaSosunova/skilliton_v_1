@@ -1,20 +1,125 @@
-<div class="col-xs-12 row no-padd main-window"
-*ngIf="chatUploader === true">
-  <div class="col-xs-12 header start-xs">
+<div class="col-xs-12 no-padd main-window box" [ngSwitch]="chatUploader | async">
+  <section   *ngSwitchCase="true">
+
+<div class="col-xs-12 no-padd header-block">
+  <div class="col-xs-12 header start-xs"
+  *ngIf="chat.addInfo.isActive === true">
     <label>{{chat.addInfo.chatDetails.partnerName}} {{chat.addInfo.chatDetails.partnerLastName}} </label>
     <br>
     <span *ngIf="chat.addInfo.chatDetails.chatGoalName !== null">{{chat.addInfo.chatDetails.chatGoalName}} </span>
     <span *ngIf="chat.addInfo.chatDetails.chatSkillName !== null">{{chat.addInfo.chatDetails.chatSkillName}} </span>
-  </div>
-  <div class="col-xs-12 start-lesson center-xs">
-    <span>Start lesson</span>
-  </div>
-  <div class="col-xs-12 row messege-box">
-    <div class="col-xs-10">
-      message
-    </div>
-    <div class="col-xs-2">
-      time
+    <div class="col-xs-12 start-lesson center-xs">
+      <span>Start lesson</span>
     </div>
   </div>
+
+  <div class="col-xs-12 header start-xs"
+  *ngIf="chat.addInfo.isActive === false">
+  <label>{{chat.addInfo.chatDetails.partnerName}} {{chat.addInfo.chatDetails.partnerLastName}} </label>
+  <br>
+  <span *ngIf="chat.addInfo.chatDetails.chatGoalName !== null">{{chat.addInfo.chatDetails.chatGoalName}} </span>
+  <span *ngIf="chat.addInfo.chatDetails.chatSkillName !== null">{{chat.addInfo.chatDetails.chatSkillName}} </span>
+  </div>
+
+</div>
+
+ 
+  <div class="col-xs-12 messege-box box bottom-xs" #messageBox
+  [ngSwitch]="chatUploader | async"
+  *ngIf="messages.length > 0">
+      <section *ngSwitchCase="true" class="col-xs-12 no-padd">
+        <ul class="col-xs-12 no-padd" *ngFor="let message of messages">
+          <li>
+            <app-messages
+            [message]="message">
+            </app-messages>
+          </li>
+          
+        </ul>
+      </section>
+      <section *ngSwitchCase="false">
+        <mat-spinner></mat-spinner>
+      </section>
+    
+  </div>
+  <!-- Send message secction -->
+  <div class="col-xs-12 no-padd row send-mes-section bottom-xs" *ngIf="chat.addInfo.isActive === true && chat.addInfo.matchStatus === 1">
+    <div class="col-xs-3 col-sm-3 col-md-2 col-lg2">
+      <div appClickOutside (mClickOutside)="outsideEmoClick()" class="smile-wrapper">
+        <div class="smile-container"
+            *ngIf="openEmoList"
+            appClickOutside
+            >
+            <span *ngFor="let emo of emotions" [innerHTML]="emo"
+            class="smile"
+            (click)="chooseEmo(emo)"></span>
+        </div>
+        <button class="btn-submit-emo"
+                (click)="openEmo()"
+                data-cy="openEmo">
+                <img class="send-mes-btn"  src="assets/images/svg-icons/smile.svg">
+        </button>
+    </div>
+    </div>
+    <div class="col-xs-9 col-sm-9 col-md-10 col-lg-10 row input-box">
+      <app-textarea-chat
+        class="textarea-item no-padd"
+        [control]="control"
+        (enterKey)="onEnterKey()"
+        #messageBody
+        name="messageBody"
+        (keydown.control.Enter)="writeMessage($event)"
+        (focusout)="saveDraft($event)"
+        [text]="inputMes"
+        [placeholder]="'Write a message'"
+        [floatLabel]="'never'">
+      </app-textarea-chat>
+      <button type="submit" class="send-btn no-padd" (click)="sendMessage()">
+        <img class="send-mes-btn"  src="assets/images/svg-icons/send.svg">
+      </button>
+      
+    </div>
+  </div>
+  <!-- Incoming request -->
+  <div *ngIf="chat.addInfo.isActive === false && chat.addInfo.matchStatus === 2"
+  class="col-xs-12 no-padd row cancel-my-rq-section middle-xs center-xs">
+    <div class="col-xs-10">You have got a request from {{chat.addInfo.chatDetails.partnerName}} {{chat.addInfo.chatDetails.partnerLastName}}!</div>
+    <div class="col-xs-10 btn-match-conteiner">
+      <input
+        type="submit"
+        (click)="matching(chat.addInfo.matchId)" 
+        class="btn
+        primary-btn
+        btn-match"    
+        value="Match">
+
+      <input
+        type="submit"
+        (click)="dismatch(chat.addInfo.matchId)" 
+        class="btn
+        secondary-btn
+        btn-match"    
+        value="Decline">
+    </div>
+  </div>
+    <!-- Outcoming request -->
+  <div *ngIf="chat.addInfo.isActive === false && chat.addInfo.matchStatus === 3" 
+  class="col-xs-12 no-padd row cancel-my-rq-section middle-xs center-xs">
+    <div class="col-xs-10">You have sent request to {{chat.addInfo.chatDetails.partnerName}} {{chat.addInfo.chatDetails.partnerLastName}}.</div>
+    <div class="col-xs-10 btn-match-conteiner">
+      <input
+        type="submit"
+        (click)="dismatch(chat.addInfo.matchId)" 
+        class="btn
+        secondary-btn
+        btn-match"    
+        value="Cancel">
+    </div>
+  </div>
+<!-- Dismatched -->
+<div *ngIf="chat.addInfo.isActive === false && chat.addInfo.matchStatus === 0" 
+class="col-xs-12 no-padd row dismatched middle-xs center-xs">
+You’ve been dismatched. Chat is not available.
+</div>
+</section>
 </div>

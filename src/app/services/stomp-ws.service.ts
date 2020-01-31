@@ -57,9 +57,7 @@ export class StompWsService {
     const store = this.store;
     _this.stompClient.connect(headers, function(frame) {
       _this.stompClient.subscribe(pathes.notify, function (sdkEvent) {
-        console.log('notify: ' + sdkEvent.body);
         if(sdkEvent.body.length > 2 ) {
-          console.log(sdkEvent.body, sdkEvent.body.length);
           _this.store.dispatch(new UpdateUsersNotificationsMatches(sdkEvent.body));
         }
       });
@@ -76,14 +74,13 @@ _disconnect() {
 
   // on error, schedule a reconnection attempt
   errorCallBack(error) {
-      console.log("errorCallBack -> " + error)
       setTimeout(() => {
           this._connect();
       }, 5000);
   }
 
   onDataReceived(message) {
-    console.log("Message Recieved from Server :: " + message);
+    // console.log("Message Recieved from Server :: " + message);
     return message;
   }
 }

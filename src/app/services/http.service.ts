@@ -153,6 +153,16 @@ public getMate(params: string): Observable<any> {
   public getChat(id: number): Observable<any> {
     return this.http.get(URL_BACK + '/chat/events/' + id, {headers: this.getHeaders()});
   }
+  // Post message to chat by ID
+  public postMessage(options: any): Observable<any> {
+    console.log(options);
+    const id = options.id;
+    const params = {
+      draft: options.draft,
+      text: options.text
+    }
+    return this.http.post(URL_BACK + '/messages/' + id + '/send/', params, {headers: this.getHeaders()});
+  }
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {
 

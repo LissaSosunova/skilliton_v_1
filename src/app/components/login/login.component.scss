@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: row;
     padding: 0px;
-    // height: calc(100vh - #{$header-height + $footer-height});
     margin: 0px;
     margin-top: calc(#{$header-height} - 3px);
     overflow-x: hidden;
@@ -18,7 +17,7 @@
     padding: 60px;
     background-color: map-get($bg-color, 'primary');
     color: white;
-    height: calc(100vh - #{$header-height});
+    height: calc(100vh - 57px);
 }
 
 .right-side-block {
@@ -31,6 +30,7 @@
     height: 90%;
     margin-top: 10%;
     padding-bottom: 80px;
+    background-color: map-get($bg-color, 'gray-lighter');
 }
 .btn-conteiner {
     display: flex;

@@ -5,6 +5,7 @@ import { HttpService } from '../../../../services/http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadMates } from '../../../../state/actions/mate.actions';
 import { CongratsPopupComponent } from '../../../modals/congrats-popup/congrats-popup.component';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-incoming-matches-card',
@@ -75,8 +76,8 @@ export class IncomingMatchesCardComponent implements OnInit {
     this.congrats.open();
   }
 
-  public goToChat(): void{
-    console.log('go to chat');
+  public goToChat(id): void{
     this.onChanged.emit(true);
+    this.router.navigate(['/main/chats/chat-window/', id]);
   }
 }
