@@ -8,7 +8,7 @@ import { LoadChats } from '../state/actions/chats.actions';
 export class ChatsService {
 
   constructor(
-    private store: Store<any>
+    private store: Store<any>,
   ) { }
 
   _getChatList(): void {

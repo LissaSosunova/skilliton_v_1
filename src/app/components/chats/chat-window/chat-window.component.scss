@@ -35,7 +35,11 @@
 .messege-box {
   display: flex;
   flex-wrap: wrap;
+<<<<<<< HEAD
   padding: 6px 16px 16px 16px;
+=======
+  padding: 6px 0px 16px 0px;
+>>>>>>> Added chats without ws
   
   overflow-y: auto;
   section {
@@ -174,4 +178,31 @@ ul {
     color: white;
   }
 
+<<<<<<< HEAD
+=======
+}
+.blockquote {
+  background-color: map-get($bg-color, 'light-blue');
+  padding: 16px;
+}
+
+blockquote {
+  font-style: italic;
+  margin: 20px 0 20px 45px;
+  border-left: 5px solid  map-get($bg-color, 'blue');
+  padding-left: 30px;
+  line-height: 1.4em;
+  position: relative;
+}
+
+.cancel-edit-icon {
+  i {
+    height: 30px;
+    width: 30px;
+    color:  map-get($bg-color, 'gray');
+  }
+  &:hover {
+    cursor: pointer;
+  }
+>>>>>>> Added chats without ws
 }

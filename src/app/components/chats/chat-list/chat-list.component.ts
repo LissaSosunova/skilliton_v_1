@@ -40,7 +40,7 @@ public activeChat: number;
   }
   public openChatWindow(newChatId: number) {
     this.newChatId = newChatId;
-    this.goToChat.emit(this.chatId);
+    this.goToChat.emit(newChatId);
     this.activeChat = newChatId;
     this.store.dispatch(new LoadCurrentChat(newChatId));
     this.router.navigate(['/main/chats/chat-window/', newChatId]);

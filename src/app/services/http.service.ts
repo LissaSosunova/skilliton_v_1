@@ -155,13 +155,26 @@ public getMate(params: string): Observable<any> {
   }
   // Post message to chat by ID
   public postMessage(options: any): Observable<any> {
-    console.log(options);
     const id = options.id;
     const params = {
       draft: options.draft,
       text: options.text
     }
     return this.http.post(URL_BACK + '/messages/' + id + '/send/', params, {headers: this.getHeaders()});
+  }
+  // Edit message
+  public editMessage(options: any): Observable<any> {
+    const id = options.id;
+    const params = {
+      draft: options.draft,
+      text: options.text
+    }
+    return this.http.put(URL_BACK + '/messages/' + id, params, {headers: this.getHeaders()});
+  }
+  // Delete message
+  public deleteMessageFromChat(options: any): Observable<any> {
+    console.log(options)
+    return this.http.delete(URL_BACK + '/messages/' + options, {headers: this.getHeaders()});
   }
   // Headers for http requests, tocken gets from SessonStorage
   private getHeaders(): HttpHeaders {

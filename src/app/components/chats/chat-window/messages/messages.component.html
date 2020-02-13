@@ -1,24 +1,101 @@
 
-<div class="col-xs-12 row no-padd"
-    *ngIf="message.content.isMine === false && message.content.status !==0">
+<div class="col-xs-12 row message-conteiner"
+    [id]="'selected' + message.id"
+    *ngIf="message.content.isMine === false && message.content.status !==0"
+    (mouseenter)="over(message.id)" (mouseleave)="out(message.id)" (click)="click(message.id)">
   <div  class="col-xs-12 day center-xs">{{message.time | date:'mediumDate'}}</div>
   <div class="col-xs-10 not-mine message start-xs" [innerHTML]="message.content.text">
    
     </div>
+
     <div class="col-xs-2 time-and-check-not-mine">
-     <i #myCheck class="material-icons readed none-vis">check</i>
+     <i [id]="'check' + message.id" class="material-icons none-vis"
+        [ngClass]="{'readed' : selected === false, 'readed-checked' : selected === true}">check</i>
       <div class="time">{{message.time | date:'H:mm:ss':'UTC'}}</div>
+      <div class="edited" *ngIf="message.content.isEdited === true">(edited)</div>
     </div>
+
 </div>
 
-<div class="col-xs-12 row no-padd"
-    *ngIf="message.content.isMine === true && message.content.status !==0">
+<!-- Buttons for editing other message-->
+<div class="col-xs-12 edit start-xs"
+[id]="'section' + message.id"
+*ngIf="message.content.isMine === false"
+[ngClass]="{'none-vis' : ('section' + message.id) !== editBlock, 'edit' : ('section' + message.id) === editBlock}"
+>
+<input type="submit"
+      class="primary-btn
+      btn-chat"
+      value="Reply"> 
+
+<input type="submit"
+    class="primary-btn
+    btn-chat"
+    (click)="deleteMessage(message.id)"
+    value="Delete"> 
+
+<input type="submit"
+  class="primary-btn
+  btn-chat"
+  value="Forward">  
+
+<input type="submit"
+  class="btn
+  secondary-btn
+  btn-chat"
+  (click)="cancelEdit(message.id)"
+  value="Cancel"> 
+</div>
+
+<div class="col-xs-12 row message-conteiner"
+    [id]="'selected' + message.id"
+    *ngIf="message.content.isMine === true && message.content.status !==0"
+    (mouseenter)="over( message.id)" (mouseleave)="out(message.id)" (click)="click(message.id)">
   <div  class="col-xs-12 day center-xs">{{message.time | date:'mediumDate'}}</div>
   <div class="col-xs-2 time-and-check">
-    <i #myCheck class="material-icons readed none-vis">check</i>
+    <i [id]="'check' + message.id" class="material-icons readed none-vis"
+      [ngClass]="{'readed' : selected === false, 'readed-checked' : selected === true}">check</i>
     <div class="time">{{message.time | date:'H:mm:ss':'UTC'}}</div>
+    <div class="edited" *ngIf="message.content.isEdited === true">(edited)</div>
+    
   </div>
   <div class="col-xs-10 mine message start-xs"  [innerHTML]="message.content.text">
    
     </div>
+
+</div>
+<!-- Buttons for editing my message-->
+<div class="col-xs-12 edit start-xs"
+[id]="'section' + message.id"
+*ngIf="message.content.isMine === true"
+[ngClass]="{'none-vis' : ('section' + message.id) !== editBlock, 'edit' : ('section' + message.id) === editBlock}"
+>
+<input type="submit"
+      class="primary-btn
+      btn-chat"
+      value="Reply"> 
+
+<input type="submit"
+    class="primary-btn
+    btn-chat"
+    (click)="deleteMessage(message.id)"
+    value="Delete"> 
+
+<input type="submit"
+  class="primary-btn
+  btn-chat"
+  value="Forward"> 
+
+<input type="submit"
+  class="primary-btn
+  btn-chat"
+  (click)="editMess({text: message.content.text, id: message.id, edit: true})"
+  value="Edit"> 
+
+<input type="submit"
+  class="btn
+  secondary-btn
+  btn-chat"
+  (click)="cancelEditView(message.id)"
+  value="Cancel"> 
 </div>

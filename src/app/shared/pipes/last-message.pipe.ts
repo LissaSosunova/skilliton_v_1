@@ -9,7 +9,7 @@ export class LastMessagePipe implements PipeTransform {
   transform(value: any): any {
     if (value !== null) {
       let sliced = value.slice(0, 25);
-      let slicedLong = value.slice(0, 300);
+      sliced = sliced.replace(/<br\s*[\/]?>/gi, '&nbsp;');
       if (sliced.length < value.length) {
       sliced += '...';
       }
