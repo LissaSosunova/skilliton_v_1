@@ -1,17 +1,18 @@
 <!-- Hide or open chat-list details -->
-<div class="col-xs-12 no-padd end-xs" 
+<div class="col-xs-12 no-padd end-xs position-relative"
 (click)="hideChatList()">
-  <i class="material-icons arrow" *ngIf="isOpenedChatList === true">
+  <i class="material-icons arrow fixed" *ngIf="isOpenedChatList === true">
     format_indent_decrease
 </i>
-<i class="material-icons arrow" *ngIf="isOpenedChatList === false">
+<i class="material-icons arrow fixed" *ngIf="isOpenedChatList === false">
   format_indent_increase
 </i>
 </div>
 <!-- Requests -->
 <div class="col-xs-12
             row
-            start-xs"
+            start-xs
+            margin-28"
     [ngClass]="{'chat-list-regular': isOpenedChatList === true, 'hidden-chat-list-block': isOpenedChatList === false}"
     *ngFor="let chat of requestsList">
     <app-request-item

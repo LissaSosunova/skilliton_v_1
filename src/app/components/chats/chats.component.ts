@@ -1,9 +1,11 @@
+import { ChatWindowComponent } from './chat-window/chat-window.component';
 import * as _ from 'lodash';
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, Output, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store} from '@ngrx/store';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { LoadChats } from '../../state/actions/chats.actions';
+import { ChatsService } from '../../services/chats.service';
 
 @Component({
   selector: 'app-chats',
@@ -21,17 +23,22 @@ public chatsExsist: BehaviorSubject<boolean>;
 public requestsExsist: BehaviorSubject<boolean>;
 @Output() public chatId: BehaviorSubject<number>;
 @Input() public chatWidth: string;
+@Input() public $updateChatList: boolean = false;
 public chatWindowWidth: string;
 
   constructor(
     private router: Router,
-    private store: Store<any>
+    private store: Store<any>,
+    private chatService: ChatsService
   ) { }
 
   ngOnInit() {
     this.chatsExsist = new BehaviorSubject(false);
     this.requestsExsist = new BehaviorSubject(false);
     this.chatId = new BehaviorSubject(null);
+    this.chatId.subscribe((data) => {
+      // console.log('Subscriber A:', data);
+  });
     this.getChatsList();
     this.chatWidth = 'col-xs-4 no-padd';
   }
@@ -44,8 +51,8 @@ public chatWindowWidth: string;
     this.chatId.next(id);
   }
 
-  private getChatsList() {
-    this.store.dispatch(new LoadChats());
+  public getChatsList() {
+    this.chatService._getChatList();
     const chats$ = this.store.select('chats').subscribe((state: any) => {
       if (state.chatList.length !== 0 ) {
         this.chatList = state.chatList;
@@ -57,7 +64,6 @@ public chatWindowWidth: string;
       }
       this.chatsUploaded = true;
       }
-  );
-}
-
+     );
+  }
 }

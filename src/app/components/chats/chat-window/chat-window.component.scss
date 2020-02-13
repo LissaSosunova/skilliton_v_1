@@ -3,35 +3,199 @@
   padding-left: 0px;
   padding-right: 0px;
 }
+.header-block {
+  max-height: $chat-header-block;
+}
 .main-window {
   border-bottom-right-radius: 16px;
   border-top-right-radius: 16px;
   border: 1px solid map-get($bg-color, 'gray-light');
+  height: calc(99vh - #{$header-and-title-height});
+  position: relative;
+
 }
 .header {
   background-color: map-get($bg-color, 'light-blue');
   border-top-right-radius: 16px;
   border-bottom: 1px solid map-get($bg-color, 'gray-light');
-  padding: 18px 16px 19px 24px;
+  padding: 16px 0px 0px 0px;
   color: map-get($font-color, 'primary');
   line-height: 22px;
   label {
     font-size: 14px;
     font-weight: 500;
+    padding: 16px;
   }
   span {
     font-size: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
   }
 }
 .messege-box {
-  padding: 6px 16px 16px 16px; 
+  display: flex;
+  flex-wrap: wrap;
+  padding: 6px 0px 16px 0px;
+  
+  overflow-y: auto;
+  section {
+    height: calc(100vh - (#{$header-and-title-height} + #{$send-message-box} + 120px));
+  }
 }
 .start-lesson {
   background-color: map-get($bg-color, 'dark-blue');
   padding: 7px 16px 7px 16px;
+  margin-top: 10px;
   span {
     font-size: 18px;
     color: white;
     font-weight: 500;
+  }
+}
+
+.input-box {
+  border: 1px solid map-get($bg-color, 'gray-light');
+  border-radius: 8px;
+  padding: 2px;
+  background-color: white;
+}
+.send-mes-section {
+  position: absolute;
+  bottom: 20px;
+  right: 16px;
+  width: 96%;
+  margin-left: 50px;
+  background-color: white;
+}
+.send-mes-btn {
+  width: 24px;
+  height: 25px;
+}
+.textarea-item {
+  width: 85%;
+}
+.send-btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 12%;
+  padding: 0px 5px 5px 0px;
+  background-color: white;
+  border: 0px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.smile {
+  padding-bottom: 10px;
+}
+ul {
+  list-style: none;
+}
+.cancel-my-rq-section {
+  position: absolute;
+  bottom: 0px;
+  right: 16px;
+  width: 100%;
+  min-height: 130px;
+  margin-right: -16px;
+  background-color: map-get($bg-color, 'light-blue');
+  border-bottom-right-radius: 9px;
+}
+.dismatched {
+  position: absolute;
+  bottom: 0px;
+  right: 16px;
+  width: 100%;
+  min-height: 50px;
+  margin-right: -16px;
+  background-color: map-get($bg-color, 'dark-blue');
+  color: white;
+}
+.btn-match {
+  max-width: 170px;
+  width: 80%;
+  font-size: 14px;
+}
+.btn-match-conteiner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+@media only screen and (max-width: 700px) {
+  div.smile-container {
+    width: 280px;
+
+  }
+}
+.smile-wrapper {
+  display: inline-block;
+}
+.smile {
+  font-size: 18px;
+  line-height: 1.6em;
+  padding: 5px;
+  display: inline;
+  &:hover {
+      cursor: pointer;
+  }
+}
+.smile-container {
+  position: absolute;
+  bottom: 60px;
+  left: 50px;
+  width: 480px;
+  background-color: map-get($bg-color, 'light-blue');
+  padding: 16px;
+  border: 1px solid map-get($bg-color, 'gray');
+  z-index: 5;
+  overflow: auto;
+  max-height: calc(90vh - 220px);
+  border-radius: 8px;
+}
+@media only screen and (max-width: 1015px) {
+  .btn-submit-emo {
+    margin-left: 0;
+  }
+}
+.btn-submit-emo{
+  margin-left: 10px;
+  font-size: 11px;
+  height: 36px;
+  width: 36px;
+  padding-right: 10px;
+  align-items: center;
+  transition: 0.5s;
+  border: 0px;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  &:hover, &:active{
+    color: white;
+  }
+
+}
+.blockquote {
+  background-color: map-get($bg-color, 'light-blue');
+  padding: 16px;
+}
+
+blockquote {
+  font-style: italic;
+  margin: 20px 0 20px 45px;
+  border-left: 5px solid  map-get($bg-color, 'blue');
+  padding-left: 30px;
+  line-height: 1.4em;
+  position: relative;
+}
+
+.cancel-edit-icon {
+  i {
+    height: 30px;
+    width: 30px;
+    color:  map-get($bg-color, 'gray');
+  }
+  &:hover {
+    cursor: pointer;
   }
 }

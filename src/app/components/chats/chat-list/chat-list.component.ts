@@ -2,6 +2,8 @@ import { Observable, Subject } from 'rxjs';
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterService } from '../../../services/router.service';
+import { Store} from '@ngrx/store';
+import { LoadCurrentChat } from './../../../state/actions/chats.actions';
 
 @Component({
   selector: 'app-chat-list',
@@ -17,14 +19,16 @@ public hiddenChatList: string = 'hiddenChatListWidth no-padd';
 public openedChatList: string = 'col-xs-4 no-padd';
 public isOpenedChatList: boolean = true;
 public activeChat: number;
+@Input() public chatId: number;
 @Output() public chatWidth: string = 'col-xs-4 no-padd';
 @Output() public setChatWidth  = new EventEmitter<string>();
-@Output() public chatId: number;
+@Output() public newChatId: number;
 @Output() public goToChat  = new EventEmitter<number>();
 
   constructor(
     private router: Router,
     private routerService: RouterService,
+    private store: Store<any>
   ) { }
 
   ngOnInit() {
@@ -34,11 +38,12 @@ public activeChat: number;
     this.getChatId();
 
   }
-  public openChatWindow(chatId: number) {
-    this.chatId = chatId;
-    this.goToChat.emit(this.chatId);
-    this.activeChat = chatId;
-    this.router.navigate(['/main/chats/chat-window/', chatId]);
+  public openChatWindow(newChatId: number) {
+    this.newChatId = newChatId;
+    this.goToChat.emit(newChatId);
+    this.activeChat = newChatId;
+    this.store.dispatch(new LoadCurrentChat(newChatId));
+    this.router.navigate(['/main/chats/chat-window/', newChatId]);
   }
   public hideChatList(): void {
     this.isOpenedChatList = !this.isOpenedChatList;

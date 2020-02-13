@@ -7,12 +7,14 @@ import * as _ from 'lodash';
 })
 export class LastMessagePipe implements PipeTransform {
   transform(value: any): any {
-    let sliced = value.slice(0, 25);
-    let slicedLong = value.slice(0, 300);
-    if (sliced.length < value.length) {
-    sliced += '...';
+    if (value !== null) {
+      let sliced = value.slice(0, 25);
+      sliced = sliced.replace(/<br\s*[\/]?>/gi, '&nbsp;');
+      if (sliced.length < value.length) {
+      sliced += '...';
+      }
+      return sliced;
     }
-    return sliced;
   }
 
 }

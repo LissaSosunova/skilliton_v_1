@@ -34,7 +34,6 @@ export class InterestedPersonsComponent implements OnInit {
     });
   }
   change(option) {
-    console.log(option)
     if (option !== null) {
       this.onChanged.emit(option);
     }

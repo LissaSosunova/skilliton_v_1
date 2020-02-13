@@ -287,4 +287,21 @@ export module types {
     userEmail: string;
     workPlace: any;
   }
+
+  export interface Message {
+    id: number;
+    eventType: number;
+    time: string;
+    content: {
+      authorName: string;
+      authorLastName: string;
+      authorAvatar?: any;
+      authorId: number;
+      text: string;
+      status: number;
+      isEdited: boolean;
+      isMine: boolean;
+    }
+
+  }
 }

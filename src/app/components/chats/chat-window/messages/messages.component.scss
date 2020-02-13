@@ -1,0 +1,92 @@
+@import '../../../../../scss/variables';
+.no-padd {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.mine {
+  background-color: map-get($bg-color, 'dark-blue');
+}
+
+.not-mine {
+  background-color:  map-get($bg-color, 'blue');
+}
+
+.message {
+  color: white;
+  border-radius: 8px;
+  padding: 12px 12px 12px 12px;
+  margin-bottom: 10px;
+  min-height: 30px;
+  font-size: 12px;
+}
+
+.readed {
+  border-radius: 50%;
+  border: 1px solid map-get($bg-color, 'gray');
+  height: 19px;
+  width: 19px;
+  font-size: 18px;
+  padding: 2px;
+  color: map-get($bg-color, 'gray');
+  margin-bottom: 5px;
+}
+.readed-checked {
+  border-radius: 50%;
+  border: 1px solid map-get($bg-color, 'gray');
+  background-color: white;
+  height: 19px;
+  width: 19px;
+  font-size: 18px;
+  padding: 2px;
+  color: black;
+  margin-bottom: 5px;
+}
+.time {
+  font-size: 6px;
+  line-height: 7px;
+  color: map-get($bg-color, 'gray');
+  letter-spacing: 2px;
+}
+.day {
+  font-size: 8px;
+  line-height: 12px;
+  color: map-get($bg-color, 'gray-dark');
+  letter-spacing: 2px;
+}
+.time-and-check {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-bottom: 5px;
+  padding-left: 5px;
+}
+.time-and-check-not-mine {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-bottom: 5px;
+}
+.none-vis {
+  display: none;
+}
+.blue {
+  background-color: map-get($bg-color, 'light-blue');
+}
+
+.message-conteiner {
+  min-height: 80px;
+  padding: 0px 16px 0px 16px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.edited {
+  font-size: 7px;
+  font-style: oblique;
+  color: map-get($bg-color, 'gray');
+  letter-spacing: 1px;
+}
