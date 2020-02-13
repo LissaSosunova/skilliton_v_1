@@ -143,6 +143,7 @@ import { ChatItemComponent } from './components/chats/chat-list/chat-item/chat-i
 import { RequestItemComponent } from './components/chats/chat-list/request-item/request-item.component';
 import { MessagesComponent } from './components/chats/chat-window/messages/messages.component';
 import { TextareaChatComponent } from './shared/form-controls/textarea-chat/textarea-chat.component';
+import { MessageLogComponent } from './components/chats/chat-window/message-log/message-log.component';
 
 
 @NgModule({
@@ -227,7 +228,8 @@ import { TextareaChatComponent } from './shared/form-controls/textarea-chat/text
     ChatItemComponent,
     RequestItemComponent,
     MessagesComponent,
-    TextareaChatComponent
+    TextareaChatComponent,
+    MessageLogComponent
   ],
   imports: [
     BrowserModule,

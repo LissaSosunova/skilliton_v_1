@@ -29,18 +29,7 @@
   font-size: 18px;
   padding: 2px;
   color: map-get($bg-color, 'gray');
-  margin-bottom: 5px;
-}
-.readed-checked {
-  border-radius: 50%;
-  border: 1px solid map-get($bg-color, 'gray');
-  background-color: white;
-  height: 19px;
-  width: 19px;
-  font-size: 18px;
-  padding: 2px;
-  color: black;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .time {
   font-size: 6px;
@@ -59,8 +48,7 @@
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  margin-bottom: 5px;
-  padding-left: 5px;
+  margin-bottom: 10px;
 }
 .time-and-check-not-mine {
   display: flex;
@@ -69,24 +57,6 @@
   align-items: flex-end;
   margin-bottom: 5px;
 }
-.none-vis {
-  display: none;
-}
-.blue {
-  background-color: map-get($bg-color, 'light-blue');
-}
-
 .message-conteiner {
-  min-height: 80px;
   padding: 0px 16px 0px 16px;
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.edited {
-  font-size: 7px;
-  font-style: oblique;
-  color: map-get($bg-color, 'gray');
-  letter-spacing: 1px;
 }

@@ -10,7 +10,7 @@ import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { RouterService } from '../../../services/router.service';
 import { ChatsService } from '../../../services/chats.service';
 import { FormControl, Validators, NgForm } from '@angular/forms';
-
+import { ToastsService } from '../../../services/toasts.service';
 
 @Component({
   selector: 'app-chat-window',
@@ -24,12 +24,18 @@ public chat: Observable<any>;
 public chatUploader = new BehaviorSubject<boolean>(false);
 private draftObj: any;
 @Output() inputMes: string;
+@Output() editableInputMes: string;
+@Output() cancelEditing = new EventEmitter<boolean>();
 private savedDraft: string;
+private savedEditedMesDraft: string;
 @ViewChild('messageBox', {static: false}) private messageBox: ElementRef;
 private messageBoxElement: HTMLDivElement;
 public control: FormControl;
 public openEmoList: boolean = false;
 public emotions = ChatEmotions;
+public isActiveChat = new BehaviorSubject<boolean>(false);
+public updateChat: boolean = false;
+public editableMessageId: any;
 
   constructor(
     private data: HttpService,
@@ -37,6 +43,7 @@ public emotions = ChatEmotions;
     private routerService: RouterService,
     private store: Store<any>,
     private chatService: ChatsService,
+    public toastService: ToastsService
   ) { }
 
   ngOnInit() {
@@ -66,6 +73,8 @@ public emotions = ChatEmotions;
         this.chat = state.currChat;
         const reverced$ = state.currChat.data.reverse();
         this.messages = reverced$;
+        // Set value for active chat boolean
+        state.currChat.addInfo.matchStatus === 1 ? this.isActiveChat.next(true) : this.isActiveChat.next(false);
         reverced$.forEach((t) => {
           if (t.content.status === 0 && t.content.isMine === true) {
             this.inputMes = t.content.text;
@@ -99,9 +108,33 @@ public emotions = ChatEmotions;
       }
     }
   }
+  public sendEditedMessage(): any {
+    if (this.editableInputMes !== '' && typeof this.editableInputMes !== undefined) {
+      this.editableInputMes = this.editableInputMes.replace(/\n/g, '<br/>');
+      this.editableInputMes = this.editableInputMes.replace('<br/><br/>', '');
+      const options = {
+        draft: false,
+        text: this.editableInputMes,
+        id: this.editableMessageId
+      };
+
+      this.data.editMessage(options).subscribe((resp) => {
+        if (resp.error === false) {
+          this.updateChat = !this.updateChat;
+          this.store.dispatch(new LoadCurrentChat(this.chatId));
+          this.toastService.openToastSuccess("Editing message complete.");
+          this.scrollMessageBox();
+        }
+      });
+    }
+  }
   public writeMessage(e): void {
     this.inputMes = e.target.value;
     this.sendMessage();
+  }
+  public writeEditableMessage(e): void {
+    this.editableInputMes = e.target.value;
+    this.sendEditedMessage();
   }
   public saveDraft(e): void {
     if (e.target.value !== '') {
@@ -125,6 +158,27 @@ public emotions = ChatEmotions;
       this.scrollMessageBox();
     });
   }
+  deleteMessage($event): void {
+    if ($event === true) {
+      this.store.dispatch(new LoadCurrentChat(this.chatId));
+      this.scrollMessageBox();
+    }
+  }
+  editMessage($event): void {
+    if ($event.edit === true) {
+      this.updateChat = !this.updateChat;
+      this.editableInputMes = $event.text.replace(/<br\s*[\/]?>/gi, '\n');
+      this.editableMessageId = $event.id;
+    } else if ($event.edit === false) {
+      this.updateChat = false;
+    }
+  }
+
+  cancelEditMess($event) {
+    this.updateChat = !this.updateChat;
+    this.inputMes = '';
+    this.editableInputMes = '';
+  }
 
   ngAfterViewInit(): void {
   }
@@ -138,7 +192,7 @@ public emotions = ChatEmotions;
       this.messageBox.nativeElement.scrollTo(0, scroll);
     }, 600);
   }
-
+// Match and Dismatch
   public matching(id: number) {
     this.chatService._getChatList();
     this.data.getConfirmMaych(id, true).subscribe((data) => {
@@ -155,7 +209,7 @@ public emotions = ChatEmotions;
       }
     });
   }
-
+// Emotions
   public openEmo(): void {
     this.openEmoList = !this.openEmoList;
   }

@@ -20,8 +20,7 @@
 <div class="col-xs-12 exch-skills">
 {{chat.chatDetails.chatGoalName || 'No deals'}} &#60;&mdash;&#62; {{chat.chatDetails.chatSkillName || 'No deals'}} 
 </div>
-<div class="col-xs-12 last-message">
-{{ chat.lastEvent.message.text | lastMessage }}
+<div class="col-xs-12 last-message" [innerHTML]="chat.lastEvent.message.text | lastMessage">
 </div>
 </div>
 </div>

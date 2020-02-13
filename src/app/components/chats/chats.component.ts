@@ -36,6 +36,9 @@ public chatWindowWidth: string;
     this.chatsExsist = new BehaviorSubject(false);
     this.requestsExsist = new BehaviorSubject(false);
     this.chatId = new BehaviorSubject(null);
+    this.chatId.subscribe((data) => {
+      // console.log('Subscriber A:', data);
+  });
     this.getChatsList();
     this.chatWidth = 'col-xs-4 no-padd';
   }
