@@ -35,11 +35,7 @@
 .messege-box {
   display: flex;
   flex-wrap: wrap;
-<<<<<<< HEAD
-  padding: 6px 16px 16px 16px;
-=======
   padding: 6px 0px 16px 0px;
->>>>>>> Added chats without ws
   
   overflow-y: auto;
   section {
@@ -178,8 +174,6 @@ ul {
     color: white;
   }
 
-<<<<<<< HEAD
-=======
 }
 .blockquote {
   background-color: map-get($bg-color, 'light-blue');
@@ -204,5 +198,4 @@ blockquote {
   &:hover {
     cursor: pointer;
   }
->>>>>>> Added chats without ws
 }
