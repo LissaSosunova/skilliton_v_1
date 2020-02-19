@@ -30,7 +30,7 @@ export class AboutMeComponent implements OnInit {
   constructor(
     private data: HttpService,
     private actRoute: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     private routerService: RouterService,
     private store: Store<types.NewUser>,
 

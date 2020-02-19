@@ -19,8 +19,8 @@ import { ToastsService } from '../../../services/toasts.service';
 })
 export class ChatWindowComponent implements OnInit, AfterViewInit, OnChanges {
 @Input() public chatId?: number;
-@Output() public messages: Observable<Array<types.Message>>;
-public chat: Observable<any>;
+@Output() public messages: Observable<types.Chat>;
+public chat: types.Chat;
 public chatUploader = new BehaviorSubject<boolean>(false);
 private draftObj: any;
 @Output() inputMes: string;
@@ -28,7 +28,7 @@ private draftObj: any;
 @Output() cancelEditing = new EventEmitter<boolean>();
 private savedDraft: string;
 private savedEditedMesDraft: string;
-@ViewChild('messageBox', {static: false}) private messageBox: ElementRef;
+@ViewChild('messageBox') private messageBox: ElementRef;
 private messageBoxElement: HTMLDivElement;
 public control: FormControl;
 public openEmoList: boolean = false;
@@ -39,7 +39,7 @@ public editableMessageId: any;
 
   constructor(
     private data: HttpService,
-    private router: Router,
+    public router: Router,
     private routerService: RouterService,
     private store: Store<any>,
     private chatService: ChatsService,
@@ -174,7 +174,7 @@ public editableMessageId: any;
     }
   }
 
-  cancelEditMess($event) {
+  cancelEditMess() {
     this.updateChat = !this.updateChat;
     this.inputMes = '';
     this.editableInputMes = '';

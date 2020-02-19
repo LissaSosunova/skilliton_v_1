@@ -15,7 +15,7 @@ export class PostsComponent implements OnInit {
   public postsAPI = postExapleAPI.data.posts ;
   @Output() posts = [] as any;
   constructor(
-    private router: Router
+    public router: Router
   ) { }
 
   ngOnInit() {

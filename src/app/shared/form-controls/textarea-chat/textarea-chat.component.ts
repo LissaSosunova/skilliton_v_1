@@ -32,7 +32,7 @@ export class TextareaChatComponent extends InputAbstract implements OnInit, OnCh
   private inputElement: HTMLInputElement;
 
   @ViewChild('input', {static: true}) public input: ElementRef;
-  @ViewChild('autosize', {static: false}) autosize: CdkTextareaAutosize;
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
   constructor(private _ngZone: NgZone) {
     super();
   }

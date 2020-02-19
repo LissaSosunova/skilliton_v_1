@@ -52,7 +52,7 @@
                 >
                 </app-input-search>
                 <section *ngIf="openAuto === true"
-                        [ngClass]="{'block-drop': openAuto == true,  'non-vis': openAuto == false}">
+                        class="block-drop">
                         <div *ngFor="let option of options">
                                 <div (click)="setValueFromDropDown(option)">
                                 <i class="material-icons plus-icon">
@@ -61,8 +61,7 @@
                                 <span>{{option.name}} </span></div>
                                 </div>
                         </section>
-                <span *ngIf="showBtn"
-                [ngClass]="{'non-vis': showBtn == false}">Add new skill?   </span>
+                <span *ngIf="showBtn === true">Add new skill?   </span>
                 <input
                 type="submit"
                 (click)="setValue(goalName)"
@@ -185,7 +184,7 @@
                                 </app-input-search>
                         
                                 <section *ngIf="openAutoUsersServices"
-                                [ngClass]="{'block-drop-goals': openAutoUsersServices == true,  'non-vis': openAutoUsersServices == false}">
+                                class="block-drop-goals">
                                 <div *ngFor="let option of optionsUserServises">
                                         <div (click)="setValueUsersServiceFromDropDown(option)">
                                         <i class="material-icons plus-icon">
@@ -247,7 +246,7 @@
                 </app-input-search>
         
                 <section *ngIf="openAutoUsersSkills"
-                [ngClass]="{'block-drop-goals': openAutoUsersSkills == true,  'non-vis': openAutoUsersSkills == false}">
+                class="block-drop-goals">
                 <div *ngFor="let option of optionsUserSkills">
                         <div (click)="setValueUsersSkillsFromDropDown(option)">
                         <i class="material-icons plus-icon">
@@ -334,8 +333,6 @@
         <app-alert-modal
         [header]="headerError"
         [actionName]="showErrorText"
-        [details]="details"
-        [recomend]="recomend"
          #infoPopup></app-alert-modal>
         </form> 
         </div>

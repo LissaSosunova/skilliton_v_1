@@ -18,12 +18,12 @@ export class VeiwProfileComponent implements OnInit {
   public user: types.NewUser = {} as types.NewUser;
   public mateEmail: string;
   public activeUrl: string;
-  private userUploaded: boolean = false;
-  private mateUploaded: boolean = false;
+  public userUploaded: boolean = false;
+  public mateUploaded: boolean = false;
   public mate: any;
   constructor(
     private actRoute: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     private routerService: RouterService,
     private store: Store<any>,
     private data: HttpService,

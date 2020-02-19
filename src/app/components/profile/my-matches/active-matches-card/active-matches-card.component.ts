@@ -12,7 +12,7 @@ import { LoadMates } from '../../../../state/actions/mate.actions';
 })
 export class ActiveMatchesCardComponent implements OnInit {
   @Input() match: any;
-  private avatar = 'assets/images/post-exaple2.jpg';
+  public avatar = 'assets/images/post-exaple2.jpg';
   @Output() onChanged = new EventEmitter<boolean>();
   constructor(
     private store: Store<any>,
@@ -40,7 +40,7 @@ export class ActiveMatchesCardComponent implements OnInit {
       }
     });
   }
-  private openDetialsBlock(id): void {
+  public openDetialsBlock(id): void {
     const elems = Array.from(document.getElementsByTagName('div'));
     let elem;
     elems.forEach((el) => {

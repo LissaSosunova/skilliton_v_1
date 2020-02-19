@@ -10,8 +10,8 @@ import * as _ from 'lodash';
 export class SkillToShareCardComponent implements OnInit {
   public enableSkill: boolean = true;
   public skills = [] as any;
-  private showSkills: boolean = false;
-  private initSkills = [] as any;
+  public showSkills: boolean = false;
+  public initSkills = [] as any;
   constructor(
     private store: Store<any>
     ) { }

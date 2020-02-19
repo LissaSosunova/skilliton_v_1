@@ -26,7 +26,7 @@
                         [requiredFieldError]="'You must to choose country first'">
                         </app-input-search>
                         <section *ngIf="openAutoCountr === true"
-                        [ngClass]="{'block-drop': openAutoCountr == true,  'non-vis': openAutoCountr == false}">
+                        class="block-drop">
                         <div *ngFor="let option of options" >
                                 <div (click)="setValueCountriesFromDropDown(option)">
                                 <i class="material-icons plus-icon">
@@ -50,7 +50,7 @@
                             [requiredFieldError]="'You must to choose city'">
                             </app-input-search>
                             <section *ngIf="openAutoCity === true"
-                        [ngClass]="{'block-drop': openAutoCity == true,  'non-vis': openAutoCity == false}">
+                            class="block-drop">
                         <div *ngFor="let option of optionsCity" >
                                 <div (click)="setValueCity(option)">
                                 <i class="material-icons plus-icon">
@@ -121,7 +121,7 @@
                         [requiredFieldError]="'You must to choose country first'">
                         </app-input-search>
                         <section *ngIf="openAutoCountr === true"
-                        [ngClass]="{'block-drop': openAutoCountr == true,  'non-vis': openAutoCountr == false}">
+                        class="block-drop">
                         <div *ngFor="let option of options" >
                                 <div (click)="setValueCountriesFromDropDown(option)">
                                 <i class="material-icons plus-icon">
@@ -145,7 +145,7 @@
                             [requiredFieldError]="'You must to choose city'">
                             </app-input-search>
                         <section *ngIf="openAutoCity === true"
-                        [ngClass]="{'block-drop': openAutoCity == true,  'non-vis': openAutoCity == false}">
+                        class="block-drop">
                         <div *ngFor="let option of optionsCity" >
                                 <div (click)="setValueCity(option)">
                                 <i class="material-icons plus-icon">

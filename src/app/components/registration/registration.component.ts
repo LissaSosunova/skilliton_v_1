@@ -15,12 +15,12 @@ import { LeavePopupComponent} from './leave-popup/leave-popup.component';
   providers: [DatePipe]
 })
 export class RegistrationComponent implements OnInit {
-  @ViewChild('registrationForm', { read: true, static: false }) public registrationForm: NgForm;
-  @ViewChild('leaveRegistration', { static: false }) public leaveRegistration: LeavePopupComponent;
+  @ViewChild('registrationForm', { read: true }) public registrationForm: NgForm;
+  @ViewChild('leaveRegistration') public leaveRegistration: LeavePopupComponent;
 
   public params: types.RegistrationAPI;
-  private agreeConfirmCheckBox: boolean = false;
-  private registrationFormCorrect: boolean = true;
+  public agreeConfirmCheckBox: boolean = false;
+  public registrationFormCorrect: boolean = true;
   private ERROR_API: any = errorTypes.api.registration;
   private ERROR_APP: any = errorTypes.app.registration;
   public showEqualError: boolean = false;
@@ -31,14 +31,21 @@ export class RegistrationComponent implements OnInit {
   public minLength: 5;
   private resp: any;
   public openConfirmPopup: boolean = false;
-  private minimalYear: number;
+  public minimalYear: number;
   public checkDate: number;
+  public passConf: any;
+  public password: any;
+  public email: any;
+  public birthdayDate: any;
+  public firstNameOfUser: any;
+  public lastNameOfUser: any;
+  public agree: any;
   @Input() errorTextDate: string;
 
   constructor(
     private data: HttpService,
     private datePipe: DatePipe,
-    private router: Router
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -83,7 +90,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
 // Function checks inputs and makes send button visible
-  agreeConfirm($event) {
+  agreeConfirm($event, data?: any) {
     if($event.target.checked == true) {
       this.checkDateFn();
       return this.registrationFormCorrect = false;
@@ -115,7 +122,7 @@ export class RegistrationComponent implements OnInit {
     this.errorAPP = result.title;
   }
 // Function checks correct date in input datepicker
-  public checkDatePicker(event, birthdayDate: string): void {
+  public checkDatePicker(event, birthdayDate: string, data?: any): void {
     this.checkDate = +(this.datePipe.transform(birthdayDate, "yyyy"));
     if(this.checkDate >= this.minimalYear){
       this.registrationFormCorrect = false;

@@ -2,20 +2,35 @@ import { MetaReducer } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 import { ChatsActionTypes } from '../actions/chats.actions';
+import { types } from 'src/app/types/types';
 
 
 export const chatsFeatureKey = 'chats';
 
 export interface State {
-  requests: any;
-  chatList: any;
-  currChat: any;
+  requests: Array<types.RequestListForChats>;
+  chatList: Array<types.ChatsListForChats>;
+  currChat: types.Chat;
 }
 
 export const initialState: State = {
   requests: [],
   chatList: [],
-  currChat: ''
+  currChat: {
+    data: [],
+    addInfo: {
+      id: null,
+      chatDetails: {
+        partnerName: "Default name",
+        partnerLastName: "Default last name",
+        chatGoalName: "Default skill",
+        chatSkillName: null
+      },
+      lastEvent: null,
+      isActive: false,
+      unreadAmount: null
+    }
+  }
 };
 
 export function chatsReducer(state = initialState, action: any): State {
@@ -35,16 +50,6 @@ export function chatsReducer(state = initialState, action: any): State {
     }
     case ChatsActionTypes.LOAD_CURRENT_CHAT_ERROR : {
       if (action.payload) {
-        updateState.currChat = {
-          addInfo : {
-            chatDetails: {
-              partnerName: "Default name",
-              partnerLastName: "Default last name",
-              chatGoalName: "Default skill",
-              chatSkillName: null
-            }
-          }
-        };
         return updateState;
       }
     }

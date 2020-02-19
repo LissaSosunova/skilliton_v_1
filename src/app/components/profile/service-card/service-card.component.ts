@@ -9,7 +9,7 @@ import { Store} from '@ngrx/store';
 })
 export class ServiceCardComponent implements OnInit {
   public services: Observable<any>;
-  private showServices: boolean = false;
+  public showServices: boolean = false;
 
   constructor(
     private store: Store<any>

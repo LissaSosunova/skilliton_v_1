@@ -16,14 +16,14 @@ import * as _ from 'lodash';
   styleUrls: ['./services.component.scss']
 })
 export class ServicesComponent implements OnInit {
-  @ViewChild('serviceDataForm', { read: true, static: false  }) public serviceDataForm: NgForm;
-  public user: Observable<types.NewUser>;
+  @ViewChild('serviceDataForm', { read: true }) public serviceDataForm: NgForm;
+  public user: types.NewUser;
   public activeUrl: string = '/main/profile/services';
   public searchControl: FormControl;
   private unsubscribe$: Subject<void> = new Subject();
-  private openAuto: boolean = false;
-  private showBtn: boolean = false;
-  private btnConfirm: boolean = false;
+  public openAuto: boolean = false;
+  public showBtn: boolean = false;
+  public btnConfirm: boolean = false;
   public tags: any;
   public tagsServices = [] as any;
   public options: any;
@@ -33,7 +33,7 @@ export class ServicesComponent implements OnInit {
   public choosedService: number;
   public choosedServicename: string;
   private params: types.AddServiceAPI;
-
+  public service: any;
   @Input() currTab: string;
   @Input() userUploaded: boolean = false;
   @Output() servicePlaceholder: string;
@@ -42,7 +42,7 @@ export class ServicesComponent implements OnInit {
 
   constructor(
     private data: HttpService,
-    private router: Router,
+    public router: Router,
     private store: Store<types.NewUser>,
   ) { }
 
@@ -110,6 +110,7 @@ export class ServicesComponent implements OnInit {
     this.choosedServicename = option.name;
     this.openAuto = false;
     this.searchControl.reset({ value: '', disabled: false });
+    this.service = '';
   }
   public setValue(val) {
     if (val !== null) {
@@ -118,6 +119,7 @@ export class ServicesComponent implements OnInit {
         this.choosedServicename = val;
         this.openAuto = false;
         this.showBtn = true;
+        this.service = '';
       });
     }
   }

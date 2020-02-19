@@ -44,7 +44,6 @@
                   class="scroll-height"
                   [ngClass]="chatWidth"
                   *ngIf="(chatsExsist | async) || (requestsExsist | async)"
-                  [typeChat]="chat"
                   [chatList]="chatList"
                   [requestsList]="requestsList"
                   (setChatWidth)="setChatWidth($event)"

@@ -9,10 +9,10 @@ import { RouterService } from 'src/app/services/router.service';
   styleUrls: ['./confirm.component.scss']
 })
 export class ConfirmComponent implements OnInit {
-  private message: string;
+  public message: string;
   constructor(
     private data: HttpService,
-    private router: Router,
+    public router: Router,
     private routerService: RouterService,
   ) { }
 

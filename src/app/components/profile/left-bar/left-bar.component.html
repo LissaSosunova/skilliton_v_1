@@ -72,7 +72,7 @@ class="tabs-nav
 <div class="col-xs-12
         tab-expert-class"
         [ngClass]="{'not-active-tab':  currChildUrl !== 'myIntrests',  'active':  currChildUrl === 'myIntrests'}"
-        (click)="switcher('myIntrests')">
+        (click)="switcher('/main/profile/', 'myIntrests')">
         <span>
             My interests
         </span>

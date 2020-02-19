@@ -76,7 +76,7 @@
                     </app-input-search>
                     <!-- Drop down -->
                     <section *ngIf="openAutoSearch === true" appClickOutside (mClickOutside)="outsideSearchClick()"
-                      [ngClass]="{'block-drop': openAutoSearch == true,  'non-vis': openAutoSearch == false}">
+                      class="block-drop">
                       <div *ngFor="let option of options" appClickOutside>
                               <div (click)="setValueFromDropDown(option)">
                               <i class="material-icons plus-icon">
@@ -134,11 +134,11 @@
                       [floatLabel]="'auto'"
                       [disabled]="false"
                       [format]="'dd MM yyyy'"
-                      [(ngModel)]="fromDate"
+                      [(ngModel)]="dateFrom"
                       [required]="true"
                       [errorText]="'Date is required'"
                       name="from"
-                      (change)="changeDate('fromDate', $event, fromDate)"
+                      (change)="changeDate('dateFrom', $event, dateFrom)"
                       [errorTextDate]="errorTextDate">
                   </app-input-datepicker>
                   </div>
@@ -177,7 +177,7 @@
                     <div class="col-xs-12 no-padd">
                         <input
                         type="submit"
-                        (click)="saveBtn(educationPlace, degreeName, specializationName, currentlyPeriod, fromDate, toDate)" 
+                        (click)="saveBtn(educationPlace, degreeName, specializationName, currentlyPeriod, dateFrom, toDate)" 
                         class="btn
                         primary-btn
                         btn-width-middle"    

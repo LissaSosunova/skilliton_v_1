@@ -25,8 +25,7 @@
                  class="avatar">
                 <input id="avatar-input" 
                       type="file" 
-                      name="image" 
-                      (change)="uploadAvatar($event)"
+                      name="image"
                       accept=".png, .jpg, .jpeg"
                       enctype="multipart/form-data" #uploadFile>
         
@@ -64,9 +63,8 @@
                             col-lg-6
                             btn-top-bar
                             "
-                [ngClass]="{'active-btn': activeUrl === '/main/view-profile'}"
-                (click)="goToSubUrl('/main/profile')"
-                >About {{mate.profile.name}}</div>
+                [ngClass]="{'active-btn': activeUrl === '/main/view-profile'}">
+                About {{mate.profile.name}}</div>
         <div class="col-xs-6
                     col-sm-6
                     col-md-6
@@ -193,7 +191,7 @@
                     col-md-12
                     col-lg-12
                     header-section-block">
-                <span class="link-title" (click)="goToSubUrl('/main/profile/sts-view')">Skills to share</span>
+                <span class="link-title">Skills to share</span>
                 </div>
     <div class="section-of-skill-list col-xs-12 start-xs">
             <mate-skill-to-share-card></mate-skill-to-share-card>
@@ -215,7 +213,7 @@ spec-pad">
         col-md-12
         col-lg-12
         header-section-block">
-        <span class="link-title" (click)="goToSubUrl('/main/profile/sto-view')">Skills to obtain</span>
+        <span class="link-title">Skills to obtain</span>
     </div>
     
 <div class="section-of-skill-list col-xs-12 start-xs">

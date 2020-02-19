@@ -14,20 +14,20 @@ export class MyMatchesComponent implements OnInit {
   @Output() activeTopBtn: 'myMatches';
   @Output() user: any;
   @Output() userIncomingMatches = [] as any;
-  private incomUploaded: boolean = false;
-  private openIncome: boolean = false;
+  public incomUploaded: boolean = false;
+  public openIncome: boolean = false;
   @Output() userOutcomingMatches = [] as any;
-  private outcomUploaded: boolean = false;
-  private openOutcome: boolean = false;
+  public outcomUploaded: boolean = false;
+  public openOutcome: boolean = false;
   @Output() userActiveMatches = [] as any;
-  private activeUploaded: boolean = false;
-  private openActive: boolean = false;
+  public activeUploaded: boolean = false;
+  public openActive: boolean = false;
   @Output() userRecomendations = [] as any;
-  private recomedationsUploaded: boolean = false;
-  private openRecomendations: boolean = false;
+  public recomedationsUploaded: boolean = false;
+  public openRecomendations: boolean = false;
   @Output() userInterested = [] as any;
-  private interestedUploaded: boolean = false;
-  private openInterested: boolean = false;
+  public interestedUploaded: boolean = false;
+  public openInterested: boolean = false;
 
   constructor(
     private data: HttpService,

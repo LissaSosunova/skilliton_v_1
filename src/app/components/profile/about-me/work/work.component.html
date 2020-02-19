@@ -65,7 +65,7 @@
                             </app-input-search>
                             <!-- Drop down -->
                             <section *ngIf="openAutoSearch === true" appClickOutside (mClickOutside)="outsideSearchClick()"
-                              [ngClass]="{'block-drop': openAutoSearch == true,  'non-vis': openAutoSearch == false}">
+                             class="block-drop">
                               <div *ngFor="let option of options" appClickOutside>
                                       <div (click)="setValueFromDropDown(option)">
                                       <i class="material-icons plus-icon">
@@ -105,12 +105,11 @@
                               [floatLabel]="'auto'"
                               [disabled]="false"
                               [format]="'dd MM yyyy'"
-                              [(ngModel)]="fromDate"
+                              [(ngModel)]="dateFrom"
                               [required]="true"
                               [errorText]="'Date is required'"
                               name="from"
-                              (change)="changeDate('fromDate', $event, fromDate)"
-                              [errorTextDate]="errorTextDate">
+                              (change)="changeDate('dateFrom', $event, dateFrom)">
                           </app-input-datepicker>
                           </div>
                           <div class="col-xs-12" *ngIf="currentlyPeriod === false"> To
@@ -122,8 +121,7 @@
                               [required]="false"
                               [errorText]="'Date is required'"
                               name="to"
-                              (change)="changeDate('toDate', $event, toDate)"
-                              [errorTextDate]="errorTextDate">
+                              (change)="changeDate('toDate', $event, toDate)">
                           </app-input-datepicker>
                           </div>
                           <div class="col-xs-6">
@@ -148,7 +146,7 @@
                             <div class="col-xs-12 no-padd">
                                 <input
                                 type="submit"
-                                (click)="saveBtn(workPlace, workPosition, currentlyPeriod, fromDate, toDate)" 
+                                (click)="saveBtn(workPlace, workPosition, currentlyPeriod, dateFrom, toDate)" 
                                 class="btn
                                 primary-btn
                                 btn-width-middle"    

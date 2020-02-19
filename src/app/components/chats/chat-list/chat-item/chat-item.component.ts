@@ -1,6 +1,5 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { types } from 'src/app/types/types';
 
 @Component({
   selector: 'app-chat-item',
@@ -9,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ChatItemComponent implements OnInit {
   public photo: string;
-  @Input() public chat: Observable<any>;
+  @Input() public chat: types.ChatsListForChats;
   @Input() public isOpenedChatList: boolean;
   @Input() public activeChat?: number;
   constructor() { }

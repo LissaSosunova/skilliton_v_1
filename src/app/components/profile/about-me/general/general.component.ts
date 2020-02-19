@@ -32,6 +32,9 @@ public langs = [] as  any;
 public optionsLangs: any;
 public universitySelected: boolean = true;
 private unsubscribe$: Subject<void> = new Subject();
+public langName: any;
+public langsOther: any;
+
 // Mail and Femail
 public maleSelect: boolean = false;
 public femaleSelect: boolean = false;
@@ -46,6 +49,7 @@ public nativeLangRequired: boolean = false;
 public minimalYear: number;
 public checkDate: number;
 public birthDate: string;
+public birthdayDate: any;
 // Errors
 public errorTextDate: string;
 private ERROR_API: any = errorTypes.api.registration;
@@ -53,18 +57,18 @@ private ERROR_APP: any = errorTypes.app.editProfile;
 public errorAPP: string;
 public showEqualError: boolean = false;
 
-private firstNameErr:  boolean = false;
+public firstNameErr:  boolean = false;
 public errorFirstNameText: string;
 
-private lastNameErr:  boolean = false;
+public lastNameErr:  boolean = false;
 public errorLastNameText: string;
 
-private sexErr:  boolean = false;
+public sexErr:  boolean = false;
 public errorSexText: string;
 
   constructor(
     private data: HttpService,
-    private router: Router,
+    public router: Router,
     private store: Store<any>,
     private datePipe: DatePipe,
     private editData: EditUserProfileService,
@@ -180,7 +184,7 @@ public errorSexText: string;
       this.openAutoOtherLang = false;
       this.searchOtherLangsControl.reset({ value: '', disabled: false });
     }
-    private changeOtherLangItem(option) {
+    public changeOtherLangItem(option) {
       let params = [];
       const deletItem = _.remove(this.user.profile.langs.other, {id: option.id});
       const langAPI = _.remove(this.user.profile.langs.other, (n) => {
@@ -192,7 +196,7 @@ public errorSexText: string;
       this.editData.sendData('otherLang', params);
       this.updateUserData();
     }
-    private changeNativeLangItem(option) {
+    public changeNativeLangItem(option) {
       let params = [];
       const deletItem = _.remove(this.user.profile.langs.native, {id: option.id});
       const langAPI = _.remove(this.user.profile.langs.native, (n) => {
@@ -205,15 +209,15 @@ public errorSexText: string;
       this.updateUserData();
     }
     // First name
-    private changeFirstName() {
+    public changeFirstName() {
       this.editableFirstName = !this.editableFirstName;
     }
-    private cancelName() {
+    public cancelName() {
       this.errorFirstNameText = '';
       this.firstNameErr = false;
       this.editableFirstName = false;
     }
-    private saveNewName(key: string, newVal) {
+    public saveNewName(key: string, newVal) {
       if (newVal === null) {
         let result = _.find(this.ERROR_APP, ((o) => { return o.code == 100; }) );
         this.getErrorCodeApp(100);
@@ -228,15 +232,15 @@ public errorSexText: string;
       }
     }
     // Last name
-    private changeLastName() {
+    public changeLastName() {
       this.editableLastName = !this.editableLastName;
     }
-    private cancelLastName() {
+    public cancelLastName() {
       this.errorLastNameText = '';
       this.lastNameErr = false;
       this.editableLastName = false;
     }
-    private saveNewData (key: string, newVal) {
+    public saveNewData (key: string, newVal) {
       if (newVal === null) {
         let result = _.find(this.ERROR_APP, ((o) => { return o.code == 100; }) );
         this.getErrorCodeApp(100);
@@ -251,14 +255,15 @@ public errorSexText: string;
       }
     }
     // Birthday
-    private changeBirthday() {
+    public changeBirthday() {
       this.editableBirthDay = !this.editableBirthDay;
     }
-    private cancelBD() {
+    public cancelBD() {
       this.editableBirthDay = false;
     }
     // Function checks correct date in input datepicker
-  public checkDatePicker(event, birthdayDate: string): void {
+  public checkDatePicker(event, birthdayDate: string, data?: any): void {
+    console.log(event, birthdayDate, data)
 
     this.checkDate = +(this.datePipe.transform(birthdayDate, "yyyy"));
     if(this.checkDate >= this.minimalYear){
@@ -280,13 +285,13 @@ public errorSexText: string;
   }
 
   // Sex
-  private maleSelected (e) {
+  public maleSelected (e) {
     if (e.target.checked === true) {
       this.femaleSelect = false;
       this.editData.sendData('sex', 1);
     } 
   }
-  private femaleSelected(e) {
+  public femaleSelected(e) {
     if (e.target.checked === true) {
       this.maleSelect = false;
       this.editData.sendData('sex', 2);

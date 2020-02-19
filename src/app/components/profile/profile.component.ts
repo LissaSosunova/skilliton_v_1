@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   public langsNative: any;
   public myServices: Array<any>;
   public currParentUrl: string;
-  @ViewChild('currChildUrl', {static: false}) public currChildUrl: string;
+  @ViewChild('currChildUrl') public currChildUrl: string;
   @ViewChild('summaryValue', {static: true}) public summaryValue: string;
   @ViewChild('uploadFile', {static: true}) public uploadFile: ElementRef;
   subscription: Subscription;
@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   public placeOfBirth: any;
   public placeOfResidence: any;
   private unsubscribe$: Subject<void> = new Subject<void>();
-  private openSummaryTextarea: boolean = false;
+  public openSummaryTextarea: boolean = false;
   public counter: number;
 
 
@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit,  OnDestroy {
     private actRoute: ActivatedRoute,
     private avatarService: AvatarService,
     private localstorageService: LocalstorageService,
-    private router: Router,
+    public router: Router,
     private routerService: RouterService,
     private sessionStorageService: SessionstorageService,
     private store: Store<any>,

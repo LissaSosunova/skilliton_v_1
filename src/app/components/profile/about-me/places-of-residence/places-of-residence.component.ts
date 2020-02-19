@@ -16,14 +16,14 @@ import * as _ from 'lodash';
 })
 export class PlacesOfResidenceComponent implements OnInit {
   @Output() currChildUrl: 'places-of-residence';
-  @ViewChild('editPlacesForm', { read: true, static: false  }) public editPlacesForm: NgForm;
+  @ViewChild('editPlacesForm', { read: true }) public editPlacesForm: NgForm;
   @Input() user: any;
   public userUploaded: boolean = false;
-  private editablePlaceFrom: boolean = false;
-  private editablePlaceLive: boolean = false;
-  private openAutoCountr: boolean = false;
-  private openAutoCity: boolean = false;
-  private disabledCity: boolean = true;
+  public editablePlaceFrom: boolean = false;
+  public editablePlaceLive: boolean = false;
+  public openAutoCountr: boolean = false;
+  public openAutoCity: boolean = false;
+  public disabledCity: boolean = true;
   public searchCountriesControl: FormControl;
   public searchCityControl: FormControl;
   public searchCountriesControlLive: FormControl;
@@ -31,14 +31,18 @@ export class PlacesOfResidenceComponent implements OnInit {
   private unsubscribe$: Subject<void> = new Subject();
   public countries: any;
   public cities: any;
-  private options: any;
-  private optionsCity: any;
+  public options: any;
+  public optionsCity: any;
   public choosedCountryname: string = '';
   public choosedCityname: string = '';
+  public cityNames: any;
+  public cityNames2: any;
+  public countrNames: any;
+  public countrNames2: any;
+
   constructor(
     private data: HttpService,
     private store: Store<any>,
-    private editData: EditUserProfileService,
   ) { }
 
   ngOnInit() {
@@ -62,20 +66,20 @@ export class PlacesOfResidenceComponent implements OnInit {
     this.store.dispatch(new LoadLocations());
 }
 
-private changePlaceFrom() {
+public changePlaceFrom() {
   this.editablePlaceFrom = !this.editablePlaceFrom;
 }
-private cancelPlaceFrom() {
+public cancelPlaceFrom() {
   this.editablePlaceFrom = false;
   this.searchCityControl.reset({ value: '', disabled: false });
   this.searchCountriesControl.reset({ value: '', disabled: false });
   this.choosedCountryname = '';
   this.choosedCityname = '';
 }
-private changePlaceLive() {
+public changePlaceLive() {
   this.editablePlaceLive = !this.editablePlaceLive;
 }
-private cancelPlaceLive() {
+public cancelPlaceLive() {
   this.editablePlaceLive = false;
   this.searchCityControl.reset({ value: '', disabled: false });
   this.searchCountriesControl.reset({ value: '', disabled: false });
@@ -188,10 +192,6 @@ private initSearchCountriesForm(): void {
     }
   }
 
-
-
-
-
   public setValueCountriesFromDropDown(option) {
     this.choosedCountryname = option.country;
     this.openAutoCountr = false;
@@ -207,7 +207,7 @@ private initSearchCountriesForm(): void {
     this.searchCountriesControl.reset({ value: '', disabled: false });
   }
 
-  private savePlaceOfBirth() {
+  public savePlaceOfBirth() {
     if (this.choosedCountryname !== '' && this.choosedCityname !== '') {
       const newVal = {
         city: this.choosedCityname,
@@ -217,7 +217,7 @@ private initSearchCountriesForm(): void {
     }
   }
 
-  private savePlaceOfLive() {
+  public savePlaceOfLive() {
     if (this.choosedCountryname !== '' && this.choosedCityname !== '') {
       const newVal = {
         city: this.choosedCityname,
