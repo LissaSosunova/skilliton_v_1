@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 export class MateSkillToObtainCardComponent implements OnInit {
 
   public skills = [] as any;
-  private showSkills: boolean = false;
+  public showSkills: boolean = false;
   constructor(
     private store: Store<any>
     ) { }

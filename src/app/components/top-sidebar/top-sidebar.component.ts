@@ -19,9 +19,10 @@ export class TopSidebarComponent implements OnInit {
 
   public currParentUrl: string;
   public currChildUrl: string;
-  private searchVis: boolean = false;
+  public searchVis: boolean = false;
   public searchControl: FormControl;
   public search: string = '';
+  public searchValue: any;
   private unsubscribe$: Subject<void> = new Subject();
   @Input() notFound?: boolean = false;
   @Input() public disabled?: boolean = false;
@@ -66,7 +67,7 @@ export class TopSidebarComponent implements OnInit {
     });
    }
 
-   private exitApp() {
+   public exitApp() {
     this.localstorageService.removeValue('user');
     this.sessionStorageService.removeValue('_token');
     this.sessionStorageService.removeValue('tokenType');

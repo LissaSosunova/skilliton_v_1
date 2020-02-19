@@ -39,8 +39,7 @@
                         [requiredFieldError]="'You can not to continue without any service'"
                         >
                         </app-input-search>
-                        <span *ngIf="showBtn"
-                        [ngClass]="{'non-vis': showBtn == false}">Add new service?   </span>
+                        <span *ngIf="showBtn == true">Add new service?   </span>
                         <input
                         type="submit"
                         (click)="setValue(service)"
@@ -48,7 +47,7 @@
                         value="Add"
                         >
                         <section *ngIf="openAuto === true" appClickOutside
-                        [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
+                        class="block-droop">
                         <div *ngFor="let option of options">
                                 <div (click)="setValueFromDropDown(option)">
                                 <i class="material-icons plus-icon">

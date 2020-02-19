@@ -51,7 +51,6 @@ import { MatFormFieldModule,
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { InputDatepickerComponent } from './shared/form-controls/input-datepicker/input-datepicker.component';
 import { InputEmailComponent } from './shared/form-controls/input-email/input-email.component';
-import { MatSelectComponent } from './shared/form-controls/mat-select/mat-select.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -77,13 +76,11 @@ import { UserEffects } from './state/effects/user.effects';
 import { FiltersEffects } from './state/effects/filters.effects';
 import { LocationsEffects } from './state/effects/locations.effects';
 import { PostsComponent } from './components/posts/posts.component';
-import { InputCustomDatepickerComponent } from './shared/form-controls/input-custom-datepicker/input-custom-datepicker.component';
 import { AngularMyDatePickerModule } from 'angular-mydatepicker';
 import { SetExactdataPageComponent } from './components/set-exactdata-page/set-exactdata-page.component';
 import { InputSearchComponent } from './shared/form-controls/input-search/input-search.component';
 import {DemoMaterialModule} from './material-module';
 import { InputTrimDirective } from './shared/directives/input-trim.directive';
-import { DropdownItemsComponent } from './shared/components/dropdown-items/dropdown-items.component';
 import { ProgressBarComponent } from './shared/components/progress-bar/progress-bar.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { SkillsToObtainComponent } from './components/profile/skills-to-obtain/skills-to-obtain.component';
@@ -159,7 +156,6 @@ import { MessageLogComponent } from './components/chats/chat-window/message-log/
     InputPasswordComponent,
     InputEmailComponent,
     InputDatepickerComponent,
-    MatSelectComponent,
     SelectComponent,
     AlertModalComponent,
     LeavePopupComponent,
@@ -168,11 +164,9 @@ import { MessageLogComponent } from './components/chats/chat-window/message-log/
     ProfileComponent,
     AboutMeComponent,
     PostsComponent,
-    InputCustomDatepickerComponent,
     SetExactdataPageComponent,
     InputSearchComponent,
     InputTrimDirective,
-    DropdownItemsComponent,
     ProgressBarComponent,
     SkillsToObtainComponent,
     WeekDaysComponent,

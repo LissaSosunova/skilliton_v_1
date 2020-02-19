@@ -19,7 +19,7 @@ export class InputSearchComponent extends InputAbstract implements OnInit, OnCha
   public maxLengthLimit: number;
   public showContent: boolean = false;
 
-  @ViewChild('searchInput',  { static: false }) private input: ElementRef;
+  @ViewChild('searchInput') private input: ElementRef;
 
   constructor() {
     super();

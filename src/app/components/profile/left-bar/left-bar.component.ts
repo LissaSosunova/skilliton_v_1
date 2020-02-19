@@ -14,9 +14,9 @@ export class LeftBarComponent implements OnInit {
   @Input() myGoals = [] as any;
   @Input() currChildUrl: string;
   public activeUrl: any;
-  @ViewChild('currTab', {static: false}) public currTab: string;
+  @ViewChild('currTab') public currTab: string;
   constructor(
-    private router: Router,
+    public router: Router,
     private transferService: TransferService,
     private activatedRoute: ActivatedRoute,
   ) { }

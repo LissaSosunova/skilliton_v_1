@@ -17,27 +17,30 @@ import { LoadTags } from '../../state/actions/filters.actions';
   styleUrls: ['./set-exactdata-page.component.scss']
 })
 export class SetExactdataPageComponent implements OnInit, OnDestroy {
-  @ViewChild('skillsDataForm', { static: false }) public skillsDataForm: NgForm;
-  @ViewChild('goalsDataForm', { static: false }) public goalsDataForm: NgForm;
-  @ViewChild('interestsDataForm', { static: false }) public interestsDataForm: NgForm;
+  @ViewChild('skillsDataForm') public skillsDataForm: NgForm;
+  @ViewChild('goalsDataForm') public goalsDataForm: NgForm;
+  @ViewChild('interestsDataForm') public interestsDataForm: NgForm;
 
   public searchControl: FormControl;
   private unsubscribe$: Subject<void> = new Subject();
 
-  private paramsPostInitInfo: types.PostInitInfo;
-  private createNewElem: types.CategoryElement;
+  public paramsPostInitInfo: types.PostInitInfo;
+  public createNewElem: types.CategoryElement;
 
-  private ERROR_API: any = errorTypes.api.login;
-  private ERROR_APP: any = errorTypes.app.setExactData;
+  public ERROR_API: any = errorTypes.api.login;
+  public ERROR_APP: any = errorTypes.app.setExactData;
 
   public options: any;
   public user: types.NewUser;
-  private goToNextPage: boolean = false;
-  private isTagsSkills:  boolean = true;
-  private isTagsGoals:  boolean = true;
-  private isTagsInterests:  boolean = true;
-  private openAuto: boolean = false;
-  private showBtn: boolean = false;
+  public goToNextPage: boolean = false;
+  public isTagsSkills:  boolean = true;
+  public isTagsGoals:  boolean = true;
+  public isTagsInterests:  boolean = true;
+  public openAuto: boolean = false;
+  public showBtn: boolean = false;
+  public interestName1: any;
+  public goalName: any;
+  public skillName: any;
 
   @Output() chipsSkills = [] as  any;
   @Output() chipsGoals = [] as  any;
@@ -50,17 +53,17 @@ export class SetExactdataPageComponent implements OnInit, OnDestroy {
   public tags: any;
   private selectedTagsId = [] as  any;
   // For future
-  private newTags = [] as  any;
-  private activePage: string;
-  private userUploaded: boolean = false;
-  private ifErrAPIPage: string;
+  public newTags = [] as  any;
+  public activePage: string;
+  public userUploaded: boolean = false;
+  public ifErrAPIPage: string;
   @Input() valueSearch: any;
-  @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
+  @ViewChild('infoPopup') public infoPopup: AlertModalComponent;
 
   constructor(
     private actRoute: ActivatedRoute,
     private data: HttpService,
-    private router: Router,
+    public router: Router,
     public alertModal: AlertModalComponent,
     private store: Store<any>
   ) { }

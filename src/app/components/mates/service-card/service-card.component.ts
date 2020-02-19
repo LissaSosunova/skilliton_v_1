@@ -9,7 +9,7 @@ import * as _ from 'lodash';
 })
 export class MateServiceCardComponent implements OnInit {
   public services: any;
-  private showServices: boolean = false;
+  public showServices: boolean = false;
 
   constructor(
     private store: Store<any>

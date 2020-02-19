@@ -72,7 +72,6 @@
       <app-textarea-chat
         class="textarea-item no-padd"
         [control]="control"
-        (enterKey)="onEnterKey()"
         #messageBody
         name="messageBody"
         (keydown.control.Enter)="writeMessage($event)"

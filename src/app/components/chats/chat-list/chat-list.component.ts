@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RouterService } from '../../../services/router.service';
 import { Store} from '@ngrx/store';
 import { LoadCurrentChat } from './../../../state/actions/chats.actions';
+import { types } from 'src/app/types/types';
 
 @Component({
   selector: 'app-chat-list',
@@ -11,9 +12,8 @@ import { LoadCurrentChat } from './../../../state/actions/chats.actions';
   styleUrls: ['./chat-list.component.scss']
 })
 export class ChatListComponent implements OnInit {
-@Input() public chatList: Observable<any>;
-@Input() public requestsList: Observable<any>;
-@Input() public typeChat: string;
+@Input() public chatList: Array<types.ChatsListForChats>;
+@Input() public requestsList: Array<types.RequestListForChats>;
 public photo: string;
 public hiddenChatList: string = 'hiddenChatListWidth no-padd';
 public openedChatList: string = 'col-xs-4 no-padd';
@@ -26,7 +26,7 @@ public activeChat: number;
 @Output() public goToChat  = new EventEmitter<number>();
 
   constructor(
-    private router: Router,
+    public router: Router,
     private routerService: RouterService,
     private store: Store<any>
   ) { }

@@ -16,7 +16,7 @@ export class StsViewComponent implements OnInit {
   public mySkills = [] as any;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private store: Store<types.NewUser>,
     private actRoute: ActivatedRoute,
   ) { }

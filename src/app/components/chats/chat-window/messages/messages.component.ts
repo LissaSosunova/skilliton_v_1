@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { ToastsService } from '../../../../services/toasts.service';
 import { HttpService } from '../../../../services/http.service';
+import { types } from 'src/app/types/types';
 
 @Component({
   selector: 'app-messages',
@@ -9,7 +10,7 @@ import { HttpService } from '../../../../services/http.service';
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
-  @Input() message: Observable<any>;
+  @Input() message: types.Message;
   public selected: boolean = false;
   public editBlock: string;
   @Output() delete = new EventEmitter<boolean>();
@@ -70,7 +71,7 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-  private deleteMessage(options) {
+  public deleteMessage(options) {
     this.data.deleteMessageFromChat(options).subscribe((resp) => {
       if (resp.error == false) {
         this.toastService.openToastSuccess("Message deleted.");

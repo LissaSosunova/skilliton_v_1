@@ -20,22 +20,24 @@ export class WorkComponent implements OnInit {
   @Input() user: any;
   public userUploaded: boolean = false;
   public companies: Array<any>;
-  private editableWork: boolean = false;
-  private workExist: boolean = false;
-  private currentlyPeriod: boolean = false;
-  private dateFrom: string;
-  private toDate: string;
-  private openAutoSearch: boolean = false;
-  private openSearchBlock: boolean = false;
+  public editableWork: boolean = false;
+  public workExist: boolean = false;
+  public currentlyPeriod: boolean = false;
+  public dateFrom: string;
+  public toDate: string;
+  public openAutoSearch: boolean = false;
+  public openSearchBlock: boolean = false;
   public searchControl: FormControl;
   private unsubscribe$: Subject<void> = new Subject();
   private setAPIdata: any;
-  private choosedComp: boolean = false;
-  private options: any;
-  private nameSeted: boolean = false;
-  private positionSeted: boolean = false;
-  private companyName: string;
-  private positionName: string;
+  public choosedComp: boolean = false;
+  public options: any;
+  public nameSeted: boolean = false;
+  public positionSeted: boolean = false;
+  public companyName: string;
+  public positionName: string;
+  public workPosition: string;
+  public workPlace: string;
 
   constructor(
     private data: HttpService,
@@ -101,16 +103,16 @@ export class WorkComponent implements OnInit {
         });
     }
 
-    private addWork() {
+    public addWork() {
       this.editableWork = true;
       this.openSearchBlock = true;
     }
 
-    private editPositionNameFn(id) {
+    public editPositionNameFn(id) {
       console.log(id);
     }
 
-    private changeDate(type, e, fieldData): void {
+    public changeDate(type, e, fieldData): void {
       if (type === 'currPeriod') {
         if (e.target.checked === false) {
           this.toDate = '';
@@ -125,7 +127,7 @@ export class WorkComponent implements OnInit {
       }
     }
 
-    private openSearch(): void {
+    public openSearch(): void {
       this.openAutoSearch = true;
     }
     public setSearch(query: string): void {
@@ -156,7 +158,7 @@ export class WorkComponent implements OnInit {
       this.choosedComp = false;
       this.openSearchBlock = true;
     }
-    private saveBtn(workPlace, workPosition, currentlyPeriod, fromDate, toDate): void {
+    public saveBtn(workPlace, workPosition, currentlyPeriod, fromDate, toDate): void {
       this.dateFrom = this.datePipe.transform(fromDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
       if (this.toDate !== null) {
         this.toDate = this.datePipe.transform(toDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")

@@ -14,11 +14,12 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-@ViewChild('searchPageForm', { read: true, static: false  }) public searchPageForm: NgForm;
+@ViewChild('searchPageForm', { read: true }) public searchPageForm: NgForm;
 @Output() searchResult: any;
-private loaded: boolean = false;
+public loaded: boolean = false;
 public searchControl: FormControl;
-private searchPlaceholder: string;
+public searchPlaceholder: string;
+public search: any;
 private unsubscribe$: Subject<void> = new Subject();
 
   constructor(

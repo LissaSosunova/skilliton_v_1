@@ -302,6 +302,77 @@ export module types {
       isEdited: boolean;
       isMine: boolean;
     }
-
+  }
+  export interface Chat {
+    data: Array<Message>;
+    error?: boolean;
+    orderBy?: string;
+    direction?: string;
+    page?: number;
+    limit?: number;
+    total?: number;
+    addInfo: AddInfoForChat;
+  }
+  export interface AddInfoForChat {
+    id: number | null;
+    matchId?: number;
+    matchStatus?: number;
+    isGroup?: boolean;
+    lessonAgreed?: boolean;
+    groupDetails?: number | null;
+    chatDetails: {
+      partnerName: string;
+      partnerLastName: string;
+      partnerAvatar?: string | null;
+      chatGoalName?: string | null;
+      chatSkillName?: string | null;
+    };
+    lastEvent?: any;
+    isActive: boolean;
+    unreadAmount: number | null;
+    isPinned?: boolean;
+    pinnedSort?: number;
+  }
+  export interface RequestListForChats {
+    contactId: number | null;
+    chatId: number | null;
+    incoming: boolean;
+    partnerName: string;
+    partnerLastName: string;
+    partnerAvatar?: number | null;
+    requestTime: string;
+    matchedSkillTagId?: number | null;
+    matchedSkillName?: string;
+    skillId?: number | null;
+    goalId?: number | null;
+    requestMessage?: string;
+  }
+  export interface ChatsListForChats {
+    id: number | null;
+    matchId?: number;
+    matchStatus?: number;
+    isGroup?: boolean;
+    lessonAgreed?: boolean;
+    groupDetails?: number | null;
+    chatDetails: {
+      partnerName: string;
+      partnerLastName: string;
+      partnerAvatar?: string | null;
+      chatGoalName?: string | null;
+      chatSkillName?: string | null;
+    };
+    lastEvent?: {
+      eventType?: number | null;
+      message?: {
+        text: string;
+        authorName: string;
+        authorLastName: string;
+        isMine: boolean;
+      };
+      lesson?: number | null;
+    }
+    isActive: boolean;
+    unreadAmount: number | null;
+    isPinned?: boolean;
   }
 }

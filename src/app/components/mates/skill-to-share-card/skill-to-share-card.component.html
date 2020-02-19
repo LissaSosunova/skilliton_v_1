@@ -99,41 +99,6 @@
       </div>
   
     </div>
-  
-    <!-- Init skills -->
-    <div class="col-xs-12
-                col-sm-12
-                col-md-12
-                col-lg-12
-                row
-                margin-bottom"
-                >
-    <div class="section-100" *ngFor="let skill of initSkills">
-      <div class="col-xs-12
-                  header-block
-                  disable
-                  row"
-                  >
-      <div class="col-xs-10
-                title-header-block
-                start-xs"
-                >
-                <span>{{skill.name}} </span>
-      </div> 
-        <div class="col-xs-2 end-xs">
-          <!-- open btn -->
-          <span class="edit" (click)="openSkill(skill.skillId)"> <i class="material-icons">
-              keyboard_arrow_down
-          </i>
-          </span>
-        </div>
-      </div>
-      <div class="col-xs-12 descr-field-init start-xs non-vis"
-            [id]="'skill' + skill.skillId">
-          <span>Add some description</span> </div>
-      </div>
-    </div>
-    <!-- End of card init skill-->
   </div>
    <!-- End of includer -->
   

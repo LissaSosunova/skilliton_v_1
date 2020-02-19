@@ -16,8 +16,8 @@ import { ToastsService } from './../../../services/toasts.service';
   styleUrls: ['./skills-card.component.scss']
 })
 export class SkillsCardComponent implements OnInit {
-  @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
-  @ViewChild('errorPopup', { static: false }) public errorPopup: AlertModalComponent;
+  @ViewChild('infoPopup') public infoPopup: AlertModalComponent;
+  @ViewChild('errorPopup') public errorPopup: AlertModalComponent;
   @Input() skills: any;
   @Output() actionName: string;
   @Output() headerError: any;
@@ -26,7 +26,7 @@ export class SkillsCardComponent implements OnInit {
   @Output() isFooter: true;
   public activDropDownID: string;
   private ERROR_API: any = errorTypes.api.search;
-  private avatar = 'assets/images/post-exaple2.jpg';
+  public avatar = 'assets/images/post-exaple2.jpg';
 
   constructor(
     private store: Store<any>,
@@ -40,7 +40,7 @@ export class SkillsCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  private openDetialsBlock(id, type?: string): void {
+  public openDetialsBlock(id, type?: string): void {
     const elems = Array.from(document.getElementsByTagName('div'));
     let elem;
     elems.forEach((el) => {

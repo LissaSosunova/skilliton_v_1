@@ -31,22 +31,26 @@ export class EducationComponent implements OnInit {
   public alltypes = {} as any;
   public searchControl: FormControl;
   private unsubscribe$: Subject<void> = new Subject();
-  private openAutoSearch: boolean = false;
-  private nameSeted: boolean = false;
-  private choosedFromList: boolean = false;
-  private choosedId: number;
-  private currentlyPeriod: boolean = false;
+  public openAutoSearch: boolean;
+  public nameSeted: boolean = false;
+  public choosedFromList: boolean;
+  public choosedId: number;
+  public currentlyPeriod: boolean;
   private setAPIdata: any;
-  private placeName: string;
+  public placeName: string;
   public type: number;
-  private options: any;
-  private dateFrom: string;
-  private toDate: string;
+  public options: any;
+  public dateFrom: string;
+  public toDate: string;
+  public specializationName: string;
+  public degreeName: string;
+  public educationPlace: any;
+  public errorTextDate: 'Here is wrong date parameter.';
 
   constructor(
     private data: HttpService,
     private store: Store<any>,
-    private datePipe: DatePipe,
+    public datePipe: DatePipe,
   ) { }
 
   ngOnInit() {
@@ -154,7 +158,7 @@ export class EducationComponent implements OnInit {
       this.searchControl.reset({ value: option.name, disabled: false });
     }
 
-    private addEducation() {
+    public addEducation() {
       this.chooseEducationType = true;
     }
 
@@ -171,7 +175,7 @@ export class EducationComponent implements OnInit {
       this.nameSeted = false;
       this.choosedFromList = false;
     }
-    private changeDate(type, e, fieldData): void {
+    public changeDate(type, e, fieldData): void {
       if (type === 'currPeriod') {
         if (e.target.checked === false) {
           this.toDate = '';
@@ -185,13 +189,13 @@ export class EducationComponent implements OnInit {
         this.toDate = this.datePipe.transform(fieldData, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
       }
     }
-    private cancel(e) {
+    public cancel(e) {
       this.editEducationForm.reset();
       this.chooseEducationType = false;
       this.editableEducation = false;
       this.currentlyPeriod = false;
     }
-    private saveBtn(placeName, edDegree, specialization, currentlyPeriod, fromDate, toDate): void {
+    public saveBtn(placeName, edDegree, specialization, currentlyPeriod, fromDate, toDate): void {
       let dateFromVal = this.datePipe.transform(fromDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
       let dateToVal;
       if (this.toDate !== null) {

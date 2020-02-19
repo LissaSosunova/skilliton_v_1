@@ -55,7 +55,7 @@
           </app-input-search>
 
           <section *ngIf="openAuto === true"
-          [ngClass]="{'block-drop': openAuto == true,  'non-vis': openAuto == false}">
+          class="block-drop">
           <div *ngFor="let option of options" >
                   <div (click)="setValueFromDropDown(option)">
                   <i class="material-icons plus-icon">
@@ -67,8 +67,8 @@
           </section>   
 
 
-          <span *ngIf="showBtn"
-          [ngClass]="{'non-vis': showBtn == false}">Add new skill?   </span>
+          <span *ngIf="showBtn == true"
+          >Add new skill?   </span>
           <input
           type="submit"
           (click)="setValue(skillName)"
@@ -211,7 +211,7 @@
               </app-input-search>
     
               <section *ngIf="openAutoLangs === true" 
-              [ngClass]="{'block-drop': openAutoLangs == true,  'non-vis': openAutoLangs == false}">
+              class="block-drop">
               <div *ngFor="let option of optionsLangs">
                       <div (click)="setValueLangsFromDropDown(option)">
                       <i class="material-icons plus-icon">
@@ -315,7 +315,7 @@
       </app-input-search>
   
         <section *ngIf="openAutoGoals === true"
-          [ngClass]="{'block-drop-goals': openAutoGoals == true,  'non-vis': openAutoGoals == false}">
+          class="block-drop-goals">
           <div *ngFor="let option of optionsGoals">
                   <div (click)="setValueGoalsFromDropDown(option)">
                   <i class="material-icons plus-icon">
@@ -344,9 +344,9 @@
         <label class="container-ch-sm  align-left"> Individual lesson 
           <span class="additional-text">(per hour)</span>
             <input type="checkbox"
-              name="individual"
-              #individual="ngModel"
-              [(ngModel)]="money.individual"
+              name="individ"
+              #individ="ngModel"
+              [(ngModel)]="individual1"
               (change)="pricingSet($event, 'individual')">
             <span class="checkmark-sm"></span>
             </label>
@@ -356,9 +356,9 @@
           <div class="col-xs-9 no-padd">
             <input
             min="0.1" max="999999" step="0.1"
-            name="individVal"
-            #individVal="ngModel"
-            [(ngModel)]="money.individVal"
+            name="individVal1"
+            #individVal1="ngModel"
+            [(ngModel)]="individVal"
             class="input-field"
             type="number"
             (change)="valPayment($event, 0)"
@@ -374,9 +374,9 @@
         <label class="container-ch-sm  align-left"> Group lesson 
             <span class="additional-text">(per hour)</span>
             <input type="checkbox"
-              name="group"
-              #group="ngModel"
-              [(ngModel)]="money.group"
+              name="group1"
+              #group1="ngModel"
+              [(ngModel)]="group"
               (change)="pricingSet($event, 'group')">
               <span class="checkmark-sm"></span>
               </label>
@@ -386,9 +386,9 @@
           <div class="col-xs-9 no-padd">
             <input
             min="0.1" max="999999" step="0.1"
-            name="groupVal"
-            #groupVal="ngModel"
-            [(ngModel)]="money.groupVal"
+            name="groupVal1"
+            #groupVal1="ngModel"
+            [(ngModel)]="groupVal"
             class="input-field"
             type="number"
             (change)="valPayment($event, 1)"
@@ -404,9 +404,9 @@
             <label class="container-ch-sm  align-left"> Consultation 
                 <span class="additional-text">(per hour)</span>
                 <input type="checkbox"
-                  name="consultation"
-                  #consultation="ngModel"
-                  [(ngModel)]="money.consultation"
+                  name="consultation1"
+                  #consultation1="ngModel"
+                  [(ngModel)]="consultation"
                 (change)="pricingSet($event, 'consultation')">
                 <span class="checkmark-sm"></span>
                 </label>
@@ -416,9 +416,9 @@
               <div class="col-xs-9 no-padd">
                 <input
                 min="0.1" max="999999" step="0.1"
-                name="consultationVal"
-                #consultationVal="ngModel"
-                [(ngModel)]="money.consultationVal"
+                name="consultationVal1"
+                #consultationVal1="ngModel"
+                [(ngModel)]="consultationVal"
                 class="input-field"
                 type="number"
                 (change)="valPayment($event, 2)"
@@ -433,9 +433,9 @@
         <div class="col-xs-12">
             <label class="container-ch-sm  align-left"> Expert opinion
                 <input type="checkbox"
-                  name="expertOp"
-                  #expertOp="ngModel"
-                  [(ngModel)]="money.expertOp"
+                  name="expertOp1"
+                  #expertOp1="ngModel"
+                  [(ngModel)]="expertOp"
                   (change)="pricingSet($event, 'expertOp')">
                 <span class="checkmark-sm"></span>
                 </label>
@@ -445,9 +445,9 @@
               <div class="col-xs-9 no-padd">
                 <input
                 min="0.1" max="999999" step="0.1"
-                name="expertOpVal"
-                #expertOpVal="ngModel"
-                [(ngModel)]="money.expertOpVal"
+                name="expertOpVal1"
+                #expertOpVal1="ngModel"
+                [(ngModel)]="expertOpVal"
                 class="input-field"
                 type="number"
                 (change)="valPayment($event, 3)"
@@ -564,7 +564,6 @@
                     [header]="headerError"
                     [actionName]="showErrorText"
                     [details]="details"
-                    [recomend]="recomend"
                      #infoPopup></app-alert-modal>
         </form> 
     </div>

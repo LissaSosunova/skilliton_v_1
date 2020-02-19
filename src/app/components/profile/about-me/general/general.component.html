@@ -187,7 +187,7 @@
                             </app-input-search>
                             <!-- Dropdown -->
                             <section *ngIf="openAutoNative === true" 
-                            [ngClass]="{'block-drop': openAutoNative == true,  'non-vis': openAutoNative == false}">
+                                class="block-drop">
                             <div *ngFor="let option of optionsLangs">
                                     <div (click)="setValueNativeFromDropDown(option)">
                                     <i class="material-icons plus-icon">
@@ -244,7 +244,7 @@
                               </app-input-search>
                               <!-- Dropdown -->
                               <section *ngIf="openAutoOtherLang === true" 
-                              [ngClass]="{'block-drop': openAutoOtherLang == true,  'non-vis': openAutoOtherLang == false}">
+                              class="block-drop">
                               <div *ngFor="let option of optionsLangs">
                                       <div (click)="setValueOtherFromDropDown(option)">
                                       <i class="material-icons plus-icon">

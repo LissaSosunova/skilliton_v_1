@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private data: HttpService,
     private sessionStorageService: SessionstorageService,
     private localstorageService: LocalstorageService,
-    private router: Router,
+    public router: Router,
     private transferService: TransferService,
     private store: Store<any>
   ) { }

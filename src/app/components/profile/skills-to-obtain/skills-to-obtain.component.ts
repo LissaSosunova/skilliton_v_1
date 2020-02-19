@@ -19,16 +19,16 @@ import { AlertModalComponent } from '../../modals/alert-modal/alert-modal.compon
   styleUrls: ['./skills-to-obtain.component.scss']
 })
 export class SkillsToObtainComponent implements OnInit {
-  @ViewChild('skillsDataForm', { read: true, static: false  }) public skillsDataForm: NgForm;
-  @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
+  @ViewChild('skillsDataForm', { read: true }) public skillsDataForm: NgForm;
+  @ViewChild('infoPopup') public infoPopup: AlertModalComponent;
   @Output() user: Observable<types.NewUser>;
   @Output() skillPlaceholder: string;
   @Output() newValue: string;
   @Output() time: any = selectHours;
   @Output() levelSkill: any = skillLevel;
   @Output() skillsPlaceholder: string;
-  private selectedTagsId = [] as  any;
-  private newTags = [] as  any;
+  public selectedTagsId = [] as  any;
+  public newTags = [] as  any;
   public activeUrl: string = 'skills-to-obtain';
   @Input() valueSearch: any;
   public tags: any;
@@ -39,40 +39,47 @@ export class SkillsToObtainComponent implements OnInit {
   public createdSkillToObtaine: types.AddGoalAPI;
   public optionsUserSkills = [] as  any;
   public optionsUserServises = [] as  any;
-  private openAuto: boolean = false;
-  private openAutoUsersSkills: boolean = false;
-  private openAutoUsersServices: boolean = false;
+  public openAuto: boolean = false;
+  public openAutoUsersSkills: boolean = false;
+  public openAutoUsersServices: boolean = false;
   public skillsExpList = [] as  any;
   public skillsArrAPI = [] as  any;
   public servicesExpList = [] as  any;
   public servicesArrAPI = [] as  any;
-  private showBtn: boolean = false;
-  private showChoosedSkill: boolean = false;
+  public showBtn: boolean = false;
+  public showChoosedSkill: boolean = false;
   public newSkill: boolean = false;
-  private choosedSkill: any;
-  private choosedSkillname: any;
+  public choosedSkill: any;
+  public choosedSkillname: any;
   public options: any;
   public userUploaded: boolean;
-  private moneyOffered: boolean = true;
-  private servicesOffered: boolean = false;
-  private servicesSearch: boolean = false;
-  private skillsOffered: boolean = false;
-  private skillsOffereArr = [] as any;
-  private hidden: boolean = false;
-  private withTrial: boolean = false;
+  public moneyOffered: boolean = true;
+  public servicesOffered: boolean = false;
+  public servicesSearch: boolean = false;
+  public skillsOffered: boolean = false;
+  public skillsOffereArr = [] as any;
+  public hidden: boolean = false;
+  public withTrial: boolean = false;
   public searchControl: FormControl;
   public searchSkillsControl: FormControl;
   public searchServicesControl: FormControl;
   private unsubscribe$: Subject<void> = new Subject();
-  private noSkillsForSelect: boolean = false;
-  private noServicesForSelect: boolean = false;
-  private showErrorText: string;
-  private actionName: string;
-  private headerError: string;
+  public noSkillsForSelect: boolean = false;
+  public noServicesForSelect: boolean = false;
+  public showErrorText: string;
+  public actionName: string;
+  public headerError: string;
+  public description: string;
+  public expectedLevel: any;
+  public expectedRes: any;
+  public goalName: any;
+  public currentLevel: any;
+  public skillsName: any;
+  public serviceName: any;
 
   constructor(
     private data: HttpService,
-    private router: Router,
+    public router: Router,
     private store: Store<any>,
     public alertModal: AlertModalComponent,
   ) { }

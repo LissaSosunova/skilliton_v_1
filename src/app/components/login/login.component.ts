@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
   public showError: boolean = false;
   public showErrorText: string;
   public user: types.NewUser = {} as types.NewUser;
-  @ViewChild('loginForm', { read: true, static: false }) public loginForm: NgForm;
-  @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
+  @ViewChild('loginForm', { read: true }) public loginForm: NgForm;
+  @ViewChild('infoPopup') public infoPopup: AlertModalComponent;
   @Output() rememberMeText: string = 'Remember me';
   @Output() actionName: string;
   @Output() headerError: any;
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     private data: HttpService,
     private sessionStorageService: SessionstorageService,
     private localstorageService: LocalstorageService,
-    private router: Router,
+    public router: Router,
     public errorModal: ErrorModalComponent,
     public alertModal: AlertModalComponent,
     ) { }

@@ -12,7 +12,7 @@ import { LoadMates } from '../../../../state/actions/mate.actions';
 })
 export class InterestedPersonsComponent implements OnInit {
   @Input() person: any;
-  private avatar = 'assets/images/post-exaple2.jpg';
+  public avatar = 'assets/images/post-exaple2.jpg';
   @Output() onChanged = new EventEmitter<boolean>();
 
   constructor(

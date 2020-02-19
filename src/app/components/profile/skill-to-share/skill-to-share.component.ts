@@ -22,8 +22,8 @@ import { AlertModalComponent } from '../../modals/alert-modal/alert-modal.compon
 })
 export class SkillToShareComponent implements OnInit {
 
-  @ViewChild('skillsDataForm', { read: true, static: false  }) public skillsDataForm: NgForm;
-  @ViewChild('infoPopup', { static: false }) public infoPopup: AlertModalComponent;
+  @ViewChild('skillsDataForm', { read: true }) public skillsDataForm: NgForm;
+  @ViewChild('infoPopup') public infoPopup: AlertModalComponent;
   @Output() user: Observable<types.NewUser>;
   @Output() skillPlaceholder: string;
   @Output() langsPlaceholder: string;
@@ -31,53 +31,58 @@ export class SkillToShareComponent implements OnInit {
   @Output() newValue: string;
   @Output() time: any = selectHours;
   @Output() levelSkill: any = skillLevel;
-  private showErrorText: string;
-  private actionName: string;
-  private headerError: string;
-  private selectedTagsId = [] as  any;
-  private newTags = [] as  any;
+  public showErrorText: string;
+  public actionName: string;
+  public headerError: string;
+  public details: string;
+  public selectedTagsId = [] as  any;
+  public newTags = [] as  any;
   public activeUrl: string = 'skills-to-share';
-  // @Input() valueSearch: any;
+  public otherinputText: any;
+  public traningExpertise: any;
+  public description: any;
+  public skillName: any;
+  public individual1: any;
   public tags: any;
   public tagsSkills = [] as  any;
   public langs = [] as  any;
   @Input() myGoals = [] as any;
   public mySkills = [] as any;
-  private arrDegree = [] as any;
-  private degree: string | '';
-  private choosedLang = [] as  any;
-  private choosedLangname = [] as  any;
-  private choosedSkill: any;
-  private choosedGoals = [] as any;
-  private choosedSkillname: any;
-  private collegeSelected: boolean = false;
-  private coursesSelected: boolean = false;
-  private disConsultationVal: boolean = true;
-  private disExpertOpVal: boolean = true;
-  private disGroupVal:  boolean = true;
-  private disIndividVal:  boolean = true;
-  private hidden: boolean = false;
-  private isShared: boolean = true;
-  private langRequired: boolean = true;
-  private moneyExpected: boolean = false;
-  private noSkillsForSelect: boolean = false;
-  private openAuto: boolean = false;
-  private openAutoGoals: boolean = false;
-  private openAutoLangs: boolean = false;
-  private otherRequired: boolean = false;
-  private otherRequiredErr: string;
-  private otherSelected: boolean = false;
-  private prices = [] as any;
-  private selfEducationSelected: boolean = false;
-  private servicesExpected: boolean = false;
-  private showBtn: boolean = false;
-  private showChoosedLangs:  boolean = false;
-  private showChoosedSkill: boolean = false;
-  private skillsExpected: boolean = false;
-  private skillsExpList = [] as  any;
-  private universitySelected: boolean = true;
+  public arrDegree = [] as any;
+  public degree: string | '';
+  public choosedLang = [] as  any;
+  public choosedLangname = [] as  any;
+  public choosedSkill: any;
+  public choosedGoals = [] as any;
+  public choosedSkillname: any;
+  public collegeSelected: boolean = false;
+  public coursesSelected: boolean = false;
+  public disConsultationVal: boolean = true;
+  public disExpertOpVal: boolean = true;
+  public disGroupVal:  boolean = true;
+  public disIndividVal:  boolean = true;
+  public hidden: boolean = false;
+  public isShared: boolean = true;
+  public langRequired: boolean = true;
+  public moneyExpected: boolean = false;
+  public noSkillsForSelect: boolean = false;
+  public openAuto: boolean = false;
+  public openAutoGoals: boolean = false;
+  public openAutoLangs: boolean = false;
+  public otherRequired: boolean = false;
+  public otherRequiredErr: string;
+  public otherSelected: boolean = false;
+  public prices = [] as any;
+  public selfEducationSelected: boolean = false;
+  public servicesExpected: boolean = false;
+  public showBtn: boolean = false;
+  public showChoosedLangs:  boolean = false;
+  public showChoosedSkill: boolean = false;
+  public skillsExpected: boolean = false;
+  public skillsExpList = [] as  any;
+  public universitySelected: boolean = true;
   private unsubscribe$: Subject<void> = new Subject();
-  private withTrial: boolean = false;
+  public withTrial: boolean = false;
   public createdSkillToShare: types.AddSkillAPI;
   public currency = [{name: "USD", value: "USD"}, {name: "EURO", value: "EURO"}];
   public newSkill: boolean = false;
@@ -90,10 +95,23 @@ export class SkillToShareComponent implements OnInit {
   public searchLangsControl: FormControl;
   public tagsInterests = [] as  any;
   public userUploaded: boolean;
+  public relevantExpirience: string;
+  public expectedRes: string;
+  public expectedLevel: any;
+  public currentLevel: any;
+  public expertOp: any;
+  public consultationVal: any;
+  public goalsName: any;
+  public langName: any;
+  public consultation: any;
+  public groupVal: any;
+  public group: any;
+  public individVal: any;
+  public expertOpVal: any;
 
   constructor(
     private data: HttpService,
-    private router: Router,
+    public router: Router,
     private store: Store<any>,
     public alertModal: AlertModalComponent,
   ) { }
@@ -350,7 +368,9 @@ public outsideSearchClick(): void {
   this.showBtn = true;
 }
 // Set prices
-pricingSet(e, name: string) {
+pricingSet(e, name?: string) {
+  console.log(e)
+
   if (e.target.checked === true) {
     let defaultPrice = {currency: 'USD',
     type: null,

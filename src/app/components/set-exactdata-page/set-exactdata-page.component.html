@@ -24,7 +24,7 @@
                     </section>
           
         <section *ngIf="openAuto === true" 
-                    [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
+                   class="block-droop">
         <div *ngFor="let option of options" appClickOutside>
               <div (click)="setValueFromDropDown(option, 'skills')">
                   <i class="material-icons plus-icon">
@@ -99,7 +99,7 @@
                     </section>
 
                     <section *ngIf="openAuto === true" 
-                    [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
+                    class="block-droop">
                         <div *ngFor="let option of options" appClickOutside>
                             <div (click)="setValueFromDropDown(option, 'goals')">
                               <i class="material-icons plus-icon">
@@ -171,8 +171,8 @@
                     <app-input-search
                     [control]="searchControl"
                     name="interestName"
-                    [(ngModel)]="interestName"
-                    #lastName="ngModel"
+                    [(ngModel)]="interestName1"
+                    #interestName="ngModel"
                     [required]="true"
                     [placeholder]="'Start to type name of interest'"
                     [requiredFieldError]="'You can not to continue without any interest'"
@@ -181,7 +181,7 @@
                 </section>
 
                 <section *ngIf="openAuto === true" 
-                [ngClass]="{'block-droop': openAuto == true,  'non-vis': openAuto == false}">
+                class="block-droop">
                     <div *ngFor="let option of options" appClickOutside>
                         <div (click)="setValueFromDropDown(option, 'interests')">
                             <i class="material-icons plus-icon">

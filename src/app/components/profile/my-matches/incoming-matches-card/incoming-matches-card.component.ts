@@ -14,12 +14,12 @@ import { debug } from 'util';
 })
 export class IncomingMatchesCardComponent implements OnInit {
   @Input() match: any;
-  private avatar = 'assets/images/post-exaple2.jpg';
+  public avatar = 'assets/images/post-exaple2.jpg';
   @Output() onChanged = new EventEmitter<boolean>();
   @Output() public actionName: string;
   @Output() public avatar1: string;
   @Output() public avatar2: string;
-  @ViewChild('congrats', { static: false }) public congrats: CongratsPopupComponent;
+  @ViewChild('congrats') public congrats: CongratsPopupComponent;
 
 
   constructor(
@@ -58,7 +58,7 @@ export class IncomingMatchesCardComponent implements OnInit {
       }
     });
   }
-  private openDetialsBlock(id): void {
+  public openDetialsBlock(id): void {
     const elems = Array.from(document.getElementsByTagName('div'));
     let elem;
     elems.forEach((el) => {

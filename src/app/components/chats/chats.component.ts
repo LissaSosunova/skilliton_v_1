@@ -3,9 +3,10 @@ import * as _ from 'lodash';
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, Output, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store} from '@ngrx/store';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, from } from 'rxjs';
 import { LoadChats } from '../../state/actions/chats.actions';
 import { ChatsService } from '../../services/chats.service';
+import { types } from 'src/app/types/types';
 
 @Component({
   selector: 'app-chats',
@@ -15,9 +16,8 @@ import { ChatsService } from '../../services/chats.service';
 export class ChatsComponent implements OnInit {
 
 public chatsUploaded: boolean = false;
-@Output() public chatList: Observable<any>;
-@Output() public requestsList: Observable<any>;
-@Output() public typeChat: string;
+@Output() public chatList: Array<types.ChatsListForChats>;
+@Output() public requestsList: Array<types.RequestListForChats>;
 private unsubscribe$: Subject<void> = new Subject<void>();
 public chatsExsist: BehaviorSubject<boolean>;
 public requestsExsist: BehaviorSubject<boolean>;
@@ -27,7 +27,7 @@ public requestsExsist: BehaviorSubject<boolean>;
 public chatWindowWidth: string;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private store: Store<any>,
     private chatService: ChatsService
   ) { }

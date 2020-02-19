@@ -13,7 +13,7 @@ import { LoadMates } from '../../../state/actions/mate.actions';
 })
 export class PeopleCardComponent implements OnInit {
   @Input() people: any;
-  private avatar = 'assets/images/post-exaple2.jpg';
+  public avatar = 'assets/images/post-exaple2.jpg';
   constructor(
     private store: Store<any>,
     private data: HttpService,
