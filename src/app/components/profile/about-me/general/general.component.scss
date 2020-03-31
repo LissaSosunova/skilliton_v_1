@@ -29,7 +29,7 @@
   position: absolute;
   text-align: left;
   width: 99.7%;
-  top: 66px;
+  top: 54px;
   height: 160px;
   overflow: auto;
   padding: 0px;
@@ -74,7 +74,7 @@
     line-height: 1rem;
 }
 .inner-text {
-  padding-top: 8px;
+  padding-top: 2px;
 }
 
 .margin-text {
@@ -102,7 +102,7 @@
   width: 100%;
   box-sizing: border-box;
   display: flex;
-  height: 47px;
+  height: 35px;
   text-align: left;
 }
 .choosed-lang-field {
@@ -118,15 +118,15 @@
   height: 47px;
 }
 .btn-edit {
-  padding: 8px;
+  padding: 6px;
   background-color: map-get($bg-color, 'gray-lighter');
   border-left: 1px solid map-get($bg-color, 'gray-light');
   border-bottom: 1px solid map-get($bg-color, 'gray-light');
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-  height: 46px;
+  height: 34px;
   color: map-get($bg-color, 'gray');
-  font-size: 20px;
+  font-size: 14px;
   &:hover {
     cursor: pointer;
     background-color: map-get($bg-color, 'gray-light');

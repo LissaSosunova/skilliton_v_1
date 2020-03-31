@@ -102,12 +102,12 @@
                               [required]="true"
                               [errorText]="'Date of birth is required'"
                               name="birthday"
-                              (dateChange)="checkDatePicker('change', $event, birthdayDate)"
+                              (change)="checkDatePicker($event)"
                               [errorTextDate]="errorTextDate">
                           </app-input-datepicker>
                       </div>
                       <div class="col-xs-2 no-padd btn-save center-xs middle-xs">
-                          <span *ngIf="showEqualError == false" (click)="saveNewName('lastName', lastNameOfUser)">
+                          <span (click)="checkDatePicker(birthdayDate, $event)">
                                 <i class="material-icons edit-icon">
                                                 save
                                 </i>

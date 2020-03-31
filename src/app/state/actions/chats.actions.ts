@@ -7,12 +7,15 @@ export enum ChatsActionTypes {
   LOAD_CURRENT_CHAT = '[Chat] Load Current Chat',
   LOAD_CURRENT_CHAT_SUCCESS = '[Chat] Load Current Chat success',
   LOAD_CURRENT_CHAT_ERROR = '[Chat] Load Current Chat error',
+  UPDATE_CHAT_LIST = '[Chats] Update Chat list'
 }
 
 export class LoadChats implements Action {
   readonly type = ChatsActionTypes.LOAD_CHATS;
 }
-
+export class UpdateChatList implements Action {
+  readonly type = ChatsActionTypes.UPDATE_CHAT_LIST;
+}
 export class LoadChatsSuccess implements Action {
   readonly type = ChatsActionTypes.LOAD_CHATS_SUCCESS;
   constructor(public payload) { }

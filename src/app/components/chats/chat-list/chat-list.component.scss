@@ -52,7 +52,6 @@
   max-width: 100px;
 }
 
-
 .bg-white {
   background-color: map-get($bg-color, 'white');
 }
@@ -73,6 +72,7 @@
 }
 .position-relative {
   position: relative;
+  margin-bottom: 27px;
 }
 .fixed {
   position: absolute;
@@ -80,4 +80,7 @@
 }
 .margin-28 {
   margin-top: 28px;
+}
+.spacer {
+  margin-top: 35px;
 }

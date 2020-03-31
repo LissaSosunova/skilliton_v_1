@@ -10,6 +10,7 @@ import { environment } from '../../../environments/environment';
 
 import { types } from '../../types/types';
 import * as userAction from '../actions/user.actions';
+import { Router } from '@angular/router';
 
 export const stateFeatureKey = 'state';
 
@@ -34,6 +35,7 @@ const userInitState: types.NewUser = {
     placeOfResidence:  '',
     rate: 0,
     profileSummary: null,
+    profileStatus: null,
     langs: null,
     sex: '',
     userType: null
@@ -100,6 +102,13 @@ export function userReducer(state: any, action: any)  {
       const data = action.payload;
       if (state !== undefined) {
         state.notifications.active = data;
+      }
+      return state;
+    }
+    case userAction.UserActionTypes.LOAD_USER_ERROR: {
+      const data = action.payload;
+      if(data.status == 401) {
+        state = undefined;
       }
       return state;
     }

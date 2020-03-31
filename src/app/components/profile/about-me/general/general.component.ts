@@ -262,9 +262,9 @@ public errorSexText: string;
       this.editableBirthDay = false;
     }
     // Function checks correct date in input datepicker
-  public checkDatePicker(event, birthdayDate: string, data?: any): void {
-    console.log(event, birthdayDate, data)
-
+  public checkDatePicker(birthdayDate: string, data?: any): void {
+    this.showEqualError = false;
+    this.getDataForDateOptions();
     this.checkDate = +(this.datePipe.transform(birthdayDate, "yyyy"));
     if(this.checkDate >= this.minimalYear){
       let result = _.find(this.ERROR_APP, function(o) { return o.code == 103; });
@@ -276,7 +276,7 @@ public errorSexText: string;
       this.showEqualError = false;
       this.errorAPP = '';
     }
-    if (birthdayDate !== null) {
+    if (birthdayDate !== null && this.checkDate <= this.minimalYear) {
       const newVal = this.datePipe.transform(birthdayDate, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
       this.editData.sendData('birthDate', newVal);
       this.updateUserData();

@@ -4,10 +4,15 @@
 <div class="col-xs-12 no-padd header-block">
   <div class="col-xs-12 header start-xs"
   *ngIf="chat.addInfo.isActive === true">
+  <span class="col-xs-4 col-sm-4 hidden-md hidden-lg back-arrow" (click)="goBack()">
+    <img src="assets/images/svg-icons/go_back_arrow.svg">
+  </span>
     <label>{{chat.addInfo.chatDetails.partnerName}} {{chat.addInfo.chatDetails.partnerLastName}} </label>
     <br>
-    <span *ngIf="chat.addInfo.chatDetails.chatGoalName !== null">{{chat.addInfo.chatDetails.chatGoalName}} </span>
-    <span *ngIf="chat.addInfo.chatDetails.chatSkillName !== null">{{chat.addInfo.chatDetails.chatSkillName}} </span>
+    <span *ngIf="chat.addInfo.chatDetails.chatGoalName !== null"
+    class="hidden-xs hidden-sm col-md-8 col-lg-8">{{chat.addInfo.chatDetails.chatGoalName}} </span>
+    <span *ngIf="chat.addInfo.chatDetails.chatSkillName !== null"
+    class="hidden-xs hidden-sm col-md-8 col-lg-8">{{chat.addInfo.chatDetails.chatSkillName}} </span>
     <div class="col-xs-12 start-lesson center-xs">
       <span>Start lesson</span>
     </div>
@@ -15,10 +20,15 @@
 
   <div class="col-xs-12 header start-xs"
   *ngIf="chat.addInfo.isActive === false">
+  <span class="col-xs-4 col-sm-4 hidden-md hidden-lg back-arrow" (click)="goBack()">
+    <img src="assets/images/svg-icons/go_back_arrow.svg">
+  </span>
   <label>{{chat.addInfo.chatDetails.partnerName}} {{chat.addInfo.chatDetails.partnerLastName}} </label>
   <br>
-  <span *ngIf="chat.addInfo.chatDetails.chatGoalName !== null">{{chat.addInfo.chatDetails.chatGoalName}} </span>
-  <span *ngIf="chat.addInfo.chatDetails.chatSkillName !== null">{{chat.addInfo.chatDetails.chatSkillName}} </span>
+  <span *ngIf="chat.addInfo.chatDetails.chatGoalName !== null"
+  class="hidden-xs hidden-sm col-md-8 col-lg-8">{{chat.addInfo.chatDetails.chatGoalName}} </span>
+  <span *ngIf="chat.addInfo.chatDetails.chatSkillName !== null"
+  class="hidden-xs hidden-sm col-md-8 col-lg-8">{{chat.addInfo.chatDetails.chatSkillName}} </span>
   </div>
 
 </div>

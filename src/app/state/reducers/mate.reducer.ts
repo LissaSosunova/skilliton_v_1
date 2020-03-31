@@ -25,6 +25,7 @@ export const initialState: State = {
     placeOfResidence:  '',
     rate: 0,
     profileSummary: null,
+    profileStatus: null,
     langs: null,
     sex: '',
     userType: null

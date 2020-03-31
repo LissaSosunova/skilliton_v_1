@@ -46,35 +46,76 @@
             <span class="name">{{name}} </span>
             <span class="name">{{lastName}}</span> 
             <br/>
-            <div  class="summary row">
-                    <div *ngIf="openSummaryTextarea == false" class="edit-summary-btn" (click)="openEditSummary()">
-                                <i class="material-icons create-icon">
-                                                create
-                                </i>
+            <div  class="summary column">
+                <div class="col-xs-12 row prof-status-box">
+                    <span *ngIf="openProfileStatusTextarea == false"
+                    class="col-xs-10 no-padding">{{ profileSt || "Status is not set"}}</span>
+                    <div *ngIf="openProfileStatusTextarea == false"
+                    class="col-xs-2" (click)="openEditProfileSt()">
+                    <div class="edit-summary-btn">
+                        <img class="create-icon"  src="assets/images/svg-icons/edit_btn.svg">
                     </div>
-                    <span *ngIf="openSummaryTextarea == false">{{summary || "No summary"}}</span>
-
-                    <div class="col-xs-10" *ngIf="openSummaryTextarea == true"> 
-                        <app-input-textarea
-                        name="summaryV"
-                        [value]="summaryValue"
-                        #summaryV="ngModel"
-                        [(ngModel)]="summaryValue"
-                        [maxLength]="300"
-                        [required]="false"></app-input-textarea>
                     </div>
-                        <div class="col-xs-2 middle-xs center-xs">
-                        <span *ngIf="openSummaryTextarea == true" (click)="saveNewSummary(summaryValue)">
+                    
+                    <br>
+                    <div class="col-xs-10 no-padding" *ngIf="openProfileStatusTextarea == true"> 
+                        <app-input-text
+                            name="profileStat"
+                            [value]="profileStatus"
+                            [(ngModel)]="profileStatus"
+                            #profileStat="ngModel"
+                            [required]="false"
+                            >
+                        </app-input-text>
+                    </div>
+                    <div class="col-xs-2 btn-group center-xs">
+                        <span *ngIf="openProfileStatusTextarea == true" (click)="saveNewProfileStatus(profileStatus)"
+                        class="edit-round-btn">
                         <i class="material-icons edit-icon">
                                 check
                         </i>
                         </span>
-                        <span *ngIf="openSummaryTextarea == true" (click)="cancelEditSumm()">
+                        <span *ngIf="openProfileStatusTextarea == true" (click)="cancelEditProfileStatus()"
+                        class="edit-round-btn">
                         <i class="material-icons edit-icon">
                                 close
                         </i>
                         </span>               
                     </div>
+                </div>
+                <div class="col-xs-12 row">
+                <span *ngIf="openSummaryTextarea == false"
+                class="col-xs-10 no-padding">{{summary || "No summary"}}</span>
+                <div *ngIf="openSummaryTextarea == false" class="col-xs-2" (click)="openEditSummary()">
+                    <div class="edit-summary-btn">
+                        <img class="create-icon"  src="assets/images/svg-icons/edit_btn.svg">
+                    </div>
+                </div>
+
+                <div class="col-xs-10 no-padding" *ngIf="openSummaryTextarea == true"> 
+                    <app-input-textarea
+                    name="summaryV"
+                    [value]="summaryValue"
+                    #summaryV="ngModel"
+                    [(ngModel)]="summaryValue"
+                    [maxLength]="300"
+                    [required]="false"></app-input-textarea>
+                </div>
+                    <div class="col-xs-2 btn-group center-xs">
+                    <span *ngIf="openSummaryTextarea == true" (click)="saveNewSummary(summaryValue)"
+                    class="edit-round-btn">
+                    <i class="material-icons edit-icon">
+                            check
+                    </i>
+                    </span>
+                    <span *ngIf="openSummaryTextarea == true" (click)="cancelEditSumm()"
+                    class="edit-round-btn">
+                    <i class="material-icons edit-icon">
+                            close
+                    </i>
+                    </span>               
+                </div>
+                </div>
             </div>
             <div class="col-lg-12 bar-bg start-xs">
                     <app-progress-bar

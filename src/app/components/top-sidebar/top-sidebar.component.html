@@ -5,12 +5,12 @@
                 col-md-12
                 col-lg-12
                 row">
-    <div class="col-xs-4">
+    <div class="col-xs-3">
             <a [routerLink]="'/main'" routerLinkActive="active" class="logo">
-                <img src="assets/images/skilliton_logo.png" class="logo-img">
+                <img src="assets/images/svg-icons/skilliton_logo.svg" class="logo-img">
             </a>
     </div>
-    <div class="col-xs-8 ">
+    <div class="col-xs-9">
             <nav *ngIf="currParentUrl !== 'login' && currParentUrl
             !== 'registration' && currParentUrl
             !== 'registration-success' && currParentUrl !== 'unknownPage'
@@ -30,15 +30,15 @@
                         >
                     </li>
                 </form>
-                    <li><i class="material-icons search-btn" (click)="openSearch()">search</i></li>
-                    <li><a href="#" [routerLink]="'/main'" routerLinkActive="active"><i class="material-icons exit-btn" alt="Home page">home</i></a></li>
-                    <li><a href="#" [routerLink]="'/main'" routerLinkActive="active"><i class="material-icons exit-btn">local_library</i></a></li>
-                    <li ><a href="#" [routerLink]="'/main'" routerLinkActive="active"><i class="material-icons exit-btn">class</i></a></li>
-                    <li><a href="#" [routerLink]="'/main/chats'" routerLinkActive="active"><i class="material-icons exit-btn">chat</i></a></li>
-                    <li><a href="#" [routerLink]="'/main/profile'" routerLinkActive="active"><i class="material-icons exit-btn">notifications</i></a></li>
+                    <li class="li-link"><i class="material-icons search-btn" (click)="openSearch()">search</i></li>
+                    <li class="li-link"><a href="#" [routerLink]="'/main'" routerLinkActive="active">Home</a></li>
+                    <li class="li-link"><a href="#" [routerLink]="'/main'" routerLinkActive="active">Library</a></li>
+                    <li class="li-link"><a href="#" [routerLink]="'/main'" routerLinkActive="active">Classroom</a></li>
+                    <li class="li-link"><a href="#" [routerLink]="'/main/chats'" routerLinkActive="active">Chat</a></li>
+                    <li class="li-link"><a href="#" [routerLink]="'/main/profile'" routerLinkActive="active">Notifications</a></li>
                     <li><a href="#" [routerLink]="'/main/profile'" routerLinkActive="active"><i class="material-icons exit-btn">account_circle</i></a></li>
                     <li>
-                            <app-lang-switcher></app-lang-switcher>
+                            <!-- <app-lang-switcher></app-lang-switcher> -->
                         </li>
                     <li><i class="material-icons exit-btn" (click)="exitApp()">exit_to_app</i></li>
                 </ul>

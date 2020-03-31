@@ -37,15 +37,18 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   public currParentUrl: string;
   @ViewChild('currChildUrl') public currChildUrl: string;
   @ViewChild('summaryValue', {static: true}) public summaryValue: string;
+  @ViewChild('profileStatus', {static: true}) public profileStatus: string;
   @ViewChild('uploadFile', {static: true}) public uploadFile: ElementRef;
   subscription: Subscription;
   public name: string;
   public lastName: string;
   public summary: string;
+  public profileSt: string;
   public placeOfBirth: any;
   public placeOfResidence: any;
   private unsubscribe$: Subject<void> = new Subject<void>();
   public openSummaryTextarea: boolean = false;
+  public openProfileStatusTextarea: boolean = false;
   public counter: number;
 
 
@@ -95,6 +98,10 @@ export class ProfileComponent implements OnInit,  OnDestroy {
         this.name = state.profile.name;
         this.lastName = state.profile.lastName;
         this.summary = this.user.profile.profileSummary;
+        this.profileSt = this.user.profile.profileStatus;
+        if (this.profileSt !== '') {
+          this.profileStatus = this.profileSt;
+        }
         if (this.summary !== '') {
           this.summaryValue = this.summary;
           this.counter = this.counter + 12.5;
@@ -137,14 +144,26 @@ export class ProfileComponent implements OnInit,  OnDestroy {
   openEditSummary() {
     this.openSummaryTextarea = !this.openSummaryTextarea;
   }
+  openEditProfileSt() {
+    this.openProfileStatusTextarea = !this.openProfileStatusTextarea;
+  }
   saveNewSummary(newVal) {
     if(newVal !== null) {
       this.editData.sendData('profileSummary', newVal);
       this.openSummaryTextarea = false;
     }
   }
+  saveNewProfileStatus(newVal) {
+    if(newVal !== null && newVal !== '') {
+      this.editData.sendData('profileStatus', newVal);
+      this.openProfileStatusTextarea = false;
+    }
+  }
   cancelEditSumm() {
     this.openSummaryTextarea = false;
+  }
+  cancelEditProfileStatus() {
+    this.openProfileStatusTextarea = false;
   }
   getErrorCodeApi(data: number, message: string): void {
     if (data === 401) {

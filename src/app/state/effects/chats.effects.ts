@@ -8,7 +8,8 @@ import { ChatsActionTypes,
   LoadCurrentChatSuccess,
   LoadCurrentChatError,
   LoadChatsSuccess,
-  LoadChatsError
+  LoadChatsError,
+  UpdateChatList
  } from '../actions/chats.actions';
 
 
@@ -20,6 +21,20 @@ export class ChatsEffects {
   @Effect() loadChats$ = this.actions$
   .pipe(
     ofType(ChatsActionTypes.LOAD_CHATS),
+    mergeMap(
+      () => this.api.getChatList()
+        .pipe(
+          map(resp => {
+            return new LoadChatsSuccess(resp);
+          }),
+          catchError(error => of(new LoadChatsError(error)))
+        )
+    ),
+  );
+
+  @Effect() updateChats$ = this.actions$
+  .pipe(
+    ofType(ChatsActionTypes.UPDATE_CHAT_LIST),
     mergeMap(
       () => this.api.getChatList()
         .pipe(

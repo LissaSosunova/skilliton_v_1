@@ -76,6 +76,7 @@ export module types {
     placeOfResidence: any;
     rate: number;
     profileSummary: null | string;
+    profileStatus: null | string;
     langs: Langs | null;
     sex: any;
     userType?: number;
