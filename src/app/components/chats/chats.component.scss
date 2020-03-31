@@ -20,8 +20,14 @@
   margin-top: calc(#{$header-height} - 3px);
   padding: 23px 16px 5px 16px;
   color: map-get($font-color, 'primary');
-  font-size: 18px;
+  font-size: 30px;
   font-weight: 500;
+  max-height: 56px;
+  border-bottom: 1px solid map-get($bg-color, 'gray-light');
+  background-color: map-get($bg-color, 'white');
+}
+.all-chats-sm {
+  margin-top: 10px;
   max-height: 56px;
   border-bottom: 1px solid map-get($bg-color, 'gray-light');
   background-color: map-get($bg-color, 'white');

@@ -15,7 +15,18 @@
                         start-xs
                         bg-white
                         no-padd">
-                <div class="all-chats">
+                <div class="hidden-xs
+                            hidden-sm
+                            col-md-10
+                            col-lg 10
+                            all-chats">
+                  Chats
+                  </div>
+                  <div class="col-xs-10
+                  col-sm-10
+                    hidden-md
+                    hidden-lg
+                    all-chats-sm">
                   Chats
                   </div>
             </div>
@@ -31,8 +42,8 @@
                         *ngIf="chatsExsist.value === false && requestsExsist.value === false"> After you matched with someone, there will appear a hat with this person </div>
 <!-- Chats exist -->
 
-              <div class="col-xs-12
-              col-sm-12
+              <div class="hidden-xs
+              hidden-sm
               col-md-10
               col-lg-10
               row
@@ -44,6 +55,30 @@
                   class="scroll-height"
                   [ngClass]="chatWidth"
                   *ngIf="(chatsExsist | async) || (requestsExsist | async)"
+                  [chatList]="chatList"
+                  [requestsList]="requestsList"
+                  (setChatWidth)="setChatWidth($event)"
+                  (goToChat)="goToChat($event)"></app-chat-list>
+
+                <div class="chat-conteiner"
+                      *ngIf="router.url !== '/main/chats'">
+                  <app-chat-window
+                      [chatId]="chatId.value"></app-chat-window>
+                </div>
+            </div>
+<!-- Small screen -->
+            <div class="col-xs-12
+              col-sm-12
+              hidden-md
+              hidden-lg
+              row
+              box
+              top-xs
+              chats"
+              *ngIf="(chatsExsist | async) || (requestsExsist | async)">
+                  <app-chat-list
+                  class="scroll-height col-xs-12"
+                  *ngIf="router.url === '/main/chats' && ((chatsExsist | async) || (requestsExsist | async))"
                   [chatList]="chatList"
                   [requestsList]="requestsList"
                   (setChatWidth)="setChatWidth($event)"

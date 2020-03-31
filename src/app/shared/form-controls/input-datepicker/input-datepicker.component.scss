@@ -5,7 +5,7 @@
 }
 
 .input-field {
-    height: 47px;
+    height: 30px;
     width: 100%;
     margin-bottom: 5px;
 }
@@ -15,14 +15,14 @@ mat-form-field ::ng-deep  {
         display: none;
     }
     .mat-form-field-infix {
-        margin-top: 5px;
+        margin-top: 1px;
         width: auto !important;
-        padding: 5px 7px 8px 8px;
+        padding: 1px 3px 3px 6px;
     }
     .mat-form-field-suffix {
-        bottom: 11px;
+        bottom: 5px;
         
-        padding: 5px 7px 8px 8px;
+        padding: 5px 5px 0px 10px;
         .mat-datepicker-toggle {
             .mat-button, .mat-icon-button, .mat-stroked-button {
                 background-color: transparent !important;
@@ -41,13 +41,13 @@ mat-form-field ::ng-deep  {
     }
     .mat-form-field-wrapper {
         padding-bottom: 0 !important;
-        border: 1px solid map-get($font-color, 'gray');
+        border: 1px solid map-get($font-color, 'gray-light');
         border-radius: 8px;
-        padding: 5px;
+        padding: 3px 4px 3px 5px;
         background-color: white;
     }
     .mat-form-field-label-wrapper {
-        padding: 5px;
+        padding: 3px;
         
     }
     .mat-icon-button {

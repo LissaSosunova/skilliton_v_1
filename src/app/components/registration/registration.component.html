@@ -55,20 +55,7 @@
                 col-md-offset-2
                 col-lg-offset-3 spec-padd">
                 
-    <!-- Date of birth field -->
-    <div class="input-name">Date of birth: </div>
-    <app-input-datepicker
-                        [floatLabel]="'auto'"
-                        [disabled]="false"
-                        [format]="'dd MM yyyy'"
-                        [max]="2012"
-                        [(ngModel)]="birthdayDate"
-                        [required]="true"
-                        [errorText]="'Date of birth is required'"
-                        name="birthday"
-                        (dateChange)="checkDatePicker('change', $event, birthdayDate)"
-                        [errorTextDate]="errorTextDate">
-    </app-input-datepicker>
+    
     </div>
 
     <div class="col-xs-11
@@ -79,8 +66,25 @@
                 col-xs-offset-1
                 col-md-offset-2
                 col-lg-offset-3 spec-padd">
+
+                <!-- Date of birth field -->
+                <div class="input-name marg-bottom">Date of birth: </div>
+                <app-input-datepicker
+                class="marg-bottom"
+                  [floatLabel]="'auto'"
+                  [disabled]="false"
+                  [format]="'dd MM yyyy'"
+                  [max]="2012"
+                  [(ngModel)]="birthdayDate"
+                  [required]="true"
+                  [errorText]="'Date of birth is required'"
+                  name="birthday"
+                  (dateChange)="checkDatePicker('change', $event, birthdayDate)"
+                  [errorTextDate]="errorTextDate">
+                </app-input-datepicker>
+
                         <!-- E-mail field -->
-                <div class="input-name">Your e-mail: </div>
+                <div class="input-name marg-top">Your e-mail: </div>
                 <app-input-email [(ngModel)]="email"
                                 #emailInput="ngModel"
                                 name="emailInput"

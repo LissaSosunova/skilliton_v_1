@@ -1,6 +1,6 @@
 import { ChatEmotions } from './../../../shared/constants/chat-emotions';
 import { types } from './../../../types/types';
-import { LoadCurrentChat, LoadChats } from './../../../state/actions/chats.actions';
+import { LoadCurrentChat, UpdateChatList } from './../../../state/actions/chats.actions';
 import * as _ from 'lodash';
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy, Output, Input, ElementRef, OnChanges, EventEmitter } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
@@ -71,11 +71,11 @@ public editableMessageId: any;
       this.inputMes = '';
       if (state.currChat) {
         this.chat = state.currChat;
-        const reverced$ = state.currChat.data.reverse();
-        this.messages = reverced$;
+        const arrayOfMessages$ = state.currChat.data;
+        this.messages = arrayOfMessages$;
         // Set value for active chat boolean
         state.currChat.addInfo.matchStatus === 1 ? this.isActiveChat.next(true) : this.isActiveChat.next(false);
-        reverced$.forEach((t) => {
+        arrayOfMessages$.forEach((t) => {
           if (t.content.status === 0 && t.content.isMine === true) {
             this.inputMes = t.content.text;
           }
@@ -122,6 +122,7 @@ public editableMessageId: any;
         if (resp.error === false) {
           this.updateChat = !this.updateChat;
           this.store.dispatch(new LoadCurrentChat(this.chatId));
+          this.store.dispatch(new UpdateChatList());
           this.toastService.openToastSuccess("Editing message complete.");
           this.scrollMessageBox();
         }
@@ -153,6 +154,7 @@ public editableMessageId: any;
     this.data.postMessage(options).subscribe((resp) => {
       if (options.draft === false) {
         this.inputMes = '';
+        this.store.dispatch(new UpdateChatList());
       }
       this.store.dispatch(new LoadCurrentChat(this.chatId));
       this.scrollMessageBox();
@@ -224,5 +226,9 @@ public editableMessageId: any;
     } else {
       this.inputMes = emo;
     }
+  }
+  // Back to chat list for small screens
+  public goBack() {
+    this.router.navigate(['/main/chats']);
   }
 }

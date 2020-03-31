@@ -6,8 +6,8 @@
     width: 100%;
     padding-block-start: 10px;
     padding-block-end: 10px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 1%;
+    padding-right: 1%;
     margin-left: 0px;
     margin-right: 0px;
     z-index: 500;
@@ -57,7 +57,7 @@ header {
 
 .logo-img {
     margin-left: 2%;
-    height: 30px;
+    height: 20px;
 }
 
 .exit-btn {
@@ -90,4 +90,8 @@ header {
 }
 .non-vis {
     display: none;
+}
+.li-link {
+    margin-left: 8px;
+    margin-right: 8px;
 }

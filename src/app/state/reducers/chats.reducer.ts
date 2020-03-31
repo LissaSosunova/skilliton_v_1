@@ -3,6 +3,8 @@ import { environment } from '../../../environments/environment';
 import * as _ from 'lodash';
 import { ChatsActionTypes } from '../actions/chats.actions';
 import { types } from 'src/app/types/types';
+import { act } from '@ngrx/effects';
+import { isArray } from 'util';
 
 
 export const chatsFeatureKey = 'chats';
@@ -44,7 +46,18 @@ export function chatsReducer(state = initialState, action: any): State {
     }
     case ChatsActionTypes.LOAD_CURRENT_CHAT_SUCCESS : {
       if (action.payload) {
-        updateState.currChat = action.payload;
+        const data = action.payload;
+        const check$ = action.payload.data;
+        for (let i = 0; i < check$.length; i++) {
+          if (check$[0].eventType !== 0) {
+            let last = new Date(check$[0].time);
+            let second = new Date(check$[1].time);
+            if (last > second) {
+              data.data = check$.reverse();
+            }
+          }
+          }
+        updateState.currChat = data;
         return updateState;
       }
     }

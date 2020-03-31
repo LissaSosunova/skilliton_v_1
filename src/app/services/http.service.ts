@@ -1,11 +1,13 @@
+import {  mergeMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { types } from '../types/types';
 import { SessionstorageService } from './sessionstorage.service';
 import { Router } from '@angular/router';
 import { typeSourceSpan } from '@angular/compiler';
+import {Observable, of, throwError} from "rxjs";
+import {catchError, map} from 'rxjs/operators';
 
 const URL_BACK = 'http://185.41.250.120:8080';
 
@@ -39,7 +41,14 @@ export class HttpService {
     return this.http.get(URL_BACK + '/resend_activation_code?activation_code=' + params);
   }
   public getUser(): Observable<any> {
-    return this.http.get(URL_BACK + '/user/me', {headers: this.getHeaders()});
+    return this.http.get(URL_BACK + '/user/me', {headers: this.getHeaders()})
+    .pipe(
+      catchError((err) => {
+        console.log('error caught in service', err);
+        this.handleError(err);
+        return throwError(err);
+      })
+    )
   }
 
   public getTags(): Observable<any> {
@@ -214,7 +223,7 @@ public getMate(params: string): Observable<any> {
       res = r.json();
     } catch (err) {
     }
-    if (r.status == 404) {
+    if (r.status == 404 || r.status == 401) {
       this.router.navigate(['']);
     }
 

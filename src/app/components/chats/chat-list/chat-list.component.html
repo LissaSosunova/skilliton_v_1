@@ -1,5 +1,5 @@
 <!-- Hide or open chat-list details -->
-<div class="col-xs-12 no-padd end-xs position-relative"
+<div class="hidden-xs hidden-sm col-md-12 col-lg-12 no-padd end-xs position-relative"
 (click)="hideChatList()">
   <i class="material-icons arrow fixed" *ngIf="isOpenedChatList === true">
     format_indent_decrease
@@ -8,6 +8,7 @@
   format_indent_increase
 </i>
 </div>
+<div class="col-xs-12 col-sm-12 hidden-md hidden-lg spacer"> </div>
 <!-- Requests -->
 <div class="col-xs-12
             row

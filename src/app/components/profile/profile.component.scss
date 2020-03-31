@@ -71,14 +71,6 @@
         }
     }
 }
-.edit-icon {
-    margin-right: 15px;
-    color:map-get($bg-color, 'gray');
-    &:hover {
-        cursor: pointer;
-        color:map-get($bg-color, 'white');
-    }
-}
 
 .edit-icon-ava-position {
     position: relative;
@@ -88,31 +80,51 @@
 
 .name {
     font-size: 20px;
+    padding-left: 10px;
 }
 .summary {
     position: relative;
     margin-top: 15px;
-    padding: 20px;
+    padding: 20px 16px 20px 0px;
     span {
-        font-size: 15px;
+        font-size: 14px;
         color: map-get($bg-color, 'white');
     }
 }
 .edit-summary-btn {
-    position: absolute;
-    right: 10px;
-    top: -10px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: map-get($bg-color, 'gray');
+    margin-bottom: 5px;
+    color: black;
+    &:hover {
+        cursor: pointer;
+        background-color:map-get($bg-color, 'white');
+    }
     .create-icon {
-        font-size: 20px;
-        color:map-get($bg-color, 'gray');
-        margin-right: 20px;
-        &:hover {
-            cursor: pointer;
-            color:map-get($bg-color, 'white');
-        }
+        height: 12px;
+        margin-top: 4px;
+        margin-left: 4px;
     }
 }
-
+.edit-round-btn {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: map-get($bg-color, 'gray');
+    
+    margin-right: 10px;
+    &:hover {
+        cursor: pointer;
+        background-color:map-get($bg-color, 'white');
+    }
+}
+.edit-icon {
+    font-size: 14px;
+    color: black;
+    margin-top: 2px;
+}
 .header-text-block {
     width: 100%;
     padding-right: 0px;
@@ -143,7 +155,11 @@ padding-bottom: 0px;
     padding-right: 0px;
     padding-left: 0px;
 }
-
+.btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .btn-top-bar {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -296,4 +312,7 @@ padding-left: 0px;
 }
 .router-outlet {
     background-color: map-get($bg-color, 'gray-lighter');
+}
+.prof-status-box {
+    margin-bottom: 30px;
 }

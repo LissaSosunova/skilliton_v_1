@@ -2,8 +2,7 @@
 
 .content-block {
     padding-top: 15px;
-    height: calc(100vh + #{$footer-height + $header-height});
-    padding-bottom: $footer-height;
+    padding-bottom: 30px;
     margin-top: calc(#{$header-height} - 3px);
 }
 
@@ -78,6 +77,12 @@
 .spec-padd {
     padding-left: 30px;
     padding-right: 30px;
+}
+.marg-bottom {
+    margin-bottom: 10px;
+}
+.marg-top {
+    margin-top: 10px;
 }
 
 .login-btns-conteiner {

@@ -51,35 +51,28 @@ export class HomeComponent implements OnInit, OnDestroy {
     private getUserData() {
       this.store.dispatch(new LoadUserData());
       const newUser$ = this.store.select('user').subscribe((state: any) => {
-        if (state !== undefined) {
+        if (state && typeof state != 'undefined') {
           this.user = state;
           this.userUploaded = true;
           if((this.user.keyData.skills.length === 0 ||
             this.user.keyData.skills == null) &&
             this.user.keyData.skillsSkipped === false) {
             this.dataNotSet = true;
-            this.router.navigate(['/set-exactdata']);
+            this.router.navigate(['/main/set-exactdata']);
           } else if ((this.user.keyData.goals.length === 0 ||
             this.user.keyData.goals == null)
             && this.user.keyData.goalsSkipped === false) {
             this.dataNotSet = true;
-            this.router.navigate(['/set-exactdata']);
+            this.router.navigate(['/main/set-exactdata']);
           } else if(this.user.keyData.interests.length === 0 ||
             this.user.keyData.interests == null) {
             this.dataNotSet = true;
-            this.router.navigate(['/set-exactdata']);
+            this.router.navigate(['/main/set-exactdata']);
           } else {
             this.dataNotSet = false;
           }
         }
       });
-      // Here is example of resolver for this.user
-      // this.actRoute.data.subscribe(data => {
-      //   this.user = data.user$.data;
-      //   this.store.dispatch(new LoadUserData());
-      //   // this.store.dispatch(new UpdateUser(this.user));
-        
-      // });
   }
 
   private getFilters() {
